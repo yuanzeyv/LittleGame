@@ -1,0 +1,31 @@
+{
+  "description": "项目配置文件。",
+  "miniprogramRoot": "",
+  "setting": {
+    "urlCheck": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": false,
+    "enhance": true,
+    "useIsolateContext": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "compileType": "game",
+  "libVersion": "2.30.1",
+  "appid": "wxc50df155002f2cab",
+  "projectname": "麻麻迷呀",
+  "condition": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "cloudfunctionRoot": "openDataContext/cloudfunctions/"
+}
