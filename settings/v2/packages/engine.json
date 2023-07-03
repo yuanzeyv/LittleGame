@@ -121,12 +121,14 @@
       "dragon-bones",
       "gfx-webgl",
       "gfx-webgl2",
+      "light-probe",
       "particle-2d",
       "profiler",
       "spine",
       "tween",
       "ui",
       "video",
+      "websocket",
       "webview"
     ],
     "noDeprecatedFeatures": {
