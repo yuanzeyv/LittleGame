@@ -33,13 +33,13 @@
     "far2D": 10000,
     "near2D": 1,
     "wheelSpeed2D": 6,
-    "size": "通用"
+    "size": "__default_design__"
   },
   "camera-infos": {
     "c77ecaa8-c936-46c4-a5b0-98692673ed87": {
       "position": {
-        "x": 360,
-        "y": 640,
+        "x": 749,
+        "y": 501,
         "z": 5000
       },
       "rotation": {
@@ -56,8 +56,8 @@
     },
     "8e0474bd-6e8d-4768-9667-772d731583b7": {
       "position": {
-        "x": 359.99999999999994,
-        "y": 639.9999999999999,
+        "x": 750,
+        "y": 500,
         "z": 5000
       },
       "rotation": {
@@ -92,7 +92,7 @@
     }
   },
   "camera-uuids": [
-    "c77ecaa8-c936-46c4-a5b0-98692673ed87"
+    "8e0474bd-6e8d-4768-9667-772d731583b7"
   ],
   "float-window": {
     "position": {
@@ -111,12 +111,17 @@
     "scaleValue": 65,
     "sliderValue": 31,
     "devicesInfo": {
-      "name": "通用",
-      "type": "device",
-      "width": 720,
-      "height": 1280
+      "name": "i18n:scene.game_view.free_aspect",
+      "type": "free",
+      "width": 0,
+      "height": 0
     },
     "fullScreen": false,
     "fps": 60
+  },
+  "__version__": "1.0.0",
+  "builder": {},
+  "": {
+    "sculpt_brush_rotate": 0
   }
 }

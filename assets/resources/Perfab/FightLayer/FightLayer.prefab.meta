@@ -1,1 +1,13 @@
-{"ver":"1.1.40","importer":"prefab","imported":true,"uuid":"018e429a-99fe-44f1-9679-2733173d69de","files":[".json"],"subMetas":{},"userData":{"syncNodeName":"FightLayer"}}
+{
+  "ver": "1.1.43",
+  "importer": "prefab",
+  "imported": true,
+  "uuid": "018e429a-99fe-44f1-9679-2733173d69de",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "syncNodeName": "FightLayer"
+  }
+}

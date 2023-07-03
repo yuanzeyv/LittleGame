@@ -1,1 +1,13 @@
-{"ver":"1.1.40","importer":"prefab","imported":true,"uuid":"b5562c19-7d20-4a79-bb31-f481a6b77717","files":[".json"],"subMetas":{},"userData":{"syncNodeName":"BagLayer"}}
+{
+  "ver": "1.1.43",
+  "importer": "prefab",
+  "imported": true,
+  "uuid": "b5562c19-7d20-4a79-bb31-f481a6b77717",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "syncNodeName": "BagLayer"
+  }
+}
