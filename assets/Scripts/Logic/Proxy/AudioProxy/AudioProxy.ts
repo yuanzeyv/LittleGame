@@ -1,7 +1,6 @@
 import { Asset, AudioClip, AudioSource, director, find, instantiate,Node, Prefab, resources } from "cc"; 
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
-import { Resource } from "../../../Util/Resource/Resource";
 import { ResouceProxy } from "../BundleProxy/ResouceProxy";
 import { GameSetting, GameSettingProxy } from "../GameSettingProxy/GameSettingProxy";
 //用于管理当前游戏中的所有窗口 以及 预制体缓存
@@ -35,20 +34,20 @@ export class AudioProxy extends BaseProxy{
     }
 
     PlayAudioEffect(path:string){
-        _Facade.FindProxy(ResouceProxy).Load(path,(clip:AudioClip)=>{
-            if(clip == undefined)   
-                return; 
-            this.m_AudioSource.playOneShot(clip,this.m_EffectVolume);
-        });
+        //_Facade.FindProxy(ResouceProxy).Load(path,(clip:AudioClip)=>{
+        //    if(clip == undefined)   
+        //        return; 
+        //    this.m_AudioSource.playOneShot(clip,this.m_EffectVolume);
+        //});
     }
 
     PlayMusic(path:string){
-        _Facade.FindProxy(ResouceProxy).Load(path,(clip:AudioClip)=>{
-            if(clip == undefined)   
-                return;
-            this.m_AudioSource.clip = clip;
-            this.m_AudioSource.loop = true;
-            this.m_AudioSource.play();
-        });
+        //_Facade.FindProxy(ResouceProxy).Load(path,(clip:AudioClip)=>{
+        //    if(clip == undefined)   
+        //        return;
+        //    this.m_AudioSource.clip = clip;
+        //    this.m_AudioSource.loop = true;
+        //    this.m_AudioSource.play();
+        //});
     }
 }

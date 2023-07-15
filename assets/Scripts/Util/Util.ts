@@ -117,3 +117,11 @@ export function StringLimit(str:string,label:Label,maxLength:number){
         label.string = tempStr + "...";
     }
 }
+
+export function ParaseUrl(path:string):{bundleName:string,url:string} | undefined{
+    let index = path.indexOf("/",0);
+    if((path.length - 1) == index)
+        return undefined;
+    return {bundleName:path.substring(0,index),url:path.substring(index + 1)} ;
+
+}

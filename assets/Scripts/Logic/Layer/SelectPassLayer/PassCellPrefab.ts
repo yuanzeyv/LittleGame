@@ -2,14 +2,14 @@
 import { _decorator, Label, Sprite, find } from 'cc';
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade} from '../../../Global';
-import {NotificationEnum} from '../../../NotificationTable';
-import { Resource } from '../../../Util/Resource/Resource';
+import {NotificationEnum} from '../../../NotificationTable'; 
 import {LogInMeidator} from '../../Mediator/LogInMediator/LogInMeidator';
 import {SelectPassMediator} from '../../Mediator/SelectPassMediator/SelectPassMediator';
 import {PagePassProxy, PassData} from '../../Proxy/PagePassProxy/PagePassProxy';
 import { PassDataStruct } from '../../Proxy/PagePassProxy/PassDataStruct';
 import {ImageResProxy} from '../../Proxy/ResourceProxy/ImageResProxy';
 import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
+import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 const {ccclass, property, type} = _decorator;
 @ccclass('PassCellPrefab')
 export class PassCellPrefab extends BaseLayer {
@@ -68,7 +68,7 @@ export class PassCellPrefab extends BaseLayer {
         let pagePassProxy: PagePassProxy = _Facade.FindProxy(PagePassProxy);
         let passData:PassData|undefined = pagePassProxy.GetPassData(this.Level); 
         //关卡图片设置为默认
-        Resource.Load("resources/Images/Private/PageSelectLayer/PassBGNoStart/spriteFrame", this.m_BackGourndSprite,"spriteFrame");
+        _Facade.FindProxy(ResouceProxy).Load(this.m_BackGourndSprite,"resources/Images/Private/PageSelectLayer/PassBGNoStart/spriteFrame","spriteFrame");
         for (let i = 0; i < 3; i++)
             this.m_LevelAwardStartSprite[i].node.active = false;
         for (let i = 0; i < 3; i++)
@@ -76,7 +76,7 @@ export class PassCellPrefab extends BaseLayer {
         //当前关卡要有数据 （并且前一个关卡要有数据，
         if(passData == undefined || !pagePassProxy.GetLevelCanGame(this.Level))//无数据的情况
             return;
-        Resource.Load("resources/Images/Private/PageSelectLayer/PassBGStart/spriteFrame", this.m_BackGourndSprite, "spriteFrame");
+        _Facade.FindProxy(ResouceProxy).Load(this.m_BackGourndSprite,"resources/Images/Private/PageSelectLayer/PassBGStart/spriteFrame","spriteFrame"); 
         let passStarCount:number = _Facade.FindProxy(UserDataProxy).GetPassStar(this.m_Level) //获取到当前关卡的信息个数
         //星星显示
         for(let i = 0;i< 3;i++){

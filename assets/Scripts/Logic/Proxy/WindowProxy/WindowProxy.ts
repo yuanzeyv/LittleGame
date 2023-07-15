@@ -6,6 +6,8 @@ import { _Facade, _G } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
 import { ResouceProxy } from "../BundleProxy/ResouceProxy";
 import { WindowCreateRequest, LayerOrder, PrefabLoadStruct } from "./Class";
+import { BundleAssest } from "../BundleProxy/BundleAsset";
+import { BundleProxy, LoadStruct } from "../BundleProxy/BundleProxy";
 //用于管理当前游戏中的所有窗口 以及 预制体缓存
 export class WindowProxy extends BaseProxy{
     static  get ProxyName():string { return "WindowProxy" };
@@ -16,13 +18,8 @@ export class WindowProxy extends BaseProxy{
     //value 窗口的控制组件 key mediator分配的名称
     private m_WindowMap:Map<string,WindowCreateRequest> = new Map<string,WindowCreateRequest>()//保存所有的窗口对象信息，支持打开一个窗口，支持关闭一个窗口。
     private m_OrderNodeMap:Map<LayerOrder,Node> = new Map<LayerOrder,Node>();
-    //资源代理
-    private mResourceProxy:ResouceProxy;
-    
     public onLoad(): void { 
-        this.mResourceProxy = _Facade.FindProxy(ResouceProxy); 
-        this.InitOrderNode();
-        this.InitWindowPrefab();
+        this.InitOrderNode();  
         this.StartDetectionPoolCount();
     }  
 
@@ -35,12 +32,8 @@ export class WindowProxy extends BaseProxy{
         this.m_OrderNodeMap.set(LayerOrder.MaxTop,find("Canvas/UINode/MaxTop"));
     }
 
-    private InitWindowPrefab(){ 
-        this.mResourceProxy.Load(`resources/Perfab/WindowInterface`,(asset:Prefab | undefined)=>{
-            if(asset == undefined ) return;//游戏主模块未加载完成的通知
-            this.m_WindowPrefab = asset; 
-            _Facade.Send(NotificationEnum.InitGameData);//初始化游戏初始数据的Control
-        })
+    public InitWindowPrefab(){ 
+        this.m_WindowPrefab = _Facade.FindProxy(BundleProxy).UseAsset("resources/Perfab/WindowInterface") as Prefab;
     } 
 
     private GenerateWindow(winRequest:WindowCreateRequest):WindowInterface | undefined{
@@ -74,7 +67,8 @@ export class WindowProxy extends BaseProxy{
         //正式打开成功添加入其中
         this.m_WindowMap.set(winRequest.m_Mediator.getMediatorName(),winRequest); 
         //我希望所有的窗口，都是至少在下一帧进行显示
-        this.mResourceProxy.Load(winRequest.m_Mediator.PrefabPath,(prefab:Prefab | undefined)=>{
+        _Facade.FindProxy(BundleProxy).Load(winRequest.m_Mediator.PrefabPath, (loadStruct: LoadStruct)=>{
+            let prefab:Prefab = loadStruct.OperationAsset as Prefab;
             if(prefab == undefined){
                 _Facade.Send(NotificationEnum.CloseWindow,mediatorName);//关闭当前mediator对应的窗口
                 return;                
@@ -85,8 +79,8 @@ export class WindowProxy extends BaseProxy{
             if(isSuccess== false){
                 _Facade.Send(NotificationEnum.M_TipsShow,`关闭窗口:${mediatorName} 原因:窗口初始化失败`);//提示窗口打开失败
                 this.DeleteWindow(mediatorName);
-            }
-        });
+            } 
+        }); 
     } 
 
     //销毁一个winodw

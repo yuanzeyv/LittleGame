@@ -1,9 +1,0 @@
-{
-  "mini_controlFlowFlattening": true,
-  "mini_controlFlowFlatteningThreshold": 0.56,
-  "mini_deadCodeInjection": true,
-  "mini_unicodeEscapeSequence": true,
-  "mini_transformObjectKeys": true,
-  "mini_splitStringsChunkLength": 39.8,
-  "mini_is_AST_obfus": false
-}

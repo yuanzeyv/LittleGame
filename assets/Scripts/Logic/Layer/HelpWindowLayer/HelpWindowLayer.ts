@@ -2,7 +2,6 @@ import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, f
 import { BaseLayer } from '../../../Frame/BaseLayer/BaseLayer';
 import { _Facade } from '../../../Global';
 import { NotificationEnum } from '../../../NotificationTable';
-import { Resource } from '../../../Util/Resource/Resource';
 import { HelpWindowMediator } from '../../Mediator/HelpWindowMediator/HelpWindowMediator';
 import { TipsWindowMediator } from '../../Mediator/TipsWindowMediator/TipsWindowMediator';
 const { ccclass, property,type} = _decorator;

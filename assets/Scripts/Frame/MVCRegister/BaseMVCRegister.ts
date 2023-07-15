@@ -12,8 +12,7 @@ export type MediatorConstructor = new (mediatorName: string) => BaseMediator;
  * 用于继承所有的Meidator Command Proxy的注册的类。 可以注册这个类（Scripts/Config/GameMVCConfig中就有注册），并重写Alloc* * * 函数，来传递想要注册的类。
  */
 export interface IBaseMVCRegister {
-    Register(): void;
-
+    Register(): void; 
     UnRegister(): void;
 }
 

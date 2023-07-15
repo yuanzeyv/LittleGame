@@ -27,7 +27,7 @@ import {ImageResProxy} from '../../Proxy/ResourceProxy/ImageResProxy';
 import {PagePassProxy, PassData} from "db://assets/Scripts/Logic/Proxy/PagePassProxy/PagePassProxy";
 import {CardMap} from "db://assets/Scripts/CardConfig";
 import {CardCellEffect} from "db://assets/Scripts/Frame/BaseControl/CardCellEffect";
-import { Resource } from '../../../Util/Resource/Resource';
+import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 
 export class CardCell {
     m_Pos: Vec3;//卡牌的最终坐标
@@ -101,7 +101,6 @@ export class GameMainLayer extends BaseLayer {
 
     CreateAllCard() { 
         let MaxTime: number = 0.5;//总时间
-
         for (let cardCell of this.m_CardCellArray) {
             let card: Node = instantiate(this.m_CardCellPrefab);
             card.position = new Vec3(cardCell.m_Pos.x, cardCell.m_Pos.y + this.m_OffsetY);
@@ -116,7 +115,7 @@ export class GameMainLayer extends BaseLayer {
             } else {
                 carImg = CardMap[cardCell.m_Card].img
             }
-            Resource.Load(`resources/Images/Public/Card/${carImg}/spriteFrame`, card.getComponent(Sprite), "spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load( card.getComponent(Sprite),`resources/Images/Public/Card/${carImg}/spriteFrame`,"spriteFrame"); 
         }
         for (let cardCell of this.m_OptionsCellArray) {
             let card: Node = instantiate(this.m_CardCellPrefab);
@@ -125,9 +124,8 @@ export class GameMainLayer extends BaseLayer {
             card.getComponent(CardCellEffect).Selected = false
             this.m_AnswerPanel.addChild(card);
             this.CreateTweenAnim(card, Math.random() * MaxTime);
-
             let carImg = CardMap[cardCell.m_Card].img
-            Resource.Load(`resources/Images/Public/Card/${carImg}/spriteFrame`, card.getComponent(Sprite), "spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load( card.getComponent(Sprite),`resources/Images/Public/Card/${carImg}/spriteFrame`,"spriteFrame"); 
         }
 
         let dialog: Node = instantiate(this.m_FailedDialogPrefab);

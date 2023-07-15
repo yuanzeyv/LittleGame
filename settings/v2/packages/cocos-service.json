@@ -1,88 +1,23 @@
 {
+  "__version__": "3.0.7",
   "game": {
-    "name": "UNKNOW GAME",
+    "name": "未知游戏",
     "app_id": "UNKNOW",
     "c_id": "0"
   },
   "appConfigMaps": [
     {
       "app_id": "UNKNOW",
-      "config_id": "3747aa"
-    },
-    {
-      "app_id": "668651279",
-      "config_id": "4dbfb9"
+      "config_id": "968f55"
     }
   ],
   "configs": [
     {
       "app_id": "UNKNOW",
-      "config_id": "3747aa",
+      "config_id": "968f55",
       "config_name": "Default",
       "config_remarks": "",
       "services": []
-    },
-    {
-      "app_id": "668651279",
-      "config_id": "4dbfb9",
-      "config_name": "Default",
-      "config_remarks": "",
-      "services": [
-        {
-          "service_id": "278",
-          "enable": false,
-          "param": {
-            "configId": "2c50b8",
-            "plugin_version": "2.0.7_0.2.0"
-          }
-        },
-        {
-          "service_id": "316",
-          "enable": false,
-          "param": {}
-        },
-        {
-          "service_id": "311",
-          "enable": false,
-          "param": {}
-        },
-        {
-          "service_id": "235",
-          "enable": false,
-          "param": {
-            "app_id": "668651279",
-            "store_id": "160564"
-          }
-        }
-      ]
     }
-  ],
-  "sdkHubConfigSet": [
-    {
-      "id": "2c50b8",
-      "name": "HUAWEI  AppGallery Connect",
-      "platform": "3",
-      "channelID": "161221",
-      "channelName": "HUAWEI  AppGallery Connect",
-      "remarks": "HUAWEI  AppGallery Connect",
-      "plugins": [
-        {
-          "hasParam": false,
-          "pParam": {},
-          "pId": "2412",
-          "pName": "HUAWEI HMS",
-          "packageName": "huawei-hms",
-          "pType": 30,
-          "pUseType": 30,
-          "hasLocal": true,
-          "hasUpdate": false,
-          "requireParam": true,
-          "pVersion": "2.0.3_6.3.0",
-          "isInstall": false,
-          "installProgress": true
-        }
-      ]
-    }
-  ],
-  "__version__": "3.0.7"
+  ]
 }

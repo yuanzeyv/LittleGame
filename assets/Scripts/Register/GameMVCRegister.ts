@@ -28,7 +28,6 @@ import {NotificationEnum} from "../NotificationTable";
 import {AudioMediator} from "../Logic/Mediator/AudioMediator/AudioMediator";
 import { ResouceProxy } from "../Logic/Proxy/BundleProxy/ResouceProxy";
 import { BundleProxy } from "../Logic/Proxy/BundleProxy/BundleProxy";
-import { ResourceManagerMediator } from "../Logic/Mediator/ResourceManagerMediator/ResourceManagerMediator";
 import { TipsWindowMediator } from "../Logic/Mediator/TipsWindowMediator/TipsWindowMediator";
 import { MainGameMediator } from "../Logic/Mediator/MainGameMediator/MainGameMediator";
 import { HelpWindowMediator } from "../Logic/Mediator/HelpWindowMediator/HelpWindowMediator";
@@ -63,7 +62,6 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(UserBaseMediator) //主界面信息
             .add(SelectPassMediator) //关卡界面用
             //.add(GameMainMediator) //主关卡界面
-            .add(ResourceManagerMediator) //主关卡界面
             .add(TipsWindowMediator)
             .add(MainGameMediator)
             .add(HelpWindowMediator)

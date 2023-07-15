@@ -2,11 +2,11 @@ import { _decorator, Node, Sprite, find, SpriteFrame, instantiate, Label, Toggle
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
 import { _Facade, _G } from '../../../Global';
 import { NotificationEnum } from '../../../NotificationTable';
-import { Resource } from '../../../Util/Resource/Resource';
 import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { DisorganizeArray, StringLimit } from '../../../Util/Util';
 import { PassDataStruct, PassDataTypeStruct, PassDataType, PassDataAnswerType } from '../../Proxy/PagePassProxy/PassDataStruct';
 import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
+import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 const { ccclass, property,type} = _decorator;
 @ccclass('MainGameLayer')
 export class MainGameLayer extends BaseLayer {
@@ -105,7 +105,7 @@ export class MainGameLayer extends BaseLayer {
     }
     public FilpBlackCards(){
         for(let model of this.mNotOwnerCardLayout.children){
-            Resource.Load(`resources/Images/Public/48/spriteFrame`,model.getComponent(Sprite),"spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load(model.getComponent(Sprite),`resources/Images/Public/48/spriteFrame`,"spriteFrame");
             this.mNotOwnerCardLayout.addChild(model);
         }
         this.mMosaicSolt = undefined;
@@ -143,7 +143,7 @@ export class MainGameLayer extends BaseLayer {
             let model:Node = instantiate(this.mCardModel);
             let spriteNode:Node = find("Sprite",model);
             model.active = true;
-            Resource.Load(`resources/Images/Public/Card/${ cardID }/spriteFrame`,spriteNode.getComponent(Sprite),"spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame");
             this.mOwnerCardLayout.addChild(model);
             this.MoveByTween(spriteNode,math.random()* 0.8 ,new Vec3(0,Math.random() * 600,0));
         }
@@ -156,7 +156,7 @@ export class MainGameLayer extends BaseLayer {
             let model:Node = instantiate(this.mCardModel);
             let spriteNode:Node = find("Sprite",model);
             model.active = true;
-            Resource.Load(`resources/Images/Public/Card/${ cardID }/spriteFrame`,spriteNode.getComponent(Sprite),"spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame");
             this.mNotOwnerCardLayout.addChild(model);
             this.MoveByTween(spriteNode,math.random()* 0.8 ,new Vec3(0,Math.random() * 600,0));
         }) 
@@ -200,7 +200,7 @@ export class MainGameLayer extends BaseLayer {
                 let model:Node = instantiate(this.mCardModel);
                 let spriteNode:Node = find("Sprite",model);
                 model.active = true;
-                Resource.Load(`resources/Images/Public/Card/${ cardID }/spriteFrame`,spriteNode.getComponent(Sprite),"spriteFrame");
+                _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame");
                 cardLayout.addChild(model);
             }
         }else{

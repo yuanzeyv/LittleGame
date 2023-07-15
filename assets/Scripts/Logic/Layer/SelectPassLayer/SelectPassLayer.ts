@@ -1,13 +1,13 @@
 import { _decorator, Label, PageView, find, instantiate, Button ,Node, tween, UIOpacity, Sprite, assetManager, ImageAsset, SpriteFrame, Texture2D} from 'cc';
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade, _G} from '../../../Global';
-import {NotificationEnum} from '../../../NotificationTable';
-import { Resource } from '../../../Util/Resource/Resource';
+import {NotificationEnum} from '../../../NotificationTable'; 
 import { StringLimit } from '../../../Util/Util';
 import {SelectPassMediator} from '../../Mediator/SelectPassMediator/SelectPassMediator';
 import {PagePassProxy} from '../../Proxy/PagePassProxy/PagePassProxy';
 import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
 import { PassCellPrefab } from './PassCellPrefab';
+import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 
 const {ccclass} = _decorator;
 @ccclass('SelectPassLayer')
@@ -154,8 +154,8 @@ export class SelectPassLayer extends BaseLayer {
         this.mPageLabel.string = (nowIndex + 1).toString();
         let frontSpritePath: string = nowIndex == 0 ? "resources/Images/Private/PageSelectLayer/FrontPageEnd/spriteFrame" : "resources/Images/Private/PageSelectLayer/FrontPage/spriteFrame";
         let nextSpritePath: string = (sumCount < 0 || nowIndex == sumCount) ? "resources/Images/Private/PageSelectLayer/NextPageEnd/spriteFrame" : "resources/Images/Private/PageSelectLayer/NextPage/spriteFrame";
-        Resource.Load(frontSpritePath, this.mFrontButton.getComponent(Button),"normalSprite");
-        Resource.Load(nextSpritePath, this.mNextButton.getComponent(Button),"normalSprite");
+        _Facade.FindProxy(ResouceProxy).Load(this.mFrontButton.getComponent(Button),frontSpritePath, "normalSprite");
+        _Facade.FindProxy(ResouceProxy).Load(this.mNextButton.getComponent(Button),nextSpritePath, "normalSprite");
         //请求本页数据
         _Facade.FindProxy(PagePassProxy).RequestPassData(nowIndex);//页数据必须每次更新都请求
     }

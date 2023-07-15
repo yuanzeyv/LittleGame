@@ -54,9 +54,6 @@ export enum NotificationEnum {
     UserBaseOpen = "UserBaseOpen",
     //页签用
     UpdatePageCell = "UpdatePageCell",
-    //资源用
-    AssetLoadSuccess = "AssetLoadSuccess",
-    AssetLoadFail = "AssetLoadFail",
 
     //提示窗口
     TipsWindowLayerOpen = "TipsWindowLayerOpen",
