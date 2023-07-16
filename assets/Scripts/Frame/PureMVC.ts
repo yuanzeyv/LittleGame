@@ -496,10 +496,10 @@ export class View implements IView {
 
         //Register the Mediator for retrieval by name.
         this.mediatorMap[name] = mediator;
-
+ 
         //Get Notification interests, if any.
         let interests: string[] = mediator.listNotificationInterests();
-        let len: Number = interests.length;
+        let len: number = interests.length;
         if (len > 0) {
             //Create Observer referencing this mediator's handlNotification method.
             let observer: IObserver = new Observer(mediator.handleNotification, mediator);
