@@ -108,14 +108,14 @@ export class BundleProxy extends BaseProxy{
                 for(let asset of loadStruct.LoadMap.values()){
                     if(asset == undefined)  
                         continue;
-                    asset.decRef;
+                    asset.decRef();
                 }
             }
         }
         listenSet.clear();//清理
         this.mLoadAssetMap.delete(path);//清理
     }
-
+ 
     /*
     参数:
     path:加载资源路径

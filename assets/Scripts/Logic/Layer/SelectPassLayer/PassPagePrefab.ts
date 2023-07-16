@@ -5,7 +5,6 @@ import { NotificationEnum } from '../../../NotificationTable';
 import { LogInMeidator } from '../../Mediator/LogInMediator/LogInMeidator';
 import { SelectPassMediator } from '../../Mediator/SelectPassMediator/SelectPassMediator';
 import { PagePassProxy } from '../../Proxy/PagePassProxy/PagePassProxy';
-import { ImageResProxy } from '../../Proxy/ResourceProxy/ImageResProxy';
 import { PassCellPrefab } from './PassCellPrefab';
 const { ccclass, property,type} = _decorator;
 @ccclass('PassPagePrefab')

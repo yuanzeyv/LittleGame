@@ -5,7 +5,6 @@ import { _Facade } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
 import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
 export class GameBoxMediator extends WindowBaseMediator{  
-    
     static get MediatorName(){ return "GameBoxMediator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap

@@ -20,8 +20,6 @@ import {GameSettingProxy} from "../Logic/Proxy/GameSettingProxy/GameSettingProxy
 import {NetDispatchProxy} from "../Logic/Proxy/NetDispatchProxy/NetDispatchProxy";
 import {NetProxy} from "../Logic/Proxy/NetProxy/NetProxy";
 import {PagePassProxy} from "../Logic/Proxy/PagePassProxy/PagePassProxy";
-import {ImageResProxy} from "../Logic/Proxy/ResourceProxy/ImageResProxy";
-import {ResouceProxy1} from "../Logic/Proxy/ResourceProxy/ResouceProxy";
 import {TestProxy} from "../Logic/Proxy/TestProxy/TestProxy";
 import {WindowProxy} from "../Logic/Proxy/WindowProxy/WindowProxy";
 import {NotificationEnum} from "../NotificationTable";
@@ -81,7 +79,6 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(WindowProxy)
             .add(AudioProxy)
             .add(GameSettingProxy)
-            .add(ImageResProxy)
             .add(PagePassProxy)
             .add(TestProxy)
             .add(ResouceProxy)

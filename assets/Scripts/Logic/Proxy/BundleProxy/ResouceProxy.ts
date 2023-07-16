@@ -61,20 +61,20 @@ export class ResouceProxy extends BaseProxy{
             let frontLoad:string|undefined = this.HasLoadInfo(comp.uuid,key as string);//判断之前有没有加载
             if(frontLoad != undefined){
                 resComp.ReleaseRes(comp.uuid,key as string);
-                this.mBundleProxy.UnUseAsset(path);//反引用这个资源
+                this.BundleProxy.UnUseAsset(path);//反引用这个资源
                 this.DelLoadInfo(comp.uuid,key as string);//毫无意义的删除
             }
             let asset:Asset|undefined = LoadStruct.OperationAsset;//获取到本轮正确的资源 
             if(asset == undefined) 
                 console.warn(`资源:${LoadStruct.OperationAssetName} 加载失败` );
             else{
-                this.mBundleProxy.UseAsset(path);//资源引用计数+1 
+                this.BundleProxy.UseAsset(path);//资源引用计数+1 
                 resComp.LoadRes(comp.uuid,key as string);//引用资源
                 this.SetLoadInfo(comp.uuid,key as string,path);
             }
             comp[key as string] = asset;//设置资源信息
         }
-        this.mBundleProxy.Load(path,loadHandle);//开始监听资源
+        this.BundleProxy.Load(path,loadHandle);//开始监听资源
     } 
 
     //由RescourceCom调用，不可主动调用
@@ -85,7 +85,7 @@ export class ResouceProxy extends BaseProxy{
         let path:Path|undefined = loadMap.get(key);
         if(path == undefined)//没有对这个字段进行操作
             return;
-        this.mBundleProxy.UnUseAsset(path);//反引用这个资源
+        this.BundleProxy.UnUseAsset(path);//反引用这个资源
         loadMap.delete(key);
         if(loadMap.size == 0)
             this.mLoadInfoMap.get(uuid)
