@@ -4,22 +4,21 @@ import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediat
 import { _Facade } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
 import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
+import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
+import { AnnouncementLayer } from "../../Layer/AnnouncementLayer/AnnouncementLayer";
 
-export class AnnouncementMediator extends WindowBaseMediator{  
+export class AnnouncementMediator extends WindowBaseMediator{
     static get MediatorName(){ return "AnnouncementMediator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
-        .set(NotificationEnum.AnnouncementOpen,this.AnnouncementOpenHandle.bind(this))
+        .set(NotificationEnum.AnnouncementOpen,this.OpenLayer.bind(this))
         .set(NotificationEnum.AnnouncementShow,this.LayerHandle.bind(this));
     }  
 
     protected InitPrefabPath(): string {//每个窗口mediator都对应一个窗口预制体
         return "resources/Perfab/AnnouncementLayer/AnnouncementLayer";
     }
-
-    AnnouncementOpenHandle(data:any){  
-        if(this.ExistWindow) return;//存在的话直接进行返回
-        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,data,LayerOrder.MaxTop);//创建一个window请求
-        _Facade.Send(NotificationEnum.CreateWindow,windowRequest);//创建一个window请求
-    } 
+    protected InitLayerComponent(): new () => BaseLayer {
+        return AnnouncementLayer;
+    }   
 }

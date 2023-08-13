@@ -10,7 +10,6 @@ import { TipsWindowMediator } from '../../Mediator/TipsWindowMediator/TipsWindow
 import { PagePassProxy, PAGE_COUNT, PassData } from '../../Proxy/PagePassProxy/PagePassProxy';
 import { PassDataStruct } from '../../Proxy/PagePassProxy/PassDataStruct';
 const { ccclass, property,type} = _decorator;
-@ccclass('TipsPassWinLayer')
 export class TipsPassWinLayer extends BaseLayer {
     private mNextButton:Node; //获取到下一关的按钮
     private mNextGrayButton:Node;//获取到下一关禁用的按钮

@@ -5,7 +5,6 @@ import { NotificationEnum } from '../../../NotificationTable';
 import { HelpWindowMediator } from '../../Mediator/HelpWindowMediator/HelpWindowMediator';
 import { TipsWindowMediator } from '../../Mediator/TipsWindowMediator/TipsWindowMediator';
 const { ccclass, property,type} = _decorator;
-@ccclass('HelpWindowLayer')
 export class HelpWindowLayer extends BaseLayer {
     private mCloseButton:Node;//获取到返回按钮
     private mBackground:Node;//获取到背景板

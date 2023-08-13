@@ -18,7 +18,6 @@ import {NotificationEnum} from '../../../NotificationTable';
 
 const {ccclass, property, type} = _decorator;
 
-@ccclass('TipsLayer')
 export class TipsLayer extends BaseLayer {
     public m_MoveNode: Node;
     public m_StartPosition: Vec3 = new Vec3(0, 0, 0);

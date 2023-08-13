@@ -1,3 +1,4 @@
+import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { BaseMediator, NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { _Facade } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
@@ -16,8 +17,8 @@ export class InterstitialAdvertisingMediator extends BaseMediator{
     
     public onRegister(){
         this.m_InterstitialAdvertisingProxy = _Facade.FindProxy(InterstitialAdvertisingProxy);//寻找到当前的代理 
-    }
-
+    } 
+    
     private InterstitialAdvertisingShowHandle(path:string){ 
         this.m_InterstitialAdvertisingProxy.ShowIntersitialAD();
     }

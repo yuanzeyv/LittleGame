@@ -6,7 +6,6 @@ export type LayerExecute = (any)=>void;
  * 其本身是一个Component组件 拥有一个与BaseMediator功能类似的监听Map,用于监听并执行由WindowMediator发送消息。 并且会有一些功能方法，统一Layer的编写规范。
  */
 export class BaseLayer extends Component{
-    protected m_Custom:any;
     //消息队列,不用map 数组效率更高
     private m_ExecuteHandle:Map<string,LayerExecute> = new Map<string,LayerExecute>();
     protected RegisterExecuteHandle(executeMap:Map<string,LayerExecute> ){}
@@ -25,17 +24,16 @@ export class BaseLayer extends Component{
     public InitBaseLayer(data:any):void{
         this.RegisterExecuteHandle(this.m_ExecuteHandle);
         this.InitNode();
-        this.m_Custom = data;
-        this.InitData(this.m_Custom);
+        this.InitData(data);
     }
-    onLoad(){
+    protected onLoad(){
         this.InitLayer();
         this.AfterLoad();
     }
-    InitNode() {}//初始化节点信息
-    InitData(data:any) {}//初始化数据信息
-    InitLayer() {}//初始化界面信息
-    AfterLoad() { }//初始化结束以后
 
-    CloseLayer(){}
+    public InitNode() {}//初始化节点信息
+    protected InitData(data:any) {}//初始化数据信息
+    protected InitLayer() {}//初始化界面信息
+    protected AfterLoad() { }//初始化结束以后
+    protected CloseLayer(){}
 }

@@ -7,7 +7,6 @@ import { TipsPassFailMediator } from '../../Mediator/TipsPassFailMediator/TipsPa
 import { PagePassProxy, PassData } from '../../Proxy/PagePassProxy/PagePassProxy';
 import { PassDataStruct } from '../../Proxy/PagePassProxy/PassDataStruct';
 const { ccclass, property,type} = _decorator;
-@ccclass('TipsPassFailLayer')
 export class TipsPassFailLayer extends BaseLayer {
     private mRetryButton:Node;
     private mFullHeart:UIOpacity ;

@@ -2,6 +2,7 @@ import {_decorator, Component} from "cc";
 import {GameMVCRegister} from "./Register/GameMVCRegister";
 import {_Facade, _G} from "./Global";
 import { NotificationEnum } from "./NotificationTable";
+import { PHYSICS_2D_PTM_RATIO } from "cc";
 
 const { ccclass, property } = _decorator;
 
@@ -14,7 +15,7 @@ interface MessageFormat {
 @ccclass('MainGameControl')
 class MainGameControl extends Component{ 
     start(){
-        _G.GameMVCRegister = new GameMVCRegister();//游戏mvc控制对象
+    _G.GameMVCRegister = new GameMVCRegister();//游戏mvc控制对象
         _G.GameMVCRegister.Register(); //注册所有的登录MVC 
         _Facade.Send(NotificationEnum.InitGameData);//初始化游戏数据
     }

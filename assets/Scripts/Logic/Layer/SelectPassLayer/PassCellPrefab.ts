@@ -8,7 +8,6 @@ import { PassDataStruct } from '../../Proxy/PagePassProxy/PassDataStruct';
 import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
 import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 const {ccclass, property, type} = _decorator;
-@ccclass('PassCellPrefab')
 export class PassCellPrefab extends BaseLayer {
     private m_LevelLabel: Label;
     private m_BackGourndSprite: Sprite;

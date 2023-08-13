@@ -7,11 +7,8 @@ import {
 import {AuthSuccessCommand} from "../Logic/Control/AuthSuccessCommand";
 import {AnnouncementMediator} from "../Logic/Mediator/AnnouncementMediator/AnnouncementMediator";
 
-import {GameBoxMediator} from "../Logic/Mediator/GameBoxMediator/GameBoxMediator";
-import {GameMainMediator} from "../Logic/Mediator/GameMainMediator/GameMainMediator";
 import {LogInMeidator} from "../Logic/Mediator/LogInMediator/LogInMeidator";
 import {SelectPassMediator} from "../Logic/Mediator/SelectPassMediator/SelectPassMediator";
-import {TestMediator} from "../Logic/Mediator/TestMediator/TestMediator";
 import {TipsMediator} from "../Logic/Mediator/TipsMediator/TipsMediator";
 import {UserBaseMediator} from "../Logic/Mediator/UserBaseMediator/UserBaseMediator";
 import {WindowMediator} from "../Logic/Mediator/WindowMediator/WindowMediator";
@@ -20,7 +17,6 @@ import {GameSettingProxy} from "../Logic/Proxy/GameSettingProxy/GameSettingProxy
 import {NetDispatchProxy} from "../Logic/Proxy/NetDispatchProxy/NetDispatchProxy";
 import {NetProxy} from "../Logic/Proxy/NetProxy/NetProxy";
 import {PagePassProxy} from "../Logic/Proxy/PagePassProxy/PagePassProxy";
-import {TestProxy} from "../Logic/Proxy/TestProxy/TestProxy";
 import {WindowProxy} from "../Logic/Proxy/WindowProxy/WindowProxy";
 import {NotificationEnum} from "../NotificationTable";
 import {AudioMediator} from "../Logic/Mediator/AudioMediator/AudioMediator";
@@ -40,6 +36,12 @@ import { RewardedVideoAdvertisingMediator } from "../Logic/Mediator/RewardedVide
 import { InterstitialAdvertisingMediator } from "../Logic/Mediator/InterstitialAdvertisingMediator/InterstitialAdvertisingMediator";
 import { InterstitialAdvertisingProxy } from "../Logic/Proxy/InterstitialAdvertisingProxy/InterstitialAdvertisingProxy";
 import { UserDataProxy } from "../Logic/Proxy/UserDataProxy/UserDataProxy";
+import { FishLoadingMediator } from "../Logic/Mediator/FishLoadingMediator/FishLoadingMediator";
+import { FishMenuMediator } from "../Logic/Mediator/FishMenuMediator/FishMenuMediator";
+import { FishSettingMediator } from "../Logic/Mediator/FishSettingMediator/FishSettingMediator";
+import { FishCommonPopWindowMediator } from "../Logic/Mediator/FishCommonPopWindowMediator/FishCommonPopWindowMediator";
+import { FishMainProxy } from "../Logic/Proxy/FishMainProxy/FishMainProxy";
+import { FishMainGameMediator } from "../Logic/Mediator/FishMainGameMediator/FishMainGameMediator";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<NotificationEnum, CommandConstructor>): void {
@@ -50,16 +52,13 @@ export class GameMVCRegister extends BaseMVCRegister {
 
     protected AllocMediator(mediatorMap: Set<MediatorConstructor>): void {
         mediatorMap
-            .add(TestMediator) //测试用界面
             .add(WindowMediator)//主窗口的mediator
-            .add(GameBoxMediator)//主窗口的mediator
             .add(LogInMeidator)//登录界面的mediator
             .add(TipsMediator)//主窗口的mediator
             .add(AudioMediator)//音效用
             .add(AnnouncementMediator) //公告用
             .add(UserBaseMediator) //主界面信息
             .add(SelectPassMediator) //关卡界面用
-            //.add(GameMainMediator) //主关卡界面
             .add(TipsWindowMediator)
             .add(MainGameMediator)
             .add(HelpWindowMediator)
@@ -69,23 +68,27 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(BannerAdvertisingMediator)
             .add(RewardedVideoAdvertisingMediator)
             .add(InterstitialAdvertisingMediator)
+            .add(FishLoadingMediator)
+            .add(FishMenuMediator)
+            .add(FishSettingMediator)
+            .add(FishCommonPopWindowMediator)
+            .add(FishMainGameMediator)   
     }
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void {
         proxyMap
-            .add(TestProxy)
             .add(NetProxy)
             .add(NetDispatchProxy)
             .add(WindowProxy)
             .add(AudioProxy)
             .add(GameSettingProxy)
             .add(PagePassProxy)
-            .add(TestProxy)
             .add(ResouceProxy)
             .add(BundleProxy)
             .add(BannerAdvertisingProxy)
             .add(RewardedVideoAdvertisingProxy)
             .add(InterstitialAdvertisingProxy)
             .add(UserDataProxy)
+            .add(FishMainProxy) 
     }
 }

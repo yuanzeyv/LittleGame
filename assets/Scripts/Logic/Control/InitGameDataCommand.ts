@@ -29,11 +29,11 @@ export class InitGameDataCommand extends BaseCommand{
         //打开这三个姐
         _Facade.Send(NotificationEnum.M_TipsOpen);
         _Facade.Send(NotificationEnum.AnnouncementOpen);
-        _Facade.Send(NotificationEnum.LongInOpen);
+        _Facade.Send(NotificationEnum.FishLoadingLayerOpen);
 
-        //请求关卡总数信息
-        _Facade.FindProxy(PagePassProxy).RequestPassCount();
-        //请求用户数据
-        _Facade.FindProxy(UserDataProxy).RequestUserData({});  
+        ////请求关卡总数信息
+        //_Facade.FindProxy(PagePassProxy).RequestPassCount();
+        ////请求用户数据
+        //_Facade.FindProxy(UserDataProxy).RequestUserData({});  
     }
 }  

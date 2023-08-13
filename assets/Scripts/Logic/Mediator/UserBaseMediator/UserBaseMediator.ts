@@ -4,24 +4,21 @@ import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediat
 import { _Facade } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
 import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
+import { UserBaseLayer } from "../../Layer/UserBaseLayer/UserBaseLayer";
+import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 export class UserBaseMediator extends WindowBaseMediator{  
     static get MediatorName(){ return "UserBaseMediator"; }
 
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
-        .set(NotificationEnum.UserBaseOpen,this.UserBaseOpenHandle.bind(this)); 
+        .set(NotificationEnum.UserBaseOpen,this.OpenLayer.bind(this)); 
     }  
 
     protected InitPrefabPath(): string {//每个窗口mediator都对应一个窗口预制体
         return "resources/Perfab/UserBaseLayer/UserBaseLayer";
     }
 
-    UserBaseOpenHandle(data:any){  
-        if(this.ExistWindow) return;//存在的话直接进行返回
-        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,data,LayerOrder.Bottom);//创建一个window请求
-        windowRequest.SetFullScreenMask(false,false,new Color(255,0,0,255));
-        windowRequest.SetWindowTouchMask(true);
-        //windowRequest.SetWindowPosition(new Vec2(0,500));
-        _Facade.Send(NotificationEnum.CreateWindow,windowRequest);//创建一个window请求
-    } 
+    protected InitLayerComponent(): new () => BaseLayer {
+        return UserBaseLayer;
+    }  
 }

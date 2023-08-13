@@ -9,7 +9,6 @@ import { TipsWindowMediator } from '../../Mediator/TipsWindowMediator/TipsWindow
 import { AudioProxy } from '../../Proxy/AudioProxy/AudioProxy';
 import { GameSettingProxy, GameSetting } from '../../Proxy/GameSettingProxy/GameSettingProxy';
 const { ccclass, property,type} = _decorator;
-@ccclass('GameMenuLayer')
 export class GameMenuLayer extends BaseLayer {
     private mPassLabel:Label;
     private mPauseButton:Node;

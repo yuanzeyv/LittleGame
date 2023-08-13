@@ -4,8 +4,7 @@ export enum NotificationEnum {
     INVALID = "",
 
     LoadScene = "LoadScene",
-    //Window 窗口管理
-    CreateWindow = "CreateWindow",
+    //Window 窗口管理 
     UpdateWindow = "UpdateWindow",
     CloseWindow = "CloseWindow", 
 
@@ -52,6 +51,17 @@ export enum NotificationEnum {
     M_NetReconnectFail = "NetReconnectFail",
     //玩家主界面信息界面打开
     UserBaseOpen = "UserBaseOpen",
+
+    //游戏加载用
+    FishLoadingLayerOpen = "FishLoadingLayerOpen",
+    FishMenuLayerOpen = "FishMenuLayerOpen",
+    FishSettingLayerOpen = "FishSettingLayerOpen",//设置界面
+    FishCommonLayerOpen = "FishCommonLayerOpen",//通用界面
+
+    //小鱼游戏主界面
+    FishMainGameLayerOpen = "FishMainLayerOpen",//通用界面
+    GenerateFish = "GenerateFish",//生产一条小鱼
+    
     //页签用
     UpdatePageCell = "UpdatePageCell",
 

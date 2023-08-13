@@ -2,7 +2,6 @@ import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, i
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
 import { NotificationEnum } from '../../../NotificationTable';
 const { ccclass, property,type} = _decorator;
-@ccclass('AnnouncementLayer')
 export class AnnouncementLayer extends BaseLayer {
     public m_MoveNode:Node; 
     public m_StartPosition:Vec3 = new Vec3(0,0,0);

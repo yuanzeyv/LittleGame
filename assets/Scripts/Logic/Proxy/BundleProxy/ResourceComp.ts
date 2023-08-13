@@ -1,26 +1,9 @@
-//目前已知 常用的资源有 
-/*
-图片   通过记录 spriteFrame 
-音乐   待定
-音效   待定
-Spine动画  通过记录 spriteFrame
-行为树     
-JsonFile   通过记录
-TiledMap
-帧动画
-Animation
-预制体
-
-
-对象池不需要考虑 ，因为包含的节点确实没有被引用
-*/
 //对节点进行添加组件
 //本组件用来保存所有对应的资源组件 和 key 
 import { _decorator, Component} from 'cc'; 
 import { _Facade } from '../../../Global'; 
 import { ResouceProxy, UseKey, UUID } from './ResouceProxy';
 const { ccclass, property,type} = _decorator;
-@ccclass('GameMenuLayer')
 export class ResourceComp extends Component {//配合资源管理器，来动态管理资源加载
     private mLoadMap:Map<UUID,Set<UseKey>> = new Map<UUID,Set<UseKey>>();
     //uuid:组件的唯一UUID  key:什么字段加载的资源

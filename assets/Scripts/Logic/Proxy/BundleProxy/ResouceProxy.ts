@@ -61,7 +61,7 @@ export class ResouceProxy extends BaseProxy{
             let frontLoad:string|undefined = this.HasLoadInfo(comp.uuid,key as string);//判断之前有没有加载
             if(frontLoad != undefined){
                 resComp.ReleaseRes(comp.uuid,key as string);
-                this.BundleProxy.UnUseAsset(path);//反引用这个资源
+                this.BundleProxy.UnUseAsset(frontLoad);//反引用这个资源
                 this.DelLoadInfo(comp.uuid,key as string);//毫无意义的删除
             }
             let asset:Asset|undefined = LoadStruct.OperationAsset;//获取到本轮正确的资源 

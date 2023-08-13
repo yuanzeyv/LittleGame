@@ -1,5 +1,5 @@
 {
-  "__version__": "1.0.4",
+  "__version__": "1.0.5",
   "general": {
     "designResolution": {
       "width": 1280,
@@ -7,5 +7,28 @@
       "fitHeight": true,
       "height": 720
     }
-  }
+  },
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "Board"
+      },
+      {
+        "index": 2,
+        "name": "NormalFish"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 3,
+      "1": 15,
+      "2": 10,
+      "3": 6
+    },
+    "gravity": {
+      "y": 0
+    },
+    "fixedTimeStep": 0.016667
+  },
+  "custom_joint_texture_layouts": []
 }

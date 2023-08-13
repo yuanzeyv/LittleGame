@@ -9,8 +9,6 @@ import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
 import { PassCellPrefab } from './PassCellPrefab';
 import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 
-const {ccclass} = _decorator;
-@ccclass('SelectPassLayer')
 export class SelectPassLayer extends BaseLayer {
     private mBackButton: Node;//返回按钮
     private mFrontButton: Node;//左按钮

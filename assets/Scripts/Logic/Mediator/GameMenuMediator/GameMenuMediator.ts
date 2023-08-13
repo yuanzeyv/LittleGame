@@ -4,11 +4,14 @@ import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediat
 import { _Facade } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
 import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
+import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
+import { FishSettingLayer } from "../../Layer/FishSettingLayer/FishSettingLayer";
+import { GameMenuLayer } from "../../Layer/GameMenuLayer/GameMenuLayer";
 export class GameMenuMediator extends WindowBaseMediator{  
     static get MediatorName(){ return "GameMenuMediator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
-        .set(NotificationEnum.GameMenuLayerOpen,this.OpenLayerHandle.bind(this))
+        .set(NotificationEnum.GameMenuLayerOpen,this.OpenLayer.bind(this))
         .set(NotificationEnum.SetEffectVolume,this.LayerHandle.bind(this))
         .set(NotificationEnum.SetMusicVolume,this.LayerHandle.bind(this))
     }  
@@ -17,11 +20,8 @@ export class GameMenuMediator extends WindowBaseMediator{
         return "resources/Perfab/GameMenuLayer/GameMenuLayer";
     }
 
-    OpenLayerHandle(data:any){  
-        if(this.ExistWindow) return;//存在的话直接进行返回
-        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,data,LayerOrder.Top);//创建一个window请求
-        windowRequest.SetFullScreenMask(true,true,new Color(0,0,0,125));
-        windowRequest.SetWindowTouchMask(true);
-        _Facade.Send(NotificationEnum.CreateWindow,windowRequest);//创建一个window请求
-    } 
+
+    protected InitLayerComponent(): new () => BaseLayer {
+        return GameMenuLayer;
+    }   
 }

@@ -3,17 +3,11 @@ import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade, _G} from '../../../Global';
 import {NotificationEnum} from '../../../NotificationTable';
 import {wechatLogin} from '../../../api/WechatAPI';
-import {LogInMeidator} from '../../Mediator/LogInMediator/LogInMeidator';
 import {GameSetting, GameSettingProxy} from '../../Proxy/GameSettingProxy/GameSettingProxy';
-import {NetProxy} from '../../Proxy/NetProxy/NetProxy';
-import {ImageResProxy} from '../../Proxy/ResourceProxy/ImageResProxy';
-import {PagePassProxy} from "db://assets/Scripts/Logic/Proxy/PagePassProxy/PagePassProxy";
-import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
 import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 
 const {ccclass, property, type} = _decorator;
 
-@ccclass('LoginLayer')
 export class LoginLayer extends BaseLayer {
     private m_StartButton: Node;//开始按钮
     private m_MusicButton: Node;//音乐按钮
@@ -62,7 +56,7 @@ export class LoginLayer extends BaseLayer {
         if (nowStatus == 1)
             _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/OpenVideo/spriteFrame","normalSprite");
         else
-            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/CloseVideo/spriteFrame", "normalSprite");
+            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/TipsPassFailLayer/FailBackGround/spriteFrame", "normalSprite");
     }
 
     UpdateSoundEffectButtonSprite() {
@@ -72,7 +66,7 @@ export class LoginLayer extends BaseLayer {
         if (newStatus == 1)
             _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/OpenEffect/spriteFrame","normalSprite");
         else
-            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/CloseEffect/spriteFrame", "normalSprite");
+            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/TipsPassFailLayer/FailBackGround/spriteFrame", "normalSprite");
     }
 
     MusicButtonHandle() {

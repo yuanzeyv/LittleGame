@@ -2,7 +2,6 @@ import {_decorator, Component, Node, Sprite, find} from 'cc';
 
 const {ccclass, property} = _decorator;
 
-@ccclass('CardCellEffect')
 export class CardCellEffect extends Component {
     @property({type: Boolean, displayName: "是否可点击"})
     private m_Selectable: boolean;

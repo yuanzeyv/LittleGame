@@ -4,13 +4,15 @@ import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediat
 import { _Facade } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
 import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
+import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
+import { LoginLayer } from "../../Layer/LoginLayer/LoginLayer";
 
 export class LogInMeidator extends WindowBaseMediator{  
     
     static get MediatorName(){ return "LogInMeidator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
-        .set(NotificationEnum.LongInOpen,this.LogInOpenHandle.bind(this))   
+        .set(NotificationEnum.LongInOpen,this.OpenLayer.bind(this))   
         .set(NotificationEnum.SetMusicVolume,this.LayerHandle.bind(this))   
         .set(NotificationEnum.SetEffectVolume,this.LayerHandle.bind(this))   
     }  
@@ -18,11 +20,7 @@ export class LogInMeidator extends WindowBaseMediator{
         return "resources/Perfab/LoginLayer/LoginLayer";
     }
 
-    LogInOpenHandle(data:any){  
-        if(this.ExistWindow) return;//存在的话直接进行返回
-        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,data,LayerOrder.MinBottom);//创建一个window请求
-        windowRequest.SetFullScreenMask(true,false,new Color(0,128,25,255));
-        windowRequest.SetWindowTouchMask(true);
-        _Facade.Send(NotificationEnum.CreateWindow,windowRequest);//创建一个window请求
-    }  
+    protected InitLayerComponent(): new () => BaseLayer {
+        return LoginLayer;
+    }   
 }

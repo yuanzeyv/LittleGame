@@ -8,7 +8,6 @@ import { PassDataStruct, PassDataTypeStruct, PassDataType, PassDataAnswerType } 
 import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
 import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 const { ccclass, property,type} = _decorator;
-@ccclass('MainGameLayer')
 export class MainGameLayer extends BaseLayer {
     //节点区域
     private mOwnerCardLayout:Node;//明牌队列

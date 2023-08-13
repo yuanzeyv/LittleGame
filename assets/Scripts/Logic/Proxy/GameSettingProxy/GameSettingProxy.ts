@@ -35,4 +35,4 @@ export class GameSettingProxy extends BaseProxy{
     public SetSetting(type:GameSetting,value:number){
         return this.m_GameSettingMap.set(type,value);
     }
-}  
+}
