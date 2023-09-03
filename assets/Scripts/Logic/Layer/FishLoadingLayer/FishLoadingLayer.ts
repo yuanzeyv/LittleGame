@@ -6,33 +6,34 @@ import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { FishLoadingMediator } from '../../Mediator/FishLoadingMediator/FishLoadingMediator';
 const { ccclass, property,type} = _decorator;
 export class FishLoadingLayer extends BaseLayer { 
-    private mTouchID:number = -1;//唯一ID
+    private mTouchID:number = -1;//触摸ID用，确保只存在一个触摸节点
     private mPlayGameButton:Node;//玩家游戏按钮
+
+    
     private mLoadingImageBar:ProgressBar;//加载中的进度条
     private mLoadingTextBar:ProgressBar;//加载字体的进度条
-    private mSnailNode:Node;//蜗牛图片
+    private mSnailNode:Node;//蜗牛动画节点
 
     private mUpdateSolt:SoltCell;
-    //加载文字进度条
-    RegisterExecuteHandle(executeMap:Map<NotificationEnum,LayerExecute> ){
-    }
-
     InitNode() {
         this.mPlayGameButton = find("PlayGameButton",this.node);
         this.mLoadingImageBar = find("ImageProgressBar",this.node).getComponent(ProgressBar);
         this.mLoadingTextBar = find("TextProgressBar",this.node).getComponent(ProgressBar);
+        
         this.mSnailNode = find("SnailNode",this.node);
     } 
     
-
     public InitLayer(): void {
+        this.mLoadingImageBar.node.active = true;
+        this.mLoadingTextBar.node.active = true;
+        this.mPlayGameButton.active = false; 
+
+        //此处添加一个监听是为了让按钮能够同时放大以及做位置偏移
         this.mPlayGameButton.on("click",this.PlayGameButtonHandle.bind(this)); 
         this.mPlayGameButton.on(Input.EventType.TOUCH_START,this.TouchStartHandle.bind(this));
         this.mPlayGameButton.on(Input.EventType.TOUCH_END,this.TouchEndHandle.bind(this));
         this.mPlayGameButton.on(Input.EventType.TOUCH_CANCEL,this.TouchCancelHandle.bind(this));
 
-        this.mLoadingImageBar.node.active = true;
-        this.mLoadingTextBar.node.active = true;
         this.LoadingHandle(0);
     }
 
@@ -48,14 +49,16 @@ export class FishLoadingLayer extends BaseLayer {
         this.mLoadingImageBar.progress = (index / distance);
         if(index > (0.27 * distance) && index < (0.74 *distance)){
             let length:number = (0.74 * distance) - (0.27 * distance); 
-            this.mLoadingTextBar.progress = (index - (0.27 * distance)) / distance; 
+            this.mLoadingTextBar.progress = (index - (0.27 * distance)) / length; 
         }
         let movePos:number = index; 
-        this.mSnailNode.setPosition(-287 + movePos,-261);
-        this.mUpdateSolt = _G.TimeWheel.Set(0.03,this.LoadingHandle.bind(this,index + 20));//准备加载资源组
+        this.mSnailNode.setPosition(-287 + movePos,-312); 
+        this.mUpdateSolt = _G.TimeWheel.Set(0.03,this.LoadingHandle.bind(this,index + 2));//准备加载资源组
     }
 
     private SnailMoveHandle(){
+        if(this.mSnailNode.getPosition().x >= 460)
+            return ;
         this.mSnailNode.setPosition(this.mSnailNode.getPosition().x + 5,this.mSnailNode.getPosition().y)
         this.mUpdateSolt = _G.TimeWheel.Set(0.03,this.SnailMoveHandle.bind(this));//准备加载资源组
     }
@@ -65,7 +68,7 @@ export class FishLoadingLayer extends BaseLayer {
             return;
         this.mTouchID = event.getID();
         let pos:Vec3 = this.mPlayGameButton.getPosition();
-        this.mPlayGameButton.setPosition(pos.x + 1,pos.y - 1);
+        this.mPlayGameButton.setPosition(pos.x + 1,pos.y - 1); 
         
         let size:math.Size = this.mPlayGameButton.getComponent(UITransform).contentSize;
         this.mPlayGameButton.getComponent(UITransform).contentSize = new math.Size(size.width,size.height - 3);

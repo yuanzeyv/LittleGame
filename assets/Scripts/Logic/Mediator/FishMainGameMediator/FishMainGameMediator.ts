@@ -24,34 +24,6 @@ export class FishMainGameMediator extends WindowBaseMediator{
     }   
     protected GenerateFishHandle(data: any, notification: NotificationEnum): void { 
         _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
-        _Facade.FindProxy(FishMainProxy).GenerateFish();
+        _Facade.FindProxy(FishMainProxy).GenerateFish(); 
     }   
-}
+} 

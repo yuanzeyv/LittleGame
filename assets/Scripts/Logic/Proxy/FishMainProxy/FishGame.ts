@@ -145,6 +145,9 @@ export class Biology{
     public get IsNewFish():boolean{
         return this.mIsNewFish;
     } 
+    public set IsNewFish(status:boolean){
+        this.mIsNewFish = status;
+    } 
     //获取小鱼位置
     public GetPosition():Vec2{
         return this.mChaetodonMinimus.GetPosition();
@@ -246,7 +249,7 @@ export class GameInning{
     public set DropSpeed(speed:number){
         this.mGoalDropSpeed = speed;
     }
-    public set GoalDestoryTime(destroyTime:number){
+    public set GoalDestoryTime(destroyTime:number){ 
         this.mGoalDropSpeed = destroyTime;
     }
     public get MapSize():Size{
@@ -255,12 +258,13 @@ export class GameInning{
 
     //生成一个小鱼
     public GenerateFish():void{ 
-        _Facade.FindProxy(BundleProxy).Load("resources/Perfab/FishMainGameLayer/Biology/Fish/ChaetodonMinimus",(loadStruct: LoadStruct)=>{
+        _Facade.FindProxy(BundleProxy).Load("resources/Biology/Fish/ChaetodonMinimus",(loadStruct: LoadStruct)=>{
             let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName) as Prefab;
             if(prefab == undefined) 
-                return;       
+                return;        
             let fishID:number = this.mAllocID++;
             let fish:Node = instantiate(prefab);
+            fish.name = `Fish_${fishID}`;
             
             let  chaetodonMinimusScripts:ChaetodonMinimusScripts= fish.getComponent(ChaetodonMinimusScripts);
             chaetodonMinimusScripts.InitData(fishID);
@@ -374,5 +378,4 @@ export class GameInning{
             return false;
         return fish.IsNewFish;
     }
-    
 }

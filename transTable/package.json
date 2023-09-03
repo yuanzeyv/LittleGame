@@ -1,0 +1,17 @@
+{
+  "name": "trans_table",
+  "version": "1.0.0",
+  "description": "用于转换xlsx to ts",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "i": "^0.3.7",
+    "node-xlsx": "^0.23.0",
+    "ts-node": "^10.9.1"
+  }
+}
