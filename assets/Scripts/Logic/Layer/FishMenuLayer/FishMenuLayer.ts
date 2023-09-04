@@ -37,8 +37,9 @@ export class FishMenuLayer extends BaseLayer {
                 game.end();
             }});
         });
-        this.mStartButton.on("click",()=>{
-            _Facade.Send(NotificationEnum.FishMainGameLayerOpen)
+        this.mStartButton.on("click",()=>{ 
+            _Facade.Send(NotificationEnum.FishChoosePetsLayerOpen);
+            //_Facade.Send(NotificationEnum.FishMainGameLayerOpen);
         });
         
         this.mMoveButton.on("click",()=>{

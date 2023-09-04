@@ -84,4 +84,7 @@ export enum NotificationEnum {
 
     //显示插屏广告
     InterstitialAdvertisingShow = "InterstitialAdvertisingShow",//显示插屏广告
+
+    //选择宠物面板
+    FishChoosePetsLayerOpen = "FishChoosePetsLayerOpen",//宠物选择面板打开
 }

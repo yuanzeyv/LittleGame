@@ -42,6 +42,7 @@ import { FishSettingMediator } from "../Logic/Mediator/FishSettingMediator/FishS
 import { FishCommonPopWindowMediator } from "../Logic/Mediator/FishCommonPopWindowMediator/FishCommonPopWindowMediator";
 import { FishMainProxy } from "../Logic/Proxy/FishMainProxy/FishMainProxy";
 import { FishMainGameMediator } from "../Logic/Mediator/FishMainGameMediator/FishMainGameMediator";
+import { CheckFishPetLayerMediator } from "../Logic/Mediator/CheckFishPetLayerMediator/CheckFishPetLayerMediator";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<NotificationEnum, CommandConstructor>): void {
@@ -72,7 +73,8 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(FishMenuMediator)
             .add(FishSettingMediator)
             .add(FishCommonPopWindowMediator)
-            .add(FishMainGameMediator)   
+            .add(FishMainGameMediator)    
+            .add(CheckFishPetLayerMediator)   
     }
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void {
