@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 362,56
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_niko_0
+  rotate: true
+  xy: 328, 0
+  size: 56, 34
+  orig: 60, 60
+  offset: 2, 1
+  index: -1
+scl_niko_1
+  rotate: true
+  xy: 149, 0
+  size: 56, 36
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_2
+  rotate: true
+  xy: 293, 0
+  size: 56, 35
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_3
+  rotate: true
+  xy: 185, 0
+  size: 56, 36
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_4
+  rotate: true
+  xy: 221, 0
+  size: 56, 36
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_5
+  rotate: true
+  xy: 257, 0
+  size: 56, 36
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_6
+  rotate: true
+  xy: 38, 0
+  size: 56, 37
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_7
+  rotate: true
+  xy: 75, 0
+  size: 56, 37
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_8
+  rotate: true
+  xy: 0, 0
+  size: 56, 38
+  orig: 60, 60
+  offset: 2, 0
+  index: -1
+scl_niko_9
+  rotate: true
+  xy: 112, 0
+  size: 56, 37
+  orig: 60, 60
+  offset: 2, 0
+  index: -1

@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 114,157
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_nimbus_0
+  rotate: false
+  xy: 0, 0
+  size: 57, 36
+  orig: 60, 60
+  offset: 0, 8
+  index: -1
+scl_nimbus_1
+  rotate: false
+  xy: 57, 0
+  size: 57, 36
+  orig: 60, 60
+  offset: 0, 8
+  index: -1
+scl_nimbus_2
+  rotate: false
+  xy: 0, 39
+  size: 56, 33
+  orig: 60, 60
+  offset: 1, 11
+  index: -1
+scl_nimbus_3
+  rotate: false
+  xy: 0, 130
+  size: 57, 27
+  orig: 60, 60
+  offset: 1, 17
+  index: -1
+scl_nimbus_4
+  rotate: false
+  xy: 0, 102
+  size: 57, 28
+  orig: 60, 60
+  offset: 1, 16
+  index: -1
+scl_nimbus_5
+  rotate: false
+  xy: 56, 71
+  size: 56, 31
+  orig: 60, 60
+  offset: 1, 16
+  index: -1
+scl_nimbus_6
+  rotate: false
+  xy: 0, 72
+  size: 56, 30
+  orig: 60, 60
+  offset: 1, 16
+  index: -1
+scl_nimbus_7
+  rotate: false
+  xy: 57, 130
+  size: 55, 27
+  orig: 60, 60
+  offset: 1, 17
+  index: -1
+scl_nimbus_8
+  rotate: false
+  xy: 57, 102
+  size: 57, 28
+  orig: 60, 60
+  offset: 1, 16
+  index: -1
+scl_nimbus_9
+  rotate: false
+  xy: 56, 36
+  size: 58, 35
+  orig: 60, 60
+  offset: 0, 9
+  index: -1

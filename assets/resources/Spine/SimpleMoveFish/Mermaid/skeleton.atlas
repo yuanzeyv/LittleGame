@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 265,102
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_meryl_0
+  rotate: false
+  xy: 153, 1
+  size: 52, 52
+  orig: 60, 60
+  offset: 2, 4
+  index: -1
+scl_meryl_1
+  rotate: true
+  xy: 205, 0
+  size: 53, 54
+  orig: 60, 60
+  offset: 2, 2
+  index: -1
+scl_meryl_2
+  rotate: true
+  xy: 0, 3
+  size: 50, 51
+  orig: 60, 60
+  offset: 2, 5
+  index: -1
+scl_meryl_3
+  rotate: false
+  xy: 51, 3
+  size: 52, 50
+  orig: 60, 60
+  offset: 2, 6
+  index: -1
+scl_meryl_4
+  rotate: false
+  xy: 0, 53
+  size: 55, 49
+  orig: 60, 60
+  offset: 2, 6
+  index: -1
+scl_meryl_5
+  rotate: false
+  xy: 55, 53
+  size: 55, 49
+  orig: 60, 60
+  offset: 2, 6
+  index: -1
+scl_meryl_6
+  rotate: false
+  xy: 110, 53
+  size: 53, 49
+  orig: 60, 60
+  offset: 2, 6
+  index: -1
+scl_meryl_7
+  rotate: false
+  xy: 163, 53
+  size: 51, 49
+  orig: 60, 60
+  offset: 2, 6
+  index: -1
+scl_meryl_8
+  rotate: false
+  xy: 214, 53
+  size: 51, 49
+  orig: 60, 60
+  offset: 2, 6
+  index: -1
+scl_meryl_9
+  rotate: false
+  xy: 103, 3
+  size: 50, 50
+  orig: 60, 60
+  offset: 2, 5
+  index: -1

@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 504,38
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_gumbo_0
+  rotate: false
+  xy: 410, 1
+  size: 47, 37
+  orig: 60, 60
+  offset: 6, 13
+  index: -1
+scl_gumbo_1
+  rotate: false
+  xy: 457, 1
+  size: 47, 37
+  orig: 60, 60
+  offset: 6, 13
+  index: -1
+scl_gumbo_2
+  rotate: false
+  xy: 362, 1
+  size: 48, 37
+  orig: 60, 60
+  offset: 6, 13
+  index: -1
+scl_gumbo_3
+  rotate: false
+  xy: 211, 0
+  size: 51, 38
+  orig: 60, 60
+  offset: 6, 12
+  index: -1
+scl_gumbo_4
+  rotate: false
+  xy: 0, 0
+  size: 53, 38
+  orig: 60, 60
+  offset: 6, 12
+  index: -1
+scl_gumbo_5
+  rotate: false
+  xy: 53, 0
+  size: 53, 38
+  orig: 60, 60
+  offset: 6, 12
+  index: -1
+scl_gumbo_6
+  rotate: false
+  xy: 106, 0
+  size: 53, 38
+  orig: 60, 60
+  offset: 6, 12
+  index: -1
+scl_gumbo_7
+  rotate: false
+  xy: 159, 0
+  size: 52, 38
+  orig: 60, 60
+  offset: 6, 12
+  index: -1
+scl_gumbo_8
+  rotate: false
+  xy: 262, 1
+  size: 51, 37
+  orig: 60, 60
+  offset: 6, 13
+  index: -1
+scl_gumbo_9
+  rotate: false
+  xy: 313, 1
+  size: 49, 37
+  orig: 60, 60
+  offset: 6, 13
+  index: -1

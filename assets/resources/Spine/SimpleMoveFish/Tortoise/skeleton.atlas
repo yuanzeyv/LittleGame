@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 458,58
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_seymour_0
+  rotate: true
+  xy: 98, 1
+  size: 57, 48
+  orig: 60, 60
+  offset: 1, 6
+  index: -1
+scl_seymour_1
+  rotate: true
+  xy: 49, 2
+  size: 56, 49
+  orig: 60, 60
+  offset: 1, 5
+  index: -1
+scl_seymour_2
+  rotate: true
+  xy: 146, 1
+  size: 57, 47
+  orig: 60, 60
+  offset: 1, 7
+  index: -1
+scl_seymour_3
+  rotate: true
+  xy: 240, 1
+  size: 57, 46
+  orig: 60, 60
+  offset: 1, 8
+  index: -1
+scl_seymour_4
+  rotate: true
+  xy: 330, 0
+  size: 58, 43
+  orig: 60, 60
+  offset: 1, 11
+  index: -1
+scl_seymour_5
+  rotate: true
+  xy: 416, 0
+  size: 58, 42
+  orig: 60, 60
+  offset: 1, 12
+  index: -1
+scl_seymour_6
+  rotate: true
+  xy: 373, 1
+  size: 57, 43
+  orig: 60, 60
+  offset: 1, 11
+  index: -1
+scl_seymour_7
+  rotate: true
+  xy: 286, 1
+  size: 57, 44
+  orig: 60, 60
+  offset: 1, 10
+  index: -1
+scl_seymour_8
+  rotate: true
+  xy: 193, 1
+  size: 57, 47
+  orig: 60, 60
+  offset: 1, 7
+  index: -1
+scl_seymour_9
+  rotate: true
+  xy: 0, 1
+  size: 57, 49
+  orig: 60, 60
+  offset: 1, 5
+  index: -1

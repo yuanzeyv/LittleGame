@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 105,244
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_nostradamus_0
+  rotate: true
+  xy: 0, 0
+  size: 44, 49
+  orig: 60, 60
+  offset: 3, 5
+  index: -1
+scl_nostradamus_1
+  rotate: true
+  xy: 50, 2
+  size: 44, 50
+  orig: 60, 60
+  offset: 3, 4
+  index: -1
+scl_nostradamus_2
+  rotate: true
+  xy: 50, 46
+  size: 45, 50
+  orig: 60, 60
+  offset: 4, 4
+  index: -1
+scl_nostradamus_3
+  rotate: true
+  xy: 53, 91
+  size: 48, 51
+  orig: 60, 60
+  offset: 4, 4
+  index: -1
+scl_nostradamus_4
+  rotate: false
+  xy: 0, 91
+  size: 53, 51
+  orig: 60, 60
+  offset: 4, 4
+  index: -1
+scl_nostradamus_5
+  rotate: false
+  xy: 0, 193
+  size: 55, 51
+  orig: 60, 60
+  offset: 4, 4
+  index: -1
+scl_nostradamus_6
+  rotate: false
+  xy: 0, 142
+  size: 55, 51
+  orig: 60, 60
+  offset: 4, 4
+  index: -1
+scl_nostradamus_7
+  rotate: true
+  xy: 55, 190
+  size: 54, 50
+  orig: 60, 60
+  offset: 4, 5
+  index: -1
+scl_nostradamus_8
+  rotate: true
+  xy: 55, 139
+  size: 51, 49
+  orig: 60, 60
+  offset: 4, 5
+  index: -1
+scl_nostradamus_9
+  rotate: true
+  xy: 0, 44
+  size: 47, 50
+  orig: 60, 60
+  offset: 3, 5
+  index: -1

@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 117,232
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_wadsworth_0
+  rotate: false
+  xy: 58, 0
+  size: 57, 48
+  orig: 60, 60
+  offset: 1, 5
+  index: -1
+scl_wadsworth_1
+  rotate: false
+  xy: 0, 95
+  size: 57, 47
+  orig: 60, 60
+  offset: 1, 5
+  index: -1
+scl_wadsworth_2
+  rotate: false
+  xy: 0, 48
+  size: 58, 47
+  orig: 60, 60
+  offset: 1, 5
+  index: -1
+scl_wadsworth_3
+  rotate: false
+  xy: 58, 141
+  size: 58, 46
+  orig: 60, 60
+  offset: 1, 6
+  index: -1
+scl_wadsworth_4
+  rotate: false
+  xy: 0, 187
+  size: 58, 45
+  orig: 60, 60
+  offset: 2, 7
+  index: -1
+scl_wadsworth_5
+  rotate: false
+  xy: 58, 187
+  size: 58, 45
+  orig: 60, 60
+  offset: 2, 7
+  index: -1
+scl_wadsworth_6
+  rotate: false
+  xy: 0, 142
+  size: 58, 45
+  orig: 60, 60
+  offset: 2, 7
+  index: -1
+scl_wadsworth_7
+  rotate: false
+  xy: 57, 95
+  size: 59, 46
+  orig: 60, 60
+  offset: 1, 6
+  index: -1
+scl_wadsworth_8
+  rotate: false
+  xy: 58, 48
+  size: 59, 47
+  orig: 60, 60
+  offset: 1, 5
+  index: -1
+scl_wadsworth_9
+  rotate: false
+  xy: 0, 1
+  size: 58, 47
+  orig: 60, 60
+  offset: 1, 5
+  index: -1

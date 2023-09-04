@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 367,32
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_breeder_0
+  rotate: false
+  xy: 263, 0
+  size: 35, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_1
+  rotate: false
+  xy: 298, 0
+  size: 35, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_2
+  rotate: false
+  xy: 333, 0
+  size: 34, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_3
+  rotate: false
+  xy: 227, 0
+  size: 36, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_4
+  rotate: false
+  xy: 0, 0
+  size: 38, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_5
+  rotate: false
+  xy: 38, 0
+  size: 38, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_6
+  rotate: false
+  xy: 76, 0
+  size: 38, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_7
+  rotate: false
+  xy: 114, 0
+  size: 38, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_8
+  rotate: false
+  xy: 152, 0
+  size: 38, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1
+scl_breeder_9
+  rotate: false
+  xy: 190, 0
+  size: 37, 32
+  orig: 40, 40
+  offset: 1, 4
+  index: -1

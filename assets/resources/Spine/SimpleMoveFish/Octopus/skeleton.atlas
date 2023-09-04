@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 92,207
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_clyde_0
+  rotate: true
+  xy: 48, 9
+  size: 41, 42
+  orig: 60, 60
+  offset: 9, 13
+  index: -1
+scl_clyde_1
+  rotate: true
+  xy: 0, 0
+  size: 38, 46
+  orig: 60, 60
+  offset: 11, 10
+  index: -1
+scl_clyde_2
+  rotate: true
+  xy: 0, 75
+  size: 36, 53
+  orig: 60, 60
+  offset: 12, 4
+  index: -1
+scl_clyde_3
+  rotate: true
+  xy: 0, 111
+  size: 34, 57
+  orig: 60, 60
+  offset: 13, 1
+  index: -1
+scl_clyde_4
+  rotate: true
+  xy: 0, 145
+  size: 32, 59
+  orig: 60, 60
+  offset: 14, 0
+  index: -1
+scl_clyde_5
+  rotate: true
+  xy: 0, 177
+  size: 30, 59
+  orig: 60, 60
+  offset: 15, 1
+  index: -1
+scl_clyde_6
+  rotate: false
+  xy: 59, 152
+  size: 32, 55
+  orig: 60, 60
+  offset: 14, 4
+  index: -1
+scl_clyde_7
+  rotate: false
+  xy: 57, 94
+  size: 34, 51
+  orig: 60, 60
+  offset: 13, 7
+  index: -1
+scl_clyde_8
+  rotate: true
+  xy: 0, 38
+  size: 37, 48
+  orig: 60, 60
+  offset: 11, 9
+  index: -1
+scl_clyde_9
+  rotate: false
+  xy: 53, 50
+  size: 39, 44
+  orig: 60, 60
+  offset: 10, 12
+  index: -1

@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 550,39
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_itchy_0
+  rotate: false
+  xy: 58, 0
+  size: 56, 39
+  orig: 60, 60
+  offset: 1, 12
+  index: -1
+scl_itchy_1
+  rotate: false
+  xy: 226, 0
+  size: 55, 39
+  orig: 60, 60
+  offset: 1, 12
+  index: -1
+scl_itchy_2
+  rotate: false
+  xy: 281, 0
+  size: 55, 39
+  orig: 60, 60
+  offset: 2, 12
+  index: -1
+scl_itchy_3
+  rotate: false
+  xy: 114, 0
+  size: 56, 39
+  orig: 60, 60
+  offset: 2, 12
+  index: -1
+scl_itchy_4
+  rotate: false
+  xy: 170, 0
+  size: 56, 39
+  orig: 60, 60
+  offset: 2, 12
+  index: -1
+scl_itchy_5
+  rotate: false
+  xy: 391, 0
+  size: 53, 39
+  orig: 60, 60
+  offset: 2, 12
+  index: -1
+scl_itchy_6
+  rotate: false
+  xy: 444, 0
+  size: 53, 39
+  orig: 60, 60
+  offset: 2, 12
+  index: -1
+scl_itchy_7
+  rotate: false
+  xy: 497, 0
+  size: 53, 39
+  orig: 60, 60
+  offset: 2, 12
+  index: -1
+scl_itchy_8
+  rotate: false
+  xy: 336, 0
+  size: 55, 39
+  orig: 60, 60
+  offset: 2, 12
+  index: -1
+scl_itchy_9
+  rotate: false
+  xy: 0, 0
+  size: 58, 39
+  orig: 60, 60
+  offset: 1, 12
+  index: -1

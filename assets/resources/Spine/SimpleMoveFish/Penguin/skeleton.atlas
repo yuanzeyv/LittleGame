@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 567,34
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_walter_0
+  rotate: false
+  xy: 0, 0
+  size: 57, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_1
+  rotate: false
+  xy: 57, 0
+  size: 57, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_2
+  rotate: false
+  xy: 114, 0
+  size: 57, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_3
+  rotate: false
+  xy: 171, 0
+  size: 57, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_4
+  rotate: false
+  xy: 399, 0
+  size: 56, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_5
+  rotate: false
+  xy: 455, 0
+  size: 56, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_6
+  rotate: false
+  xy: 511, 0
+  size: 56, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_7
+  rotate: false
+  xy: 228, 0
+  size: 57, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_8
+  rotate: false
+  xy: 285, 0
+  size: 57, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1
+scl_walter_9
+  rotate: false
+  xy: 342, 0
+  size: 57, 34
+  orig: 60, 60
+  offset: 2, 13
+  index: -1

@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 334,37
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_gekko_0
+  rotate: false
+  xy: 103, 0
+  size: 33, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_1
+  rotate: false
+  xy: 136, 0
+  size: 33, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_2
+  rotate: false
+  xy: 169, 0
+  size: 33, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_3
+  rotate: false
+  xy: 202, 0
+  size: 33, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_4
+  rotate: false
+  xy: 0, 0
+  size: 35, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_5
+  rotate: false
+  xy: 301, 1
+  size: 33, 36
+  orig: 40, 40
+  offset: 3, 4
+  index: -1
+scl_gekko_6
+  rotate: false
+  xy: 235, 0
+  size: 33, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_7
+  rotate: false
+  xy: 268, 0
+  size: 33, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_8
+  rotate: false
+  xy: 35, 0
+  size: 34, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1
+scl_gekko_9
+  rotate: false
+  xy: 69, 0
+  size: 34, 37
+  orig: 40, 40
+  offset: 3, 3
+  index: -1

@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 546,47
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_zorf_0
+  rotate: true
+  xy: 0, 1
+  size: 46, 58
+  orig: 60, 60
+  offset: 7, 1
+  index: -1
+scl_zorf_1
+  rotate: true
+  xy: 58, 1
+  size: 46, 57
+  orig: 60, 60
+  offset: 7, 2
+  index: -1
+scl_zorf_2
+  rotate: true
+  xy: 115, 1
+  size: 46, 55
+  orig: 60, 60
+  offset: 7, 4
+  index: -1
+scl_zorf_3
+  rotate: true
+  xy: 170, 1
+  size: 46, 54
+  orig: 60, 60
+  offset: 7, 5
+  index: -1
+scl_zorf_4
+  rotate: true
+  xy: 390, 0
+  size: 47, 52
+  orig: 60, 60
+  offset: 6, 7
+  index: -1
+scl_zorf_5
+  rotate: true
+  xy: 442, 0
+  size: 47, 52
+  orig: 60, 60
+  offset: 6, 7
+  index: -1
+scl_zorf_6
+  rotate: true
+  xy: 494, 0
+  size: 47, 52
+  orig: 60, 60
+  offset: 6, 7
+  index: -1
+scl_zorf_7
+  rotate: true
+  xy: 224, 1
+  size: 46, 54
+  orig: 60, 60
+  offset: 7, 5
+  index: -1
+scl_zorf_8
+  rotate: true
+  xy: 278, 1
+  size: 46, 55
+  orig: 60, 60
+  offset: 7, 4
+  index: -1
+scl_zorf_9
+  rotate: true
+  xy: 333, 1
+  size: 46, 57
+  orig: 60, 60
+  offset: 7, 2
+  index: -1

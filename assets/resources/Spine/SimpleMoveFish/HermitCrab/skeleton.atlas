@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 239,113
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_rhubarb_0
+  rotate: false
+  xy: 0, 57
+  size: 49, 56
+  orig: 60, 60
+  offset: 4, 2
+  index: -1
+scl_rhubarb_1
+  rotate: false
+  xy: 98, 0
+  size: 48, 56
+  orig: 60, 60
+  offset: 5, 2
+  index: -1
+scl_rhubarb_2
+  rotate: false
+  xy: 146, 57
+  size: 48, 56
+  orig: 60, 60
+  offset: 7, 2
+  index: -1
+scl_rhubarb_3
+  rotate: false
+  xy: 0, 1
+  size: 49, 56
+  orig: 60, 60
+  offset: 7, 2
+  index: -1
+scl_rhubarb_4
+  rotate: false
+  xy: 49, 57
+  size: 49, 56
+  orig: 60, 60
+  offset: 7, 2
+  index: -1
+scl_rhubarb_5
+  rotate: false
+  xy: 192, 2
+  size: 46, 55
+  orig: 60, 60
+  offset: 8, 2
+  index: -1
+scl_rhubarb_6
+  rotate: false
+  xy: 194, 57
+  size: 45, 56
+  orig: 60, 60
+  offset: 8, 2
+  index: -1
+scl_rhubarb_7
+  rotate: false
+  xy: 146, 0
+  size: 46, 57
+  orig: 60, 60
+  offset: 7, 1
+  index: -1
+scl_rhubarb_8
+  rotate: false
+  xy: 98, 56
+  size: 48, 57
+  orig: 60, 60
+  offset: 5, 1
+  index: -1
+scl_rhubarb_9
+  rotate: false
+  xy: 49, 1
+  size: 49, 56
+  orig: 60, 60
+  offset: 4, 2
+  index: -1

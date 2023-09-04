@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 280,34
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_starcatcher_0
+  rotate: false
+  xy: 0, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_1
+  rotate: false
+  xy: 28, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_2
+  rotate: false
+  xy: 56, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_3
+  rotate: false
+  xy: 84, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_4
+  rotate: false
+  xy: 112, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_5
+  rotate: false
+  xy: 140, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_6
+  rotate: false
+  xy: 168, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_7
+  rotate: false
+  xy: 196, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_8
+  rotate: false
+  xy: 224, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1
+scl_starcatcher_9
+  rotate: false
+  xy: 252, 0
+  size: 28, 34
+  orig: 40, 40
+  offset: 6, 3
+  index: -1

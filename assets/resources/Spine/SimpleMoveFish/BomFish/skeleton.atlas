@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 560,52
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+scl_shrapnel_0
+  rotate: false
+  xy: 340, 0
+  size: 55, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_1
+  rotate: false
+  xy: 0, 0
+  size: 57, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_2
+  rotate: false
+  xy: 395, 0
+  size: 55, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_3
+  rotate: false
+  xy: 57, 0
+  size: 57, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_4
+  rotate: false
+  xy: 228, 0
+  size: 56, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_5
+  rotate: false
+  xy: 450, 0
+  size: 55, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_6
+  rotate: false
+  xy: 284, 0
+  size: 56, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_7
+  rotate: false
+  xy: 505, 0
+  size: 55, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_8
+  rotate: false
+  xy: 114, 0
+  size: 57, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
+scl_shrapnel_9
+  rotate: false
+  xy: 171, 0
+  size: 57, 52
+  orig: 60, 60
+  offset: 1, 4
+  index: -1
