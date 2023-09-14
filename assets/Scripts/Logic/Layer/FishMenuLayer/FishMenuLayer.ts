@@ -6,6 +6,7 @@ import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { FishMenuMediator } from '../../Mediator/FishMenuMediator/FishMenuMediator';
 import { FishCommonPopWindowMediator } from '../../Mediator/FishCommonPopWindowMediator/FishCommonPopWindowMediator';
 import { FishMainProxy } from '../../Proxy/FishMainProxy/FishMainProxy';
+import { MusicProxy } from '../../Proxy/MusicProxy/MusicProxy';
 const { ccclass, property,type} = _decorator;
 export class FishMenuLayer extends BaseLayer {
     private mTailSpine:sp.Skeleton;
@@ -38,10 +39,11 @@ export class FishMenuLayer extends BaseLayer {
             }});
         });
         this.mStartButton.on("click",()=>{ 
+            _G.Facade.FindProxy(MusicProxy).Play(2);
             _Facade.Send(NotificationEnum.FishChoosePetsLayerOpen);
             //_Facade.Send(NotificationEnum.FishMainGameLayerOpen);
         });
-        
+         
         this.mMoveButton.on("click",()=>{
             if(this.mIsRunning== true) return;
             this.PlayTailAnimation(0);//立即播放一次

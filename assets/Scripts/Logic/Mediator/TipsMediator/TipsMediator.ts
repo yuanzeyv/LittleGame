@@ -20,4 +20,9 @@ export class TipsMediator extends WindowBaseMediator{
     protected InitLayerComponent(): new () => BaseLayer {
         return TipsLayer;
     }  
+    
+    public InitWindowLayerOrder():LayerOrder{
+        return LayerOrder.MaxTop;
+    } 
+    
 }

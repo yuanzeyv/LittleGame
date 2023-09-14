@@ -258,8 +258,8 @@ export class GameInning{
 
     //生成一个小鱼
     public GenerateFish():void{ 
-        _Facade.FindProxy(BundleProxy).Load("resources/Biology/Fish/ChaetodonMinimus",(loadStruct: LoadStruct)=>{
-            let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName) as Prefab;
+        _Facade.FindProxy(BundleProxy).Load("resources/Biology/Fish/ChaetodonMinimus",Prefab,(loadStruct: LoadStruct)=>{
+            let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName,Prefab);
             if(prefab == undefined) 
                 return;        
             let fishID:number = this.mAllocID++;

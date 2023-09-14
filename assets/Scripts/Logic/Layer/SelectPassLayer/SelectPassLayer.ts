@@ -152,8 +152,8 @@ export class SelectPassLayer extends BaseLayer {
         this.mPageLabel.string = (nowIndex + 1).toString();
         let frontSpritePath: string = nowIndex == 0 ? "resources/Images/Private/PageSelectLayer/FrontPageEnd/spriteFrame" : "resources/Images/Private/PageSelectLayer/FrontPage/spriteFrame";
         let nextSpritePath: string = (sumCount < 0 || nowIndex == sumCount) ? "resources/Images/Private/PageSelectLayer/NextPageEnd/spriteFrame" : "resources/Images/Private/PageSelectLayer/NextPage/spriteFrame";
-        _Facade.FindProxy(ResouceProxy).Load(this.mFrontButton.getComponent(Button),frontSpritePath, "normalSprite");
-        _Facade.FindProxy(ResouceProxy).Load(this.mNextButton.getComponent(Button),nextSpritePath, "normalSprite");
+        _Facade.FindProxy(ResouceProxy).Load(this.mFrontButton.getComponent(Button),frontSpritePath, "normalSprite",SpriteFrame);
+        _Facade.FindProxy(ResouceProxy).Load(this.mNextButton.getComponent(Button),nextSpritePath, "normalSprite",SpriteFrame);
         //请求本页数据
         _Facade.FindProxy(PagePassProxy).RequestPassData(nowIndex);//页数据必须每次更新都请求
     }

@@ -8,12 +8,12 @@ export class AudioMediator extends BaseMediator{
     m_UINode:Node;
     static get MediatorName(){ return "AudioMediator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
-        notificationMap.set(NotificationEnum.PlayAudioEffect,this.PlayAudioEffect.bind(this));
-        notificationMap.set(NotificationEnum.PlayMusic,this.PlayMusicHandle.bind(this));
-        notificationMap.set(NotificationEnum.SetMusicVolume,this.SetMusicVolumeHandle.bind(this)); 
-        notificationMap.set(NotificationEnum.SetEffectVolume,this.SetEffectVolumeHandle.bind(this)); 
+        //notificationMap.set(NotificationEnum.PlayAudioEffect,this.PlayAudioEffect.bind(this));
+        //notificationMap.set(NotificationEnum.PlayMusic,this.PlayMusicHandle.bind(this));
+        //notificationMap.set(NotificationEnum.SetMusicVolume,this.SetMusicVolumeHandle.bind(this)); 
+        //notificationMap.set(NotificationEnum.SetEffectVolume,this.SetEffectVolumeHandle.bind(this)); 
     }          
-    onRegister(){
+    onRegister(){ 
         this.m_AudioProxy = _Facade.FindProxy(AudioProxy);//寻找到当前的代理 
     }
 

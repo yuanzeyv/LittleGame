@@ -43,13 +43,17 @@ import { FishCommonPopWindowMediator } from "../Logic/Mediator/FishCommonPopWind
 import { FishMainProxy } from "../Logic/Proxy/FishMainProxy/FishMainProxy";
 import { FishMainGameMediator } from "../Logic/Mediator/FishMainGameMediator/FishMainGameMediator";
 import { CheckFishPetLayerMediator } from "../Logic/Mediator/CheckFishPetLayerMediator/CheckFishPetLayerMediator";
+import { BundleLoadResultCommand } from "../Logic/Control/BundleLoadResultCommand";
+import { MusicProxy } from "../Logic/Proxy/MusicProxy/MusicProxy";
+import { MusicControlMediator } from "../Logic/Mediator/MusicControlMediator/MusicControlMediator";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<NotificationEnum, CommandConstructor>): void {
         commandMap
         .set(NotificationEnum.NetAuthSuccess, AuthSuccessCommand)
-        .set(NotificationEnum.InitGameData, InitGameDataCommand);
-    }
+        .set(NotificationEnum.InitGameData, InitGameDataCommand)
+        .set(NotificationEnum.BundleLoadResult, BundleLoadResultCommand);
+    }  
 
     protected AllocMediator(mediatorMap: Set<MediatorConstructor>): void {
         mediatorMap
@@ -71,10 +75,11 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(InterstitialAdvertisingMediator)
             .add(FishLoadingMediator)
             .add(FishMenuMediator)
-            .add(FishSettingMediator)
+            .add(FishSettingMediator) 
             .add(FishCommonPopWindowMediator)
             .add(FishMainGameMediator)    
             .add(CheckFishPetLayerMediator)   
+            .add(MusicControlMediator)   
     }
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void {
@@ -88,9 +93,10 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(ResouceProxy)
             .add(BundleProxy)
             .add(BannerAdvertisingProxy)
-            .add(RewardedVideoAdvertisingProxy)
+            .add(RewardedVideoAdvertisingProxy) 
             .add(InterstitialAdvertisingProxy)
-            .add(UserDataProxy)
+            .add(UserDataProxy) 
             .add(FishMainProxy) 
+            .add(MusicProxy) 
     }
-}
+} 

@@ -7,6 +7,7 @@ import {PagePassProxy, PassData} from '../../Proxy/PagePassProxy/PagePassProxy';
 import { PassDataStruct } from '../../Proxy/PagePassProxy/PassDataStruct';
 import { UserDataProxy } from '../../Proxy/UserDataProxy/UserDataProxy';
 import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
+import { SpriteFrame } from 'cc';
 const {ccclass, property, type} = _decorator;
 export class PassCellPrefab extends BaseLayer {
     private m_LevelLabel: Label;
@@ -64,7 +65,7 @@ export class PassCellPrefab extends BaseLayer {
         let pagePassProxy: PagePassProxy = _Facade.FindProxy(PagePassProxy);
         let passData:PassData|undefined = pagePassProxy.GetPassData(this.Level); 
         //关卡图片设置为默认
-        _Facade.FindProxy(ResouceProxy).Load(this.m_BackGourndSprite,"resources/Images/Private/PageSelectLayer/PassBGNoStart/spriteFrame","spriteFrame");
+        _Facade.FindProxy(ResouceProxy).Load(this.m_BackGourndSprite,"resources/Images/Private/PageSelectLayer/PassBGNoStart/spriteFrame","spriteFrame",SpriteFrame);
         for (let i = 0; i < 3; i++)
             this.m_LevelAwardStartSprite[i].node.active = false;
         for (let i = 0; i < 3; i++)
@@ -72,7 +73,7 @@ export class PassCellPrefab extends BaseLayer {
         //当前关卡要有数据 （并且前一个关卡要有数据，
         if(passData == undefined || !pagePassProxy.GetLevelCanGame(this.Level))//无数据的情况
             return;
-        _Facade.FindProxy(ResouceProxy).Load(this.m_BackGourndSprite,"resources/Images/Private/PageSelectLayer/PassBGStart/spriteFrame","spriteFrame"); 
+        _Facade.FindProxy(ResouceProxy).Load(this.m_BackGourndSprite,"resources/Images/Private/PageSelectLayer/PassBGStart/spriteFrame","spriteFrame",SpriteFrame); 
         let passStarCount:number = _Facade.FindProxy(UserDataProxy).GetPassStar(this.m_Level) //获取到当前关卡的信息个数
         //星星显示
         for(let i = 0;i< 3;i++){

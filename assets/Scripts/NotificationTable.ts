@@ -1,7 +1,8 @@
 export enum NotificationEnum {
     TestOpen = "TestOpen",
-
     INVALID = "",
+    //Bundle加载成功结束消息
+    BundleLoadResult = "BundleLoadResult", 
 
     LoadScene = "LoadScene",
     //Window 窗口管理 
@@ -9,6 +10,8 @@ export enum NotificationEnum {
     CloseWindow = "CloseWindow", 
 
     InitGameData = "InitGameData",
+    //音效界面用
+    EffectPlayFinish = "EffectPlayFinish",
 
     //登录界面
     LongInOpen = "LongInOpen",
@@ -33,8 +36,11 @@ export enum NotificationEnum {
     AnnouncementShow = "AnnouncementShow",
 
     //播放音效用
+    MusicControlLayerOpem = "MusicControlLayerOpem",
+    
     PlayAudioEffect = "PlayAudioEffect",
     PlayMusic = "PlayMusic",
+    StopMusic = "StopMusic",
     SetMusicVolume = "SetMusicVolume", 
     SetEffectVolume = "SetEffectVolume", 
     

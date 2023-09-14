@@ -28,12 +28,12 @@ export class WindowProxy extends BaseProxy{
         this.mOrderNodeMap[LayerOrder.Float] = find("Canvas/UINode/Float");
         this.mOrderNodeMap[LayerOrder.Top] = find("Canvas/UINode/Top");
         this.mOrderNodeMap[LayerOrder.MaxTop] = find("Canvas/UINode/MaxTop");
-    }
-
-    //初始化基础窗口预制体
-    public InitWindowPrefab(){ 
-        this.mWindowPrefab = _Facade.FindProxy(BundleProxy).UseAsset("resources/Perfab/WindowInterface") as Prefab;
     } 
+
+    //初始化基础窗口预制体  
+    public InitWindowPrefab(){ 
+        this.mWindowPrefab = _Facade.FindProxy(BundleProxy).UseAsset("resources/Perfab/WindowInterface",Prefab); 
+    }  
 
     private GenerateWindow(winRequest:WindowCreateRequest):WindowInterface | undefined{
         let windowNodeCompoment:WindowInterface|undefined = this.mWindowPrefabPool.pop();

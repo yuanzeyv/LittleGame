@@ -104,7 +104,7 @@ export class MainGameLayer extends BaseLayer {
     }
     public FilpBlackCards(){
         for(let model of this.mNotOwnerCardLayout.children){
-            _Facade.FindProxy(ResouceProxy).Load(model.getComponent(Sprite),`resources/Images/Public/48/spriteFrame`,"spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load(model.getComponent(Sprite),`resources/Images/Public/48/spriteFrame`,"spriteFrame",SpriteFrame);
             this.mNotOwnerCardLayout.addChild(model);
         }
         this.mMosaicSolt = undefined;
@@ -142,7 +142,7 @@ export class MainGameLayer extends BaseLayer {
             let model:Node = instantiate(this.mCardModel);
             let spriteNode:Node = find("Sprite",model);
             model.active = true;
-            _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame",SpriteFrame);
             this.mOwnerCardLayout.addChild(model);
             this.MoveByTween(spriteNode,math.random()* 0.8 ,new Vec3(0,Math.random() * 600,0));
         }
@@ -155,7 +155,7 @@ export class MainGameLayer extends BaseLayer {
             let model:Node = instantiate(this.mCardModel);
             let spriteNode:Node = find("Sprite",model);
             model.active = true;
-            _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame");
+            _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame",SpriteFrame);
             this.mNotOwnerCardLayout.addChild(model);
             this.MoveByTween(spriteNode,math.random()* 0.8 ,new Vec3(0,Math.random() * 600,0));
         }) 
@@ -199,7 +199,7 @@ export class MainGameLayer extends BaseLayer {
                 let model:Node = instantiate(this.mCardModel);
                 let spriteNode:Node = find("Sprite",model);
                 model.active = true;
-                _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame");
+                _Facade.FindProxy(ResouceProxy).Load(spriteNode.getComponent(Sprite),`resources/Images/Public/Card/${ cardID }/spriteFrame`,"spriteFrame",SpriteFrame);
                 cardLayout.addChild(model);
             }
         }else{

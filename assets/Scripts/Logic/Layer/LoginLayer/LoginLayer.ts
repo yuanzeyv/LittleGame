@@ -5,6 +5,7 @@ import {NotificationEnum} from '../../../NotificationTable';
 import {wechatLogin} from '../../../api/WechatAPI';
 import {GameSetting, GameSettingProxy} from '../../Proxy/GameSettingProxy/GameSettingProxy';
 import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
+import { SpriteFrame } from 'cc';
 
 const {ccclass, property, type} = _decorator;
 
@@ -54,9 +55,9 @@ export class LoginLayer extends BaseLayer {
         let nowStatus = gameSettingProxy.GetSetting(GameSetting.MUSIC);
         let button: Button = this.m_MusicButton.getComponent(Button);
         if (nowStatus == 1)
-            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/OpenVideo/spriteFrame","normalSprite");
+            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/OpenVideo/spriteFrame","normalSprite",SpriteFrame);
         else
-            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/TipsPassFailLayer/FailBackGround/spriteFrame", "normalSprite");
+            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/TipsPassFailLayer/FailBackGround/spriteFrame", "normalSprite",SpriteFrame);
     }
 
     UpdateSoundEffectButtonSprite() {
@@ -64,9 +65,9 @@ export class LoginLayer extends BaseLayer {
         let button: Button = this.m_SoundEffectButton.getComponent(Button);
         let newStatus = gameSettingProxy.GetSetting(GameSetting.SOUND_EFFECT);
         if (newStatus == 1)
-            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/OpenEffect/spriteFrame","normalSprite");
+            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/main/OpenEffect/spriteFrame","normalSprite",SpriteFrame);
         else
-            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/TipsPassFailLayer/FailBackGround/spriteFrame", "normalSprite");
+            _Facade.FindProxy(ResouceProxy).Load(button,"resources/Images/Private/TipsPassFailLayer/FailBackGround/spriteFrame", "normalSprite",SpriteFrame);
     }
 
     MusicButtonHandle() {

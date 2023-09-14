@@ -1,5 +1,6 @@
 import { Component } from "cc";
 import { INotification } from "../PureMVC";
+import { NotificationEnum as eNotificationEnum } from "../../NotificationTable";
 export type LayerExecute = (any)=>void;
 //窗口的基础
 /**
@@ -7,11 +8,11 @@ export type LayerExecute = (any)=>void;
  */
 export class BaseLayer extends Component{
     //消息队列,不用map 数组效率更高
-    private m_ExecuteHandle:Map<string,LayerExecute> = new Map<string,LayerExecute>();
-    protected RegisterExecuteHandle(executeMap:Map<string,LayerExecute> ){}
+    private m_ExecuteHandle:Map<eNotificationEnum,LayerExecute> = new Map<eNotificationEnum,LayerExecute>();
+    protected RegisterExecuteHandle(executeMap:Map<eNotificationEnum ,LayerExecute> ){}
 
     public NotificationExecute(notification:INotification){
-        let handle = this.m_ExecuteHandle.get(notification.getName());
+        let handle = this.m_ExecuteHandle.get(notification.getName() as eNotificationEnum);
         if(handle == undefined) return; 
         try{
             handle(notification.getBody());//执行方法体

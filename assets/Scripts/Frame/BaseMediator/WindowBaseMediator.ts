@@ -14,7 +14,9 @@ import { BaseLayer } from "../BaseLayer/BaseLayer";
 import { WindowProxy } from "../../Logic/Proxy/WindowProxy/WindowProxy";
 export  abstract class WindowBaseMediator extends BaseMediator {
     private mPrefabAsset:Prefab|undefined;//预制体资源
-    private mLayerCompnent:new ()=>BaseLayer;//
+    private mLayerCompnent:new ()=>BaseLayer;
+
+    private mWindowLayerOrder:LayerOrder = LayerOrder.MinBottom;//窗口层级
 
     private m_OpenSound:string;//打开音效
     private m_CloseSound:string;//关闭音效
@@ -45,7 +47,11 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     }
     public get ExistWindow():boolean{
         return this.m_WindowInterface != undefined;
-    }
+    } 
+
+    public InitWindowLayerOrder():LayerOrder{
+        return LayerOrder.MinBottom;
+    } 
 
     protected InitPrefabPath(){
         return "";
@@ -54,6 +60,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     protected InitWindow():void{
         this.mPrefabPath = this.InitPrefabPath();
         this.mLayerCompnent = this.InitLayerComponent();
+        this.mWindowLayerOrder = this.InitWindowLayerOrder();
     }
 
     onRegister(): void {
@@ -78,12 +85,12 @@ export  abstract class WindowBaseMediator extends BaseMediator {
         if(this.ExistWindow)//存在的话直接进行返回
             return; 
         if(this.mPrefabAsset == undefined){
-            _Facade.FindProxy(BundleProxy).Load(this.PrefabPath, (loadStruct: LoadStruct)=>{
+            _Facade.FindProxy(BundleProxy).Load(this.PrefabPath, Prefab,(loadStruct: LoadStruct)=>{
                 if(this.mPrefabAsset != undefined){//防止连点
                     console.warn(`尝试连续多次的加载${this.PrefabPath}`);
-                    return;
+                    return; 
                 } 
-                let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName) as Prefab;
+                let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName,Prefab);
                 if(prefab == undefined){
                     _Facade.Send(NotificationEnum.M_TipsShow,`打开窗口失败:${this.MediatorName} 原因:窗口预制体加载失败`);//提示窗口打开失败
                     return;                
@@ -92,12 +99,12 @@ export  abstract class WindowBaseMediator extends BaseMediator {
                 this.OpenLayer(data);
             });
             return;
-        } 
+        }  
         let layerCell:Node = instantiate(this.mPrefabAsset);//实例化当前预制体     
         layerCell.setPosition(0,0,0); 
-        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,layerCell,data,LayerOrder.MinBottom);//创建一个window请求
-        windowRequest.SetFullScreenMask(true,true,new Color(0,0,0,0));
-        windowRequest.SetWindowTouchMask(true);
+        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,layerCell,data,this.mWindowLayerOrder);//创建一个window请求
+        windowRequest.SetFullScreenMask(false,false,new Color(0,0,0,0));
+        windowRequest.SetWindowTouchMask(false);
         _Facade.FindProxy(WindowProxy).CreateWindow(windowRequest,this.mLayerCompnent);//直接进行窗口创建
     } 
 }
