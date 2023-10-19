@@ -3,6 +3,7 @@
     "__type__": "cc.Prefab",
     "_name": "FishMenuLayer",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_native": "",
     "data": {
       "__id__": 1
@@ -90,6 +91,7 @@
     "__type__": "cc.Node",
     "_name": "GameBG",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -149,6 +151,7 @@
     "__type__": "cc.Node",
     "_name": "TailNode",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 2
     },
@@ -198,6 +201,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -225,6 +229,7 @@
     "__type__": "sp.Skeleton",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -242,24 +247,24 @@
       "b": 255,
       "a": 255
     },
-    "loop": false,
+    "_skeletonData": {
+      "__uuid__": "befe957a-63bb-4cd5-bd69-8d246dc4d763",
+      "__expectedType__": "sp.SkeletonData"
+    },
+    "defaultSkin": "default",
+    "defaultAnimation": "",
+    "_premultipliedAlpha": false,
     "_timeScale": 1,
-    "_useTint": false,
     "_preCacheMode": 0,
     "_cacheMode": 0,
     "_defaultCacheMode": 0,
+    "_sockets": [],
+    "_useTint": false,
+    "_debugMesh": false,
     "_debugBones": false,
     "_debugSlots": false,
-    "_skeletonData": {
-      "__uuid__": "829c9544-cbde-4cba-9d55-89648cc4199b",
-      "__expectedType__": "sp.SkeletonData"
-    },
-    "_premultipliedAlpha": false,
-    "defaultSkin": "default",
-    "defaultAnimation": "<None>",
     "_enableBatch": false,
-    "_sockets": [],
-    "_debugMesh": false,
+    "loop": false,
     "_id": ""
   },
   {
@@ -283,6 +288,7 @@
     "__type__": "cc.Node",
     "_name": "MoveButton",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 2
     },
@@ -332,6 +338,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 9
     },
@@ -359,6 +366,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 9
     },
@@ -441,6 +449,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -468,6 +477,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -512,6 +522,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -560,6 +571,7 @@
     "__type__": "cc.Node",
     "_name": "StartButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -616,6 +628,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 22
     },
@@ -668,6 +681,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 23
     },
@@ -695,6 +709,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 23
     },
@@ -715,7 +730,7 @@
     "_string": "开始游戏",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 65,
+    "_actualFontSize": 71,
     "_fontSize": 65,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -742,6 +757,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 23
     },
@@ -780,6 +796,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 22
     },
@@ -807,6 +824,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 22
     },
@@ -851,6 +869,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 22
     },
@@ -930,6 +949,7 @@
     "__type__": "cc.Node",
     "_name": "TimeTrialButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -986,6 +1006,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 38
     },
@@ -1038,6 +1059,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 39
     },
@@ -1065,6 +1087,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 39
     },
@@ -1085,7 +1108,7 @@
     "_string": "计时赛",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 50,
+    "_actualFontSize": 55,
     "_fontSize": 50,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1112,6 +1135,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 39
     },
@@ -1150,6 +1174,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 38
     },
@@ -1177,6 +1202,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 38
     },
@@ -1221,6 +1247,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 38
     },
@@ -1300,6 +1327,7 @@
     "__type__": "cc.Node",
     "_name": "ChallengeButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -1356,6 +1384,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 54
     },
@@ -1408,6 +1437,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 55
     },
@@ -1435,6 +1465,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 55
     },
@@ -1455,7 +1486,7 @@
     "_string": "挑战模式",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 50,
+    "_actualFontSize": 55,
     "_fontSize": 50,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1482,6 +1513,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 55
     },
@@ -1520,6 +1552,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 54
     },
@@ -1547,6 +1580,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 54
     },
@@ -1591,6 +1625,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 54
     },
@@ -1670,6 +1705,7 @@
     "__type__": "cc.Node",
     "_name": "VirtualButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -1726,6 +1762,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 70
     },
@@ -1778,6 +1815,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 71
     },
@@ -1805,6 +1843,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 71
     },
@@ -1825,7 +1864,7 @@
     "_string": "水族馆",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 65,
+    "_actualFontSize": 71,
     "_fontSize": 65,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1852,6 +1891,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 71
     },
@@ -1890,6 +1930,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 70
     },
@@ -1917,6 +1958,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 70
     },
@@ -1961,6 +2003,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 70
     },
@@ -2040,6 +2083,7 @@
     "__type__": "cc.Node",
     "_name": "RankButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -2096,6 +2140,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 86
     },
@@ -2151,6 +2196,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 87
     },
@@ -2178,6 +2224,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 87
     },
@@ -2198,7 +2245,7 @@
     "_string": "排 行 榜",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 30,
+    "_actualFontSize": 33,
     "_fontSize": 30,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -2225,6 +2272,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 87
     },
@@ -2250,6 +2298,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 87
     },
@@ -2298,6 +2347,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 86
     },
@@ -2325,6 +2375,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 86
     },
@@ -2369,6 +2420,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 86
     },
@@ -2448,6 +2500,7 @@
     "__type__": "cc.Node",
     "_name": "QuitButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -2504,6 +2557,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 104
     },
@@ -2559,6 +2613,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 105
     },
@@ -2586,6 +2641,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 105
     },
@@ -2606,7 +2662,7 @@
     "_string": "退 出",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 30,
+    "_actualFontSize": 33,
     "_fontSize": 30,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -2633,6 +2689,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 105
     },
@@ -2658,6 +2715,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 105
     },
@@ -2706,6 +2764,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 104
     },
@@ -2733,6 +2792,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 104
     },
@@ -2777,6 +2837,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 104
     },
@@ -2856,6 +2917,7 @@
     "__type__": "cc.Node",
     "_name": "SettingButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -2912,6 +2974,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 122
     },
@@ -2967,6 +3030,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 123
     },
@@ -2994,6 +3058,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 123
     },
@@ -3014,7 +3079,7 @@
     "_string": "设 置",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 30,
+    "_actualFontSize": 33,
     "_fontSize": 30,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -3041,6 +3106,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 123
     },
@@ -3066,6 +3132,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 123
     },
@@ -3114,6 +3181,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 122
     },
@@ -3141,6 +3209,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 122
     },
@@ -3185,6 +3254,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 122
     },
@@ -3264,6 +3334,7 @@
     "__type__": "cc.Node",
     "_name": "HelpButton",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -3320,6 +3391,7 @@
     "__type__": "cc.Node",
     "_name": "Label",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 140
     },
@@ -3375,6 +3447,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 141
     },
@@ -3402,6 +3475,7 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 141
     },
@@ -3422,7 +3496,7 @@
     "_string": "帮 助",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 30,
+    "_actualFontSize": 33,
     "_fontSize": 30,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -3449,6 +3523,7 @@
     "__type__": "cc.LabelOutline",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 141
     },
@@ -3474,6 +3549,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 141
     },
@@ -3522,6 +3598,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 140
     },
@@ -3549,6 +3626,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 140
     },
@@ -3593,6 +3671,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 140
     },
@@ -3672,6 +3751,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -3699,6 +3779,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },

@@ -10,11 +10,11 @@ import { MusicProxy } from '../../Proxy/MusicProxy/MusicProxy';
 const { ccclass, property,type} = _decorator;
 export class FishMenuLayer extends BaseLayer {
     private mTailSpine:sp.Skeleton;
-    
     private mMoveButton:Node;//点击尾巴 运动
     private mStartButton:Node;//开始按钮
     private mSettingButton:Node;//设置按钮
     private mExitButton:Node;//退出按钮
+    private mFightTimeButton:Node;//计时按钮
 
     private mSoltCell:SoltCell;
     private mIsRunning:boolean = false;
@@ -22,11 +22,13 @@ export class FishMenuLayer extends BaseLayer {
     RegisterExecuteHandle(executeMap:Map<eNotificationEnum,LayerExecute> ){
     }
 
+    TimeTrialButton
     InitNode() { 
         this.mStartButton = find("StartButton",this.node);
         this.mMoveButton = find("GameBG/MoveButton",this.node);
         this.mSettingButton = find("SettingButton",this.node);
         this.mExitButton = find("QuitButton",this.node);
+        this.mFightTimeButton = find("TimeTrialButton",this.node);
          
         this.mTailSpine = find("GameBG/TailNode",this.node).getComponent(sp.Skeleton);
         this.mTailSpine.setCompleteListener(()=>{//播放完成时
@@ -41,7 +43,6 @@ export class FishMenuLayer extends BaseLayer {
         this.mStartButton.on("click",()=>{ 
             _G.Facade.FindProxy(MusicProxy).Play(2);
             _Facade.Send(NotificationEnum.FishChoosePetsLayerOpen);
-            //_Facade.Send(NotificationEnum.FishMainGameLayerOpen);
         });
          
         this.mMoveButton.on("click",()=>{
@@ -52,15 +53,21 @@ export class FishMenuLayer extends BaseLayer {
         this.mSettingButton.on("click",()=>{
             _Facade.Send(eNotificationEnum.FishSettingLayerOpen);
         });
+
+        this.RegisterButtonEvent<FishMenuLayer>(this.mFightTimeButton,"OpenFightLayer");
         this.PlayTailAnimation();//默认开局播放一次
     }   
 
-    private PlayTailAnimation(delay:number = 5000){
+    public PlayTailAnimation(delay:number = 5000){
         this.mSoltCell?.Stop();//停止播放当前的动画
         this.mSoltCell = _G.TimeWheel.Set(delay * Math.random(),()=>{
             this.mIsRunning = true;
             this.mTailSpine.setAnimation(0,"WiggleTail",false);
         });
+    } 
+ 
+    public OpenFightLayer(){ 
+        _Facade.Send(eNotificationEnum.FightLayerOpen);
     }
 
 
@@ -70,7 +77,7 @@ export class FishMenuLayer extends BaseLayer {
     }
 
  
-    public CloseLayer(){
+    public Close(){
         this.mSoltCell.Stop();
         this.mSoltCell = undefined;
     }

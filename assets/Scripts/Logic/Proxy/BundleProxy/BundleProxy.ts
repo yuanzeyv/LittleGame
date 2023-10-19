@@ -102,7 +102,7 @@ export class BundleProxy extends BaseProxy{
         this.LoadArr([{path:path,type:type}],loadStructHandle);
     }
     //加载一组资源 
-    public LoadArr(loadDatas:[{path:string,type:ResouoceType<Asset>}],loadStructHandle:(loadStruct:LoadStruct)=>void):void{//解析一组资源
+    public LoadArr(loadDatas:{path:string,type:ResouoceType<Asset>}[],loadStructHandle:(loadStruct:LoadStruct)=>void):void{//解析一组资源
         this.GenerationAnalysis(loadDatas,loadStructHandle);
         for(let loadData of loadDatas){
             let url:{bundleName:string,url:string} | undefined = ParaseUrl(loadData.path)//获取到Url 
@@ -155,7 +155,5 @@ export class BundleProxy extends BaseProxy{
         let url:{bundleName:string,url:string} | undefined = ParaseUrl(path)//获取到Url
         let bundleAsset:BundleAssest|undefined = this.mBundleAssetMap.get(url.bundleName);//获取到是否拥有bundle
         bundleAsset.DecRef(url.url,type);
-    }
-
-    
+    } 
 }

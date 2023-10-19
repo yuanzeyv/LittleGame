@@ -19,12 +19,12 @@ export interface IBaseMVCRegister {
 export class BaseMVCRegister implements IBaseMVCRegister {
     public m_IsRegister: boolean = false;
     private m_CommandMap: Map<NotificationEnum, CommandConstructor> = new Map<NotificationEnum, CommandConstructor>();
-    private m_MediatorMap: Set<MediatorConstructor> = new Set<MediatorConstructor>();
+    private m_MediatorMap: Map<MediatorConstructor,string> = new Map<MediatorConstructor,string>();
     private m_ProxyMap: Set<ProxyConstructor> = new Set<ProxyConstructor>();
 
     protected AllocProxy(proxyMap: Set<ProxyConstructor>) {
     }//注册所需要的代理
-    protected AllocMediator(mediatorMap: Set<MediatorConstructor>) {
+    protected AllocMediator(mediatorMap: Map<MediatorConstructor,string>) {
     }//注册所需要的中介
     protected AllocCommand(commandMap: Map<NotificationEnum, CommandConstructor>) {
     } //注册所需要的中介
@@ -71,9 +71,8 @@ export class BaseMVCRegister implements IBaseMVCRegister {
     }
 
     private RegisterMediator() {//注册所需要的中介
-        this.m_MediatorMap.forEach((mediatorConstructor: MediatorConstructor) => {
-            let temp: any = mediatorConstructor;
-            _Facade.registerMediator(new mediatorConstructor(temp["MediatorName"]));
+        this.m_MediatorMap.forEach((name:string,mediatorConstructor: MediatorConstructor) => {
+            _Facade.registerMediator(new mediatorConstructor(name));
         });
     }
 
@@ -91,9 +90,8 @@ export class BaseMVCRegister implements IBaseMVCRegister {
     }
 
     private UnRegisterMediator() {
-        this.m_MediatorMap.forEach((mediatorConstructor: MediatorConstructor) => {
-            let temp: any = mediatorConstructor;
-            _Facade.removeMediator(temp["MediatorName"]);
+        this.m_MediatorMap.forEach((name:string,mediatorConstructor: MediatorConstructor) => {
+            _Facade.removeMediator(name); 
         });
         this.m_MediatorMap.clear();
     }

@@ -1,4 +1,5 @@
 import { Label, UITransform, Widget } from "cc";
+import { BaseLayer } from "../Frame/BaseLayer/BaseLayer";
 
 export function CopyWidget(srcWidget:Widget,destWidget:Widget){
     destWidget.target = srcWidget.target; 

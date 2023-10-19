@@ -7,18 +7,14 @@ import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { AnnouncementLayer } from "../../Layer/AnnouncementLayer/AnnouncementLayer";
 
-export class AnnouncementMediator extends WindowBaseMediator{
-    static get MediatorName(){ return "AnnouncementMediator"; }
+export class AnnouncementMediator extends WindowBaseMediator{ 
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
         .set(NotificationEnum.AnnouncementOpen,this.OpenLayer.bind(this))
         .set(NotificationEnum.AnnouncementShow,this.LayerHandle.bind(this));
     }  
 
-    protected InitPrefabPath(): string {//每个窗口mediator都对应一个窗口预制体
-        return "resources/Perfab/AnnouncementLayer/AnnouncementLayer";
-    }
-    protected InitLayerComponent(): new () => BaseLayer {
-        return AnnouncementLayer;
-    }   
+    protected InitPrefabInfo(): { path: string; layerConst: new () => BaseLayer;} {
+        return { path: "resources/Perfab/AnnouncementLayer/AnnouncementLayer",layerConst: AnnouncementLayer}
+    } 
 }

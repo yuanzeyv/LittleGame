@@ -28,7 +28,8 @@
     "gravity": {
       "y": 0
     },
-    "fixedTimeStep": 0.016667
+    "fixedTimeStep": 0.016667,
+    "maxSubSteps": 1
   },
   "custom_joint_texture_layouts": []
 }

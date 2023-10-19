@@ -8,15 +8,11 @@ import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { FishMenuLayer } from "../../Layer/FishMenuLayer/FishMenuLayer";
 
 export class FishMenuMediator extends WindowBaseMediator{
-    static get MediatorName(){ return "FishMenuMediator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
         .set(NotificationEnum.FishMenuLayerOpen,this.OpenLayer.bind(this))  
     }  
-    protected InitPrefabPath(): string {//每个窗口mediator都对应一个窗口预制体
-        return "resources/Perfab/FishMenuLayer/FishMenuLayer";
-    }
-    protected InitLayerComponent(): new () => BaseLayer {
-        return FishMenuLayer;
-    }   
+    protected InitPrefabInfo(): { path: string; layerConst: new () => BaseLayer;} {
+        return { path:"resources/Perfab/FishMenuLayer/FishMenuLayer",layerConst:FishMenuLayer};
+    }  
 }

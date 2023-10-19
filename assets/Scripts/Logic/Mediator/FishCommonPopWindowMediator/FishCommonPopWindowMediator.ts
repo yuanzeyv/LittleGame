@@ -9,15 +9,14 @@ import { FishSettingLayer } from "../../Layer/FishSettingLayer/FishSettingLayer"
 import { FishCommonPopWindowLayer } from "../../Layer/FishCommonPopWindowLayer/FishCommonPopWindowLayer";
 
 export class FishCommonPopWindowMediator extends WindowBaseMediator{
-    static get MediatorName(){ return "FishCommonPopWindowMediator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
         .set(NotificationEnum.FishCommonLayerOpen,this.OpenLayer.bind(this))  
-    }  
-    protected InitPrefabPath(): string {//每个窗口mediator都对应一个窗口预制体
-        return "resources/Perfab/FishCommonPopWindowLayer/FishCommonPopWindowLayer";
-    }
-    protected InitLayerComponent(): new () => BaseLayer {
-        return FishCommonPopWindowLayer;
-    }   
+        .set(NotificationEnum.FishCommonLayerClose,this.CloseLayer.bind(this))  
+    
+}  
+
+    protected InitPrefabInfo(): { path: string; layerConst: new () => BaseLayer;} {
+        return { path:"resources/Perfab/FishCommonPopWindowLayer/FishCommonPopWindowLayer" ,layerConst: FishCommonPopWindowLayer}
+    } 
 }

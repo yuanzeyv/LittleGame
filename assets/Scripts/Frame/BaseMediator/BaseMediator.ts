@@ -3,12 +3,9 @@
  */
 import { INotification, Mediator } from "../../Frame/PureMVC";
 import { _Facade} from "../../Global";
-
 export type NotificationHandle = (data:any,notification:INotification)=>void;
-
 export class BaseMediator extends Mediator{
     private m_NotificationMap:Map<string,NotificationHandle> = new Map<string,NotificationHandle>();
-    static get MediatorName(){  return "" }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{}
     listNotificationInterests(): string[] {
         this.RegisterNotification(this.m_NotificationMap);
@@ -27,7 +24,6 @@ export class BaseMediator extends Mediator{
            console.warn("The message was not implemented");//打印消息没有被实现
             return;
         }
-
         handleFunc(notification.getBody(),notification);
     }
 }

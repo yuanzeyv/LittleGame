@@ -1,11 +1,9 @@
 import { BaseMediator, NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { _Facade } from "../../../Global";
 import { NotificationEnum } from "../../../NotificationTable";
-import { AudioProxy } from "../../Proxy/AudioProxy/AudioProxy";
 import { BannerAdvertisingProxy } from "../../Proxy/BannerAdvertisingProxy/BannerAdvertisingProxy";
 
 export class BannerAdvertisingMediator extends BaseMediator{  
-    static get MediatorName(){ return "BannerAdvertisingMediator"; }
     private m_BannerAdvertisingProxy:BannerAdvertisingProxy;
     public RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
          

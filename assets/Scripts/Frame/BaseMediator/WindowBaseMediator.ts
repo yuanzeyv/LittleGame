@@ -15,32 +15,20 @@ import { WindowProxy } from "../../Logic/Proxy/WindowProxy/WindowProxy";
 export  abstract class WindowBaseMediator extends BaseMediator {
     private mPrefabAsset:Prefab|undefined;//预制体资源
     private mLayerCompnent:new ()=>BaseLayer;
-
     private mWindowLayerOrder:LayerOrder = LayerOrder.MinBottom;//窗口层级
-
-    private m_OpenSound:string;//打开音效
-    private m_CloseSound:string;//关闭音效
     private m_EnableScreenTouchMask:boolean = false;//是否应该存在触摸遮罩层
     private m_ShowScreenTaskImage:boolean = false;//存在的话，是否显示遮罩背景
     private m_ShowScreenMaskColor:Color = new Color(0,0,0,64);
-
     private m_EnableWindowMask:boolean = true;//窗口触摸是否被遮罩
     private m_EnableDragMove:boolean = false;//是否可以被拖动
 
     private m_WindowInterface:WindowInterface; //界面关联的组件
-
     private m_OpenNotify:NotificationEnum;
 
     private mPrefabPath:string;//获取到预制体资源
     public get PrefabPath():string{
         return this.mPrefabPath;
-    } 
-
-    protected abstract InitLayerComponent():new ()=>BaseLayer;
-    
-    get MediatorName(){ return "WindowBaseMediator"; }
-
-    
+    }  
 
     public get WindowInterface():WindowInterface{
         return this.m_WindowInterface;
@@ -51,15 +39,14 @@ export  abstract class WindowBaseMediator extends BaseMediator {
 
     public InitWindowLayerOrder():LayerOrder{
         return LayerOrder.MinBottom;
-    } 
+    }  
 
-    protected InitPrefabPath(){
-        return "";
-    }
+    protected abstract InitPrefabInfo():{path:string,layerConst:new ()=>BaseLayer};
 
     protected InitWindow():void{
-        this.mPrefabPath = this.InitPrefabPath();
-        this.mLayerCompnent = this.InitLayerComponent();
+        let prefabInfo:{path:string,layerConst:new ()=>BaseLayer}|undefined = this.InitPrefabInfo();
+        this.mPrefabPath = prefabInfo?.path;
+        this.mLayerCompnent = prefabInfo?.layerConst;
         this.mWindowLayerOrder = this.InitWindowLayerOrder();
     }
 
@@ -92,7 +79,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
                 } 
                 let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName,Prefab);
                 if(prefab == undefined){
-                    _Facade.Send(NotificationEnum.M_TipsShow,`打开窗口失败:${this.MediatorName} 原因:窗口预制体加载失败`);//提示窗口打开失败
+                    _Facade.Send(NotificationEnum.M_TipsShow,`打开窗口失败:${this.getMediatorName()} 原因:窗口预制体加载失败`);//提示窗口打开失败
                     return;                
                 }  
                 this.mPrefabAsset = prefab;
@@ -107,4 +94,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
         windowRequest.SetWindowTouchMask(false);
         _Facade.FindProxy(WindowProxy).CreateWindow(windowRequest,this.mLayerCompnent);//直接进行窗口创建
     } 
+    protected CloseLayer(data:any){
+        _Facade.Send(NotificationEnum.CloseWindow,this.getMediatorName());
+    }
 }

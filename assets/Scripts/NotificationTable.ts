@@ -35,6 +35,9 @@ export enum NotificationEnum {
     AnnouncementOpen = "AnnouncementOpen",
     AnnouncementShow = "AnnouncementShow",
 
+    //公告用
+    FightLayerOpen = "FightLayerOpen", 
+
     //播放音效用
     MusicControlLayerOpem = "MusicControlLayerOpem",
     
@@ -60,10 +63,12 @@ export enum NotificationEnum {
 
     //游戏加载用
     FishLoadingLayerOpen = "FishLoadingLayerOpen",
+    FishLoadingLayerClose = "FishLoadingLayerClose",
     FishMenuLayerOpen = "FishMenuLayerOpen",
     FishSettingLayerOpen = "FishSettingLayerOpen",//设置界面
+    FishSettingLayerClose = "FishSettingLayerClose",//设置界面关闭
     FishCommonLayerOpen = "FishCommonLayerOpen",//通用界面
-
+    FishCommonLayerClose  = "FishCommonLayerClose",//通用界面
     //小鱼游戏主界面
     FishMainGameLayerOpen = "FishMainLayerOpen",//通用界面
     GenerateFish = "GenerateFish",//生产一条小鱼
@@ -73,9 +78,11 @@ export enum NotificationEnum {
 
     //提示窗口
     TipsWindowLayerOpen = "TipsWindowLayerOpen",
+    TipsWindowLayerClose = "TipsWindowLayerClose",
     HelpWindowLayerOpen = "HelpWindowLayerOpen",
+    HelpWindowLayerClose = "HelpWindowLayerClose",
     //打开游戏
-    MainGameOpen ="MainGameOpen",
+    MainGameOpen ="MainGameOpen", 
     RefreshGamePass = "RefreshGamePass",//刷新当前关卡
     TipsPassFailLayerOpen = "TipsPassFailLayerOpen",
     TipsPassWinLayerOpen = "TipsPassWinLayerOpen",
@@ -93,4 +100,5 @@ export enum NotificationEnum {
 
     //选择宠物面板
     FishChoosePetsLayerOpen = "FishChoosePetsLayerOpen",//宠物选择面板打开
+    FishChoosePetsLayerClose = "FishChoosePetsLayerClose",//宠物选择面板关闭
 }

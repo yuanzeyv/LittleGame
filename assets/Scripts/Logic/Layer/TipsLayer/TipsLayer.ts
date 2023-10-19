@@ -1,17 +1,4 @@
-import {
-    _decorator,
-    Component,
-    Node,
-    BlockInputEvents,
-    Color,
-    Sprite,
-    Button,
-    instantiate,
-    RichText,
-    Vec3,
-    tween,
-    UIOpacity
-} from 'cc';
+import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantiate,RichText,Vec3,tween,UIOpacity} from 'cc';
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade} from '../../../Global';
 import {NotificationEnum} from '../../../NotificationTable';

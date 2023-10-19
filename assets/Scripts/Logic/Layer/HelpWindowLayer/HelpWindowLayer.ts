@@ -38,6 +38,6 @@ export class HelpWindowLayer extends BaseLayer {
     }
 
     public CloseButtonHandle() {
-        _Facade.Send(NotificationEnum.CloseWindow,HelpWindowMediator.MediatorName);
+        _Facade.Send(NotificationEnum.HelpWindowLayerClose);
     }
 }

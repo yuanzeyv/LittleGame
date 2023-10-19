@@ -3,6 +3,7 @@
     "__type__": "cc.Prefab",
     "_name": "FishHelpLayer",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_native": "",
     "data": {
       "__id__": 1
@@ -81,6 +82,7 @@
     "__type__": "cc.Node",
     "_name": "LoadingBG",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -133,6 +135,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -160,6 +163,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -204,6 +208,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -252,6 +257,7 @@
     "__type__": "cc.Node",
     "_name": "ImageProgressBar",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -305,6 +311,7 @@
     "__type__": "cc.Node",
     "_name": "Bar",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 10
     },
@@ -354,6 +361,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 11
     },
@@ -381,6 +389,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 11
     },
@@ -438,6 +447,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -465,6 +475,7 @@
     "__type__": "cc.ProgressBar",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -502,6 +513,7 @@
     "__type__": "cc.Node",
     "_name": "TextProgressBar",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -555,6 +567,7 @@
     "__type__": "cc.Node",
     "_name": "Bar",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 22
     },
@@ -604,6 +617,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 23
     },
@@ -631,6 +645,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 23
     },
@@ -688,6 +703,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 22
     },
@@ -715,6 +731,7 @@
     "__type__": "cc.ProgressBar",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 22
     },
@@ -752,6 +769,7 @@
     "__type__": "cc.Node",
     "_name": "PlayGameButton",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -808,6 +826,7 @@
     "__type__": "cc.Node",
     "_name": "loaderplay",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 34
     },
@@ -857,6 +876,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 35
     },
@@ -884,6 +904,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 35
     },
@@ -941,6 +962,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 34
     },
@@ -968,6 +990,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 34
     },
@@ -1012,6 +1035,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 34
     },
@@ -1091,6 +1115,7 @@
     "__type__": "cc.Node",
     "_name": "SnailNode",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -1140,6 +1165,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 48
     },
@@ -1154,8 +1180,8 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.468125,
-      "y": 0.22275
+      "x": 0.4681250095367432,
+      "y": 0.22274999618530272
     },
     "_id": ""
   },
@@ -1167,6 +1193,7 @@
     "__type__": "sp.Skeleton",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 48
     },
@@ -1184,24 +1211,24 @@
       "b": 255,
       "a": 255
     },
-    "loop": true,
+    "_skeletonData": {
+      "__uuid__": "21a4d6e2-e5b4-4339-ae7b-7f495c103bc4",
+      "__expectedType__": "sp.SkeletonData"
+    },
+    "defaultSkin": "default",
+    "defaultAnimation": "",
+    "_premultipliedAlpha": true,
     "_timeScale": 1,
-    "_useTint": false,
     "_preCacheMode": 0,
     "_cacheMode": 0,
     "_defaultCacheMode": 0,
+    "_sockets": [],
+    "_useTint": false,
+    "_debugMesh": false,
     "_debugBones": false,
     "_debugSlots": false,
-    "_skeletonData": {
-      "__uuid__": "ed63ed8c-fcbf-4139-8ac2-040abb6f8f25",
-      "__expectedType__": "sp.SkeletonData"
-    },
-    "_premultipliedAlpha": true,
-    "defaultSkin": "default",
-    "defaultAnimation": "move",
     "_enableBatch": false,
-    "_sockets": [],
-    "_debugMesh": false,
+    "loop": true,
     "_id": ""
   },
   {
@@ -1225,6 +1252,7 @@
     "__type__": "cc.Node",
     "_name": "MaskBG",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -1274,6 +1302,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 54
     },
@@ -1301,6 +1330,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 54
     },
@@ -1358,6 +1388,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -1385,6 +1416,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },

@@ -4,6 +4,7 @@ import { NotificationEnum } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
 import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { FishLoadingMediator } from '../../Mediator/FishLoadingMediator/FishLoadingMediator';
+import { parseStyle } from '../../../Util/StyleParse/StyleParse';
 const { ccclass, property,type} = _decorator;
 export class FishLoadingLayer extends BaseLayer { 
     private mTouchID:number = -1;//触摸ID用，确保只存在一个触摸节点
@@ -27,16 +28,16 @@ export class FishLoadingLayer extends BaseLayer {
         this.mLoadingImageBar.node.active = true;
         this.mLoadingTextBar.node.active = true;
         this.mPlayGameButton.active = false; 
-
+ 
         //此处添加一个监听是为了让按钮能够同时放大以及做位置偏移
         this.mPlayGameButton.on("click",this.PlayGameButtonHandle.bind(this)); 
         this.mPlayGameButton.on(Input.EventType.TOUCH_START,this.TouchStartHandle.bind(this));
         this.mPlayGameButton.on(Input.EventType.TOUCH_END,this.TouchEndHandle.bind(this));
         this.mPlayGameButton.on(Input.EventType.TOUCH_CANCEL,this.TouchCancelHandle.bind(this));
 
-        this.LoadingHandle(0);
-    }
-
+        this.LoadingHandle(0); 
+        find("RichText",this.node).getComponent(RichText).string = parseStyle("<id=1>1AA<id=11>A<id=2>2BB</id>B</id><id=2>3CCC4</id>DD</id><id=2>E</id><id=10>6FFFF</id>")
+    }   
     private LoadingHandle(index:number = 0){
         let distance:number = 500;
         if(index >= distance){
@@ -96,8 +97,7 @@ export class FishLoadingLayer extends BaseLayer {
     }
 
     private PlayGameButtonHandle(){ 
-        //关闭当前界面
-        _Facade.Send(NotificationEnum.CloseWindow,FishLoadingMediator.MediatorName);
+        _Facade.Send(NotificationEnum.FishChoosePetsLayerClose);
         _Facade.Send(NotificationEnum.FishMenuLayerOpen);
     }
     

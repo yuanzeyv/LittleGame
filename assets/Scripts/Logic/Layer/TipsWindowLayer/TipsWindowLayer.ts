@@ -37,6 +37,6 @@ export class TipsWindowLayer extends BaseLayer {
     }
 
     public CloseButtonHandle() {
-        _Facade.Send(NotificationEnum.CloseWindow,TipsWindowMediator.MediatorName);
+        _Facade.Send(NotificationEnum.TipsWindowLayerClose);
     }
 }

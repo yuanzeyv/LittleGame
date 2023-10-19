@@ -7,19 +7,20 @@ import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { AnnouncementLayer } from "../../Layer/AnnouncementLayer/AnnouncementLayer";
 import { CheckFishPetLayer } from "../../Layer/CheckFishPetLayer/CheckFishPetLayer";
+import { WindowProxy } from "../../Proxy/WindowProxy/WindowProxy";
 
 export class CheckFishPetLayerMediator extends WindowBaseMediator{
-    static get MediatorName(){ return "CheckFishPetLayerMediator"; }
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
         .set(NotificationEnum.FishChoosePetsLayerOpen,this.OpenLayer.bind(this))
+        .set(NotificationEnum.FishChoosePetsLayerClose,this.CloseLayer.bind(this))
     }  
-
-    protected InitPrefabPath(): string {//每个窗口mediator都对应一个窗口预制体
-        return "resources/Perfab/FishChoosePetsLayer/FishChoosePetsLayer";
+    protected InitPrefabInfo(): { path: string; layerConst: new () => BaseLayer;} {
+        return { path:  "resources/Perfab/FishChoosePetsLayer/FishChoosePetsLayer" ,layerConst: CheckFishPetLayer}
+    } 
+ 
+    protected CloseLayer(){
+        _Facade.FindProxy(WindowProxy).DeleteWindow(this.getMediatorName()) ;
     }
 
-    protected InitLayerComponent(): new () => BaseLayer {
-        return CheckFishPetLayer;
-    }   
 }

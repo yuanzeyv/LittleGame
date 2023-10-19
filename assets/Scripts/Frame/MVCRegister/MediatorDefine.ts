@@ -1,0 +1,3 @@
+enum eMediatorType{
+    WindowMediator = "WindowMediator",
+}

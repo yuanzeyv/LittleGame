@@ -6,19 +6,17 @@ import { PrefabLoadStruct, WindowCreateRequest } from "../../Proxy/WindowProxy/C
 import { WindowProxy } from "../../Proxy/WindowProxy/WindowProxy";
 
 export class WindowMediator extends BaseMediator{  
-    m_WindowProxy:WindowProxy;
-    m_UINode:Node;
-    static get MediatorName(){ return "WindowMediator"; }
-    
+    private mWindowProxy:WindowProxy;
+    private mUINode:Node;
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
         notificationMap.set(NotificationEnum.CloseWindow,this.RemoveWIndowHandle.bind(this));  
     } 
+    
     onRegister(){
-        this.m_WindowProxy = _Facade.FindProxy(WindowProxy);//寻找到当前的代理
-        this.m_UINode = find("Canvas/UINode");
+        this.mWindowProxy = _Facade.FindProxy(WindowProxy);//寻找到当前的代理
     }
 
     RemoveWIndowHandle(mediatorName:string){//通过mediator的名字进行删除
-        this.m_WindowProxy.DeleteWindow(mediatorName);//尝试返回一个窗口给代理，让代理可以继续操作
+        this.mWindowProxy.DeleteWindow(mediatorName);//尝试返回一个窗口给代理，让代理可以继续操作
     } 
 }

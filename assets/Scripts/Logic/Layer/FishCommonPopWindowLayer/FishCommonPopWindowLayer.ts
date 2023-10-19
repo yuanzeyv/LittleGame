@@ -1,10 +1,7 @@
-import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween, find, EventTouch, Input, math, ProgressBar, sp, random, Label } from 'cc';
-import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
+import { _decorator, find, Label, Node } from 'cc';
+import { BaseLayer, } from '../../../Frame/BaseLayer/BaseLayer';
 import { NotificationEnum } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
-import { SoltCell } from '../../../Util/Time/TimeWheel';
-import { FishSettingMediator } from '../../Mediator/FishSettingMediator/FishSettingMediator';
-import { FishCommonPopWindowMediator } from '../../Mediator/FishCommonPopWindowMediator/FishCommonPopWindowMediator';
 const { ccclass, property,type} = _decorator;
 export interface ICommonData{
     title:string;
@@ -34,10 +31,10 @@ export class FishCommonPopWindowLayer extends BaseLayer {
                 data.handleFunc();
         });
         this.mBackButton.on("click",()=>{
-            _Facade.Send(NotificationEnum.CloseWindow,FishCommonPopWindowMediator.MediatorName);
+            _Facade.Send(NotificationEnum.FishCommonLayerClose);
         });
         this.mDescLabel.string = data.desc;
-        this.mTitleLabel.string = data.title;
+        this.mTitleLabel.string = data.title; 
         this.mFuncLabel.string = data.funcDesc;
     }
 }

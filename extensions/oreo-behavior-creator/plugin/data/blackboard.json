@@ -1,7 +1,0 @@
-{
-    "type": ["bt.SharedBoolean", "bt.SharedNode", "bt.SharedNumber", "bt.SharedString"],
-    "global": {
-
-    },
-    "unsupported": ["bt.SharedArray", "bt.SharedCustom"]
-}

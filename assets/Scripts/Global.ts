@@ -1,10 +1,8 @@
-import {sys} from 'cc';
 import {IBaseMVCRegister} from "./Frame/MVCRegister/BaseMVCRegister";
 import {Facade} from "./Frame/PureMVC";
 import {TimeWheel} from "./Util/Time/TimeWheel";
 class Global {
     private m_Facade: Facade = new Facade();
-
     get Facade(): Facade {
         return this.m_Facade;
     }//返回MVC外观对象
@@ -20,6 +18,5 @@ class Global {
         return this.m_GameMVCRegister;
     }
 }
-
 export let _G: Global = new Global();//向外导出Gloabl对象
 export let _Facade: Facade = _G.Facade;//向外导出Gloabl对象
