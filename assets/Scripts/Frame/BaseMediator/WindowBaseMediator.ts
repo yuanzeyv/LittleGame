@@ -15,7 +15,6 @@ import { WindowProxy } from "../../Logic/Proxy/WindowProxy/WindowProxy";
 export  abstract class WindowBaseMediator extends BaseMediator {
     private mPrefabAsset:Prefab|undefined;//预制体资源
     private mLayerCompnent:new ()=>BaseLayer;
-    private mWindowLayerOrder:LayerOrder = LayerOrder.MinBottom;//窗口层级
     private m_EnableScreenTouchMask:boolean = false;//是否应该存在触摸遮罩层
     private m_ShowScreenTaskImage:boolean = false;//存在的话，是否显示遮罩背景
     private m_ShowScreenMaskColor:Color = new Color(0,0,0,64);
@@ -36,18 +35,19 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     public get ExistWindow():boolean{
         return this.m_WindowInterface != undefined;
     } 
-
-    public InitWindowLayerOrder():LayerOrder{
+    //初始化界面层级
+    public WindowOrder():LayerOrder{
         return LayerOrder.MinBottom;
     }  
+
+    
 
     protected abstract InitPrefabInfo():{path:string,layerConst:new ()=>BaseLayer};
 
     protected InitWindow():void{
         let prefabInfo:{path:string,layerConst:new ()=>BaseLayer}|undefined = this.InitPrefabInfo();
         this.mPrefabPath = prefabInfo?.path;
-        this.mLayerCompnent = prefabInfo?.layerConst;
-        this.mWindowLayerOrder = this.InitWindowLayerOrder();
+        this.mLayerCompnent = prefabInfo?.layerConst; 
     }
 
     onRegister(): void {
@@ -69,31 +69,38 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     }
 
     protected OpenLayer(data:any){//打开一个界面
-        if(this.ExistWindow)//存在的话直接进行返回
-            return; 
-        if(this.mPrefabAsset == undefined){
-            _Facade.FindProxy(BundleProxy).Load(this.PrefabPath, Prefab,(loadStruct: LoadStruct)=>{
-                if(this.mPrefabAsset != undefined){//防止连点
-                    console.warn(`尝试连续多次的加载${this.PrefabPath}`);
-                    return; 
-                } 
-                let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName,Prefab);
-                if(prefab == undefined){
-                    _Facade.Send(NotificationEnum.M_TipsShow,`打开窗口失败:${this.getMediatorName()} 原因:窗口预制体加载失败`);//提示窗口打开失败
-                    return;                
-                }  
-                this.mPrefabAsset = prefab;
-                this.OpenLayer(data);
-            });
-            return;
-        }  
-        let layerCell:Node = instantiate(this.mPrefabAsset);//实例化当前预制体     
-        layerCell.setPosition(0,0,0); 
-        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,layerCell,data,this.mWindowLayerOrder);//创建一个window请求
-        windowRequest.SetFullScreenMask(false,false,new Color(0,0,0,0));
-        windowRequest.SetWindowTouchMask(false);
+        //if(this.ExistWindow)//存在的话直接进行返回
+        //    return; 
+        //发送一个窗口创建请求，以创建本窗口
+        let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,data);//创建一个window请求
+        windowRequest.SetFullScreenMask(true,true,new Color(0,0,0,0));  
+        windowRequest.SetWindowTouchMask(false);   
         _Facade.FindProxy(WindowProxy).CreateWindow(windowRequest,this.mLayerCompnent);//直接进行窗口创建
+
+        //if(this.mPrefabAsset == undefined){
+        //    _Facade.FindProxy(BundleProxy).Load(this.PrefabPath, Prefab,(loadStruct: LoadStruct)=>{
+        //        if(this.mPrefabAsset != undefined){//防止连点
+        //            console.warn(`尝试连续多次的加载${this.PrefabPath}`);
+        //            return; 
+        //        } 
+        //        let prefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset(loadStruct.OperationAssetName,Prefab);
+        //        if(prefab == undefined){
+        //            _Facade.Send(NotificationEnum.M_TipsShow,`打开窗口失败:${this.getMediatorName()} 原因:窗口预制体加载失败`);//提示窗口打开失败
+        //            return;                
+        //        }  
+        //        this.mPrefabAsset = prefab;
+        //        this.OpenLayer(data);
+        //    });
+        //    return;
+        //}  
+        //let layerCell:Node = instantiate(this.mPrefabAsset);//实例化当前预制体     
+        //layerCell.setPosition(0,0,0); 
+        //let windowRequest:WindowCreateRequest = new WindowCreateRequest(this,layerCell,data,this.mWindowLayerOrder);//创建一个window请求
+        //windowRequest.SetFullScreenMask(false,false,new Color(0,0,0,0));
+        //windowRequest.SetWindowTouchMask(false);
+        //_Facade.FindProxy(WindowProxy).CreateWindow(windowRequest,this.mLayerCompnent);//直接进行窗口创建
     } 
+    //关闭本界面
     protected CloseLayer(data:any){
         _Facade.Send(NotificationEnum.CloseWindow,this.getMediatorName());
     }

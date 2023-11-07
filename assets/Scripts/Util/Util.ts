@@ -124,5 +124,19 @@ export function ParaseUrl(path:string):{bundleName:string,url:string} | undefine
     if((path.length - 1) == index)
         return undefined;
     return {bundleName:path.substring(0,index),url:path.substring(index + 1)} ;
-
 }
+
+export function PutRunTime(log:string,func:()=>void):any{
+    let startTime:number = new Date().getTime();
+    let ret = func();
+    let endTime:number = new Date().getTime();
+    console.log(`RunTimeTest ${log}:${(endTime - startTime) / 1000}` );
+    return ret;
+}
+
+//创建一个微任务，在此函数之后来确定资源加载详情
+export function SyncMicroTask(handle:(...args:any)=>void,...args:any):void{
+    new Promise((resolve)=> resolve(undefined)).then((onfulfilled: () =>unknown)=> handle(args));
+} 
+
+

@@ -17,6 +17,8 @@ export class WindowInterface extends Component {
     private mWindowNode:Node;//窗口的节点
     private m_WindowBlockInputCom:BlockInputEvents;//窗口的触摸遮罩
     private mLayerCompoment:BaseLayer; 
+    //加载窗口进度节点
+
     public InitWindowData(){ 
         this.InitNode();
         this.InitOrder();
@@ -43,10 +45,11 @@ export class WindowInterface extends Component {
             let windowWidget:Widget = this.mWindowNode.getComponent(Widget);
             if(windowWidget == undefined)
                 windowWidget = this.mWindowNode.addComponent(Widget);
-            CopyWidget(prefabWidget,windowWidget);
-            SetFullWidget(prefabWidget)
+            CopyWidget(prefabWidget,windowWidget);//window的widget变更为与窗口一致的widget
+            SetFullWidget(prefabWidget);//设置窗口的widget未全屏widget
         }
-        this.mWindowNode.getComponent(UITransform).setContentSize(layerCell.getComponent(UITransform).contentSize);//设置窗口组件的
+        //设置窗口大小 与 layercell一致
+        this.mWindowNode.getComponent(UITransform).setContentSize(layerCell.getComponent(UITransform).contentSize);
         try{
             this.mLayerCompoment  = layerCell.addComponent(componentCons);//加入组件
             this.mLayerCompoment.InitBaseLayer(data);

@@ -4,7 +4,6 @@ import { _Facade, _G } from '../../../Global';
 import { AudioSource } from 'cc';
 import { AudioClip } from 'cc';
 import { NotificationEnum } from '../../../NotificationTable';
-import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
 import { BundleProxy, ResouoceType } from '../../Proxy/BundleProxy/BundleProxy';
 const { ccclass, property,type} = _decorator;
 //最大容纳50个音频节点

@@ -1,6 +1,6 @@
 import { BaseMVCRegister, CommandConstructor, MediatorConstructor, ProxyConstructor } from "./Frame/MVCRegister/BaseMVCRegister";
 import { AuthSuccessCommand } from "./Logic/Control/AuthSuccessCommand";
-import { BundleLoadResultCommand } from "./Logic/Control/BundleLoadResultCommand";
+import { EnterGameCommand } from "./Logic/Control/EnterGameCommand";
 import { InitGameDataCommand } from "./Logic/Control/InitGameDataCommand";
 import { AnnouncementMediator } from "./Logic/Mediator/AnnouncementMediator/AnnouncementMediator";
 import { BannerAdvertisingMediator } from "./Logic/Mediator/BannerAdvertisingMediator/BannerAdvertisingMediator";
@@ -23,7 +23,6 @@ import { BiologyAttrProxy } from "./Logic/Proxy/BiologyAttrProxy/BiologyAttrProx
 import { BiologySatietyProxy } from "./Logic/Proxy/BiologySatietyProxy/BiologySatietyProxy";
 import { BuffProxy } from "./Logic/Proxy/BuffProxy/BuffProxy";
 import { BundleProxy } from "./Logic/Proxy/BundleProxy/BundleProxy";
-import { ResouceProxy } from "./Logic/Proxy/BundleProxy/ResouceProxy";
 import { FishMainProxy } from "./Logic/Proxy/FishMainProxy/FishMainProxy";
 import { InterstitialAdvertisingProxy } from "./Logic/Proxy/InterstitialAdvertisingProxy/InterstitialAdvertisingProxy";
 import { MusicProxy } from "./Logic/Proxy/MusicProxy/MusicProxy";
@@ -38,7 +37,7 @@ export class GameMVCRegister extends BaseMVCRegister {
         commandMap
         .set(NotificationEnum.NetAuthSuccess, AuthSuccessCommand)
         .set(NotificationEnum.InitGameData, InitGameDataCommand)
-        .set(NotificationEnum.BundleLoadResult, BundleLoadResultCommand);
+        .set(NotificationEnum.EnterGame, EnterGameCommand);
     }  
     protected AllocMediator(mediatorMap: Map<MediatorConstructor, string>): void {
         mediatorMap
@@ -64,7 +63,7 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(NetProxy)
             .add(NetDispatchProxy)
             .add(WindowProxy)
-            .add(ResouceProxy)
+            //ResouceProxy.add(ResouceProxy)
             .add(BundleProxy)
             .add(BannerAdvertisingProxy)
             .add(RewardedVideoAdvertisingProxy) 

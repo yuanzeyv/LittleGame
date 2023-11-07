@@ -4,7 +4,7 @@ import { NotificationEnum, NotificationEnum as eNotificationEnum } from '../../.
 import { ISimpleFishMoveStruct, SimpleFishMoveConfig } from '../../../Config/Cfg_SimpleFishMove';
 import { find } from 'cc';
 import { _Facade, _G } from '../../../Global';
-import { ResouceProxy } from '../../Proxy/BundleProxy/ResouceProxy';
+//import { ResouceProxy } from '../../Proxy/ResourceProxy/ResouceProxy';
 import { sp } from 'cc';
 import { math } from 'cc';
 import { EventTouch } from 'cc';

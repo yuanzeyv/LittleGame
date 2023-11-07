@@ -14,6 +14,6 @@ export class FishLoadingMediator extends WindowBaseMediator{
         .set(NotificationEnum.FishLoadingLayerClose,this.CloseLayer.bind(this))  
     }  
     protected InitPrefabInfo(): { path: string; layerConst: new () => BaseLayer;} {
-        return { path: "resources/Perfab/FishLoadingLayer/FishLoadingLayer",layerConst: FishLoadingLayer}
+        return { path:"LayerSource/FishLoadingLayer",layerConst: FishLoadingLayer}
     }  
-}
+} 

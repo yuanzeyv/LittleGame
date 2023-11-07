@@ -2,7 +2,7 @@ export enum NotificationEnum {
     TestOpen = "TestOpen",
     INVALID = "",
     //Bundle加载成功结束消息
-    BundleLoadResult = "BundleLoadResult", 
+    EnterGame = "EnterGame", 
 
     LoadScene = "LoadScene",
     //Window 窗口管理 

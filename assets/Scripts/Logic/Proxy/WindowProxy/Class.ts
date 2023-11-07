@@ -23,10 +23,8 @@ export enum LayerOrder{
 
 //创建一个窗口的传入信息
 export class WindowCreateRequest{
-    public mMediator:WindowBaseMediator;//被注册的mediator
-    public mInstanceNode:Node;//被实例化的节点
+    private mMediator:WindowBaseMediator;//被注册的mediator
     public m_Data:any;//一个窗口所携带的信息
-    public m_WindowType:LayerOrder;//窗口类型，用于判断窗口应该添加到哪一层之上  
     public m_WindowPos:Vec2 = new Vec2(0,0);//窗口类型，用于判断窗口应该添加到哪一层之上  
     
     public m_OpenFullScreenMask:boolean = false;//是否需要全屏遮罩
@@ -35,11 +33,13 @@ export class WindowCreateRequest{
 
     public m_WindowTouchMask:boolean;//是否需要窗口遮罩
 
-    constructor(mediator:WindowBaseMediator,InstanceNode:Node,data:any,windowType:LayerOrder = LayerOrder.Normal){
+    constructor(mediator:WindowBaseMediator,data:any){
         this.m_Data = data;
-        this.m_WindowType =windowType;
         this.mMediator = mediator;
-        this.mInstanceNode = InstanceNode;
+    }
+    
+    public get Mediator():WindowBaseMediator{
+        return this.mMediator;
     }
 
     //设置是否打开全屏mask

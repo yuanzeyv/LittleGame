@@ -1,21 +1,24 @@
-import { find, instantiate,Node, Prefab, resources } from "cc"; 
+import { find, instantiate,Label,Node, Prefab, resources, Sprite } from "cc"; 
 import { WindowInterface } from "../../../Compoment/WindowInterface";
 import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediator";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade, _G } from "../../../Global";
 import { WindowCreateRequest, LayerOrder } from "./Class";
-import { BundleProxy, LoadStruct } from "../BundleProxy/BundleProxy";
+import { BundleProxy, ListenObj, LoadID, LoadStruct } from "../BundleProxy/BundleProxy";
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 //用于管理当前游戏中的所有窗口 以及 预制体缓存
 export class WindowProxy extends BaseProxy{
     static  get ProxyName():string { return "WindowProxy" };
+    private mWindwoLoad:LoadID = 0;
     private mWindowPrefab:Prefab;//窗口的预制体 
     //窗口预制体的对象池
     private mWindowPrefabPool:Array<WindowInterface> = new Array<WindowInterface>();
     private mPoolMaxCount:number = 50;
     //value 窗口的控制组件 key mediator分配的名称
     private mWindowMap:Map<string,WindowInterface> = new Map<string,WindowInterface>()//保存所有的窗口对象信息，支持打开一个窗口，支持关闭一个窗口。
+    private mWindowResourceMap:Map<string,LoadID> = new Map<string,LoadID>();//窗口对应的资源信息
     private mOrderNodeMap:Array<Node> = new Array<Node>(10);
+    
     public onLoad(): void {
         this.InitOrderNode();  
         this.StartDetectionPoolCount();
@@ -29,48 +32,78 @@ export class WindowProxy extends BaseProxy{
         this.mOrderNodeMap[LayerOrder.Top] = find("Canvas/UINode/Top");
         this.mOrderNodeMap[LayerOrder.MaxTop] = find("Canvas/UINode/MaxTop");
     } 
-
-    //初始化基础窗口预制体  
-    public InitWindowPrefab(){ 
-        this.mWindowPrefab = _Facade.FindProxy(BundleProxy).UseAsset("resources/Perfab/WindowInterface",Prefab); 
-    }  
+ 
+    //实例化一个窗口预制体
+    public InstantiateWindowPrefab():Node{
+        let windowPrefab:Prefab = _Facade.FindProxy(BundleProxy).UseAsset("resources","LayerSource/Basics/Component/WindowInterface",Prefab)!; 
+        return instantiate(windowPrefab); 
+    }
 
     private GenerateWindow(winRequest:WindowCreateRequest):WindowInterface | undefined{
-        let windowNodeCompoment:WindowInterface|undefined = this.mWindowPrefabPool.pop();
+        let mediator:WindowBaseMediator = winRequest.Mediator;
+        let windowNodeCompoment:WindowInterface|undefined = this.mWindowPrefabPool.pop();//通过对象池获取到一个窗口对象
         if(windowNodeCompoment == undefined){
-            windowNodeCompoment = instantiate(this.mWindowPrefab).getComponent(WindowInterface);//获取到当前节点的窗口组件
+            windowNodeCompoment = this.InstantiateWindowPrefab().getComponent(WindowInterface);//获取到当前节点的窗口组件
             windowNodeCompoment.InitWindowData();
         }
-        windowNodeCompoment.node.name = winRequest.mMediator.getMediatorName();
+        windowNodeCompoment.node.name = mediator.getMediatorName();
         //窗口接口的初始化工作 
         windowNodeCompoment.SetFullScreenMask(winRequest.m_OpenFullScreenMask,winRequest.m_OpenFullScreenBackGround,winRequest.m_FullScreenMaskColor);
         windowNodeCompoment.SetWindowTouchMask(winRequest.m_WindowTouchMask); 
-        windowNodeCompoment.SetMediator(winRequest.mMediator);
-        return windowNodeCompoment;
+        windowNodeCompoment.SetMediator(mediator);
+        return windowNodeCompoment; 
     }
 
     //创建一个window 
     public CreateWindow(winRequest:WindowCreateRequest,componentCons:new ()=>BaseLayer):boolean{
-        if(!(winRequest.mMediator instanceof WindowBaseMediator))//查看创建窗口的中介不是窗口中介
+        if(!(winRequest.Mediator instanceof WindowBaseMediator))
             return false;
-        let orderNode:Node|undefined = this.mOrderNodeMap[winRequest.m_WindowType];//获取到待插入节点
-        if(orderNode == undefined) 
+        let mediator:WindowBaseMediator = winRequest.Mediator;
+        let orderNode:Node|undefined = this.mOrderNodeMap[mediator.WindowOrder()];//获取到待插入节点
+        if(orderNode == undefined) //不存在此层级
             return false;
-        let mediatorName:string = winRequest.mMediator.getMediatorName();
+        let mediatorName:string = mediator.getMediatorName();
         if(this.mWindowMap.has(mediatorName))//如果界面已经被打开过的话（不可能进入）
             return false;
         let windowNodeCompoment:WindowInterface = this.GenerateWindow(winRequest);//生成一个管理窗口
-        winRequest.mMediator.SetWindowInterface(windowNodeCompoment);
+        mediator.SetWindowInterface(windowNodeCompoment);
         orderNode.addChild(windowNodeCompoment.node);//节点进行添加
-        this.mWindowMap.set(winRequest.mMediator.getMediatorName(),windowNodeCompoment); 
-        if(!windowNodeCompoment.CreateWindow(winRequest.mInstanceNode,componentCons,winRequest.m_Data)){
-            this.DeleteWindow(mediatorName);
-            return false;
-        }
+        this.mWindowMap.set(mediatorName,windowNodeCompoment); 
+        //开始加载window资源信息
+        let loadID:LoadID|undefined = this.mWindowResourceMap.get(mediatorName);
+        if(loadID == undefined){//资源不存在与加载目录的情况时
+            loadID = _Facade.FindProxy(BundleProxy).LoadDir("resources",mediator.PrefabPath);
+            _Facade.FindProxy(BundleProxy).RegisterListen(new ListenObj(loadID,this.ResourceLoadComplete.bind(this,mediatorName),this.ResourceLoadProgress.bind(this,mediatorName)));
+            this.mWindowResourceMap.set(mediatorName,loadID);
+            return; 
+        } 
+        //否则资源已经存在 直接创建窗口内容
+        //if(!windowNodeCompoment.CreateWindow(winRequest.mInstanceNode,componentCons,winRequest.m_Data)){
+        //    this.DeleteWindow(mediatorName);
+        //    return false;
+        //}
         return true;
     } 
 
-    //销毁一个winodw
+    //加载完成回调
+    private ResourceLoadComplete(mediatorName:string,loadInfo:LoadStruct){
+        let windowInterface:WindowInterface = this.mWindowMap.get(mediatorName);
+        if(windowInterface == undefined)
+            return; 
+    } 
+    private ResourceLoadProgress(mediatorName:string,loadInfo:LoadStruct){
+        let windowInterface:WindowInterface = this.mWindowMap.get(mediatorName);
+        if(windowInterface == undefined)  
+            return;
+        let successCount:number = loadInfo.GetSuccessCount(); 
+        let fialCount:number = loadInfo.GetFailCount();
+        let sumCount:number = loadInfo.GetLoadSumCount(); 
+        find("LoadProgress/ProgressLabel",windowInterface.node).getComponent(Label).string = `${Math.floor(((fialCount + successCount) / sumCount) * 100)}%`;
+        find("LoadProgress/FailProgressImage",windowInterface.node).getComponent(Sprite).fillRange = (successCount + 100) / sumCount;
+        find("LoadProgress/CompleteProgressImage",windowInterface.node).getComponent(Sprite).fillRange = (successCount + fialCount) / sumCount;  
+    } 
+ 
+    //销毁一个winodw 
     public DeleteWindow(mediatorName:string){
         let windowInterface:WindowInterface = this.mWindowMap.get(mediatorName);
         if(windowInterface == undefined) return;//没有找到之前的这条创建请求的话 
