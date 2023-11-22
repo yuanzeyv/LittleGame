@@ -1,7 +1,7 @@
 import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantiate,RichText,Vec3,tween,UIOpacity} from 'cc';
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade} from '../../../Global';
-import {NotificationEnum} from '../../../NotificationTable';
+import {eNotificationEnum} from '../../../NotificationTable';
 
 const {ccclass, property, type} = _decorator;
 
@@ -14,8 +14,8 @@ export class TipsLayer extends BaseLayer {
     //当前是否是等待状态
     private m_IsWaitStatus: boolean = false;
 
-    RegisterExecuteHandle(executeMap: Map<NotificationEnum, LayerExecute>) {
-        executeMap.set(NotificationEnum.M_TipsShow, this.TipsShowHandle.bind(this));//缓冲队列中存在该条消息时。
+    RegisterExecuteHandle(executeMap: Map<eNotificationEnum, LayerExecute>) {
+        executeMap.set(eNotificationEnum.TipsShow, this.TipsShowHandle.bind(this));//缓冲队列中存在该条消息时。
     }
 
     InitNode() {
@@ -68,7 +68,7 @@ export class TipsLayer extends BaseLayer {
         let richText: RichText = node.getChildByPath("RichText").getComponent(RichText);
         richText.string = this.m_TipsStringArray.pop();//准备弹出
         this.NodeMove(node);
-        _Facade.Send(NotificationEnum.PlayAudioEffect, "resources/Sound/shua");
+        _Facade.Send(eNotificationEnum.PlayAudioEffect, "resources/Sound/shua");
     }
 
 }

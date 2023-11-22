@@ -1,6 +1,6 @@
 import { _decorator, find, Label, Node } from 'cc';
 import { BaseLayer, } from '../../../Frame/BaseLayer/BaseLayer';
-import { NotificationEnum } from '../../../NotificationTable';
+import { eNotificationEnum } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
 const { ccclass, property,type} = _decorator;
 export interface ICommonData{
@@ -31,7 +31,7 @@ export class FishCommonPopWindowLayer extends BaseLayer {
                 data.handleFunc();
         });
         this.mBackButton.on("click",()=>{
-            _Facade.Send(NotificationEnum.FishCommonLayerClose);
+            _Facade.Send(eNotificationEnum.FishCommonLayerClose);
         });
         this.mDescLabel.string = data.desc;
         this.mTitleLabel.string = data.title; 

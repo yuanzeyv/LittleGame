@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
-import { NotificationEnum, NotificationEnum as eNotificationEnum } from '../../../NotificationTable';
+import { eNotificationEnum, eNotificationEnum as eNotificationEnum } from '../../../NotificationTable';
 import { ISimpleFishMoveStruct, SimpleFishMoveConfig } from '../../../Config/Cfg_SimpleFishMove';
 import { find } from 'cc';
 import { _Facade, _G } from '../../../Global';
@@ -31,7 +31,7 @@ export class CheckFishPetLayer extends BaseLayer {
             cell.node.on("click",()=>{ 
                 _G.Facade.FindProxy(MusicProxy).Play(1);
                 if(this.mChoosePetMap.size >= this.mNowMaxCount && !this.mChoosePetMap.has(cell.config.key)){
-                    _G.Facade.Send(eNotificationEnum.M_TipsShow,"已经达到上限了，无法继续选中"); 
+                    _G.Facade.Send(eNotificationEnum.TipsShow,"已经达到上限了，无法继续选中"); 
                     return;
                 }
                 if(this.mChoosePetMap.has(cell.config.key)) 
@@ -43,8 +43,8 @@ export class CheckFishPetLayer extends BaseLayer {
         }
  
         find("PetVectorNode/DescBG/StartButton",this.node).on("click",()=>{
-            _Facade.Send(NotificationEnum.FishChoosePetsLayerClose);
-            _Facade.Send(NotificationEnum.FishMainGameLayerOpen);
+            _Facade.Send(eNotificationEnum.FishChoosePetsLayerClose);
+            _Facade.Send(eNotificationEnum.FishMainGameLayerOpen);
         })
     }  
 } 

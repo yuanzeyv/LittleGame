@@ -1,7 +1,7 @@
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { BaseMediator, NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { _Facade } from "../../../Global";
-import { NotificationEnum } from "../../../NotificationTable";
+import { eNotificationEnum } from "../../../NotificationTable";
 import { BannerAdvertisingProxy } from "../../Proxy/BannerAdvertisingProxy/BannerAdvertisingProxy";
 import { InterstitialAdvertisingProxy } from "../../Proxy/InterstitialAdvertisingProxy/InterstitialAdvertisingProxy";
 import { RewardedVideoAdvertisingProxy } from "../../Proxy/RewardedVideoAdvertisingProxy/RewardedVideoAdvertisingProxy";
@@ -10,7 +10,7 @@ export class InterstitialAdvertisingMediator extends BaseMediator{
     private m_InterstitialAdvertisingProxy:InterstitialAdvertisingProxy;
     public RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
          
-        notificationMap.set(NotificationEnum.InterstitialAdvertisingShow,this.InterstitialAdvertisingShowHandle.bind(this)); 
+        notificationMap.set(eNotificationEnum.InterstitialAdvertisingShow,this.InterstitialAdvertisingShowHandle.bind(this)); 
     } 
     
     public onRegister(){

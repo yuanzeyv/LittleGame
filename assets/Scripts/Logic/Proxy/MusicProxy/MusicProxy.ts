@@ -3,7 +3,7 @@ import { IMusicStruct, MusicConfig } from "../../../Config/Cfg_Music";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
 import { BundleProxy, LoadStruct } from "../BundleProxy/BundleProxy";
-import { NotificationEnum as eNotificationEnum } from "../../../NotificationTable";
+import { eNotificationEnum as eNotificationEnum } from "../../../NotificationTable";
 type ControlID = number;
 export class MusicProxy extends BaseProxy{ 
     static  get ProxyName():string { return "MusicProxy" }; 

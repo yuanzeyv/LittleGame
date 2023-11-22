@@ -1,5 +1,5 @@
 import { _Facade } from "../../../../Global";
-import { NotificationEnum } from "../../../../NotificationTable";
+import { eNotificationEnum } from "../../../../NotificationTable";
 import { NetDispatchProxy } from "../../NetDispatchProxy/NetDispatchProxy";
 import { NetProxy } from "../NetProxy";
 import { NetCellBase } from "./NetCellBase";
@@ -15,7 +15,7 @@ export class NetConnect extends NetCellBase{
     }
     CloseHandle(ev: CloseEvent): void {
         let netProxy:NetProxy = _Facade.FindProxy(NetProxy); 
-        _Facade.Send(NotificationEnum.M_NetDisConnect);//网络断开连接
+        _Facade.Send(eNotificationEnum.M_NetDisConnect);//网络断开连接
         netProxy.ClearNetCell();//将网络单元清除
     }
 

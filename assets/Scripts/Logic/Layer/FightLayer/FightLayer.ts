@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
-import { NotificationEnum } from '../../../NotificationTable';
+import { eNotificationEnum } from '../../../NotificationTable';
 import { sp } from 'cc';
 import { BaseFightAction, eFightAction } from './ActionFactory/BaseFightAction';
 import { BaseFightAnim, eFightAnim } from './AnimFactory/BaseFightAnim';
@@ -149,7 +149,7 @@ export class Player{
 
 export class FightLayer extends BaseLayer { 
     private mPlayerMap:Map<ePlayerType,Player> = new Map<ePlayerType,Player>();
-    RegisterExecuteHandle(executeMap:Map<NotificationEnum,LayerExecute> ){
+    RegisterExecuteHandle(executeMap:Map<eNotificationEnum,LayerExecute> ){
     }
 
     InitNode() { 

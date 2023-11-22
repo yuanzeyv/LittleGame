@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween, find, EventTouch, Input, math, ProgressBar, sp, random, game } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
-import { NotificationEnum, NotificationEnum as eNotificationEnum } from '../../../NotificationTable';
+import { eNotificationEnum, eNotificationEnum as eNotificationEnum } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
 import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { FishMenuMediator } from '../../Mediator/FishMenuMediator/FishMenuMediator';
@@ -42,7 +42,7 @@ export class FishMenuLayer extends BaseLayer {
         });
         this.mStartButton.on("click",()=>{ 
             _G.Facade.FindProxy(MusicProxy).Play(2);
-            _Facade.Send(NotificationEnum.FishChoosePetsLayerOpen);
+            _Facade.Send(eNotificationEnum.FishChoosePetsLayerOpen);
         });
          
         this.mMoveButton.on("click",()=>{

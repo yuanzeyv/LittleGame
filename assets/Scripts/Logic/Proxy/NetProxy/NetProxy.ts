@@ -1,7 +1,7 @@
 import { AudioClip, AudioSource, director, find, instantiate,Node, Prefab, resources } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
-import { NotificationEnum } from "../../../NotificationTable";
+import { eNotificationEnum } from "../../../NotificationTable";
 import { NetConfig } from "./NetConfig";
 import { NetAuth } from "./NetObj/NetAuth";
 import { NetCellBase } from "./NetObj/NetCellBase";
@@ -43,13 +43,13 @@ export class NetProxy extends BaseProxy{
 
     public Connect(){//准备开始连接
         if(this.m_UserAccount == "" || this.m_PassWord == ""){
-            _Facade.Send(NotificationEnum.M_TipsShow,"账号或密码未输入");
+            _Facade.Send(eNotificationEnum.TipsShow,"账号或密码未输入");
             return;
         }
         //上一次的连接操作 ，没有结束
         if(this.m_WebSocketCell != undefined){
             //当前的登录状态出现了点问题,连接了却还想着继续连接
-            _Facade.Send(NotificationEnum.M_TipsShow,"已经连接或正在连接服务器中");
+            _Facade.Send(eNotificationEnum.TipsShow,"已经连接或正在连接服务器中");
             return;
         }
         let socket:WebSocket = new WebSocket(NetConfig.NET_ADDRESS);

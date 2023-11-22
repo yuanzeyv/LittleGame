@@ -1,4 +1,4 @@
-import {NotificationEnum} from "../../NotificationTable";
+import {eNotificationEnum} from "../../NotificationTable";
 import {_Facade} from "../../Global";
 import {BaseProxy} from "../BaseProxy/BaseProxy";
 import {BaseCommand} from "../BaseControl/BaseCommand";
@@ -18,7 +18,7 @@ export interface IBaseMVCRegister {
 
 export class BaseMVCRegister implements IBaseMVCRegister {
     public m_IsRegister: boolean = false;
-    private m_CommandMap: Map<NotificationEnum, CommandConstructor> = new Map<NotificationEnum, CommandConstructor>();
+    private m_CommandMap: Map<eNotificationEnum, CommandConstructor> = new Map<eNotificationEnum, CommandConstructor>();
     private m_MediatorMap: Map<MediatorConstructor,string> = new Map<MediatorConstructor,string>();
     private m_ProxyMap: Set<ProxyConstructor> = new Set<ProxyConstructor>();
 
@@ -26,7 +26,7 @@ export class BaseMVCRegister implements IBaseMVCRegister {
     }//注册所需要的代理
     protected AllocMediator(mediatorMap: Map<MediatorConstructor,string>) {
     }//注册所需要的中介
-    protected AllocCommand(commandMap: Map<NotificationEnum, CommandConstructor>) {
+    protected AllocCommand(commandMap: Map<eNotificationEnum, CommandConstructor>) {
     } //注册所需要的中介
 
     public Register() {
@@ -77,13 +77,13 @@ export class BaseMVCRegister implements IBaseMVCRegister {
     }
 
     private RegisterCommand() {//注册所需要的中介
-        this.m_CommandMap.forEach((command: CommandConstructor, notify: NotificationEnum) => {
+        this.m_CommandMap.forEach((command: CommandConstructor, notify: eNotificationEnum) => {
             _Facade.registerCommand(notify, command);
         });
     }
 
     private UnRegisterCommand() {
-        this.m_CommandMap.forEach((command: CommandConstructor, notify: NotificationEnum) => {
+        this.m_CommandMap.forEach((command: CommandConstructor, notify: eNotificationEnum) => {
             _Facade.removeCommand(notify);
         });
         this.m_CommandMap.clear();

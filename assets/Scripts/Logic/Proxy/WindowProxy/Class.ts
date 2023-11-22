@@ -23,38 +23,49 @@ export enum LayerOrder{
 
 //创建一个窗口的传入信息
 export class WindowCreateRequest{
-    private mMediator:WindowBaseMediator;//被注册的mediator
-    public m_Data:any;//一个窗口所携带的信息
-    public m_WindowPos:Vec2 = new Vec2(0,0);//窗口类型，用于判断窗口应该添加到哪一层之上  
-    
-    public m_OpenFullScreenMask:boolean = false;//是否需要全屏遮罩
-    public m_OpenFullScreenBackGround:boolean = false;//是否显示遮罩背景
-    public m_FullScreenMaskColor:Color = new Color(0,0,0,64);//全屏遮罩的颜色
-
-    public m_WindowTouchMask:boolean;//是否需要窗口遮罩
+    private mMediator:WindowBaseMediator;//被打开的Mediator
+    private mData:any;//窗口被打开时，所携带的数据
+    //全屏遮罩
+    private mOpenFullScreenMask:boolean = false;//是否需要全屏遮罩
+    private mFullScreenTouchCloseLayer:boolean = false;//拥有全屏遮罩状态时，触摸关闭当前界面
+    //全屏背景
+    private mOpenFullScreenBackGround:boolean = false;//是否显示遮罩背景
+    private mFullScreenMaskColor:Color = new Color(0,0,0,64);//全屏遮罩的颜色
+    //窗口是否可以遮挡触摸
+    private mWindowTouchBlock:boolean = false;//窗口是否能够遮挡触摸
+    //加载资源时是否应该显示Loading
+    private mShowLoadingNode:boolean = false;
+    //常量请求区域
+    public get Mediator():WindowBaseMediator{ return this.mMediator; }
+    public get Data():any{ return this.mData; }
+    public get IsOpenFullScreen():boolean{ return this.mOpenFullScreenMask; }
+    public get IsOpenTouchCloseSwitch():boolean{ return this.mFullScreenTouchCloseLayer; }
+    public get IsOpenFullScreenBG():boolean{ return this.mOpenFullScreenBackGround; }
+    public get FullBGColor():Color{ return this.mFullScreenMaskColor; }
+    public get IsShowLoadingNode():boolean{ return this.mShowLoadingNode; }
+    public get IsWindowTouchBlock():boolean{ return this.mWindowTouchBlock; }
 
     constructor(mediator:WindowBaseMediator,data:any){
-        this.m_Data = data;
+        this.mData = data;
         this.mMediator = mediator;
     }
     
-    public get Mediator():WindowBaseMediator{
-        return this.mMediator;
+    //设置全屏遮罩信息
+    SetFullScreenMask(screenEnable:boolean = false,touchClose:boolean = false){
+        this.mOpenFullScreenMask = screenEnable;
+        this.mFullScreenTouchCloseLayer = touchClose;
     }
 
-    //设置是否打开全屏mask
-    SetFullScreenMask(touchEnable:boolean = false,maskBGEnable:boolean = false,color:Color = new Color(0,0,0,64)){
-        this.m_OpenFullScreenMask = touchEnable;
-        this.m_OpenFullScreenBackGround = maskBGEnable;
-        this.m_FullScreenMaskColor = color;
+    SetFullScreenBackGround(isOpen:boolean = false,color:Color = new Color(0,0,0,0)){
+        this.mOpenFullScreenBackGround = isOpen;
+        this.mFullScreenMaskColor = color;
     }
 
-    //Window Table Mask
-    SetWindowTouchMask(touchEnable:boolean = false){
-        this.m_WindowTouchMask = touchEnable;
+    SetWindowTouchBlock(isOpen:boolean = false){
+        this.mWindowTouchBlock = isOpen; 
     }
 
-    SetWindowPosition(pos:Vec2){
-        this.m_WindowPos.set(pos);
+    SetIsLoadingShow(isOpen:boolean = false){
+        this.mShowLoadingNode = isOpen;
     }
 } 

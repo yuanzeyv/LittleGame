@@ -1,6 +1,6 @@
 import { _decorator, Component,EventHandler, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween, find, EventTouch, Input, math, ProgressBar, Label, Collider2D, Contact2DType, BoxCollider2D, IPhysics2DContact } from 'cc';
 import { INotification } from "../PureMVC";
-import { NotificationEnum as eNotificationEnum } from "../../NotificationTable";
+import { eNotificationEnum as eNotificationEnum } from "../../NotificationTable";
 import { MusicControlMediator } from '../../Logic/Mediator/MusicControlMediator/MusicControlMediator';
 import { _Facade } from '../../Global';
 import { MusicProxy } from '../../Logic/Proxy/MusicProxy/MusicProxy';

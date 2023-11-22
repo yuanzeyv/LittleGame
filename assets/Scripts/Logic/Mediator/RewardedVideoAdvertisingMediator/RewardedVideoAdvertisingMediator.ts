@@ -1,6 +1,6 @@
 import { BaseMediator, NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { _Facade } from "../../../Global";
-import { NotificationEnum } from "../../../NotificationTable";
+import { eNotificationEnum } from "../../../NotificationTable";
 import { BannerAdvertisingProxy } from "../../Proxy/BannerAdvertisingProxy/BannerAdvertisingProxy";
 import { RewardedVideoAdvertisingProxy } from "../../Proxy/RewardedVideoAdvertisingProxy/RewardedVideoAdvertisingProxy";
 
@@ -8,7 +8,7 @@ export class RewardedVideoAdvertisingMediator extends BaseMediator{
     private m_RewardedVideoAdvertisingProxy:RewardedVideoAdvertisingProxy;
     public RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
          
-        notificationMap.set(NotificationEnum.RewardedVideoAdvertisingShow,this.RewardedVideoAdvertisingShowHandle.bind(this)); 
+        notificationMap.set(eNotificationEnum.RewardedVideoAdvertisingShow,this.RewardedVideoAdvertisingShowHandle.bind(this)); 
     } 
 
     public onRegister(){

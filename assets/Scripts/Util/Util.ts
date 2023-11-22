@@ -1,5 +1,6 @@
-import { Label, UITransform, Widget } from "cc";
+import { Label, UITransform, Widget ,Node,Button} from "cc";
 import { BaseLayer } from "../Frame/BaseLayer/BaseLayer";
+import { ClickComponent } from "../Compoment/ClickComponent";
 
 export function CopyWidget(srcWidget:Widget,destWidget:Widget){
     destWidget.target = srcWidget.target; 
@@ -138,5 +139,29 @@ export function PutRunTime(log:string,func:()=>void):any{
 export function SyncMicroTask(handle:(...args:any)=>void,...args:any):void{
     new Promise((resolve)=> resolve(undefined)).then((onfulfilled: () =>unknown)=> handle(args));
 } 
+
+/*
+*点击事件注册
+*/
+//对一个节点添加点击回调
+export function ListenClick(node:Node,target:any,handle:(...args)=>void,...args){
+    let clickCom:ClickComponent|undefined = node.getComponent(ClickComponent);
+    if(clickCom == undefined)//添加一个Button按钮
+        clickCom = node.addComponent(ClickComponent);
+    clickCom.RegisterClick(target,handle,args);
+}
+
+export function CancleClick(node:Node,target:any,handle:(...args)=>void){
+    let clickCom:ClickComponent|undefined = node.getComponent(ClickComponent);
+    if(clickCom == undefined)//添加一个Button按钮
+        return;
+    clickCom.UnRegisterClick(target,handle);
+}
+export function CancleClicks(node:Node){
+    let clickCom:ClickComponent|undefined = node.getComponent(ClickComponent);
+    if(clickCom == undefined)//添加一个Button按钮
+        return;
+    clickCom.destroy();//销毁本点击组件
+}
 
 

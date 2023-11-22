@@ -1,4 +1,4 @@
-export enum NotificationEnum {
+export enum eNotificationEnum {
     TestOpen = "TestOpen",
     INVALID = "",
     //Bundle加载成功结束消息
@@ -28,8 +28,8 @@ export enum NotificationEnum {
     MainGameLayerOpen = "MainGameLayerOpen",
 
     //Tips用
-    M_TipsOpen = "TipsOpen",
-    M_TipsShow = "TipsShow",
+    TipsLayerOpen = "TipsOpen",
+    TipsShow = "TipsShow",
 
     //公告用
     AnnouncementOpen = "AnnouncementOpen",

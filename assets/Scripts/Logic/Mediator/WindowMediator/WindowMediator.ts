@@ -1,7 +1,7 @@
 import { Prefab,Node, Scene, Director, find } from "cc";
 import { BaseMediator, NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { _Facade } from "../../../Global";
-import { NotificationEnum } from "../../../NotificationTable";
+import { eNotificationEnum } from "../../../NotificationTable";
 import { PrefabLoadStruct, WindowCreateRequest } from "../../Proxy/WindowProxy/Class";
 import { WindowProxy } from "../../Proxy/WindowProxy/WindowProxy";
 
@@ -9,7 +9,7 @@ export class WindowMediator extends BaseMediator{
     private mWindowProxy:WindowProxy;
     private mUINode:Node;
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
-        notificationMap.set(NotificationEnum.CloseWindow,this.RemoveWIndowHandle.bind(this));  
+        notificationMap.set(eNotificationEnum.CloseWindow,this.RemoveWIndowHandle.bind(this));  
     } 
     
     onRegister(){

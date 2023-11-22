@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, find, EditBox, SpriteFrame, instantiate, Label, Toggle, RichText, UITransform } from 'cc'; 
 import { BaseLayer } from '../../../Frame/BaseLayer/BaseLayer';
 import { _Facade } from '../../../Global';
-import { NotificationEnum } from '../../../NotificationTable';
+import { eNotificationEnum } from '../../../NotificationTable';
 import { HelpWindowMediator } from '../../Mediator/HelpWindowMediator/HelpWindowMediator';
 import { TipsWindowMediator } from '../../Mediator/TipsWindowMediator/TipsWindowMediator';
 const { ccclass, property,type} = _decorator;
@@ -38,6 +38,6 @@ export class HelpWindowLayer extends BaseLayer {
     }
 
     public CloseButtonHandle() {
-        _Facade.Send(NotificationEnum.HelpWindowLayerClose);
+        _Facade.Send(eNotificationEnum.HelpWindowLayerClose);
     }
 }

@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween, find, EventTouch, Input, math, ProgressBar } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
-import { NotificationEnum } from '../../../NotificationTable';
+import { eNotificationEnum } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
 import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { FishLoadingMediator } from '../../Mediator/FishLoadingMediator/FishLoadingMediator';
@@ -97,8 +97,8 @@ export class FishLoadingLayer extends BaseLayer {
     }
 
     private PlayGameButtonHandle(){ 
-        _Facade.Send(NotificationEnum.FishChoosePetsLayerClose);
-        _Facade.Send(NotificationEnum.FishMenuLayerOpen);
+        _Facade.Send(eNotificationEnum.FishChoosePetsLayerClose);
+        _Facade.Send(eNotificationEnum.FishMenuLayerOpen);
     }
     
     public CloseLayer(){

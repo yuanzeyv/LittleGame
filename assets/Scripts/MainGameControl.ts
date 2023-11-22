@@ -3,7 +3,7 @@ import {_Facade, _G} from "./Global";
 import { BundleProxy } from "./Logic/Proxy/BundleProxy/BundleProxy";
 import { FishMainProxy } from "./Logic/Proxy/FishMainProxy/FishMainProxy";
 import { GameMVCRegister } from "./GameMVCRegister";
-import { NotificationEnum } from "./NotificationTable";
+import { eNotificationEnum } from "./NotificationTable";
 const { ccclass, property } = _decorator;
  
 //脚本的职责 就是将初始资源进行全部的分配
@@ -20,7 +20,7 @@ class MainGameControl extends Component{
         _G.TimeWheel.Tick(Math.ceil(tick * 1000));
     }
     private BundleLoadResult(bundleName:string,isComplete:boolean){
-        _Facade.Send(NotificationEnum.InitGameData,{bundleName:bundleName,isComplete:isComplete});
+        _Facade.Send(eNotificationEnum.InitGameData,{bundleName:bundleName,isComplete:isComplete});
     }
 }   
   

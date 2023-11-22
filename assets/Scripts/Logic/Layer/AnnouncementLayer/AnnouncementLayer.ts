@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
-import { NotificationEnum } from '../../../NotificationTable';
+import { eNotificationEnum } from '../../../NotificationTable';
 const { ccclass, property,type} = _decorator;
 export class AnnouncementLayer extends BaseLayer {
     public m_MoveNode:Node; 
@@ -10,8 +10,8 @@ export class AnnouncementLayer extends BaseLayer {
     public m_MoveSpeedPX:number= 380;
     //拥有一个Tips队列，用以收集需要播放的tips
     private m_AnnouncementStringArray:Array<string> = new Array<string>(); 
-    RegisterExecuteHandle(executeMap:Map<NotificationEnum,LayerExecute> ){
-        executeMap.set(NotificationEnum.AnnouncementShow,this.AnnouncementShowHandle.bind(this));//缓冲队列中存在该条消息时。
+    RegisterExecuteHandle(executeMap:Map<eNotificationEnum,LayerExecute> ){
+        executeMap.set(eNotificationEnum.AnnouncementShow,this.AnnouncementShowHandle.bind(this));//缓冲队列中存在该条消息时。
     }
 
     InitNode() {

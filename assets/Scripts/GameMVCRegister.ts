@@ -28,16 +28,17 @@ import { InterstitialAdvertisingProxy } from "./Logic/Proxy/InterstitialAdvertis
 import { MusicProxy } from "./Logic/Proxy/MusicProxy/MusicProxy";
 import { NetDispatchProxy } from "./Logic/Proxy/NetDispatchProxy/NetDispatchProxy";
 import { NetProxy } from "./Logic/Proxy/NetProxy/NetProxy"; 
+import { NetWorkProxy } from "./Logic/Proxy/NetWorkProxy/NetWorkProxy";
 import { RewardedVideoAdvertisingProxy } from "./Logic/Proxy/RewardedVideoAdvertisingProxy/RewardedVideoAdvertisingProxy";
 import { WindowProxy } from "./Logic/Proxy/WindowProxy/WindowProxy";
-import { NotificationEnum } from "./NotificationTable";
+import { eNotificationEnum } from "./NotificationTable";
 
 export class GameMVCRegister extends BaseMVCRegister {
-    protected AllocCommand(commandMap: Map<NotificationEnum, CommandConstructor>): void {
+    protected AllocCommand(commandMap: Map<eNotificationEnum, CommandConstructor>): void {
         commandMap
-        .set(NotificationEnum.NetAuthSuccess, AuthSuccessCommand)
-        .set(NotificationEnum.InitGameData, InitGameDataCommand)
-        .set(NotificationEnum.EnterGame, EnterGameCommand);
+        .set(eNotificationEnum.NetAuthSuccess, AuthSuccessCommand)
+        .set(eNotificationEnum.InitGameData, InitGameDataCommand)
+        .set(eNotificationEnum.EnterGame, EnterGameCommand);
     }  
     protected AllocMediator(mediatorMap: Map<MediatorConstructor, string>): void {
         mediatorMap
@@ -66,13 +67,15 @@ export class GameMVCRegister extends BaseMVCRegister {
             //ResouceProxy.add(ResouceProxy)
             .add(BundleProxy)
             .add(BannerAdvertisingProxy)
-            .add(RewardedVideoAdvertisingProxy) 
+            .add(RewardedVideoAdvertisingProxy)  
             .add(InterstitialAdvertisingProxy)
             .add(FishMainProxy) 
             .add(MusicProxy) 
             .add(BuffProxy) 
             .add(BiologyAttrProxy) 
             .add(BiologySatietyProxy) 
+            .add(NetWorkProxy) 
+            
     }
 }  
  
