@@ -1,0 +1,42 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "d8e52119-171c-4d58-87b1-6ae35a5fc82a",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "d8e52119-171c-4d58-87b1-6ae35a5fc82a@6c48a",
+      "displayName": "btn_hd_wxzm",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "d8e52119-171c-4d58-87b1-6ae35a5fc82a",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "d8e52119-171c-4d58-87b1-6ae35a5fc82a@6c48a"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "5f355324-f5b6-4bbd-b5a5-1489fca9d318",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "5f355324-f5b6-4bbd-b5a5-1489fca9d318@6c48a",
+      "displayName": "auto_dengji",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "5f355324-f5b6-4bbd-b5a5-1489fca9d318",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "5f355324-f5b6-4bbd-b5a5-1489fca9d318@6c48a"
+  }
+}

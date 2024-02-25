@@ -1,0 +1,69 @@
+
+huaguang.png
+size: 1023,1037
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+01
+  rotate: true
+  xy: 2, 510
+  size: 525, 245
+  orig: 525, 245
+  offset: 0, 0
+  index: -1
+02
+  rotate: false
+  xy: 2, 263
+  size: 525, 245
+  orig: 525, 245
+  offset: 0, 0
+  index: -1
+03
+  rotate: false
+  xy: 249, 790
+  size: 525, 245
+  orig: 525, 245
+  offset: 0, 0
+  index: -1
+04
+  rotate: false
+  xy: 249, 543
+  size: 525, 245
+  orig: 525, 245
+  offset: 0, 0
+  index: -1
+05
+  rotate: true
+  xy: 249, 513
+  size: 28, 30
+  orig: 28, 30
+  offset: 0, 0
+  index: -1
+06
+  rotate: true
+  xy: 529, 16
+  size: 525, 245
+  orig: 525, 245
+  offset: 0, 0
+  index: -1
+07
+  rotate: true
+  xy: 776, 2
+  size: 506, 245
+  orig: 525, 245
+  offset: 19, 0
+  index: -1
+08
+  rotate: false
+  xy: 2, 16
+  size: 525, 245
+  orig: 525, 245
+  offset: 0, 0
+  index: -1
+09
+  rotate: true
+  xy: 776, 510
+  size: 525, 245
+  orig: 525, 245
+  offset: 0, 0
+  index: -1

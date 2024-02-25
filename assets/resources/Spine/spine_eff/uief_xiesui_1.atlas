@@ -1,0 +1,153 @@
+
+uief_xiesui_1.png
+size: 687,687
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img_xs1_1
+  rotate: true
+  xy: 388, 505
+  size: 181, 190
+  orig: 181, 190
+  offset: 0, 0
+  index: -1
+img_xs1_2
+  rotate: false
+  xy: 579, 600
+  size: 92, 86
+  orig: 92, 86
+  offset: 0, 0
+  index: -1
+img_xs2_1
+  rotate: false
+  xy: 1, 114
+  size: 208, 243
+  orig: 208, 243
+  offset: 0, 0
+  index: -1
+img_xs2_2
+  rotate: false
+  xy: 268, 8
+  size: 119, 143
+  orig: 119, 143
+  offset: 0, 0
+  index: -1
+img_xs3_1
+  rotate: false
+  xy: 1, 358
+  size: 300, 328
+  orig: 300, 328
+  offset: 0, 0
+  index: -1
+img_xs3_2
+  rotate: true
+  xy: 210, 152
+  size: 205, 144
+  orig: 205, 144
+  offset: 0, 0
+  index: -1
+img_xs3_3
+  rotate: false
+  xy: 413, 379
+  size: 131, 125
+  orig: 131, 125
+  offset: 0, 0
+  index: -1
+sm1
+  rotate: false
+  xy: 302, 557
+  size: 70, 63
+  orig: 70, 63
+  offset: 0, 0
+  index: -1
+sm2
+  rotate: false
+  xy: 302, 621
+  size: 79, 65
+  orig: 79, 65
+  offset: 0, 0
+  index: -1
+sm3
+  rotate: false
+  xy: 579, 463
+  size: 88, 67
+  orig: 88, 67
+  offset: 0, 0
+  index: -1
+sm4
+  rotate: false
+  xy: 579, 531
+  size: 91, 68
+  orig: 91, 68
+  offset: 0, 0
+  index: -1
+zaobo_000
+  rotate: true
+  xy: 388, 28
+  size: 123, 112
+  orig: 123, 112
+  offset: 0, 0
+  index: -1
+zaobo_003
+  rotate: false
+  xy: 501, 123
+  size: 122, 112
+  orig: 122, 112
+  offset: 0, 0
+  index: -1
+zaobo_006
+  rotate: false
+  xy: 540, 236
+  size: 124, 112
+  orig: 124, 112
+  offset: 0, 0
+  index: -1
+zaobo_009
+  rotate: true
+  xy: 501, 2
+  size: 120, 112
+  orig: 120, 112
+  offset: 0, 0
+  index: -1
+zaobo_012
+  rotate: false
+  xy: 355, 152
+  size: 125, 112
+  orig: 125, 112
+  offset: 0, 0
+  index: -1
+zaobo_015
+  rotate: false
+  xy: 1, 1
+  size: 135, 112
+  orig: 135, 112
+  offset: 0, 0
+  index: -1
+zaobo_018
+  rotate: true
+  xy: 302, 363
+  size: 141, 110
+  orig: 141, 110
+  offset: 0, 0
+  index: -1
+zaobo_021
+  rotate: false
+  xy: 137, 1
+  size: 130, 112
+  orig: 130, 112
+  offset: 0, 0
+  index: -1
+zaobo_024
+  rotate: false
+  xy: 413, 265
+  size: 126, 113
+  orig: 126, 113
+  offset: 0, 0
+  index: -1
+zaobo_027
+  rotate: false
+  xy: 545, 349
+  size: 127, 113
+  orig: 127, 113
+  offset: 0, 0
+  index: -1

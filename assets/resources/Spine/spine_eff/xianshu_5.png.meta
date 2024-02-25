@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "4595d870-5c15-4eee-b5c2-c97203b4cdd4",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "xianshu_5": {
+      "ver": "1.0.6",
+      "uuid": "f5530af0-ebd1-486f-b61a-9eb56575f1aa",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "4595d870-5c15-4eee-b5c2-c97203b4cdd4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -14.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 1017,
+      "height": 1046,
+      "rawWidth": 1048,
+      "rawHeight": 1048,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "4595d870-5c15-4eee-b5c2-c97203b4cdd4@6c48a",
+      "displayName": "xianshu_5",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "4595d870-5c15-4eee-b5c2-c97203b4cdd4",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "4595d870-5c15-4eee-b5c2-c97203b4cdd4@6c48a"
+  }
+}

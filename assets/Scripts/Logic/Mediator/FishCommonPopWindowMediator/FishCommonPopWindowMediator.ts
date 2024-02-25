@@ -2,8 +2,7 @@ import { Color } from "cc";
 import { NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediator";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
-import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
+import { eNotice } from "../../../NotificationTable";
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { FishSettingLayer } from "../../Layer/FishSettingLayer/FishSettingLayer";
 import { FishCommonPopWindowLayer } from "../../Layer/FishCommonPopWindowLayer/FishCommonPopWindowLayer";
@@ -11,8 +10,8 @@ import { FishCommonPopWindowLayer } from "../../Layer/FishCommonPopWindowLayer/F
 export class FishCommonPopWindowMediator extends WindowBaseMediator{
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
-        .set(eNotificationEnum.FishCommonLayerOpen,this.OpenLayer.bind(this))  
-        .set(eNotificationEnum.FishCommonLayerClose,this.CloseLayer.bind(this))  
+        .set(eNotice.FishCommonLayerOpen,this.OpenLayer.bind(this))  
+        .set(eNotice.FishCommonLayerClose,this.CloseLayer.bind(this))  
     
 }  
 

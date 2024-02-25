@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "49ab5c2e-1121-4a07-9174-779d67ea18bb",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "songshu": {
+      "ver": "1.0.6",
+      "uuid": "5ef18846-9403-4c61-8efd-b449dcb12cfe",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "49ab5c2e-1121-4a07-9174-779d67ea18bb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 588,
+      "height": 373,
+      "rawWidth": 592,
+      "rawHeight": 377,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "49ab5c2e-1121-4a07-9174-779d67ea18bb@6c48a",
+      "displayName": "songshu",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "49ab5c2e-1121-4a07-9174-779d67ea18bb",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "49ab5c2e-1121-4a07-9174-779d67ea18bb@6c48a"
+  }
+}

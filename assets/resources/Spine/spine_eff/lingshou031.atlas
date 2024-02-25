@@ -1,0 +1,174 @@
+
+lingshou031.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ch
+  rotate: false
+  xy: 147, 9
+  size: 23, 33
+  orig: 23, 33
+  offset: 0, 0
+  index: -1
+ch2
+  rotate: false
+  xy: 221, 11
+  size: 23, 31
+  orig: 23, 31
+  offset: 0, 0
+  index: -1
+daizi
+  rotate: false
+  xy: 822, 103
+  size: 98, 150
+  orig: 98, 150
+  offset: 0, 0
+  index: -1
+hchi
+  rotate: true
+  xy: 252, 57
+  size: 196, 131
+  orig: 196, 135
+  offset: 0, 0
+  index: -1
+huzi
+  rotate: true
+  xy: 922, 122
+  size: 131, 101
+  orig: 131, 101
+  offset: 0, 0
+  index: -1
+jiugang
+  rotate: false
+  xy: 673, 90
+  size: 147, 163
+  orig: 152, 164
+  offset: 3, 1
+  index: -1
+shadow
+  rotate: true
+  xy: 2, 18
+  size: 235, 64
+  orig: 239, 68
+  offset: 2, 2
+  index: -1
+shen
+  rotate: false
+  xy: 68, 44
+  size: 182, 209
+  orig: 182, 209
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 385, 77
+  size: 176, 286
+  orig: 176, 286
+  offset: 0, 0
+  index: -1
+tshi
+  rotate: true
+  xy: 596, 23
+  size: 52, 49
+  orig: 52, 49
+  offset: 0, 0
+  index: -1
+tshi2
+  rotate: true
+  xy: 68, 7
+  size: 35, 46
+  orig: 35, 46
+  offset: 0, 0
+  index: -1
+wuqi
+  rotate: true
+  xy: 955, 43
+  size: 77, 127
+  orig: 77, 127
+  offset: 0, 0
+  index: -1
+ydbi
+  rotate: false
+  xy: 739, 10
+  size: 102, 78
+  orig: 104, 78
+  offset: 2, 0
+  index: -1
+yih
+  rotate: true
+  xy: 360, 3
+  size: 52, 81
+  orig: 52, 81
+  offset: 0, 0
+  index: -1
+yjiao
+  rotate: false
+  xy: 172, 11
+  size: 47, 31
+  orig: 47, 31
+  offset: 0, 0
+  index: -1
+youshou01
+  rotate: false
+  xy: 443, 4
+  size: 49, 71
+  orig: 49, 71
+  offset: 0, 0
+  index: -1
+yshou
+  rotate: false
+  xy: 843, 13
+  size: 110, 88
+  orig: 110, 100
+  offset: 0, 0
+  index: -1
+ytui
+  rotate: false
+  xy: 695, 3
+  size: 42, 85
+  orig: 42, 85
+  offset: 0, 0
+  index: -1
+yxiu01
+  rotate: true
+  xy: 647, 23
+  size: 52, 46
+  orig: 52, 46
+  offset: 0, 0
+  index: -1
+zdbi
+  rotate: false
+  xy: 494, 15
+  size: 100, 60
+  orig: 100, 60
+  offset: 0, 0
+  index: -1
+zjiao
+  rotate: false
+  xy: 246, 14
+  size: 42, 28
+  orig: 42, 28
+  offset: 0, 0
+  index: -1
+zjiaoh
+  rotate: false
+  xy: 116, 7
+  size: 29, 35
+  orig: 29, 35
+  offset: 0, 0
+  index: -1
+zshou
+  rotate: true
+  xy: 1025, 208
+  size: 45, 43
+  orig: 45, 43
+  offset: 0, 0
+  index: -1
+zxbi
+  rotate: true
+  xy: 290, 2
+  size: 53, 68
+  orig: 53, 68
+  offset: 0, 0
+  index: -1

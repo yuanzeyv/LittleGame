@@ -1,0 +1,27 @@
+
+fz02.png
+size: 1407,628
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guang2
+  rotate: false
+  xy: 2, 2
+  size: 625, 624
+  orig: 629, 630
+  offset: 2, 3
+  index: -1
+jian
+  rotate: false
+  xy: 1116, 339
+  size: 289, 287
+  orig: 291, 289
+  offset: 1, 1
+  index: -1
+yuan3
+  rotate: false
+  xy: 629, 31
+  size: 485, 595
+  orig: 487, 600
+  offset: 1, 2
+  index: -1

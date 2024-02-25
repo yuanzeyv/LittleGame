@@ -1,0 +1,83 @@
+
+xianshu_1.png
+size: 585,585
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gh01_00
+  rotate: false
+  xy: 1, 412
+  size: 368, 172
+  orig: 368, 172
+  offset: 0, 0
+  index: -1
+gj01_00
+  rotate: true
+  xy: 498, 85
+  size: 267, 63
+  orig: 267, 63
+  offset: 0, 0
+  index: -1
+guangyun
+  rotate: false
+  xy: 249, 73
+  size: 105, 105
+  orig: 105, 105
+  offset: 0, 0
+  index: -1
+gx01_00
+  rotate: true
+  xy: 1, 1
+  size: 7, 307
+  orig: 7, 307
+  offset: 0, 0
+  index: -1
+jian1
+  rotate: true
+  xy: 1, 9
+  size: 88, 245
+  orig: 88, 245
+  offset: 0, 0
+  index: -1
+tc01_00
+  rotate: false
+  xy: 355, 6
+  size: 149, 78
+  orig: 149, 78
+  offset: 0, 0
+  index: -1
+tc01_01
+  rotate: true
+  xy: 258, 179
+  size: 232, 101
+  orig: 232, 101
+  offset: 0, 0
+  index: -1
+tc01_02
+  rotate: true
+  xy: 360, 93
+  size: 259, 137
+  orig: 259, 137
+  offset: 0, 0
+  index: -1
+tc01_03
+  rotate: false
+  xy: 1, 256
+  size: 256, 155
+  orig: 256, 155
+  offset: 0, 0
+  index: -1
+tc01_04
+  rotate: false
+  xy: 1, 98
+  size: 247, 157
+  orig: 247, 157
+  offset: 0, 0
+  index: -1
+tc01_05
+  rotate: true
+  xy: 370, 353
+  size: 231, 156
+  orig: 231, 156
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "e8e2e292-eb5f-47e2-a424-4d001bca5c20",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_pipei01": {
+      "ver": "1.0.6",
+      "uuid": "a057029f-32be-42b8-bb4f-1234bc3448d6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "e8e2e292-eb5f-47e2-a424-4d001bca5c20",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -57,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 803,
+      "height": 917,
+      "rawWidth": 919,
+      "rawHeight": 919,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "e8e2e292-eb5f-47e2-a424-4d001bca5c20@6c48a",
+      "displayName": "uief_pipei01",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e8e2e292-eb5f-47e2-a424-4d001bca5c20",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "e8e2e292-eb5f-47e2-a424-4d001bca5c20@6c48a"
+  }
+}

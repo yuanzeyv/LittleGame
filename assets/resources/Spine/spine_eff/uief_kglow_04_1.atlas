@@ -1,0 +1,83 @@
+
+uief_kglow_04_1.png
+size: 343,343
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gg1
+  rotate: false
+  xy: 1, 1
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+gg2
+  rotate: false
+  xy: 104, 104
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+gg3
+  rotate: false
+  xy: 104, 1
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+gg4
+  rotate: false
+  xy: 136, 240
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+gg5
+  rotate: false
+  xy: 207, 137
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+gg6
+  rotate: false
+  xy: 239, 240
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+gg7
+  rotate: false
+  xy: 1, 104
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+glow01
+  rotate: false
+  xy: 249, 72
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+glowline1
+  rotate: false
+  xy: 207, 16
+  size: 41, 120
+  orig: 41, 120
+  offset: 0, 0
+  index: -1
+kk2
+  rotate: false
+  xy: 1, 207
+  size: 134, 135
+  orig: 134, 135
+  offset: 0, 0
+  index: -1
+star02
+  rotate: false
+  xy: 136, 207
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

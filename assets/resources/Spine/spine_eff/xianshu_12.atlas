@@ -1,0 +1,111 @@
+
+xianshu_12.png
+size: 296,296
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+a_Weapon_02
+  rotate: true
+  xy: 34, 201
+  size: 94, 65
+  orig: 94, 65
+  offset: 0, 0
+  index: -1
+a_Weapon_03
+  rotate: false
+  xy: 82, 118
+  size: 55, 82
+  orig: 55, 82
+  offset: 0, 0
+  index: -1
+a_Weapon_04
+  rotate: true
+  xy: 82, 73
+  size: 44, 54
+  orig: 44, 54
+  offset: 0, 0
+  index: -1
+a_Weapon_05
+  rotate: false
+  xy: 138, 164
+  size: 46, 53
+  orig: 46, 53
+  offset: 0, 0
+  index: -1
+a_Weapon_06
+  rotate: false
+  xy: 1, 1
+  size: 54, 70
+  orig: 54, 70
+  offset: 0, 0
+  index: -1
+a_Weapon_07
+  rotate: true
+  xy: 1, 72
+  size: 101, 80
+  orig: 101, 80
+  offset: 0, 0
+  index: -1
+effect/bao/bao_00000
+  rotate: false
+  xy: 56, 5
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+effect/bao/bao_00001
+  rotate: false
+  xy: 134, 6
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+effect/bao/bao_00002
+  rotate: true
+  xy: 138, 218
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+effect/bao/bao_00003
+  rotate: false
+  xy: 212, 151
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+effect/bao/bao_00004
+  rotate: true
+  xy: 138, 73
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+effect/bao/bao_00005
+  rotate: true
+  xy: 205, 73
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+effect/bao/bao_00006
+  rotate: false
+  xy: 212, 6
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+effect/huang_00000
+  rotate: false
+  xy: 212, 218
+  size: 77, 77
+  orig: 77, 77
+  offset: 0, 0
+  index: -1
+effect/jian1
+  rotate: false
+  xy: 1, 174
+  size: 32, 121
+  orig: 32, 121
+  offset: 0, 0
+  index: -1

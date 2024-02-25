@@ -3,7 +3,7 @@ import { IMusicStruct, MusicConfig } from "../../../Config/Cfg_Music";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
 import { BundleProxy, LoadStruct } from "../BundleProxy/BundleProxy";
-import { eNotificationEnum as eNotificationEnum } from "../../../NotificationTable";
+import { eNotice as eNotice } from "../../../NotificationTable";
 type ControlID = number;
 export class MusicProxy extends BaseProxy{ 
     static  get ProxyName():string { return "MusicProxy" }; 
@@ -23,7 +23,7 @@ export class MusicProxy extends BaseProxy{
                 return;
             this.mWaitLoadMusicMap.delete(retControlID);
             if(loadStruct.OperationAsset != undefined) 
-                _Facade.Send(eNotificationEnum.PlayMusic,{controlID:retControlID,path:`resources/Sound/${musicConfitg.path}`,type:AudioClip});//传入一个控制ID
+                _Facade.Send(eNotice.PlayMusic,{controlID:retControlID,path:`resources/Sound/${musicConfitg.path}`,type:AudioClip});//传入一个控制ID
         }));//加载资源
     }
     //暂停一个音乐的播放
@@ -33,6 +33,6 @@ export class MusicProxy extends BaseProxy{
             this.mWaitLoadMusicMap.delete(controlID);
             return;
         }
-        _Facade.Send(eNotificationEnum.StopMusic,controlID);//传入一个控制ID
+        _Facade.Send(eNotice.StopMusic,controlID);//传入一个控制ID
     } 
 }   

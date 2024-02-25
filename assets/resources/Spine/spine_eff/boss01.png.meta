@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "354079f8-5a0b-4989-b840-564bdc13fd0f",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "boss01": {
+      "ver": "1.0.6",
+      "uuid": "2ec36c5c-f868-4949-84f3-04ef95a469ab",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "354079f8-5a0b-4989-b840-564bdc13fd0f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -279.5,
+      "offsetY": 1,
+      "trimX": 2,
+      "trimY": 4,
+      "width": 1485,
+      "height": 502,
+      "rawWidth": 2048,
+      "rawHeight": 512,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "354079f8-5a0b-4989-b840-564bdc13fd0f@6c48a",
+      "displayName": "boss01",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "354079f8-5a0b-4989-b840-564bdc13fd0f",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "354079f8-5a0b-4989-b840-564bdc13fd0f@6c48a"
+  }
+}

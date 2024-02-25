@@ -1,0 +1,69 @@
+
+uief_xxbg_02.png
+size: 770,770
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+a111
+  rotate: false
+  xy: 279, 511
+  size: 256, 258
+  orig: 256, 258
+  offset: 0, 0
+  index: -1
+b1111
+  rotate: false
+  xy: 279, 254
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+gg1
+  rotate: false
+  xy: 444, 1
+  size: 123, 123
+  orig: 123, 123
+  offset: 0, 0
+  index: -1
+gg2
+  rotate: false
+  xy: 1, 504
+  size: 277, 265
+  orig: 277, 265
+  offset: 0, 0
+  index: -1
+glow02
+  rotate: false
+  xy: 181, 182
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+gq2
+  rotate: false
+  xy: 1, 67
+  size: 179, 179
+  orig: 179, 179
+  offset: 0, 0
+  index: -1
+ring08
+  rotate: false
+  xy: 444, 125
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+ring10
+  rotate: false
+  xy: 1, 247
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+xian2_00000
+  rotate: false
+  xy: 258, 68
+  size: 185, 185
+  orig: 185, 185
+  offset: 0, 0
+  index: -1

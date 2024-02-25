@@ -1,0 +1,83 @@
+
+uief_zb_frame.png
+size: 377,278
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fx_light_00
+  rotate: false
+  xy: 2, 122
+  size: 154, 154
+  orig: 167, 167
+  offset: 6, 7
+  index: -1
+fx_light_03
+  rotate: false
+  xy: 158, 122
+  size: 154, 154
+  orig: 180, 180
+  offset: 13, 13
+  index: -1
+fx_sg_01
+  rotate: true
+  xy: 240, 19
+  size: 28, 48
+  orig: 104, 104
+  offset: 3, 3
+  index: -1
+fx_sg_02
+  rotate: true
+  xy: 199, 49
+  size: 71, 97
+  orig: 104, 104
+  offset: 3, 3
+  index: -1
+fx_sg_03
+  rotate: false
+  xy: 2, 22
+  size: 97, 98
+  orig: 104, 104
+  offset: 3, 3
+  index: -1
+fx_sg_04
+  rotate: false
+  xy: 101, 22
+  size: 96, 98
+  orig: 104, 104
+  offset: 5, 3
+  index: -1
+fx_sg_05
+  rotate: false
+  xy: 314, 80
+  size: 56, 94
+  orig: 104, 104
+  offset: 45, 7
+  index: -1
+fx_sg_06
+  rotate: true
+  xy: 2, 3
+  size: 17, 27
+  orig: 104, 104
+  offset: 83, 73
+  index: -1
+kglow1
+  rotate: false
+  xy: 298, 2
+  size: 77, 76
+  orig: 80, 80
+  offset: 2, 2
+  index: -1
+light_xx_2
+  rotate: false
+  xy: 199, 8
+  size: 39, 39
+  orig: 64, 64
+  offset: 13, 13
+  index: -1
+ll1
+  rotate: true
+  xy: 314, 176
+  size: 100, 53
+  orig: 100, 53
+  offset: 0, 0
+  index: -1

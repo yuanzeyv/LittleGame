@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "bfc86ca9-3748-4775-a6dd-e94473b85f79",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_xiesui_1": {
+      "ver": "1.0.6",
+      "uuid": "2c1439da-14de-40ac-b9c2-9694f3c57b57",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "bfc86ca9-3748-4775-a6dd-e94473b85f79",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -7.5,
+      "offsetY": -3.5,
+      "trimX": 1,
+      "trimY": 8,
+      "width": 670,
+      "height": 678,
+      "rawWidth": 687,
+      "rawHeight": 687,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "bfc86ca9-3748-4775-a6dd-e94473b85f79@6c48a",
+      "displayName": "uief_xiesui_1",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "bfc86ca9-3748-4775-a6dd-e94473b85f79",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "bfc86ca9-3748-4775-a6dd-e94473b85f79@6c48a"
+  }
+}

@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, find, EditBox, SpriteFrame, instantiate, Label, Toggle, RichText, UITransform } from 'cc'; 
 import { BaseLayer } from '../../../Frame/BaseLayer/BaseLayer';
 import { _Facade } from '../../../Global';
-import { eNotificationEnum } from '../../../NotificationTable';
+import { eNotice } from '../../../NotificationTable';
 import { TipsWindowMediator } from '../../Mediator/TipsWindowMediator/TipsWindowMediator';
 const { ccclass, property,type} = _decorator;
 export class TipsWindowLayer extends BaseLayer {
@@ -37,6 +37,6 @@ export class TipsWindowLayer extends BaseLayer {
     }
 
     public CloseButtonHandle() {
-        _Facade.Send(eNotificationEnum.TipsWindowLayerClose);
+        _Facade.Send(eNotice.TipsWindowLayerClose);
     }
 }

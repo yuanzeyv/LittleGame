@@ -1,13 +1,20 @@
-export enum eNotificationEnum {
+export enum eNotice {
     TestOpen = "TestOpen",
     INVALID = "",
+
+    //Tips用
+    TipsLayerOpen = "TipsOpen",
+    TipsLayerClose = "TipsLayerClose",
+    TipsShow = "TipsShow",
+
+    
     //Bundle加载成功结束消息
     EnterGame = "EnterGame", 
 
     LoadScene = "LoadScene",
     //Window 窗口管理 
     UpdateWindow = "UpdateWindow",
-    CloseWindow = "CloseWindow", 
+    CloseWindow = "CloseWindow",
 
     InitGameData = "InitGameData",
     //音效界面用
@@ -15,6 +22,16 @@ export enum eNotificationEnum {
 
     //登录界面
     LongInOpen = "LongInOpen",
+    LoginInClose = "LoginInClose",
+    //游戏主界面
+    MainLayerOpen = "MainLayerOpen",
+    MainLayerClose = "MainLayerClose",
+    //热更新界面用
+    HotUpdateOpen = "HotUpdateOpen",
+    HotUpdateClose = "HotUpdateClose",
+
+    //登录服务器界面
+    SelectLoginServerLayerOpen = "SelectLoginServerLayerOpen",
 
     //关卡界面
     PassSelectOpen = "PassSelectOpen",
@@ -27,10 +44,9 @@ export enum eNotificationEnum {
     //主盒子界面用
     MainGameLayerOpen = "MainGameLayerOpen",
 
-    //Tips用
-    TipsLayerOpen = "TipsOpen",
-    TipsShow = "TipsShow",
+    
 
+    
     //公告用
     AnnouncementOpen = "AnnouncementOpen",
     AnnouncementShow = "AnnouncementShow",
@@ -101,4 +117,21 @@ export enum eNotificationEnum {
     //选择宠物面板
     FishChoosePetsLayerOpen = "FishChoosePetsLayerOpen",//宠物选择面板打开
     FishChoosePetsLayerClose = "FishChoosePetsLayerClose",//宠物选择面板关闭
+
+    //多面板管理
+    OpenMultLayer = "OpenMultLayer",//打开多面板界面
+
+    //添加 删除 一个节点到WindowProxy 
+    AddWindowNode = "AddWindowNode",
+    DelWindowNode = "DelWindowNode",
+    //打开 与 关闭 一个界面时
+    OpenLayer = "OpenLayer",
+    CloseLayer = "CloseLayer",
+
+    //协议多面板打开命令
+    ProtocolMultPanelOpen = "ProtocolMultPanelOpen",
+    ProtocolMultPanelClose = "ProtocolMultPanelClose",
+
+    //连接游戏服务器成功，准备进行登录验证
+    ConnectGameServerSuccess = "ConnectGameServerSuccess",
 }

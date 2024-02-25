@@ -1,0 +1,125 @@
+
+weaponeff_53.png
+size: 358,358
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+53/glowline1
+  rotate: false
+  xy: 314, 288
+  size: 25, 69
+  orig: 25, 69
+  offset: 0, 0
+  index: -1
+53/lizi
+  rotate: false
+  xy: 340, 344
+  size: 14, 13
+  orig: 14, 13
+  offset: 0, 0
+  index: -1
+53/zao3_000
+  rotate: true
+  xy: 1, 185
+  size: 100, 71
+  orig: 100, 71
+  offset: 0, 0
+  index: -1
+53/zao3_002
+  rotate: true
+  xy: 173, 14
+  size: 98, 71
+  orig: 98, 71
+  offset: 0, 0
+  index: -1
+53/zao3_004
+  rotate: false
+  xy: 175, 114
+  size: 98, 71
+  orig: 98, 71
+  offset: 0, 0
+  index: -1
+53/zao3_006
+  rotate: false
+  xy: 245, 42
+  size: 98, 71
+  orig: 98, 71
+  offset: 0, 0
+  index: -1
+53/zao3_008
+  rotate: true
+  xy: 144, 186
+  size: 99, 71
+  orig: 99, 71
+  offset: 0, 0
+  index: -1
+53/zao3_010
+  rotate: true
+  xy: 1, 84
+  size: 100, 71
+  orig: 100, 71
+  offset: 0, 0
+  index: -1
+53/zao3_012
+  rotate: false
+  xy: 1, 286
+  size: 104, 71
+  orig: 104, 71
+  offset: 0, 0
+  index: -1
+53/zao3_014
+  rotate: true
+  xy: 216, 186
+  size: 99, 70
+  orig: 99, 70
+  offset: 0, 0
+  index: -1
+53/zao3_016
+  rotate: true
+  xy: 287, 187
+  size: 98, 70
+  orig: 98, 70
+  offset: 0, 0
+  index: -1
+53/zao3_018
+  rotate: true
+  xy: 102, 12
+  size: 100, 70
+  orig: 100, 70
+  offset: 0, 0
+  index: -1
+53/zao3_020
+  rotate: true
+  xy: 73, 184
+  size: 101, 70
+  orig: 101, 70
+  offset: 0, 0
+  index: -1
+53/zao3_022
+  rotate: false
+  xy: 106, 286
+  size: 104, 71
+  orig: 104, 71
+  offset: 0, 0
+  index: -1
+53/zao3_024
+  rotate: false
+  xy: 73, 113
+  size: 101, 70
+  orig: 101, 70
+  offset: 0, 0
+  index: -1
+53/zao3_026
+  rotate: false
+  xy: 211, 286
+  size: 102, 71
+  orig: 102, 71
+  offset: 0, 0
+  index: -1
+53/zao3_028
+  rotate: false
+  xy: 1, 12
+  size: 100, 71
+  orig: 100, 71
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "03abda66-db94-4529-ab55-1c3a779bb0b4",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "fz01x": {
+      "ver": "1.0.6",
+      "uuid": "f0877e44-3694-409f-b0f9-b147c5b485cf",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "03abda66-db94-4529-ab55-1c3a779bb0b4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -49,
+      "trimX": 1,
+      "trimY": 99,
+      "width": 372,
+      "height": 274,
+      "rawWidth": 374,
+      "rawHeight": 374,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "03abda66-db94-4529-ab55-1c3a779bb0b4@6c48a",
+      "displayName": "fz01x",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "03abda66-db94-4529-ab55-1c3a779bb0b4",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "03abda66-db94-4529-ab55-1c3a779bb0b4@6c48a"
+  }
+}

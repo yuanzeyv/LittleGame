@@ -1,0 +1,41 @@
+
+uief_xxbg_01.png
+size: 424,424
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cloud1
+  rotate: false
+  xy: 144, 333
+  size: 246, 90
+  orig: 246, 90
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 1, 160
+  size: 422, 172
+  orig: 422, 172
+  offset: 0, 0
+  index: -1
+h2
+  rotate: false
+  xy: 78, 374
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: -1
+h2_1
+  rotate: true
+  xy: 29, 395
+  size: 28, 48
+  orig: 28, 48
+  offset: 0, 0
+  index: -1
+h2_2
+  rotate: false
+  xy: 1, 398
+  size: 27, 25
+  orig: 27, 25
+  offset: 0, 0
+  index: -1

@@ -1,22 +1,22 @@
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { BaseMediator, NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
-import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediator";
+import { LayerComp, WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediator";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
+import { eNotice } from "../../../NotificationTable";
 import { MusicControlLayer } from "../../Layer/MusicControlLayer/MusicControlLayer";
-import { LayerOrder } from "../../Proxy/WindowProxy/Class";
+import { eLayerOrder } from "../../Proxy/WindowProxy/Class";
 export class MusicControlMediator extends WindowBaseMediator{
     public RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
-        notificationMap.set(eNotificationEnum.MusicControlLayerOpem,this.OpenLayer.bind(this)); 
-        notificationMap.set(eNotificationEnum.PlayMusic,this.LayerHandle.bind(this)); 
-        notificationMap.set(eNotificationEnum.StopMusic,this.LayerHandle.bind(this)); 
-        notificationMap.set(eNotificationEnum.EffectPlayFinish,this.LayerHandle.bind(this)); 
+        notificationMap.set(eNotice.MusicControlLayerOpem,this.OpenLayer.bind(this)); 
+        notificationMap.set(eNotice.PlayMusic,this.LayerHandle.bind(this)); 
+        notificationMap.set(eNotice.StopMusic,this.LayerHandle.bind(this)); 
+        notificationMap.set(eNotice.EffectPlayFinish,this.LayerHandle.bind(this)); 
     } 
-    protected InitPrefabInfo(): { path: string; layerConst: new () => BaseLayer;} {
-        return { path:"resources/Perfab/MusicControlLayer/MusicControlLayer",layerConst:MusicControlLayer};
+    protected InitPrefabInfo(): { path: string; layerComp:LayerComp;} {
+        return { path:"resources/Perfab/MusicControlLayer/MusicControlLayer",layerComp:MusicControlLayer};
     } 
 
-    public InitWindowLayerOrder():LayerOrder{
-        return LayerOrder.MinBottom;
+    public InitWindowLayerOrder():eLayerOrder{
+        return eLayerOrder.MinBottom;
     } 
 }  

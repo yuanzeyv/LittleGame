@@ -3,7 +3,7 @@ import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
 import { _Facade, _G } from '../../../Global';
 import { AudioSource } from 'cc';
 import { AudioClip } from 'cc';
-import { eNotificationEnum } from '../../../NotificationTable';
+import { eNotice } from '../../../NotificationTable';
 import { BundleProxy, ResouoceType } from '../../Proxy/BundleProxy/BundleProxy';
 const { ccclass, property,type} = _decorator;
 //最大容纳50个音频节点
@@ -90,17 +90,17 @@ export class EffectControl extends AudioControl{
         this.mAudioResource.clip = undefined;
     }
     protected musicEndHandle(){
-        _Facade.Send(eNotificationEnum.EffectPlayFinish,this.mControlID);//停止播放此音乐
+        _Facade.Send(eNotice.EffectPlayFinish,this.mControlID);//停止播放此音乐
     } 
 };
 export class MusicControlLayer extends BaseLayer {
     private mMusicSource:AudioControl;
     private mIdleAudioSourceMap:Array<AudioControl> = new Array<AudioControl>();//空闲的音频文件
     private mBusAudioSourceMap:Map<number,AudioControl> = new Map<number,AudioControl>();//忙碌的音频文件
-    protected RegisterExecuteHandle(executeMap: Map<eNotificationEnum, LayerExecute>): void {
-        executeMap.set(eNotificationEnum.EffectPlayFinish,this.EffectPlayFinishHandle.bind(this))
-        executeMap.set(eNotificationEnum.PlayMusic,this.Play.bind(this))
-        executeMap.set(eNotificationEnum.StopMusic,this.Stop.bind(this))
+    protected RegisterExecuteHandle(executeMap: Map<eNotice, LayerExecute>): void {
+        executeMap.set(eNotice.EffectPlayFinish,this.EffectPlayFinishHandle.bind(this))
+        executeMap.set(eNotice.PlayMusic,this.Play.bind(this))
+        executeMap.set(eNotice.StopMusic,this.Stop.bind(this))
         
     }
     private Play(clipData:{controlID:number,path:string,type:ResouoceType<AudioClip>}){

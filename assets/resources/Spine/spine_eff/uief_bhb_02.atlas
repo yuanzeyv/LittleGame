@@ -1,0 +1,125 @@
+
+uief_bhb_02.png
+size: 752,752
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+EF_radia35_07
+  rotate: false
+  xy: 1, 49
+  size: 188, 188
+  orig: 188, 188
+  offset: 0, 0
+  index: -1
+flashp_11
+  rotate: true
+  xy: 370, 409
+  size: 170, 256
+  orig: 170, 256
+  offset: 0, 0
+  index: -1
+flashp_13
+  rotate: false
+  xy: 1, 495
+  size: 171, 256
+  orig: 171, 256
+  offset: 0, 0
+  index: -1
+flashp_15
+  rotate: false
+  xy: 1, 238
+  size: 171, 256
+  orig: 171, 256
+  offset: 0, 0
+  index: -1
+flashp_16
+  rotate: false
+  xy: 173, 495
+  size: 171, 256
+  orig: 171, 256
+  offset: 0, 0
+  index: -1
+flashp_18
+  rotate: false
+  xy: 173, 238
+  size: 171, 256
+  orig: 171, 256
+  offset: 0, 0
+  index: -1
+flashp_21
+  rotate: true
+  xy: 370, 580
+  size: 171, 256
+  orig: 171, 256
+  offset: 0, 0
+  index: -1
+glow
+  rotate: false
+  xy: 190, 1
+  size: 54, 56
+  orig: 54, 56
+  offset: 0, 0
+  index: -1
+glow1
+  rotate: false
+  xy: 627, 501
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+gq2
+  rotate: false
+  xy: 190, 58
+  size: 179, 179
+  orig: 179, 179
+  offset: 0, 0
+  index: -1
+light1
+  rotate: false
+  xy: 370, 7
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+ring11
+  rotate: false
+  xy: 503, 308
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+smoke2
+  rotate: false
+  xy: 611, 275
+  size: 140, 133
+  orig: 140, 133
+  offset: 0, 0
+  index: -1
+sp01
+  rotate: false
+  xy: 611, 139
+  size: 135, 135
+  orig: 135, 135
+  offset: 0, 0
+  index: -1
+sp02
+  rotate: false
+  xy: 611, 4
+  size: 134, 134
+  orig: 134, 134
+  offset: 0, 0
+  index: -1
+sp03
+  rotate: false
+  xy: 627, 622
+  size: 124, 129
+  orig: 124, 129
+  offset: 0, 0
+  index: -1
+tue1
+  rotate: true
+  xy: 345, 248
+  size: 160, 157
+  orig: 160, 157
+  offset: 0, 0
+  index: -1

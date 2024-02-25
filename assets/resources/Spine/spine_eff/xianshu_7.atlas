@@ -1,0 +1,125 @@
+
+xianshu_7.png
+size: 725,725
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/dian_00013
+  rotate: false
+  xy: 370, 414
+  size: 310, 310
+  orig: 310, 310
+  offset: 0, 0
+  index: -1
+images/guang01_00013
+  rotate: false
+  xy: 1, 593
+  size: 368, 131
+  orig: 368, 131
+  offset: 0, 0
+  index: -1
+images/huang_00013
+  rotate: false
+  xy: 1, 376
+  size: 216, 216
+  orig: 216, 216
+  offset: 0, 0
+  index: -1
+images/lizi_00000
+  rotate: false
+  xy: 185, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+images/shao/shao_00001
+  rotate: false
+  xy: 218, 457
+  size: 140, 135
+  orig: 140, 135
+  offset: 0, 0
+  index: -1
+images/shao/shao_00002
+  rotate: false
+  xy: 218, 321
+  size: 140, 135
+  orig: 140, 135
+  offset: 0, 0
+  index: -1
+images/shao/shao_00003
+  rotate: true
+  xy: 409, 137
+  size: 140, 135
+  orig: 140, 135
+  offset: 0, 0
+  index: -1
+images/shao/shao_00004
+  rotate: false
+  xy: 457, 1
+  size: 140, 135
+  orig: 140, 135
+  offset: 0, 0
+  index: -1
+images/shao/shao_00005
+  rotate: true
+  xy: 545, 137
+  size: 140, 135
+  orig: 140, 135
+  offset: 0, 0
+  index: -1
+images/shou/shou_00006
+  rotate: false
+  xy: 1, 240
+  size: 183, 135
+  orig: 183, 135
+  offset: 0, 0
+  index: -1
+images/shou/shou_00007
+  rotate: true
+  xy: 1, 56
+  size: 183, 135
+  orig: 183, 135
+  offset: 0, 0
+  index: -1
+images/shou/shou_00008
+  rotate: true
+  xy: 137, 56
+  size: 183, 135
+  orig: 183, 135
+  offset: 0, 0
+  index: -1
+images/shou/shou_00009
+  rotate: true
+  xy: 273, 137
+  size: 183, 135
+  orig: 183, 135
+  offset: 0, 0
+  index: -1
+images/shou/shou_00010
+  rotate: false
+  xy: 273, 1
+  size: 183, 135
+  orig: 183, 135
+  offset: 0, 0
+  index: -1
+images/shou/shou_00011
+  rotate: false
+  xy: 457, 278
+  size: 183, 135
+  orig: 183, 135
+  offset: 0, 0
+  index: -1
+images/tiao_00000
+  rotate: true
+  xy: 681, 579
+  size: 145, 34
+  orig: 145, 34
+  offset: 0, 0
+  index: -1
+lh1
+  rotate: false
+  xy: 598, 21
+  size: 120, 115
+  orig: 120, 115
+  offset: 0, 0
+  index: -1

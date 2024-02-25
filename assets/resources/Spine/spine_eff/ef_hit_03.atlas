@@ -1,0 +1,48 @@
+
+ef_hit_03.png
+size: 311,311
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ef_001_p_gl_392
+  rotate: false
+  xy: 214, 103
+  size: 76, 80
+  orig: 76, 80
+  offset: 0, 0
+  index: -1
+ef_001_p_gl_393
+  rotate: false
+  xy: 109, 80
+  size: 104, 103
+  orig: 104, 103
+  offset: 0, 0
+  index: -1
+ef_001_p_gl_394
+  rotate: true
+  xy: 1, 75
+  size: 114, 107
+  orig: 114, 107
+  offset: 0, 0
+  index: -1
+ef_001_p_gl_395
+  rotate: true
+  xy: 128, 184
+  size: 126, 117
+  orig: 126, 117
+  offset: 0, 0
+  index: -1
+glow02
+  rotate: false
+  xy: 246, 246
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hit01
+  rotate: false
+  xy: 1, 190
+  size: 126, 120
+  orig: 126, 120
+  offset: 0, 0
+  index: -1

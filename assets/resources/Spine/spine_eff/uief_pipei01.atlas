@@ -1,0 +1,34 @@
+
+uief_pipei01.png
+size: 919,919
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/4444
+  rotate: true
+  xy: 459, 572
+  size: 346, 345
+  orig: 346, 345
+  offset: 0, 0
+  index: -1
+images/453543
+  rotate: false
+  xy: 1, 458
+  size: 457, 460
+  orig: 457, 460
+  offset: 0, 0
+  index: -1
+images/EF_ring01_02R_A
+  rotate: false
+  xy: 462, 371
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+images/img_2
+  rotate: true
+  xy: 1, 1
+  size: 456, 460
+  orig: 456, 460
+  offset: 0, 0
+  index: -1

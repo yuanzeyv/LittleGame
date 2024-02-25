@@ -1,0 +1,118 @@
+
+ef_buff_05.png
+size: 170,170
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow02
+  rotate: false
+  xy: 1, 105
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+yanwu_01
+  rotate: false
+  xy: 1, 2
+  size: 25, 12
+  orig: 25, 12
+  offset: 0, 0
+  index: -1
+yanwu_02
+  rotate: false
+  xy: 116, 7
+  size: 33, 18
+  orig: 33, 18
+  offset: 0, 0
+  index: -1
+yanwu_03
+  rotate: false
+  xy: 129, 26
+  size: 32, 23
+  orig: 32, 23
+  offset: 0, 0
+  index: -1
+yanwu_04
+  rotate: false
+  xy: 136, 110
+  size: 33, 59
+  orig: 33, 59
+  offset: 0, 0
+  index: -1
+yanwu_05
+  rotate: false
+  xy: 66, 110
+  size: 34, 59
+  orig: 34, 59
+  offset: 0, 0
+  index: -1
+yanwu_06
+  rotate: false
+  xy: 101, 110
+  size: 34, 59
+  orig: 34, 59
+  offset: 0, 0
+  index: -1
+yanwu_07
+  rotate: false
+  xy: 1, 45
+  size: 35, 59
+  orig: 35, 59
+  offset: 0, 0
+  index: -1
+yanwu_08
+  rotate: false
+  xy: 37, 45
+  size: 31, 59
+  orig: 31, 59
+  offset: 0, 0
+  index: -1
+yanwu_09
+  rotate: true
+  xy: 1, 15
+  size: 29, 59
+  orig: 29, 59
+  offset: 0, 0
+  index: -1
+yanwu_10
+  rotate: false
+  xy: 69, 50
+  size: 29, 59
+  orig: 29, 59
+  offset: 0, 0
+  index: -1
+yanwu_11
+  rotate: false
+  xy: 99, 50
+  size: 27, 59
+  orig: 27, 59
+  offset: 0, 0
+  index: -1
+yanwu_12
+  rotate: false
+  xy: 127, 50
+  size: 23, 59
+  orig: 23, 59
+  offset: 0, 0
+  index: -1
+yanwu_13
+  rotate: true
+  xy: 69, 26
+  size: 23, 59
+  orig: 23, 59
+  offset: 0, 0
+  index: -1
+yanwu_14
+  rotate: true
+  xy: 61, 3
+  size: 22, 54
+  orig: 22, 54
+  offset: 0, 0
+  index: -1
+yanwu_15
+  rotate: false
+  xy: 151, 65
+  size: 12, 44
+  orig: 12, 44
+  offset: 0, 0
+  index: -1

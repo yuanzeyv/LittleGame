@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "2e428a30-b151-4540-a025-bf4c1c7c7cfb",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_rs_3012": {
+      "ver": "1.0.6",
+      "uuid": "cb90f37f-a572-44e0-a390-5db8019e241b",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "2e428a30-b151-4540-a025-bf4c1c7c7cfb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1980,
+      "height": 610,
+      "rawWidth": 1984,
+      "rawHeight": 614,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "2e428a30-b151-4540-a025-bf4c1c7c7cfb@6c48a",
+      "displayName": "uief_rs_3012",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "2e428a30-b151-4540-a025-bf4c1c7c7cfb",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "2e428a30-b151-4540-a025-bf4c1c7c7cfb@6c48a"
+  }
+}

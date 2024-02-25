@@ -1,0 +1,125 @@
+
+uief_xianshujd.png
+size: 349,349
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back1
+  rotate: false
+  xy: 1, 50
+  size: 118, 118
+  orig: 118, 118
+  offset: 0, 0
+  index: -1
+gq2_1
+  rotate: false
+  xy: 1, 169
+  size: 179, 179
+  orig: 179, 179
+  offset: 0, 0
+  index: -1
+guangqiu_000
+  rotate: false
+  xy: 238, 191
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
+guangqiu_002
+  rotate: false
+  xy: 282, 295
+  size: 53, 53
+  orig: 53, 53
+  offset: 0, 0
+  index: -1
+guangqiu_004
+  rotate: false
+  xy: 186, 1
+  size: 53, 52
+  orig: 53, 52
+  offset: 0, 0
+  index: -1
+guangqiu_006
+  rotate: false
+  xy: 295, 203
+  size: 53, 53
+  orig: 53, 53
+  offset: 0, 0
+  index: -1
+guangqiu_008
+  rotate: true
+  xy: 294, 48
+  size: 52, 53
+  orig: 52, 53
+  offset: 0, 0
+  index: -1
+guangqiu_010
+  rotate: false
+  xy: 240, 10
+  size: 53, 53
+  orig: 53, 53
+  offset: 0, 0
+  index: -1
+guangqiu_012
+  rotate: false
+  xy: 181, 190
+  size: 56, 57
+  orig: 56, 57
+  offset: 0, 0
+  index: -1
+guangqiu_014
+  rotate: true
+  xy: 132, 1
+  size: 52, 53
+  orig: 52, 53
+  offset: 0, 0
+  index: -1
+img_fight2
+  rotate: false
+  xy: 229, 101
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+line1
+  rotate: false
+  xy: 1, 30
+  size: 91, 19
+  orig: 91, 19
+  offset: 0, 0
+  index: -1
+ll_little
+  rotate: false
+  xy: 181, 248
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+ring5
+  rotate: false
+  xy: 120, 54
+  size: 108, 114
+  orig: 108, 114
+  offset: 0, 0
+  index: -1
+star_01
+  rotate: false
+  xy: 282, 257
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+star_02
+  rotate: false
+  xy: 229, 64
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+star_03
+  rotate: true
+  xy: 93, 10
+  size: 39, 38
+  orig: 39, 38
+  offset: 0, 0
+  index: -1

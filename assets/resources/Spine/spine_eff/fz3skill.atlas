@@ -1,0 +1,76 @@
+
+fz3skill.png
+size: 971,971
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+03/2
+  rotate: false
+  xy: 1, 281
+  size: 689, 689
+  orig: 689, 689
+  offset: 0, 0
+  index: -1
+03/baodian_031
+  rotate: false
+  xy: 1, 130
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+03/baodian_033
+  rotate: false
+  xy: 352, 130
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+03/baodian_035
+  rotate: true
+  xy: 691, 620
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+03/baodian_037
+  rotate: true
+  xy: 703, 74
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+03/ring1
+  rotate: true
+  xy: 1, 1
+  size: 128, 130
+  orig: 128, 130
+  offset: 0, 0
+  index: -1
+03/tex_trail_002
+  rotate: true
+  xy: 132, 25
+  size: 29, 92
+  orig: 29, 92
+  offset: 0, 0
+  index: -1
+03/wq1
+  rotate: true
+  xy: 132, 55
+  size: 74, 160
+  orig: 74, 160
+  offset: 0, 0
+  index: -1
+07/1
+  rotate: false
+  xy: 691, 425
+  size: 194, 194
+  orig: 194, 194
+  offset: 0, 0
+  index: -1
+07/bl1
+  rotate: false
+  xy: 293, 49
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1

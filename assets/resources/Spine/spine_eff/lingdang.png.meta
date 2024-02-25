@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "f7f20c86-3fa2-4fca-b4be-fd3a6c8a6fc8",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "lingdang": {
+      "ver": "1.0.6",
+      "uuid": "c37923f2-b41e-447a-b55b-6f2a4c3c5c89",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f7f20c86-3fa2-4fca-b4be-fd3a6c8a6fc8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 165,
+      "height": 843,
+      "rawWidth": 169,
+      "rawHeight": 847,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "f7f20c86-3fa2-4fca-b4be-fd3a6c8a6fc8@6c48a",
+      "displayName": "lingdang",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f7f20c86-3fa2-4fca-b4be-fd3a6c8a6fc8",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "f7f20c86-3fa2-4fca-b4be-fd3a6c8a6fc8@6c48a"
+  }
+}

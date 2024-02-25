@@ -3,7 +3,6 @@
     "__type__": "cc.SceneAsset",
     "_name": "LoadingScene",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "_native": "",
     "scene": {
       "__id__": 1
@@ -92,8 +91,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 640,
-      "y": 359.99999999999994,
+      "x": 479.99999999999994,
+      "y": 319.99999999999994,
       "z": 0
     },
     "_lrot": {
@@ -178,7 +177,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 360,
+    "_orthoHeight": 338.53281853281857,
     "_near": 0,
     "_far": 2000,
     "_color": {
@@ -204,8 +203,6 @@
     "_screenScale": 1,
     "_visibility": 1107296256,
     "_targetTexture": null,
-    "_postProcess": null,
-    "_usePostProcess": false,
     "_cameraType": -1,
     "_trackingType": 0,
     "_id": "63WIch3o5BEYRlXzTT0oWc"
@@ -222,8 +219,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1280,
-      "height": 720
+      "width": 960,
+      "height": 640
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -331,11 +328,8 @@
     "octree": {
       "__id__": 16
     },
-    "skin": {
-      "__id__": 17
-    },
     "lightProbeInfo": {
-      "__id__": 18
+      "__id__": 17
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
@@ -465,12 +459,6 @@
     "_depth": 8
   },
   {
-    "__type__": "cc.SkinInfo",
-    "_enabled": true,
-    "_blurRadius": 0.01,
-    "_sssIntensity": 3
-  },
-  {
     "__type__": "cc.LightProbeInfo",
     "_giScale": 1,
     "_giSamples": 1024,
@@ -479,7 +467,6 @@
     "_showProbe": true,
     "_showWireframe": true,
     "_showConvex": false,
-    "_data": null,
-    "_lightProbeSphereVolume": 1
+    "_data": null
   }
 ]

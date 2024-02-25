@@ -1,0 +1,20 @@
+
+jb.png
+size: 141,62
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tongbi
+  rotate: false
+  xy: 86, 5
+  size: 53, 55
+  orig: 54, 55
+  offset: 0, 0
+  index: -1
+yuanbao
+  rotate: false
+  xy: 2, 2
+  size: 82, 58
+  orig: 82, 59
+  offset: 0, 0
+  index: -1

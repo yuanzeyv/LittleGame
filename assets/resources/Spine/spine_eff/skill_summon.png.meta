@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "28c4e83a-76b1-4c2d-a9be-2422a525c6cc",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "skill_summon": {
+      "ver": "1.0.6",
+      "uuid": "be5c9ffb-ecc1-45b2-bfb2-90c58af7be5a",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "28c4e83a-76b1-4c2d-a9be-2422a525c6cc",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 436,
+      "height": 526,
+      "rawWidth": 440,
+      "rawHeight": 530,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "28c4e83a-76b1-4c2d-a9be-2422a525c6cc@6c48a",
+      "displayName": "skill_summon",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "28c4e83a-76b1-4c2d-a9be-2422a525c6cc",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "28c4e83a-76b1-4c2d-a9be-2422a525c6cc@6c48a"
+  }
+}

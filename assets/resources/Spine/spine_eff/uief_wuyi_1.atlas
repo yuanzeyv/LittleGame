@@ -1,0 +1,27 @@
+
+uief_wuyi_1.png
+size: 601,601
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 369, 369
+  size: 231, 231
+  orig: 231, 231
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 1, 234
+  size: 367, 366
+  orig: 367, 366
+  offset: 0, 0
+  index: -1
+glow02
+  rotate: false
+  xy: 369, 304
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

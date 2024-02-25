@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "c931becb-df58-411e-8fcc-cf35c95ce827",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_kglow_04_1": {
+      "ver": "1.0.6",
+      "uuid": "b3797747-6ec1-480c-91c2-903bdd08184c",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "c931becb-df58-411e-8fcc-cf35c95ce827",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -7.5,
+      "trimX": 1,
+      "trimY": 16,
+      "width": 340,
+      "height": 326,
+      "rawWidth": 343,
+      "rawHeight": 343,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "c931becb-df58-411e-8fcc-cf35c95ce827@6c48a",
+      "displayName": "uief_kglow_04_1",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c931becb-df58-411e-8fcc-cf35c95ce827",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "c931becb-df58-411e-8fcc-cf35c95ce827@6c48a"
+  }
+}

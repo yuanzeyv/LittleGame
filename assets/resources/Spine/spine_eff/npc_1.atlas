@@ -1,0 +1,146 @@
+
+npc_1.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+byan
+  rotate: true
+  xy: 501, 66
+  size: 69, 8
+  orig: 70, 8
+  offset: 0, 0
+  index: -1
+hfa
+  rotate: false
+  xy: 2, 51
+  size: 190, 200
+  orig: 190, 200
+  offset: 0, 0
+  index: -1
+qunh
+  rotate: false
+  xy: 130, 7
+  size: 68, 42
+  orig: 68, 42
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 194, 52
+  size: 235, 64
+  orig: 239, 68
+  offset: 2, 2
+  index: -1
+shen
+  rotate: false
+  xy: 431, 11
+  size: 68, 106
+  orig: 68, 106
+  offset: 0, 0
+  index: -1
+tou
+  rotate: false
+  xy: 194, 118
+  size: 121, 133
+  orig: 121, 133
+  offset: 0, 0
+  index: -1
+xshi
+  rotate: true
+  xy: 368, 229
+  size: 22, 47
+  orig: 22, 47
+  offset: 0, 0
+  index: -1
+yashi2
+  rotate: false
+  xy: 289, 7
+  size: 29, 12
+  orig: 29, 12
+  offset: 0, 0
+  index: -1
+ydbi
+  rotate: false
+  xy: 349, 4
+  size: 33, 46
+  orig: 33, 46
+  offset: 0, 0
+  index: -1
+yshi
+  rotate: true
+  xy: 317, 222
+  size: 29, 49
+  orig: 29, 49
+  offset: 0, 0
+  index: -1
+yshou01
+  rotate: false
+  xy: 489, 137
+  size: 20, 33
+  orig: 20, 33
+  offset: 0, 0
+  index: -1
+yshou02
+  rotate: false
+  xy: 489, 120
+  size: 10, 15
+  orig: 10, 15
+  offset: 0, 0
+  index: -1
+yshou03
+  rotate: true
+  xy: 289, 21
+  size: 29, 58
+  orig: 29, 67
+  offset: 0, 9
+  index: -1
+ytui
+  rotate: true
+  xy: 2, 8
+  size: 41, 126
+  orig: 41, 126
+  offset: 0, 0
+  index: -1
+yxbi
+  rotate: false
+  xy: 245, 6
+  size: 42, 44
+  orig: 42, 44
+  offset: 0, 0
+  index: -1
+zdbi
+  rotate: false
+  xy: 200, 6
+  size: 43, 44
+  orig: 43, 44
+  offset: 0, 0
+  index: -1
+zshou
+  rotate: false
+  xy: 320, 2
+  size: 17, 17
+  orig: 17, 17
+  offset: 0, 0
+  index: -1
+ztui
+  rotate: false
+  xy: 431, 119
+  size: 56, 132
+  orig: 56, 132
+  offset: 0, 0
+  index: -1
+zxbi
+  rotate: false
+  xy: 384, 14
+  size: 40, 36
+  orig: 40, 36
+  offset: 0, 0
+  index: -1
+zyan
+  rotate: true
+  xy: 489, 172
+  size: 79, 19
+  orig: 79, 21
+  offset: 0, 2
+  index: -1

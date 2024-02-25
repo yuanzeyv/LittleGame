@@ -1,90 +1,51 @@
-import { Pool,Node, NodePool } from "cc";
-import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
-export class NetWorkProxy extends BaseProxy{  
+import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy"; 
+import { eNetProtocol } from "../../../NetNotification";
+export type NetDisposeCallBack = (...args)=>void;
+
+export class NetWorkProxy extends BaseProxy{   
     static get ProxyName():string { return "NetWorkProxy" }; 
-    private mGgateConfig:{} = {}; 
+    private mPomelo = (window as any).pomelo; 
+    private mNetListenMap:Map<eNetProtocol,NetDisposeCallBack> = new Map<eNetProtocol,NetDisposeCallBack>();//网络信息回调
+    private mGateConfig:{} = {}; 
+ 
     public onLoad(): void {
-        const pomelo = (window as any).pomelo; 
-        pomelo.disconnect();
-        pomelo.off("disconnect"); 
-        this.mGgateConfig = {}; 
-        return;
-        pomelo.init({host: "127.0.0.1",port: 3014,log: true}, function() {
-	        var route = 'gate.gateHandler.Login';
-            pomelo.request(route, {
-                account: "123456711aaQQQQQQQQQQQQQQQQQQQQQQQ",
-                pass: "123456711aaQQQQQQQQQQQQQQQQQQQQQQQ" 
-            }, function(data) {  
-                pomelo.disconnect(); 
-                if(data.err === 500) { 
-                    console.log("连接错误"); 
-                    return;
-                }
-                pomelo.init({
-                    host: data.host,
-                    port: data.port, 
-                    log: true
-                }, function() {
-                    var route = "connector.entryHandler.enter";
-                    pomelo.request(route, {
-                        username: "123456711aaQQQQQQQQQQQQQQQQQQQQQQQ",  
-                        rid: "5000" 
-                    }, function(data: { error: any; }) {
-                        if(data.error) {
-                            console.log("加入房间错误"); 
-                            return;
-                        }
-                        console.log("加入房间成功");
-                        //setName();
-                        //setRoom(); 
-                        //showChat();
-                        //initUserList(data);
-                        
-		                var route = "chat.chatHandler.send";
-		                pomelo.request(route,{
-		                	rid:"5000",  
-		                	content:"QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ",
-				            from:"123456711aaQQQQQQQQQQQQQQQQQQQQQQQ",
-                            target:"*", 
-		                	// lost field
-		                },data=>{
-		                	console.warn("!!?? ",data)
-		                })
-                    });
-                });
-                //callback(data.host, data.port);
-                console.log("连接成功");
-            });
-        }); 
+        this.mPomelo.on("disconnect",this.CustomServerHandle.bind(this,eNetProtocol.DisConnect));
+        this.mPomelo.on("close",this.CustomServerHandle.bind(this,eNetProtocol.Close));
+        this.mPomelo.on("onKick",this.CustomServerHandle.bind(this,eNetProtocol.Kick));
     }
-     
-    //Entry = function(gateConfig,uid,token,callback){
-    //    if(!token||!uid){
-    //        return ; 
-    //    }
-    //    this.init(gateConfig,uid,function(err){
-    //        if(err){
-    //            callback(err);
-    //            return ;
-    //        }
-    //        var route = "connector.entryHandler.entry";
-    //        pomelo.request(route, {
-    //            token: token
-    //        }, function(data) {
-    //            if(data.code!=200){
-    //                callback("连接服务失败！",null);
-    //                return ;
-    //            }
-    //            callback(null,data); 
-    //        });
-    //    });
-    //}
-    //
-    //PomeloRequest = function(route,parameter,callback,isLoading){
-    //    pomelo.request(route,parameter, function(data) {
-    //        callback(data);
-    //    });
-    //}  
+    public GateConnect(host:string,port:number){
+        this.mPomelo.disconnect();//由于Pomelo是一个全局变量，所以onLoad时断开连接一次
+        this.mPomelo.init({host: host,port:port,log: true},this.CustomServerHandle.bind(this,eNetProtocol.GateConnect));
+    }
+    public Connect(host:string,port:number){
+        this.mPomelo.disconnect();//由于Pomelo是一个全局变量，所以onLoad时断开连接一次
+        this.mPomelo.init({host: host,port:port,log: true},this.CustomServerHandle.bind(this,eNetProtocol.ConnectorConnect));
+    } 
+    public DisConnect(){ 
+        this.mPomelo.disconnect();//由于Pomelo是一个全局变量，所以onLoad时断开连接一次
+    } 
+    public RegisterNetHandle(netId:eNetProtocol,handle:NetDisposeCallBack){
+        if(this.mNetListenMap.has(netId))
+            this.mNetListenMap.delete(netId);
+        this.mNetListenMap.set(netId,handle);
+        this.mPomelo.on(netId,handle); 
+    }
+    public UnregisterNetHandle(netId:eNetProtocol){
+        this.mNetListenMap.delete(netId); //清除网络监听信息
+        this.mPomelo.off(netId);  
+    }
+
+    private CustomServerHandle(netID:eNetProtocol){
+        let handle:NetDisposeCallBack = this.mNetListenMap.get(netID);
+        if(handle) 
+            handle(); 
+    } 
+    public SendMessage(netID:eNetProtocol.ConnectorConnect,msg:{}):void
+    public SendMessage(netID:eNetProtocol.GateConnect,msg:{}):void
+    public SendMessage(netID:eNetProtocol.QuaryServerList,msg:{}):void
+    public SendMessage(netID:eNetProtocol.GateInit,msg:{id:number}):void
+    public SendMessage(netID:eNetProtocol,msg:{id:number}):void
+    public SendMessage(netID:eNetProtocol,msg:any = {}):void{ 
+        this.mPomelo.notify(netID,msg);  
+    }
 } 
- 
- 

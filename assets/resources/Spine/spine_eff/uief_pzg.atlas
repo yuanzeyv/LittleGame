@@ -1,0 +1,27 @@
+
+uief_pzg.png
+size: 165,165
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glowg01_1
+  rotate: true
+  xy: 34, 102
+  size: 62, 68
+  orig: 62, 68
+  offset: 0, 0
+  index: -1
+kk5
+  rotate: true
+  xy: 1, 1
+  size: 100, 101
+  orig: 100, 101
+  offset: 0, 0
+  index: -1
+star02
+  rotate: false
+  xy: 1, 132
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,244 @@
+
+uief_xxbg_03.png
+size: 1038,1038
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ff1
+  rotate: true
+  xy: 130, 632
+  size: 303, 80
+  orig: 303, 80
+  offset: 0, 0
+  index: -1
+ff2
+  rotate: true
+  xy: 211, 646
+  size: 289, 66
+  orig: 289, 66
+  offset: 0, 0
+  index: -1
+ffglow
+  rotate: false
+  xy: 1, 936
+  size: 315, 101
+  orig: 315, 101
+  offset: 0, 0
+  index: -1
+firea_01
+  rotate: false
+  xy: 317, 909
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_02
+  rotate: false
+  xy: 1, 807
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_03
+  rotate: false
+  xy: 1, 678
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_04
+  rotate: false
+  xy: 1, 549
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_05
+  rotate: false
+  xy: 130, 503
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_06
+  rotate: false
+  xy: 1, 420
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_07
+  rotate: false
+  xy: 259, 517
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_08
+  rotate: false
+  xy: 278, 780
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_09
+  rotate: false
+  xy: 278, 780
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_10
+  rotate: false
+  xy: 278, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_11
+  rotate: false
+  xy: 278, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_12
+  rotate: false
+  xy: 388, 522
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_13
+  rotate: false
+  xy: 388, 522
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_14
+  rotate: false
+  xy: 446, 909
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+firea_15
+  rotate: false
+  xy: 446, 909
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_01
+  rotate: false
+  xy: 407, 780
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_02
+  rotate: false
+  xy: 407, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_03
+  rotate: false
+  xy: 388, 393
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_04
+  rotate: false
+  xy: 1, 291
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_05
+  rotate: false
+  xy: 130, 374
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_06
+  rotate: false
+  xy: 259, 388
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_07
+  rotate: false
+  xy: 388, 264
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_08
+  rotate: false
+  xy: 1, 162
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_09
+  rotate: false
+  xy: 130, 245
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_10
+  rotate: false
+  xy: 259, 259
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_11
+  rotate: false
+  xy: 388, 135
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_12
+  rotate: false
+  xy: 130, 116
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_13
+  rotate: false
+  xy: 1, 33
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_14
+  rotate: false
+  xy: 259, 130
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_15
+  rotate: false
+  xy: 388, 6
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fireb_16
+  rotate: false
+  xy: 259, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

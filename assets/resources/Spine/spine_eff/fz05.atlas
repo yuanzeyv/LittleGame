@@ -1,0 +1,34 @@
+
+fz05.png
+size: 1356,1113
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 771, 508
+  size: 583, 603
+  orig: 585, 626
+  offset: 1, 22
+  index: -1
+2
+  rotate: false
+  xy: 771, 24
+  size: 499, 482
+  orig: 585, 626
+  offset: 44, 69
+  index: -1
+3
+  rotate: false
+  xy: 2, 2
+  size: 343, 343
+  orig: 585, 626
+  offset: 122, 142
+  index: -1
+guang
+  rotate: false
+  xy: 2, 347
+  size: 767, 764
+  orig: 767, 764
+  offset: 0, 0
+  index: -1

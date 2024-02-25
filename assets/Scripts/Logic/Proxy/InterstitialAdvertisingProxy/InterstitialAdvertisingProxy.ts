@@ -3,7 +3,7 @@
 import { sys } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
+import { eNotice } from "../../../NotificationTable";
 export class InterstitialAdvertisingProxy extends BaseProxy{
     static get ProxyName():string { return "InterstitialAdvertisingProxy" };
     private mInterstitialAd?:any;//Banner广告对象
@@ -26,7 +26,7 @@ export class InterstitialAdvertisingProxy extends BaseProxy{
         if(this.mInterstitialAd == undefined)
             return;
         this.mInterstitialAd.show().catch((error) => {
-            _Facade.Send(eNotificationEnum.TipsShow,error);//在弹出面板弹出广告加载失败的通知
+            _Facade.Send(eNotice.TipsShow,error);//在弹出面板弹出广告加载失败的通知
         })
     }
 }

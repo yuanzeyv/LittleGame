@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "8ccd2c99-1fcd-4176-a835-997a70428086",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "lingshou003": {
+      "ver": "1.0.6",
+      "uuid": "fd615008-49fd-4a7d-a4a3-df0c6ea44705",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "8ccd2c99-1fcd-4176-a835-997a70428086",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -220.5,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 579,
+      "height": 252,
+      "rawWidth": 1024,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "8ccd2c99-1fcd-4176-a835-997a70428086@6c48a",
+      "displayName": "lingshou003",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8ccd2c99-1fcd-4176-a835-997a70428086",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "8ccd2c99-1fcd-4176-a835-997a70428086@6c48a"
+  }
+}

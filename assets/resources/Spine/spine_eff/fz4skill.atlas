@@ -1,0 +1,83 @@
+
+fz4skill.png
+size: 614,614
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+05/dg1
+  rotate: false
+  xy: 1, 586
+  size: 156, 27
+  orig: 156, 27
+  offset: 0, 0
+  index: -1
+05/par1
+  rotate: false
+  xy: 1, 337
+  size: 184, 148
+  orig: 184, 148
+  offset: 0, 0
+  index: -1
+05/skill_056
+  rotate: false
+  xy: 186, 323
+  size: 320, 160
+  orig: 320, 160
+  offset: 0, 0
+  index: -1
+05/skill_058
+  rotate: false
+  xy: 1, 162
+  size: 320, 160
+  orig: 320, 160
+  offset: 0, 0
+  index: -1
+05/skill_060
+  rotate: true
+  xy: 322, 2
+  size: 320, 160
+  orig: 320, 160
+  offset: 0, 0
+  index: -1
+05/skill_062
+  rotate: false
+  xy: 1, 1
+  size: 320, 160
+  orig: 320, 160
+  offset: 0, 0
+  index: -1
+05/wind1
+  rotate: true
+  xy: 325, 484
+  size: 65, 161
+  orig: 65, 161
+  offset: 0, 0
+  index: -1
+05/wind2
+  rotate: true
+  xy: 158, 550
+  size: 63, 161
+  orig: 63, 161
+  offset: 0, 0
+  index: -1
+05/wind3
+  rotate: true
+  xy: 320, 550
+  size: 63, 161
+  orig: 63, 161
+  offset: 0, 0
+  index: -1
+05/wind4
+  rotate: true
+  xy: 1, 486
+  size: 63, 161
+  orig: 63, 161
+  offset: 0, 0
+  index: -1
+05/wind5
+  rotate: true
+  xy: 163, 486
+  size: 63, 161
+  orig: 63, 161
+  offset: 0, 0
+  index: -1

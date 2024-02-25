@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "39d4a7bc-97ca-4603-bd2e-846659477683",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_wuyi_1": {
+      "ver": "1.0.6",
+      "uuid": "7a2e373f-1c9e-4e9c-90b8-246618e21151",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "39d4a7bc-97ca-4603-bd2e-846659477683",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -116.5,
+      "trimX": 1,
+      "trimY": 234,
+      "width": 599,
+      "height": 366,
+      "rawWidth": 601,
+      "rawHeight": 601,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "39d4a7bc-97ca-4603-bd2e-846659477683@6c48a",
+      "displayName": "uief_wuyi_1",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "39d4a7bc-97ca-4603-bd2e-846659477683",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "39d4a7bc-97ca-4603-bd2e-846659477683@6c48a"
+  }
+}

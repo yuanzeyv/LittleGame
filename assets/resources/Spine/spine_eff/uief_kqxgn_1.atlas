@@ -1,0 +1,41 @@
+
+uief_kqxgn_1.png
+size: 243,243
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 118, 31
+  size: 62, 68
+  orig: 62, 68
+  offset: 0, 0
+  index: -1
+kkglow1
+  rotate: false
+  xy: 130, 100
+  size: 99, 142
+  orig: 99, 142
+  offset: 0, 0
+  index: -1
+ring02
+  rotate: false
+  xy: 1, 114
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+sp04
+  rotate: true
+  xy: 1, 1
+  size: 112, 116
+  orig: 112, 116
+  offset: 0, 0
+  index: -1
+star01
+  rotate: false
+  xy: 181, 58
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,27 @@
+
+uief_scts_01.png
+size: 167,167
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+glow02
+  rotate: false
+  xy: 1, 66
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+par05
+  rotate: false
+  xy: 66, 24
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1

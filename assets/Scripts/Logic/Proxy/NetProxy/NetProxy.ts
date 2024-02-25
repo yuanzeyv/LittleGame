@@ -1,70 +1,85 @@
-import { AudioClip, AudioSource, director, find, instantiate,Node, Prefab, resources } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
-import { NetConfig } from "./NetConfig";
-import { NetAuth } from "./NetObj/NetAuth";
-import { NetCellBase } from "./NetObj/NetCellBase";
-import { MessageFormat } from "./NetObj/NetConnect";
+import { eNetProtocol } from "../../../NetNotification";
+import { NetWorkProxy } from "../NetWorkProxy/NetWorkProxy";
+import { ConnectorLoadingNetStatus } from "./NetStatusMatchine/ConnectorLoadingNetStatus";
+import { ConnectorNetStatus } from "./NetStatusMatchine/ConnectorNetStatus";
+import { GateLoadingNetStatus } from "./NetStatusMatchine/GateVirifyNetState";
+import { GateNetStatus } from "./NetStatusMatchine/GateNetStatus";
+import { NetStatusBase, eNetStatus } from "./NetStatusMatchine/NetStatusBase"; 
+import { NoneNetStatus } from "./NetStatusMatchine/NoneNetStatus";
 //用于管理当前游戏中的所有窗口 以及 预制体缓存
-export class NetProxy extends BaseProxy{
-    private m_WebSocketCell:NetCellBase;
-    private m_UserAccount:string = "";
-    private m_PassWord:string = "";
-    private m_LoginFlag:boolean = false;
-    static  get ProxyName():string { return "NetProxy" };
-    public get UserAccount():string{
-        return this.m_UserAccount;
+export class NetProxy extends BaseProxy{ 
+    static get ProxyName():string { return "NetProxy" };
+    public mMessageID:number = 0;
+    private mConnectorStatusMap:Map<eNetStatus,NetStatusBase> = new Map<eNetStatus,NetStatusBase>();//用于验证当前的连接状态
+    private mConnectStatus:NetStatusBase = undefined//用于验证当前的连接状态
+    private mAccount:string = "";
+    private mPassWord:string = "";
+    public onRegister(): void {
+        this.InitNetMatchingMap(); 
     }
-    public get PassWord():string{
-        return this.m_PassWord;
+    public onLoad():void{ 
+        _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.GateConnect,this.GateConnectHandle.bind(this));
+        _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.ConnectorConnect,this.ServerConnectHandle.bind(this));
+        _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.DisConnect,this.DisconnectHandle.bind(this));
+        _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.GateInit,this.GateVirifyHandle.bind(this));
+        this.ChangeStatus(eNetStatus.None);
     }
-    public SetUserAccount(account:string){
-        this.m_UserAccount = account;
+    //初始化网络状态机
+    public InitNetMatchingMap():void{
+        this.mConnectorStatusMap.set(eNetStatus.None,new NoneNetStatus("None"));
+        this.mConnectorStatusMap.set(eNetStatus.GateVirify,new GateLoadingNetStatus("GateVirify"));
+        this.mConnectorStatusMap.set(eNetStatus.Gate,new GateNetStatus("Gate"));
+        this.mConnectorStatusMap.set(eNetStatus.ConnectorLoading,new ConnectorLoadingNetStatus("ConnectorLoading"));
+        this.mConnectorStatusMap.set(eNetStatus.Connector,new ConnectorNetStatus("Connector"));
     }
-    public SetPassWord(passWord:string){
-        this.m_PassWord = passWord;
-    }
-    public ClearLoginStatus(){
-        this.m_LoginFlag = false;
-    }
-    public SetLoginStatus(){
-        this.m_LoginFlag = true;
-    }
-    public ClearNetCell(){
-        this.m_WebSocketCell = undefined;
-    }
-    public IsLogined(){
-        return this.m_LoginFlag;
-    }
-    public SetSocketCell(cell:NetCellBase){
-        this.m_WebSocketCell = cell;//创建一个验证单元，进行验证
+    public ChangeStatus(status:eNetStatus):void{ 
+        if(this.mConnectStatus)
+            this.mConnectStatus.OnExit(this);
+        this.mConnectStatus = this.GetStatusMatchine(status);
+        if(this.mConnectStatus)
+            this.mConnectStatus.OnEnter(this);
+
     }
 
-    public Connect(){//准备开始连接
-        if(this.m_UserAccount == "" || this.m_PassWord == ""){
-            _Facade.Send(eNotificationEnum.TipsShow,"账号或密码未输入");
-            return;
-        }
-        //上一次的连接操作 ，没有结束
-        if(this.m_WebSocketCell != undefined){
-            //当前的登录状态出现了点问题,连接了却还想着继续连接
-            _Facade.Send(eNotificationEnum.TipsShow,"已经连接或正在连接服务器中");
-            return;
-        }
-        let socket:WebSocket = new WebSocket(NetConfig.NET_ADDRESS);
-        this.SetSocketCell(new NetAuth(socket));//创建一个验证单元，进行验证
+    public GetStatusMatchine(status:eNetStatus):NetStatusBase{ 
+        return this.mConnectorStatusMap.get(status);
+    }
+
+    //网络断线时的处理方案
+    private DisconnectHandle():void{ 
+        this.mConnectStatus.DisconnectHandle(this);
+    }
+    private GateConnectHandle():void{ 
+        this.mConnectStatus.GateConnectHandle(this);
+    }
+    //Gate验证回调
+    private GateVirifyHandle(reply:{err:number,id:number}):void{
+        this.mConnectStatus.GateVirifyHandle(this,reply);
+    }
+    
+    //连接上Server服务器的回调
+    private ServerConnectHandle():void{
+        this.mConnectStatus.ConnectorConnectHandle(this);
+    } 
+    //连接函数
+    public Connect(){
+        this.mConnectStatus.Connect(this);
+    }
+    //登录函数
+    public Login(account:string,pass:string){ 
+        this.mAccount = account;
+        this.mPassWord = pass; 
+        this.mConnectStatus.Login(this,account,pass);
+    }
+    //断开连接
+    public DisConnect(){
+        _Facade.FindProxy(NetWorkProxy).DisConnect();//断开连接
     }  
-    public SendMessage(msgID:number,data:Object): void {
-        if(this.m_WebSocketCell == undefined){
-            console.log("网络单元不存在");            
-            return;
-        }
-        let messageFormat:MessageFormat = {
-            ID:msgID,//消息的id
-            Data:data//消息的详细数据
-        };
-        this.m_WebSocketCell.Send(messageFormat);
-    }
 
+    //发送一条网络消息
+    public Send(netID: eNetProtocol, msg: any = {} ):void{
+        this.mConnectStatus.SendMessage(netID,msg);
+    }
 }

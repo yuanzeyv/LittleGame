@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "794a6b61-3357-4429-a9a5-bece606a4d77",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "Daoshi": {
+      "ver": "1.0.6",
+      "uuid": "ca7c527d-b5cb-4f63-84c5-497d16f6a30c",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "794a6b61-3357-4429-a9a5-bece606a4d77",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1.5,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 89,
+      "height": 24,
+      "rawWidth": 96,
+      "rawHeight": 28,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "794a6b61-3357-4429-a9a5-bece606a4d77@6c48a",
+      "displayName": "Daoshi",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "794a6b61-3357-4429-a9a5-bece606a4d77",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "794a6b61-3357-4429-a9a5-bece606a4d77@6c48a"
+  }
+}

@@ -1,0 +1,55 @@
+
+fz04.png
+size: 1881,848
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 779, 2
+  size: 332, 254
+  orig: 589, 588
+  offset: 128, 215
+  index: -1
+2
+  rotate: false
+  xy: 779, 258
+  size: 589, 588
+  orig: 589, 588
+  offset: 0, 0
+  index: -1
+dazuo
+  rotate: true
+  xy: 1370, 39
+  size: 268, 329
+  orig: 272, 332
+  offset: 2, 2
+  index: -1
+g2
+  rotate: false
+  xy: 1370, 309
+  size: 509, 537
+  orig: 700, 700
+  offset: 153, 135
+  index: -1
+guang
+  rotate: false
+  xy: 2, 70
+  size: 775, 776
+  orig: 846, 792
+  offset: 36, 9
+  index: -1
+huo
+  rotate: false
+  xy: 1701, 208
+  size: 58, 99
+  orig: 63, 101
+  offset: 3, 2
+  index: -1
+huo (2)
+  rotate: true
+  xy: 2, 6
+  size: 62, 99
+  orig: 63, 101
+  offset: 0, 0
+  index: -1

@@ -1,35 +1,9 @@
 {
-  "__version__": "1.0.5",
+  "__version__": "1.0.4",
   "general": {
     "designResolution": {
-      "width": 1280,
-      "fitWidth": true,
-      "fitHeight": true,
-      "height": 720
+      "width": 750,
+      "height": 1334
     }
-  },
-  "physics": {
-    "collisionGroups": [
-      {
-        "index": 1,
-        "name": "Board"
-      },
-      {
-        "index": 2,
-        "name": "NormalFish"
-      }
-    ],
-    "collisionMatrix": {
-      "0": 3,
-      "1": 15,
-      "2": 10,
-      "3": 6
-    },
-    "gravity": {
-      "y": 0
-    },
-    "fixedTimeStep": 0.016667,
-    "maxSubSteps": 1
-  },
-  "custom_joint_texture_layouts": []
+  }
 }

@@ -1,0 +1,111 @@
+
+xianshu_15.png
+size: 517,517
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guang01_00000
+  rotate: false
+  xy: 1, 432
+  size: 136, 84
+  orig: 136, 84
+  offset: 0, 0
+  index: -1
+shengji_00001
+  rotate: false
+  xy: 376, 276
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shengji_00002
+  rotate: false
+  xy: 1, 164
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shengji_00005
+  rotate: false
+  xy: 130, 164
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shengji_00006
+  rotate: false
+  xy: 259, 147
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shengji_00007
+  rotate: false
+  xy: 388, 147
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shengji_00009
+  rotate: false
+  xy: 1, 35
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shengji_00010
+  rotate: false
+  xy: 130, 35
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shengji_00012
+  rotate: false
+  xy: 259, 18
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+shou02_00001
+  rotate: false
+  xy: 138, 405
+  size: 124, 111
+  orig: 124, 111
+  offset: 0, 0
+  index: -1
+shou02_00002
+  rotate: false
+  xy: 263, 405
+  size: 124, 111
+  orig: 124, 111
+  offset: 0, 0
+  index: -1
+shou02_00003
+  rotate: false
+  xy: 388, 405
+  size: 124, 111
+  orig: 124, 111
+  offset: 0, 0
+  index: -1
+shou02_00004
+  rotate: false
+  xy: 1, 320
+  size: 124, 111
+  orig: 124, 111
+  offset: 0, 0
+  index: -1
+shou02_00005
+  rotate: false
+  xy: 126, 293
+  size: 124, 111
+  orig: 124, 111
+  offset: 0, 0
+  index: -1
+shou02_00006
+  rotate: false
+  xy: 251, 293
+  size: 124, 111
+  orig: 124, 111
+  offset: 0, 0
+  index: -1

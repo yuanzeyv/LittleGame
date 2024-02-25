@@ -1,0 +1,34 @@
+
+ef_buff_06.png
+size: 459,459
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow02
+  rotate: false
+  xy: 1, 394
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+glow_red3
+  rotate: true
+  xy: 269, 324
+  size: 134, 189
+  orig: 134, 189
+  offset: 0, 0
+  index: -1
+ring1
+  rotate: false
+  xy: 137, 340
+  size: 131, 118
+  orig: 131, 118
+  offset: 0, 0
+  index: -1
+xy2_1
+  rotate: false
+  xy: 66, 388
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1

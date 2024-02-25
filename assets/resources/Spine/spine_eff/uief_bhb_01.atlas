@@ -1,0 +1,153 @@
+
+uief_bhb_01.png
+size: 386,386
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+firef_01
+  rotate: false
+  xy: 82, 17
+  size: 60, 65
+  orig: 60, 65
+  offset: 0, 0
+  index: -1
+glow
+  rotate: true
+  xy: 265, 1
+  size: 54, 56
+  orig: 54, 56
+  offset: 0, 0
+  index: -1
+img_bhb_xing
+  rotate: false
+  xy: 265, 56
+  size: 58, 66
+  orig: 58, 66
+  offset: 0, 0
+  index: -1
+img_bhb_xingglow
+  rotate: false
+  xy: 204, 31
+  size: 60, 81
+  orig: 60, 81
+  offset: 0, 0
+  index: -1
+lighty_01
+  rotate: false
+  xy: 82, 174
+  size: 60, 90
+  orig: 60, 90
+  offset: 0, 0
+  index: -1
+lighty_02
+  rotate: false
+  xy: 82, 83
+  size: 60, 90
+  orig: 60, 90
+  offset: 0, 0
+  index: -1
+lighty_03
+  rotate: false
+  xy: 143, 22
+  size: 60, 90
+  orig: 60, 90
+  offset: 0, 0
+  index: -1
+lighty_04
+  rotate: false
+  xy: 224, 214
+  size: 60, 90
+  orig: 60, 90
+  offset: 0, 0
+  index: -1
+lighty_05
+  rotate: false
+  xy: 224, 123
+  size: 60, 90
+  orig: 60, 90
+  offset: 0, 0
+  index: -1
+lighty_06
+  rotate: false
+  xy: 285, 214
+  size: 60, 90
+  orig: 60, 90
+  offset: 0, 0
+  index: -1
+ring01
+  rotate: false
+  xy: 1, 265
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+sm2
+  rotate: true
+  xy: 285, 131
+  size: 82, 66
+  orig: 82, 66
+  offset: 0, 0
+  index: -1
+smokell_01
+  rotate: false
+  xy: 122, 305
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+smokell_03
+  rotate: false
+  xy: 1, 103
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+smokell_05
+  rotate: false
+  xy: 203, 305
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+smokell_07
+  rotate: false
+  xy: 1, 22
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+smokell_09
+  rotate: false
+  xy: 284, 305
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+smokell_11
+  rotate: false
+  xy: 143, 194
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+smokell_13
+  rotate: false
+  xy: 143, 113
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+smokell_15
+  rotate: false
+  xy: 1, 184
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+tex_trail_003
+  rotate: true
+  xy: 122, 275
+  size: 29, 92
+  orig: 29, 92
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,27 @@
+
+fz07x.png
+size: 450,450
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fz07_1
+  rotate: true
+  xy: 1, 1
+  size: 180, 166
+  orig: 180, 166
+  offset: 0, 0
+  index: -1
+fz07_2
+  rotate: false
+  xy: 1, 182
+  size: 267, 267
+  orig: 267, 267
+  offset: 0, 0
+  index: -1
+fz07_3
+  rotate: false
+  xy: 168, 38
+  size: 143, 143
+  orig: 143, 143
+  offset: 0, 0
+  index: -1

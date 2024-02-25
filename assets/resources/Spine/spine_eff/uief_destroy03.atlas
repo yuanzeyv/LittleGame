@@ -1,0 +1,34 @@
+
+uief_destroy03.png
+size: 666,221
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 550, 44
+  size: 67, 58
+  orig: 70, 59
+  offset: 0, 1
+  index: -1
+kkglow1
+  rotate: false
+  xy: 2, 2
+  size: 546, 217
+  orig: 546, 217
+  offset: 0, 0
+  index: -1
+sp04
+  rotate: false
+  xy: 550, 104
+  size: 114, 115
+  orig: 114, 115
+  offset: 0, 0
+  index: -1
+star01
+  rotate: false
+  xy: 550, 11
+  size: 30, 31
+  orig: 32, 37
+  offset: 0, 2
+  index: -1

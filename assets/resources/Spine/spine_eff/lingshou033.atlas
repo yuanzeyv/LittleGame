@@ -1,0 +1,153 @@
+
+lingshou033.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hfa
+  rotate: true
+  xy: 68, 20
+  size: 233, 287
+  orig: 233, 287
+  offset: 0, 0
+  index: -1
+jjia
+  rotate: true
+  xy: 490, 91
+  size: 162, 60
+  orig: 162, 61
+  offset: 0, 1
+  index: -1
+mao
+  rotate: false
+  xy: 572, 2
+  size: 101, 101
+  orig: 101, 101
+  offset: 0, 0
+  index: -1
+mling
+  rotate: true
+  xy: 357, 2
+  size: 46, 31
+  orig: 46, 31
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: true
+  xy: 2, 18
+  size: 235, 64
+  orig: 239, 68
+  offset: 2, 2
+  index: -1
+shen
+  rotate: false
+  xy: 357, 50
+  size: 131, 203
+  orig: 132, 203
+  offset: 0, 0
+  index: -1
+tou
+  rotate: false
+  xy: 552, 105
+  size: 106, 148
+  orig: 106, 148
+  offset: 0, 0
+  index: -1
+tshi
+  rotate: true
+  xy: 853, 129
+  size: 23, 54
+  orig: 23, 54
+  offset: 0, 0
+  index: -1
+xshi
+  rotate: true
+  xy: 853, 181
+  size: 72, 56
+  orig: 72, 56
+  offset: 0, 0
+  index: -1
+ybfu
+  rotate: true
+  xy: 853, 154
+  size: 25, 65
+  orig: 25, 65
+  offset: 0, 0
+  index: -1
+ybfu1
+  rotate: true
+  xy: 490, 53
+  size: 36, 66
+  orig: 36, 66
+  offset: 0, 0
+  index: -1
+ybi
+  rotate: false
+  xy: 765, 126
+  size: 86, 127
+  orig: 86, 127
+  offset: 0, 0
+  index: -1
+yshi
+  rotate: false
+  xy: 759, 9
+  size: 19, 106
+  orig: 19, 106
+  offset: 0, 0
+  index: -1
+yshi1
+  rotate: false
+  xy: 780, 24
+  size: 19, 100
+  orig: 19, 100
+  offset: 0, 0
+  index: -1
+yshi2
+  rotate: true
+  xy: 675, 9
+  size: 106, 82
+  orig: 106, 82
+  offset: 0, 0
+  index: -1
+yshou
+  rotate: true
+  xy: 482, 11
+  size: 37, 88
+  orig: 37, 88
+  offset: 0, 0
+  index: -1
+zbfu
+  rotate: false
+  xy: 801, 46
+  size: 56, 78
+  orig: 56, 78
+  offset: 0, 0
+  index: -1
+zbfu2
+  rotate: true
+  xy: 801, 16
+  size: 28, 76
+  orig: 28, 76
+  offset: 0, 0
+  index: -1
+zbi
+  rotate: false
+  xy: 660, 117
+  size: 103, 136
+  orig: 103, 136
+  offset: 0, 0
+  index: -1
+zhu
+  rotate: false
+  xy: 2, 4
+  size: 11, 12
+  orig: 11, 12
+  offset: 0, 0
+  index: -1
+zshou
+  rotate: true
+  xy: 390, 5
+  size: 43, 90
+  orig: 43, 90
+  offset: 0, 0
+  index: -1

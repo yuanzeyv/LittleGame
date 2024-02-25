@@ -1,0 +1,27 @@
+
+lingqi.png
+size: 156,84
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+01
+  rotate: true
+  xy: 2, 64
+  size: 18, 152
+  orig: 20, 158
+  offset: 1, 3
+  index: -1
+02
+  rotate: false
+  xy: 2, 42
+  size: 20, 20
+  orig: 22, 22
+  offset: 1, 1
+  index: -1
+03
+  rotate: false
+  xy: 24, 2
+  size: 62, 60
+  orig: 71, 72
+  offset: 7, 5
+  index: -1

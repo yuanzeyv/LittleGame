@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "09db9e38-613b-40da-86c7-c75b0418d887",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_bhb_02": {
+      "ver": "1.0.6",
+      "uuid": "0e10a4cf-6bd5-451c-bf02-fcbf3268c148",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "09db9e38-613b-40da-86c7-c75b0418d887",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 750,
+      "height": 749,
+      "rawWidth": 752,
+      "rawHeight": 752,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "09db9e38-613b-40da-86c7-c75b0418d887@6c48a",
+      "displayName": "uief_bhb_02",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "09db9e38-613b-40da-86c7-c75b0418d887",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "09db9e38-613b-40da-86c7-c75b0418d887@6c48a"
+  }
+}

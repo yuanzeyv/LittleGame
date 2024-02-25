@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "6b013dc1-f84a-49f4-b3cd-4ae2db7f60ea",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "huaguang": {
+      "ver": "1.0.6",
+      "uuid": "8aa0c9f1-b8f1-4856-ab69-a187be19c7b0",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "6b013dc1-f84a-49f4-b3cd-4ae2db7f60ea",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1019,
+      "height": 1033,
+      "rawWidth": 1023,
+      "rawHeight": 1037,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "6b013dc1-f84a-49f4-b3cd-4ae2db7f60ea@6c48a",
+      "displayName": "huaguang",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "6b013dc1-f84a-49f4-b3cd-4ae2db7f60ea",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "6b013dc1-f84a-49f4-b3cd-4ae2db7f60ea@6c48a"
+  }
+}

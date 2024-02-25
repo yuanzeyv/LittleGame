@@ -1,0 +1,27 @@
+
+uief_kglow_05.png
+size: 237,237
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 1, 172
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+kk1
+  rotate: false
+  xy: 66, 136
+  size: 101, 100
+  orig: 101, 100
+  offset: 0, 0
+  index: -1
+kk4
+  rotate: true
+  xy: 1, 1
+  size: 134, 135
+  orig: 134, 135
+  offset: 0, 0
+  index: -1

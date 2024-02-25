@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "e52f2ea3-cd14-4f66-a516-f9b084a29608",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "lingqi": {
+      "ver": "1.0.6",
+      "uuid": "2e4696ed-0e46-444e-8830-993fbaeafd11",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "e52f2ea3-cd14-4f66-a516-f9b084a29608",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 152,
+      "height": 80,
+      "rawWidth": 156,
+      "rawHeight": 84,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "e52f2ea3-cd14-4f66-a516-f9b084a29608@6c48a",
+      "displayName": "lingqi",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e52f2ea3-cd14-4f66-a516-f9b084a29608",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "e52f2ea3-cd14-4f66-a516-f9b084a29608@6c48a"
+  }
+}

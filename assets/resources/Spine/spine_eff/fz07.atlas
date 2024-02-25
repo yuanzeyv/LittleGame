@@ -1,0 +1,48 @@
+
+fz07.png
+size: 1953,1057
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 1364, 520
+  size: 535, 567
+  orig: 800, 800
+  offset: 133, 116
+  index: -1
+2
+  rotate: false
+  xy: 832, 474
+  size: 530, 581
+  orig: 800, 800
+  offset: 133, 109
+  index: -1
+guang
+  rotate: true
+  xy: 2, 194
+  size: 861, 828
+  orig: 1200, 1200
+  offset: 171, 180
+  index: -1
+jian
+  rotate: true
+  xy: 1364, 6
+  size: 512, 587
+  orig: 800, 800
+  offset: 144, 106
+  index: -1
+shou
+  rotate: false
+  xy: 2, 2
+  size: 127, 190
+  orig: 800, 800
+  offset: 337, 304
+  index: -1
+xiao
+  rotate: false
+  xy: 832, 225
+  size: 247, 247
+  orig: 800, 800
+  offset: 277, 276
+  index: -1

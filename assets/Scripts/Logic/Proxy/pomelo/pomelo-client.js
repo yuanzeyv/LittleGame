@@ -126,8 +126,9 @@
         callbacks[i].apply(this, args);
       }
     }
-
-    return this;
+    console.log(`收到网络消息:${event}`);
+    console.log(args);
+    return this; 
   };
 
   /**
@@ -137,7 +138,7 @@
    * @return {Array}
    * @api public
    */
-
+ 
   Emitter.prototype.listeners = function(event){
     this._callbacks = this._callbacks || {};
     return this._callbacks[event] || [];

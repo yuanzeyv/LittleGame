@@ -1,0 +1,27 @@
+
+uief_shentong_3.png
+size: 235,235
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 1, 170
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+kk2
+  rotate: true
+  xy: 1, 1
+  size: 134, 135
+  orig: 134, 135
+  offset: 0, 0
+  index: -1
+starg02
+  rotate: false
+  xy: 66, 136
+  size: 100, 98
+  orig: 100, 98
+  offset: 0, 0
+  index: -1

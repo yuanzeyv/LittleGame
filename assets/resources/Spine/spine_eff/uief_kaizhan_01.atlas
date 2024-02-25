@@ -1,0 +1,90 @@
+
+uief_kaizhan_01.png
+size: 292,525
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+di
+  rotate: true
+  xy: 2, 354
+  size: 169, 227
+  orig: 169, 227
+  offset: 0, 0
+  index: -1
+guang
+  rotate: false
+  xy: 2, 190
+  size: 193, 162
+  orig: 210, 184
+  offset: 17, 18
+  index: -1
+hh1
+  rotate: true
+  xy: 231, 333
+  size: 25, 31
+  orig: 80, 84
+  offset: 28, 29
+  index: -1
+hh2
+  rotate: true
+  xy: 231, 360
+  size: 45, 57
+  orig: 80, 84
+  offset: 21, 16
+  index: -1
+hh3
+  rotate: false
+  xy: 231, 459
+  size: 57, 64
+  orig: 80, 84
+  offset: 15, 11
+  index: -1
+hh4
+  rotate: true
+  xy: 148, 2
+  size: 64, 77
+  orig: 80, 84
+  offset: 10, 5
+  index: -1
+jj1
+  rotate: false
+  xy: 231, 407
+  size: 52, 50
+  orig: 80, 84
+  offset: 19, 17
+  index: -1
+jj2
+  rotate: false
+  xy: 227, 6
+  size: 62, 60
+  orig: 80, 84
+  offset: 9, 6
+  index: -1
+jj3
+  rotate: false
+  xy: 197, 255
+  size: 77, 76
+  orig: 80, 84
+  offset: 2, 6
+  index: -1
+jj4
+  rotate: true
+  xy: 197, 183
+  size: 70, 79
+  orig: 80, 84
+  offset: 3, 2
+  index: -1
+kai
+  rotate: false
+  xy: 2, 60
+  size: 144, 128
+  orig: 149, 132
+  offset: 2, 2
+  index: -1
+zhan
+  rotate: true
+  xy: 148, 68
+  size: 113, 142
+  orig: 117, 148
+  offset: 2, 4
+  index: -1

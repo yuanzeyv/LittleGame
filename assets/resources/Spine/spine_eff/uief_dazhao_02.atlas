@@ -1,0 +1,83 @@
+
+uief_dazhao_02.png
+size: 432,432
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+b1
+  rotate: false
+  xy: 1, 265
+  size: 244, 166
+  orig: 244, 166
+  offset: 0, 0
+  index: -1
+b2
+  rotate: false
+  xy: 246, 247
+  size: 185, 184
+  orig: 185, 184
+  offset: 0, 0
+  index: -1
+b3
+  rotate: false
+  xy: 1, 18
+  size: 111, 131
+  orig: 111, 131
+  offset: 0, 0
+  index: -1
+ff1
+  rotate: true
+  xy: 187, 38
+  size: 72, 65
+  orig: 72, 65
+  offset: 0, 0
+  index: -1
+ff2
+  rotate: true
+  xy: 333, 96
+  size: 65, 74
+  orig: 65, 74
+  offset: 0, 0
+  index: -1
+ff3
+  rotate: false
+  xy: 326, 27
+  size: 64, 68
+  orig: 64, 68
+  offset: 0, 0
+  index: -1
+ff4
+  rotate: true
+  xy: 253, 45
+  size: 65, 72
+  orig: 65, 72
+  offset: 0, 0
+  index: -1
+glow_1
+  rotate: false
+  xy: 333, 162
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+h1
+  rotate: false
+  xy: 1, 150
+  size: 194, 114
+  orig: 194, 114
+  offset: 0, 0
+  index: -1
+h2
+  rotate: false
+  xy: 196, 111
+  size: 136, 135
+  orig: 136, 135
+  offset: 0, 0
+  index: -1
+h3
+  rotate: false
+  xy: 113, 57
+  size: 73, 92
+  orig: 73, 92
+  offset: 0, 0
+  index: -1

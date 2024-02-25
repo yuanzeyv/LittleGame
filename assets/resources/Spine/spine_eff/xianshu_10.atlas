@@ -1,0 +1,132 @@
+
+xianshu_10.png
+size: 489,489
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fa01
+  rotate: false
+  xy: 73, 42
+  size: 87, 190
+  orig: 87, 190
+  offset: 0, 0
+  index: -1
+fa02
+  rotate: true
+  xy: 229, 399
+  size: 89, 232
+  orig: 89, 232
+  offset: 0, 0
+  index: -1
+fa03
+  rotate: true
+  xy: 190, 302
+  size: 47, 270
+  orig: 47, 270
+  offset: 0, 0
+  index: -1
+fa04
+  rotate: true
+  xy: 229, 350
+  size: 48, 221
+  orig: 48, 221
+  offset: 0, 0
+  index: -1
+fa05
+  rotate: true
+  xy: 190, 259
+  size: 42, 206
+  orig: 42, 206
+  offset: 0, 0
+  index: -1
+fa06
+  rotate: false
+  xy: 161, 71
+  size: 35, 161
+  orig: 35, 161
+  offset: 0, 0
+  index: -1
+glow_4
+  rotate: false
+  xy: 1, 233
+  size: 188, 146
+  orig: 188, 146
+  offset: 0, 0
+  index: -1
+gx_00000
+  rotate: false
+  xy: 326, 135
+  size: 123, 123
+  orig: 123, 123
+  offset: 0, 0
+  index: -1
+ld_4
+  rotate: true
+  xy: 1, 10
+  size: 222, 71
+  orig: 222, 71
+  offset: 0, 0
+  index: -1
+ld_5
+  rotate: false
+  xy: 1, 380
+  size: 227, 108
+  orig: 227, 108
+  offset: 0, 0
+  index: -1
+line1
+  rotate: true
+  xy: 462, 397
+  size: 91, 19
+  orig: 91, 19
+  offset: 0, 0
+  index: -1
+line2
+  rotate: false
+  xy: 73, 30
+  size: 97, 11
+  orig: 97, 11
+  offset: 0, 0
+  index: -1
+lizi
+  rotate: false
+  xy: 197, 130
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+sphere
+  rotate: false
+  xy: 326, 63
+  size: 93, 71
+  orig: 93, 71
+  offset: 0, 0
+  index: -1
+sphere1
+  rotate: false
+  xy: 326, 14
+  size: 79, 48
+  orig: 79, 48
+  offset: 0, 0
+  index: -1
+star_02
+  rotate: false
+  xy: 420, 98
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+star_03
+  rotate: false
+  xy: 397, 263
+  size: 39, 38
+  orig: 39, 38
+  offset: 0, 0
+  index: -1
+xw3_00000
+  rotate: false
+  xy: 197, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

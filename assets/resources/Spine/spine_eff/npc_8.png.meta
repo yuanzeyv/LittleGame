@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "df7d8a11-b514-4c5a-ae49-d6bfa6546f5c",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "npc_8": {
+      "ver": "1.0.6",
+      "uuid": "6cc5871a-bfae-4b9e-9239-d88b57522720",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "df7d8a11-b514-4c5a-ae49-d6bfa6546f5c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1020,
+      "height": 252,
+      "rawWidth": 1024,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "df7d8a11-b514-4c5a-ae49-d6bfa6546f5c@6c48a",
+      "displayName": "npc_8",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "df7d8a11-b514-4c5a-ae49-d6bfa6546f5c",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "df7d8a11-b514-4c5a-ae49-d6bfa6546f5c@6c48a"
+  }
+}

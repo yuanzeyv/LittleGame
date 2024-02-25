@@ -197,10 +197,10 @@ export class BundleProxy extends BaseProxy{
             removeDuplicatesLoadDatas.push({bundleAsset:bundleAsset, path:cell.path,type:cell.type});
         } 
         loadStruct.SetLoadSumCount(sumCount);//设置数量
-        //遍历去重的资源信息
+        this.mLoadStructMap.set(loadID,loadStruct);//设置 
+        //遍历去重的资源信息 
         for(let cell of removeDuplicatesLoadDatas)  
             cell.bundleAsset!.Load(cell.path,cell.type);//立即加载资源
-        this.mLoadStructMap.set(loadID,loadStruct);//设置 
         if(loadStruct.IsFinish())
             SyncMicroTask(()=> this.NotifyCompleteHandle(loadID,loadStruct))
         return loadID;

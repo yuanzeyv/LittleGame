@@ -1,0 +1,125 @@
+
+lingshou017.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bozi
+  rotate: true
+  xy: 745, 4
+  size: 63, 67
+  orig: 63, 67
+  offset: 0, 0
+  index: -1
+guitou
+  rotate: false
+  xy: 792, 152
+  size: 34, 34
+  orig: 34, 34
+  offset: 0, 0
+  index: -1
+guitou1
+  rotate: true
+  xy: 389, 4
+  size: 54, 125
+  orig: 54, 125
+  offset: 0, 0
+  index: -1
+jfu
+  rotate: true
+  xy: 767, 188
+  size: 66, 31
+  orig: 66, 31
+  offset: 0, 0
+  index: -1
+jianshi
+  rotate: true
+  xy: 598, 15
+  size: 43, 145
+  orig: 43, 145
+  offset: 0, 0
+  index: -1
+jjia
+  rotate: true
+  xy: 730, 69
+  size: 89, 60
+  orig: 89, 60
+  offset: 0, 0
+  index: -1
+lshi
+  rotate: false
+  xy: 685, 160
+  size: 80, 94
+  orig: 80, 94
+  offset: 0, 0
+  index: -1
+mao
+  rotate: false
+  xy: 278, 44
+  size: 64, 210
+  orig: 64, 210
+  offset: 0, 0
+  index: -1
+mao1
+  rotate: true
+  xy: 278, 2
+  size: 40, 47
+  orig: 40, 47
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: true
+  xy: 212, 19
+  size: 235, 64
+  orig: 239, 68
+  offset: 2, 2
+  index: -1
+shen
+  rotate: false
+  xy: 2, 19
+  size: 208, 235
+  orig: 208, 235
+  offset: 0, 0
+  index: -1
+tfu
+  rotate: false
+  xy: 327, 5
+  size: 60, 37
+  orig: 62, 37
+  offset: 0, 0
+  index: -1
+tfu1
+  rotate: true
+  xy: 516, 6
+  size: 52, 41
+  orig: 52, 41
+  offset: 0, 0
+  index: -1
+toshi
+  rotate: false
+  xy: 685, 68
+  size: 43, 90
+  orig: 43, 90
+  offset: 0, 0
+  index: -1
+wuqi
+  rotate: false
+  xy: 344, 60
+  size: 277, 194
+  orig: 277, 194
+  offset: 0, 0
+  index: -1
+xshi
+  rotate: false
+  xy: 559, 13
+  size: 37, 45
+  orig: 37, 45
+  offset: 0, 0
+  index: -1
+zbi
+  rotate: false
+  xy: 623, 61
+  size: 60, 193
+  orig: 60, 193
+  offset: 0, 0
+  index: -1

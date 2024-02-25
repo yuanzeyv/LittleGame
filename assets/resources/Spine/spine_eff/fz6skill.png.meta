@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "a69fe770-cb7e-4f16-9d85-961875443707",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "fz6skill": {
+      "ver": "1.0.6",
+      "uuid": "0184b35a-3dfe-4241-b020-464427906dcc",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "a69fe770-cb7e-4f16-9d85-961875443707",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -3,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 737,
+      "height": 742,
+      "rawWidth": 745,
+      "rawHeight": 745,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "a69fe770-cb7e-4f16-9d85-961875443707@6c48a",
+      "displayName": "fz6skill",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a69fe770-cb7e-4f16-9d85-961875443707",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "a69fe770-cb7e-4f16-9d85-961875443707@6c48a"
+  }
+}

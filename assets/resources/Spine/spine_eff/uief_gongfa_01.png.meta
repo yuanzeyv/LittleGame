@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "dad8f850-567b-4b23-bc27-234c1c7feb8a",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_gongfa_01": {
+      "ver": "1.0.6",
+      "uuid": "d4b846a9-5e3f-45ed-8b16-709dd35aa7dc",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "dad8f850-567b-4b23-bc27-234c1c7feb8a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1834,
+      "height": 964,
+      "rawWidth": 1838,
+      "rawHeight": 968,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "dad8f850-567b-4b23-bc27-234c1c7feb8a@6c48a",
+      "displayName": "uief_gongfa_01",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "dad8f850-567b-4b23-bc27-234c1c7feb8a",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "dad8f850-567b-4b23-bc27-234c1c7feb8a@6c48a"
+  }
+}

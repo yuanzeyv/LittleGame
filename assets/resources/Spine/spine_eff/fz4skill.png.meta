@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "a38f34f3-7893-4ee1-9a03-bdb9178c2cda",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "fz4skill": {
+      "ver": "1.0.6",
+      "uuid": "faaf4c1e-fb26-43d7-98e5-5825028d0c98",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "a38f34f3-7893-4ee1-9a03-bdb9178c2cda",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -63.5,
+      "offsetY": -12.5,
+      "trimX": 1,
+      "trimY": 26,
+      "width": 485,
+      "height": 587,
+      "rawWidth": 614,
+      "rawHeight": 614,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "a38f34f3-7893-4ee1-9a03-bdb9178c2cda@6c48a",
+      "displayName": "fz4skill",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a38f34f3-7893-4ee1-9a03-bdb9178c2cda",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "a38f34f3-7893-4ee1-9a03-bdb9178c2cda@6c48a"
+  }
+}

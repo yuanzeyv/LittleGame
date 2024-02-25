@@ -1,0 +1,20 @@
+
+xianshu_hd.png
+size: 253,253
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+d_01
+  rotate: false
+  xy: 1, 114
+  size: 168, 138
+  orig: 168, 138
+  offset: 0, 0
+  index: -1
+d_ring1
+  rotate: true
+  xy: 170, 107
+  size: 145, 82
+  orig: 145, 82
+  offset: 0, 0
+  index: -1

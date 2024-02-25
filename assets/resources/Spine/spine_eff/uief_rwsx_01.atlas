@@ -1,0 +1,55 @@
+
+uief_rwsx_01.png
+size: 194,194
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+g2
+  rotate: true
+  xy: 161, 64
+  size: 62, 29
+  orig: 62, 29
+  offset: 0, 0
+  index: -1
+g3
+  rotate: false
+  xy: 96, 127
+  size: 77, 66
+  orig: 77, 66
+  offset: 0, 0
+  index: -1
+g4
+  rotate: false
+  xy: 1, 22
+  size: 77, 76
+  orig: 77, 76
+  offset: 0, 0
+  index: -1
+g5
+  rotate: false
+  xy: 79, 1
+  size: 63, 60
+  orig: 63, 60
+  offset: 0, 0
+  index: -1
+glow01
+  rotate: false
+  xy: 96, 62
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+glow02_1
+  rotate: false
+  xy: 1, 99
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+par05
+  rotate: false
+  xy: 143, 20
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1

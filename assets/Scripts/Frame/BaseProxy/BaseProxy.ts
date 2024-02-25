@@ -1,5 +1,4 @@
 import {Proxy} from "../../Frame/PureMVC";
-
 /**
  * 在原有的基础上，新加了一个onLoad方法，这个方法会在所有Proxy都加载完后，同意运行，可以更加方便的获取代理间的指针引用。
  */

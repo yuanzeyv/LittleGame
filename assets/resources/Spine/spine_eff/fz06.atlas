@@ -1,0 +1,62 @@
+
+fz06.png
+size: 2023,888
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 849, 303
+  size: 583, 583
+  orig: 583, 583
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 1434, 2
+  size: 463, 393
+  orig: 583, 583
+  offset: 57, 38
+  index: -1
+3
+  rotate: false
+  xy: 1434, 397
+  size: 532, 489
+  orig: 583, 583
+  offset: 26, 71
+  index: -1
+bu
+  rotate: false
+  xy: 1098, 11
+  size: 245, 290
+  orig: 247, 291
+  offset: 1, 1
+  index: -1
+g
+  rotate: false
+  xy: 849, 10
+  size: 247, 291
+  orig: 247, 291
+  offset: 0, 0
+  index: -1
+guang
+  rotate: true
+  xy: 2, 36
+  size: 850, 845
+  orig: 868, 868
+  offset: 18, 4
+  index: -1
+shou
+  rotate: false
+  xy: 1899, 220
+  size: 122, 175
+  orig: 583, 583
+  offset: 227, 208
+  index: -1
+yan
+  rotate: true
+  xy: 1899, 71
+  size: 147, 79
+  orig: 583, 583
+  offset: 218, 424
+  index: -1

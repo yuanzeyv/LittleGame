@@ -1,0 +1,76 @@
+
+uief_xssj_3.png
+size: 1006,1006
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+00000
+  rotate: false
+  xy: 1, 885
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00001
+  rotate: false
+  xy: 202, 885
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00002
+  rotate: false
+  xy: 403, 885
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00003
+  rotate: false
+  xy: 604, 885
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00004
+  rotate: false
+  xy: 805, 885
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00005
+  rotate: false
+  xy: 1, 764
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00006
+  rotate: false
+  xy: 202, 764
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00007
+  rotate: false
+  xy: 403, 764
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+00008
+  rotate: false
+  xy: 604, 764
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+kk2
+  rotate: true
+  xy: 805, 750
+  size: 134, 135
+  orig: 134, 135
+  offset: 0, 0
+  index: -1

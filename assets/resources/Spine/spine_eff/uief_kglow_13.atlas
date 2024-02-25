@@ -1,0 +1,41 @@
+
+uief_kglow_13.png
+size: 509,509
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 444, 444
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+kkglow2
+  rotate: false
+  xy: 365, 432
+  size: 78, 76
+  orig: 78, 76
+  offset: 0, 0
+  index: -1
+radial04
+  rotate: false
+  xy: 183, 329
+  size: 181, 179
+  orig: 181, 179
+  offset: 0, 0
+  index: -1
+radial05
+  rotate: false
+  xy: 1, 329
+  size: 181, 179
+  orig: 181, 179
+  offset: 0, 0
+  index: -1
+star02
+  rotate: false
+  xy: 444, 411
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

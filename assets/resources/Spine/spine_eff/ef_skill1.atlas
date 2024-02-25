@@ -1,0 +1,104 @@
+
+ef_skill1.png
+size: 195,195
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+effect/f1
+  rotate: false
+  xy: 68, 36
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/f2
+  rotate: false
+  xy: 101, 36
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/f3
+  rotate: true
+  xy: 133, 97
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/f4
+  rotate: false
+  xy: 133, 70
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/f5
+  rotate: false
+  xy: 160, 103
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/f6
+  rotate: true
+  xy: 134, 37
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/f7
+  rotate: false
+  xy: 134, 10
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/f8
+  rotate: false
+  xy: 161, 43
+  size: 32, 26
+  orig: 32, 26
+  offset: 0, 0
+  index: -1
+effect/fq3
+  rotate: false
+  xy: 1, 27
+  size: 66, 64
+  orig: 66, 64
+  offset: 0, 0
+  index: -1
+effect/fq4
+  rotate: false
+  xy: 61, 130
+  size: 66, 64
+  orig: 66, 64
+  offset: 0, 0
+  index: -1
+effect/fq5
+  rotate: true
+  xy: 68, 63
+  size: 66, 64
+  orig: 66, 64
+  offset: 0, 0
+  index: -1
+effect/fq6
+  rotate: false
+  xy: 128, 130
+  size: 66, 64
+  orig: 66, 64
+  offset: 0, 0
+  index: -1
+effect/glowline4
+  rotate: false
+  xy: 166, 76
+  size: 26, 26
+  orig: 26, 26
+  offset: 0, 0
+  index: -1
+effect/line1
+  rotate: false
+  xy: 1, 92
+  size: 59, 102
+  orig: 59, 102
+  offset: 0, 0
+  index: -1

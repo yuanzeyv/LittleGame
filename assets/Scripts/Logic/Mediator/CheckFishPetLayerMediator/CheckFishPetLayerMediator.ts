@@ -2,8 +2,8 @@ import { Color } from "cc";
 import { NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediator";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
-import { WindowCreateRequest, LayerOrder } from "../../Proxy/WindowProxy/Class";
+import { eNotice } from "../../../NotificationTable";
+import { eLayerOrder } from "../../Proxy/WindowProxy/Class";
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { AnnouncementLayer } from "../../Layer/AnnouncementLayer/AnnouncementLayer";
 import { CheckFishPetLayer } from "../../Layer/CheckFishPetLayer/CheckFishPetLayer";
@@ -12,8 +12,8 @@ import { WindowProxy } from "../../Proxy/WindowProxy/WindowProxy";
 export class CheckFishPetLayerMediator extends WindowBaseMediator{
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
-        .set(eNotificationEnum.FishChoosePetsLayerOpen,this.OpenLayer.bind(this))
-        .set(eNotificationEnum.FishChoosePetsLayerClose,this.CloseLayer.bind(this))
+        .set(eNotice.FishChoosePetsLayerOpen,this.OpenLayer.bind(this))
+        .set(eNotice.FishChoosePetsLayerClose,this.CloseLayer.bind(this))
     }  
     protected InitPrefabInfo(): { path: string; layerConst: new () => BaseLayer;} {
         return { path:  "resources/Perfab/FishChoosePetsLayer/FishChoosePetsLayer" ,layerConst: CheckFishPetLayer}

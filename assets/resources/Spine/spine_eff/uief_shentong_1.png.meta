@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "acf4af71-877a-499b-9f6e-3e3f14bd8a4f",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_shentong_1": {
+      "ver": "1.0.6",
+      "uuid": "4edd4386-2904-4ac4-9adf-9eafd5943c91",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "acf4af71-877a-499b-9f6e-3e3f14bd8a4f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -2,
+      "offsetY": -34.5,
+      "trimX": 1,
+      "trimY": 70,
+      "width": 336,
+      "height": 271,
+      "rawWidth": 342,
+      "rawHeight": 342,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "acf4af71-877a-499b-9f6e-3e3f14bd8a4f@6c48a",
+      "displayName": "uief_shentong_1",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "acf4af71-877a-499b-9f6e-3e3f14bd8a4f",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "acf4af71-877a-499b-9f6e-3e3f14bd8a4f@6c48a"
+  }
+}

@@ -1,0 +1,83 @@
+
+fz01x.png
+size: 374,374
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 1, 144
+  size: 216, 229
+  orig: 216, 229
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 297, 152
+  size: 69, 69
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 218, 222
+  size: 152, 151
+  orig: 152, 151
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 218, 143
+  size: 78, 78
+  orig: 78, 78
+  offset: 0, 0
+  index: -1
+glow_1
+  rotate: false
+  xy: 344, 122
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+q1
+  rotate: false
+  xy: 1, 100
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+q2
+  rotate: false
+  xy: 45, 100
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+q3
+  rotate: false
+  xy: 89, 100
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+q4
+  rotate: false
+  xy: 133, 100
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+q5
+  rotate: false
+  xy: 177, 99
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+ring1
+  rotate: true
+  xy: 297, 106
+  size: 45, 46
+  orig: 45, 46
+  offset: 0, 0
+  index: -1

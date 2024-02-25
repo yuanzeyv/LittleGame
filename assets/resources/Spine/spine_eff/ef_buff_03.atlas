@@ -1,0 +1,20 @@
+
+ef_buff_03.png
+size: 223,223
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ice2
+  rotate: false
+  xy: 1, 106
+  size: 135, 116
+  orig: 135, 116
+  offset: 0, 0
+  index: -1
+smoke1
+  rotate: true
+  xy: 137, 129
+  size: 93, 85
+  orig: 93, 85
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,83 @@
+
+fz6skill.png
+size: 745,745
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+06/2_glow2
+  rotate: true
+  xy: 536, 74
+  size: 166, 177
+  orig: 166, 177
+  offset: 0, 0
+  index: -1
+06/baoz01_00
+  rotate: true
+  xy: 422, 54
+  size: 186, 113
+  orig: 186, 113
+  offset: 0, 0
+  index: -1
+06/baoz01_01
+  rotate: false
+  xy: 380, 420
+  size: 303, 159
+  orig: 303, 159
+  offset: 0, 0
+  index: -1
+06/baoz01_02
+  rotate: false
+  xy: 380, 580
+  size: 359, 164
+  orig: 359, 164
+  offset: 0, 0
+  index: -1
+06/baoz01_03
+  rotate: true
+  xy: 169, 32
+  size: 376, 167
+  orig: 376, 167
+  offset: 0, 0
+  index: -1
+06/baoz01_04
+  rotate: false
+  xy: 337, 241
+  size: 376, 167
+  orig: 376, 167
+  offset: 0, 0
+  index: -1
+06/baoz01_05
+  rotate: true
+  xy: 1, 31
+  size: 377, 167
+  orig: 377, 167
+  offset: 0, 0
+  index: -1
+06/baoz01_06
+  rotate: false
+  xy: 1, 577
+  size: 378, 167
+  orig: 378, 167
+  offset: 0, 0
+  index: -1
+06/baoz01_07
+  rotate: false
+  xy: 1, 409
+  size: 378, 167
+  orig: 378, 167
+  offset: 0, 0
+  index: -1
+06/fwglow1
+  rotate: false
+  xy: 337, 22
+  size: 84, 218
+  orig: 84, 218
+  offset: 0, 0
+  index: -1
+06/tex_trail_002
+  rotate: true
+  xy: 1, 1
+  size: 29, 92
+  orig: 29, 92
+  offset: 0, 0
+  index: -1

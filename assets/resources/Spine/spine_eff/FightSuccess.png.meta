@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "9b2464be-f1fd-42e3-bea6-d709b720088c",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "FightSuccess": {
+      "ver": "1.0.6",
+      "uuid": "3281ac10-0d60-4ea3-a5ee-825aab326a31",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "9b2464be-f1fd-42e3-bea6-d709b720088c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1996,
+      "height": 920,
+      "rawWidth": 2000,
+      "rawHeight": 924,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "9b2464be-f1fd-42e3-bea6-d709b720088c@6c48a",
+      "displayName": "FightSuccess",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "9b2464be-f1fd-42e3-bea6-d709b720088c",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "9b2464be-f1fd-42e3-bea6-d709b720088c@6c48a"
+  }
+}

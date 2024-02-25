@@ -1,0 +1,41 @@
+
+xianshu_8.png
+size: 580,580
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guangyun
+  rotate: false
+  xy: 474, 439
+  size: 105, 105
+  orig: 105, 105
+  offset: 0, 0
+  index: -1
+ksx_gq
+  rotate: true
+  xy: 182, 404
+  size: 175, 176
+  orig: 175, 176
+  offset: 0, 0
+  index: -1
+lizi
+  rotate: false
+  xy: 1, 404
+  size: 180, 175
+  orig: 180, 175
+  offset: 0, 0
+  index: -1
+tiao_00000
+  rotate: false
+  xy: 359, 545
+  size: 145, 34
+  orig: 145, 34
+  offset: 0, 0
+  index: -1
+zaobo
+  rotate: true
+  xy: 359, 436
+  size: 108, 114
+  orig: 108, 114
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "3c763365-3f74-4413-8368-3279b14aa200",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "dalao": {
+      "ver": "1.0.6",
+      "uuid": "a585a0f8-389e-43ec-8b03-d79773b4628b",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "3c763365-3f74-4413-8368-3279b14aa200",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -258.5,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1527,
+      "height": 252,
+      "rawWidth": 2048,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "3c763365-3f74-4413-8368-3279b14aa200@6c48a",
+      "displayName": "dalao",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "3c763365-3f74-4413-8368-3279b14aa200",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "3c763365-3f74-4413-8368-3279b14aa200@6c48a"
+  }
+}

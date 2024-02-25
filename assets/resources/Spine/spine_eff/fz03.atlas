@@ -1,0 +1,48 @@
+
+fz03.png
+size: 1710,944
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 1213, 4
+  size: 463, 463
+  orig: 465, 465
+  offset: 1, 1
+  index: -1
+da
+  rotate: false
+  xy: 612, 343
+  size: 599, 599
+  orig: 601, 601
+  offset: 1, 1
+  index: -1
+guang
+  rotate: false
+  xy: 2, 337
+  size: 608, 605
+  orig: 608, 605
+  offset: 0, 0
+  index: -1
+qiu
+  rotate: false
+  xy: 2, 2
+  size: 85, 96
+  orig: 85, 96
+  offset: 0, 0
+  index: -1
+yan
+  rotate: false
+  xy: 2, 100
+  size: 237, 235
+  orig: 238, 237
+  offset: 0, 1
+  index: -1
+z
+  rotate: true
+  xy: 1213, 469
+  size: 473, 495
+  orig: 473, 495
+  offset: 0, 0
+  index: -1

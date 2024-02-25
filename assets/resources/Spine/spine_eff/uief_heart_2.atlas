@@ -1,0 +1,27 @@
+
+uief_heart_2.png
+size: 249,249
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 142, 184
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+glowline1
+  rotate: false
+  xy: 207, 128
+  size: 41, 120
+  orig: 41, 120
+  offset: 0, 0
+  index: -1
+heartglow
+  rotate: false
+  xy: 1, 118
+  size: 140, 130
+  orig: 140, 130
+  offset: 0, 0
+  index: -1

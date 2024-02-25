@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "8366b5ac-e866-44e2-b94f-c30fd55c9e82",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_heart_2": {
+      "ver": "1.0.6",
+      "uuid": "d93372ea-dd18-4dc9-831b-8a8d79135c4b",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "8366b5ac-e866-44e2-b94f-c30fd55c9e82",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -58.5,
+      "trimX": 1,
+      "trimY": 118,
+      "width": 247,
+      "height": 130,
+      "rawWidth": 249,
+      "rawHeight": 249,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "8366b5ac-e866-44e2-b94f-c30fd55c9e82@6c48a",
+      "displayName": "uief_heart_2",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8366b5ac-e866-44e2-b94f-c30fd55c9e82",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "8366b5ac-e866-44e2-b94f-c30fd55c9e82@6c48a"
+  }
+}

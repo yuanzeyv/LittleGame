@@ -1,0 +1,27 @@
+
+uief_xssj_1.png
+size: 122,122
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow01
+  rotate: false
+  xy: 43, 57
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+glowline1
+  rotate: false
+  xy: 1, 1
+  size: 41, 120
+  orig: 41, 120
+  offset: 0, 0
+  index: -1
+star02
+  rotate: false
+  xy: 43, 24
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

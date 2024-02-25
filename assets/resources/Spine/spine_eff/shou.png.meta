@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "9ee2fcbf-ad98-4331-8fa9-472df66a9eb2",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "shou": {
+      "ver": "1.0.6",
+      "uuid": "54cb0ea2-ae5b-47a4-87a7-e4d0428d87a1",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "9ee2fcbf-ad98-4331-8fa9-472df66a9eb2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 732,
+      "height": 220,
+      "rawWidth": 736,
+      "rawHeight": 224,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "9ee2fcbf-ad98-4331-8fa9-472df66a9eb2@6c48a",
+      "displayName": "shou",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "9ee2fcbf-ad98-4331-8fa9-472df66a9eb2",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "9ee2fcbf-ad98-4331-8fa9-472df66a9eb2@6c48a"
+  }
+}

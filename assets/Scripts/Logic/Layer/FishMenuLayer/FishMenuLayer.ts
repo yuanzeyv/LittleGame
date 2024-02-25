@@ -1,8 +1,8 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween, find, EventTouch, Input, math, ProgressBar, sp, random, game } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
-import { eNotificationEnum, eNotificationEnum as eNotificationEnum } from '../../../NotificationTable';
+import { eNotice  } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
-import { SoltCell } from '../../../Util/Time/TimeWheel';
+import { SoltCell } from '../../../Util/Time/TimeWheel'; 
 import { FishMenuMediator } from '../../Mediator/FishMenuMediator/FishMenuMediator';
 import { FishCommonPopWindowMediator } from '../../Mediator/FishCommonPopWindowMediator/FishCommonPopWindowMediator';
 import { FishMainProxy } from '../../Proxy/FishMainProxy/FishMainProxy';
@@ -19,7 +19,7 @@ export class FishMenuLayer extends BaseLayer {
     private mSoltCell:SoltCell;
     private mIsRunning:boolean = false;
     //加载文字进度条
-    RegisterExecuteHandle(executeMap:Map<eNotificationEnum,LayerExecute> ){
+    RegisterExecuteHandle(executeMap:Map<eNotice,LayerExecute> ){
     }
 
     TimeTrialButton
@@ -36,13 +36,13 @@ export class FishMenuLayer extends BaseLayer {
             this.PlayTailAnimation();//随机五秒再播放一次
         })
         this.mExitButton.on("click",()=>{
-            _Facade.Send(eNotificationEnum.FishCommonLayerOpen,{title:"退出",desc:"停止游戏?",funcDesc:"退出",handleFunc:()=>{
+            _Facade.Send(eNotice.FishCommonLayerOpen,{title:"退出",desc:"停止游戏?",funcDesc:"退出",handleFunc:()=>{
                 game.end();
             }});
         });
         this.mStartButton.on("click",()=>{ 
             _G.Facade.FindProxy(MusicProxy).Play(2);
-            _Facade.Send(eNotificationEnum.FishChoosePetsLayerOpen);
+            _Facade.Send(eNotice.FishChoosePetsLayerOpen);
         });
          
         this.mMoveButton.on("click",()=>{
@@ -51,7 +51,7 @@ export class FishMenuLayer extends BaseLayer {
         });
 
         this.mSettingButton.on("click",()=>{
-            _Facade.Send(eNotificationEnum.FishSettingLayerOpen);
+            _Facade.Send(eNotice.FishSettingLayerOpen);
         });
 
         this.RegisterButtonEvent<FishMenuLayer>(this.mFightTimeButton,"OpenFightLayer");
@@ -67,7 +67,7 @@ export class FishMenuLayer extends BaseLayer {
     } 
  
     public OpenFightLayer(){ 
-        _Facade.Send(eNotificationEnum.FightLayerOpen);
+        _Facade.Send(eNotice.FightLayerOpen);
     }
 
 

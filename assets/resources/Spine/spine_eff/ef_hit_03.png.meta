@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "e5aca074-ff56-440b-8855-94dde9c7e87b",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "ef_hit_03": {
+      "ver": "1.0.6",
+      "uuid": "a416f2ff-aa51-4672-8551-b28cad87e413",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "e5aca074-ff56-440b-8855-94dde9c7e87b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -2,
+      "offsetY": -37,
+      "trimX": 1,
+      "trimY": 75,
+      "width": 305,
+      "height": 235,
+      "rawWidth": 311,
+      "rawHeight": 311,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "e5aca074-ff56-440b-8855-94dde9c7e87b@6c48a",
+      "displayName": "ef_hit_03",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e5aca074-ff56-440b-8855-94dde9c7e87b",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "e5aca074-ff56-440b-8855-94dde9c7e87b@6c48a"
+  }
+}

@@ -1,0 +1,41 @@
+
+uief_kglow_06.png
+size: 292,292
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arrow1
+  rotate: false
+  xy: 1, 66
+  size: 94, 104
+  orig: 94, 104
+  offset: 0, 0
+  index: -1
+glow01
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+glowline1
+  rotate: false
+  xy: 1, 171
+  size: 41, 120
+  orig: 41, 120
+  offset: 0, 0
+  index: -1
+line6
+  rotate: false
+  xy: 66, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+star06
+  rotate: true
+  xy: 43, 200
+  size: 91, 89
+  orig: 91, 89
+  offset: 0, 0
+  index: -1

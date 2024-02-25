@@ -1,0 +1,69 @@
+
+fz1skill.png
+size: 234,234
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+04/hbreathline01
+  rotate: false
+  xy: 1, 119
+  size: 169, 43
+  orig: 169, 43
+  offset: 0, 0
+  index: -1
+04/hbreathline02
+  rotate: false
+  xy: 1, 75
+  size: 188, 43
+  orig: 188, 43
+  offset: 0, 0
+  index: -1
+04/hbreathline03
+  rotate: false
+  xy: 1, 169
+  size: 154, 38
+  orig: 154, 38
+  offset: 0, 0
+  index: -1
+04/hlglow2
+  rotate: false
+  xy: 156, 163
+  size: 77, 44
+  orig: 77, 44
+  offset: 0, 0
+  index: -1
+04/ll1
+  rotate: false
+  xy: 1, 225
+  size: 117, 4
+  orig: 117, 4
+  offset: 0, 0
+  index: -1
+04/ll2
+  rotate: false
+  xy: 1, 220
+  size: 157, 4
+  orig: 157, 4
+  offset: 0, 0
+  index: -1
+04/ll3
+  rotate: false
+  xy: 1, 214
+  size: 209, 5
+  orig: 209, 5
+  offset: 0, 0
+  index: -1
+04/ll4
+  rotate: false
+  xy: 1, 208
+  size: 201, 5
+  orig: 201, 5
+  offset: 0, 0
+  index: -1
+04/ll5
+  rotate: false
+  xy: 1, 230
+  size: 209, 3
+  orig: 209, 3
+  offset: 0, 0
+  index: -1

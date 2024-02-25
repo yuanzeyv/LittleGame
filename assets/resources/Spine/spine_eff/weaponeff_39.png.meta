@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "e623dc17-a967-44f1-8ac7-fe39ec676a05",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "weaponeff_39": {
+      "ver": "1.0.6",
+      "uuid": "1dd88d85-3358-4e5a-a8ab-f227712c9262",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "e623dc17-a967-44f1-8ac7-fe39ec676a05",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -17,
+      "offsetY": -2,
+      "trimX": 1,
+      "trimY": 5,
+      "width": 337,
+      "height": 367,
+      "rawWidth": 373,
+      "rawHeight": 373,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "e623dc17-a967-44f1-8ac7-fe39ec676a05@6c48a",
+      "displayName": "weaponeff_39",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e623dc17-a967-44f1-8ac7-fe39ec676a05",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "e623dc17-a967-44f1-8ac7-fe39ec676a05@6c48a"
+  }
+}

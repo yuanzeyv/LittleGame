@@ -1,0 +1,286 @@
+
+zhuangbei.png
+size: 1948,659
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+00070
+  rotate: false
+  xy: 2, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00071
+  rotate: false
+  xy: 116, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00072
+  rotate: true
+  xy: 2, 2
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00073
+  rotate: false
+  xy: 230, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00074
+  rotate: false
+  xy: 344, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00075
+  rotate: false
+  xy: 458, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00076
+  rotate: true
+  xy: 420, 2
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00077
+  rotate: false
+  xy: 572, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00078
+  rotate: false
+  xy: 686, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00079
+  rotate: false
+  xy: 800, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00080
+  rotate: true
+  xy: 838, 4
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00081
+  rotate: false
+  xy: 914, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00082
+  rotate: false
+  xy: 1028, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00083
+  rotate: false
+  xy: 1142, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00084
+  rotate: false
+  xy: 1256, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00085
+  rotate: true
+  xy: 1256, 4
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00086
+  rotate: false
+  xy: 1370, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00087
+  rotate: false
+  xy: 1484, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00088
+  rotate: false
+  xy: 1598, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+00089
+  rotate: false
+  xy: 1712, 241
+  size: 112, 416
+  orig: 114, 418
+  offset: 1, 1
+  index: -1
+k_frost_000
+  rotate: false
+  xy: 1452, 119
+  size: 119, 120
+  orig: 128, 128
+  offset: 4, 6
+  index: -1
+k_frost_001
+  rotate: false
+  xy: 1826, 417
+  size: 119, 119
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_002
+  rotate: false
+  xy: 1826, 296
+  size: 119, 119
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_003
+  rotate: false
+  xy: 1573, 119
+  size: 119, 120
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_004
+  rotate: false
+  xy: 1212, 118
+  size: 118, 121
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_005
+  rotate: false
+  xy: 728, 118
+  size: 119, 121
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_06
+  rotate: false
+  xy: 2, 116
+  size: 119, 123
+  orig: 128, 128
+  offset: 4, 4
+  index: -1
+k_frost_07
+  rotate: false
+  xy: 123, 116
+  size: 119, 123
+  orig: 128, 128
+  offset: 4, 4
+  index: -1
+k_frost_08
+  rotate: false
+  xy: 486, 117
+  size: 119, 122
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_09
+  rotate: false
+  xy: 849, 118
+  size: 119, 121
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_10
+  rotate: false
+  xy: 1694, 119
+  size: 119, 120
+  orig: 128, 128
+  offset: 4, 6
+  index: -1
+k_frost_11
+  rotate: false
+  xy: 1826, 175
+  size: 119, 119
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_12
+  rotate: false
+  xy: 1815, 54
+  size: 119, 119
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_13
+  rotate: true
+  xy: 1826, 538
+  size: 119, 120
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_14
+  rotate: false
+  xy: 1332, 118
+  size: 118, 121
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_15
+  rotate: false
+  xy: 970, 118
+  size: 119, 121
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_16
+  rotate: false
+  xy: 244, 116
+  size: 119, 123
+  orig: 128, 128
+  offset: 4, 4
+  index: -1
+k_frost_17
+  rotate: false
+  xy: 365, 116
+  size: 119, 123
+  orig: 128, 128
+  offset: 4, 4
+  index: -1
+k_frost_18
+  rotate: false
+  xy: 607, 117
+  size: 119, 122
+  orig: 128, 128
+  offset: 4, 5
+  index: -1
+k_frost_19
+  rotate: false
+  xy: 1091, 118
+  size: 119, 121
+  orig: 128, 128
+  offset: 4, 5
+  index: -1

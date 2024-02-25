@@ -1,14 +1,14 @@
 import { BaseMediator, NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
+import { eNotice } from "../../../NotificationTable";
 import { BannerAdvertisingProxy } from "../../Proxy/BannerAdvertisingProxy/BannerAdvertisingProxy";
 
 export class BannerAdvertisingMediator extends BaseMediator{  
     private m_BannerAdvertisingProxy:BannerAdvertisingProxy;
     public RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{ 
          
-        notificationMap.set(eNotificationEnum.BannerAdvertisingShow,this.BannerAdvertisingShowHandle.bind(this));
-        notificationMap.set(eNotificationEnum.BannerAdvertisingHide,this.BannerAdvertisingHideHandle.bind(this));
+        notificationMap.set(eNotice.BannerAdvertisingShow,this.BannerAdvertisingShowHandle.bind(this));
+        notificationMap.set(eNotice.BannerAdvertisingHide,this.BannerAdvertisingHideHandle.bind(this));
     } 
     public onRegister(){
         this.m_BannerAdvertisingProxy = _Facade.FindProxy(BannerAdvertisingProxy);//寻找到当前的代理 

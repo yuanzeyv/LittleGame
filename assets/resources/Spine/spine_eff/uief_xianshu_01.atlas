@@ -1,0 +1,111 @@
+
+uief_xianshu_01.png
+size: 412,412
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow02
+  rotate: false
+  xy: 150, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+gx_00000
+  rotate: false
+  xy: 229, 288
+  size: 123, 123
+  orig: 123, 123
+  offset: 0, 0
+  index: -1
+img_fight2
+  rotate: false
+  xy: 259, 199
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+ld_4
+  rotate: false
+  xy: 1, 231
+  size: 222, 71
+  orig: 222, 71
+  offset: 0, 0
+  index: -1
+ld_5
+  rotate: false
+  xy: 1, 303
+  size: 227, 108
+  orig: 227, 108
+  offset: 0, 0
+  index: -1
+line1
+  rotate: true
+  xy: 348, 196
+  size: 91, 19
+  orig: 91, 19
+  offset: 0, 0
+  index: -1
+lineglow_2
+  rotate: false
+  xy: 1, 1
+  size: 148, 100
+  orig: 148, 100
+  offset: 0, 0
+  index: -1
+ll_little
+  rotate: false
+  xy: 251, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+ring1
+  rotate: false
+  xy: 259, 121
+  size: 80, 77
+  orig: 80, 77
+  offset: 0, 0
+  index: -1
+ring3
+  rotate: false
+  xy: 1, 102
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+sphere1
+  rotate: true
+  xy: 353, 332
+  size: 79, 48
+  orig: 79, 48
+  offset: 0, 0
+  index: -1
+star_01
+  rotate: false
+  xy: 340, 158
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+star_02
+  rotate: false
+  xy: 340, 121
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+star_03
+  rotate: false
+  xy: 353, 293
+  size: 39, 38
+  orig: 39, 38
+  offset: 0, 0
+  index: -1
+xw3_00000
+  rotate: false
+  xy: 130, 102
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

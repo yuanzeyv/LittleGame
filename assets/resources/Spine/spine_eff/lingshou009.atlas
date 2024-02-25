@@ -1,0 +1,153 @@
+
+lingshou009.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hfa
+  rotate: false
+  xy: 147, 17
+  size: 274, 235
+  orig: 274, 235
+  offset: 0, 0
+  index: -1
+hffu
+  rotate: false
+  xy: 830, 184
+  size: 67, 68
+  orig: 67, 68
+  offset: 0, 0
+  index: -1
+hfling
+  rotate: false
+  xy: 656, 2
+  size: 28, 22
+  orig: 28, 22
+  offset: 0, 0
+  index: -1
+ling
+  rotate: true
+  xy: 686, 5
+  size: 106, 54
+  orig: 106, 54
+  offset: 0, 0
+  index: -1
+maozi
+  rotate: true
+  xy: 2, 10
+  size: 242, 143
+  orig: 242, 143
+  offset: 0, 0
+  index: -1
+mfu
+  rotate: false
+  xy: 879, 61
+  size: 40, 55
+  orig: 40, 55
+  offset: 0, 0
+  index: -1
+mshi
+  rotate: true
+  xy: 609, 2
+  size: 22, 45
+  orig: 22, 45
+  offset: 0, 0
+  index: -1
+mshi1
+  rotate: false
+  xy: 745, 137
+  size: 38, 115
+  orig: 38, 116
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: true
+  xy: 423, 17
+  size: 235, 64
+  orig: 239, 68
+  offset: 2, 2
+  index: -1
+st
+  rotate: true
+  xy: 489, 3
+  size: 95, 118
+  orig: 95, 118
+  offset: 0, 0
+  index: -1
+tfa
+  rotate: false
+  xy: 785, 138
+  size: 43, 114
+  orig: 43, 114
+  offset: 0, 0
+  index: -1
+tfu
+  rotate: true
+  xy: 830, 118
+  size: 64, 54
+  orig: 64, 54
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 489, 100
+  size: 152, 120
+  orig: 152, 120
+  offset: 0, 0
+  index: -1
+x
+  rotate: true
+  xy: 742, 12
+  size: 99, 135
+  orig: 99, 135
+  offset: 0, 0
+  index: -1
+xiu
+  rotate: false
+  xy: 611, 113
+  size: 132, 139
+  orig: 132, 139
+  offset: 0, 0
+  index: -1
+yxie
+  rotate: false
+  xy: 960, 209
+  size: 44, 43
+  orig: 44, 43
+  offset: 0, 0
+  index: -1
+yxieq
+  rotate: true
+  xy: 147, 2
+  size: 13, 24
+  orig: 13, 24
+  offset: 0, 0
+  index: -1
+yxling
+  rotate: false
+  xy: 879, 9
+  size: 36, 50
+  orig: 36, 50
+  offset: 0, 0
+  index: -1
+zxie
+  rotate: false
+  xy: 917, 13
+  size: 41, 46
+  orig: 41, 46
+  offset: 0, 0
+  index: -1
+zxieq
+  rotate: false
+  xy: 666, 91
+  size: 16, 20
+  orig: 17, 20
+  offset: 0, 0
+  index: -1
+zxling
+  rotate: true
+  xy: 609, 26
+  size: 72, 55
+  orig: 72, 55
+  offset: 0, 0
+  index: -1

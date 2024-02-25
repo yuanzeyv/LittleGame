@@ -1,18 +1,20 @@
 import { BaseMVCRegister, CommandConstructor, MediatorConstructor, ProxyConstructor } from "./Frame/MVCRegister/BaseMVCRegister";
 import { AuthSuccessCommand } from "./Logic/Control/AuthSuccessCommand";
 import { EnterGameCommand } from "./Logic/Control/EnterGameCommand";
-import { InitGameDataCommand } from "./Logic/Control/InitGameDataCommand";
+import { InitGameDataCommand } from "./Logic/Control/InitGameDataCommand"; 
+import { HotUpdateLayer } from "./Logic/Layer/HotUpdateLayer/HotUpdateLayer";
 import { AnnouncementMediator } from "./Logic/Mediator/AnnouncementMediator/AnnouncementMediator";
 import { BannerAdvertisingMediator } from "./Logic/Mediator/BannerAdvertisingMediator/BannerAdvertisingMediator";
-import { CheckFishPetLayerMediator } from "./Logic/Mediator/CheckFishPetLayerMediator/CheckFishPetLayerMediator";
-import { FightMediator } from "./Logic/Mediator/FightMediator/FightMediator";
+import { CheckFishPetLayerMediator } from "./Logic/Mediator/CheckFishPetLayerMediator/CheckFishPetLayerMediator"; 
 import { FishCommonPopWindowMediator } from "./Logic/Mediator/FishCommonPopWindowMediator/FishCommonPopWindowMediator";
 import { FishLoadingMediator } from "./Logic/Mediator/FishLoadingMediator/FishLoadingMediator";
 import { FishMainGameMediator } from "./Logic/Mediator/FishMainGameMediator/FishMainGameMediator";
 import { FishMenuMediator } from "./Logic/Mediator/FishMenuMediator/FishMenuMediator";
 import { FishSettingMediator } from "./Logic/Mediator/FishSettingMediator/FishSettingMediator";
 import { HelpWindowMediator } from "./Logic/Mediator/HelpWindowMediator/HelpWindowMediator";
+import { HotUpdateMediator } from "./Logic/Mediator/HotUpdateMediator/HotUpdateMediator";
 import { InterstitialAdvertisingMediator } from "./Logic/Mediator/InterstitialAdvertisingMediator/InterstitialAdvertisingMediator";
+import { LoginMediator } from "./Logic/Mediator/LoginMediator/LoginMediator";
 import { MusicControlMediator } from "./Logic/Mediator/MusicControlMediator/MusicControlMediator";
 import { RewardedVideoAdvertisingMediator } from "./Logic/Mediator/RewardedVideoAdvertisingMediator/RewardedVideoAdvertisingMediator";
 import { TipsMediator } from "./Logic/Mediator/TipsMediator/TipsMediator";
@@ -23,22 +25,25 @@ import { BiologyAttrProxy } from "./Logic/Proxy/BiologyAttrProxy/BiologyAttrProx
 import { BiologySatietyProxy } from "./Logic/Proxy/BiologySatietyProxy/BiologySatietyProxy";
 import { BuffProxy } from "./Logic/Proxy/BuffProxy/BuffProxy";
 import { BundleProxy } from "./Logic/Proxy/BundleProxy/BundleProxy";
-import { FishMainProxy } from "./Logic/Proxy/FishMainProxy/FishMainProxy";
+import { FishMainProxy } from "./Logic/Proxy/FishMainProxy/FishMainProxy"; 
 import { InterstitialAdvertisingProxy } from "./Logic/Proxy/InterstitialAdvertisingProxy/InterstitialAdvertisingProxy";
+import { LoginProxy } from "./Logic/Proxy/NetProxy/NetObj/LoginProxy";
 import { MusicProxy } from "./Logic/Proxy/MusicProxy/MusicProxy";
-import { NetDispatchProxy } from "./Logic/Proxy/NetDispatchProxy/NetDispatchProxy";
-import { NetProxy } from "./Logic/Proxy/NetProxy/NetProxy"; 
+import { NetDispatchProxy } from "./Logic/Proxy/NetDispatchProxy/NetDispatchProxy"; 
+import { NetProxy } from "./Logic/Proxy/NetProxy/NetProxy";
 import { NetWorkProxy } from "./Logic/Proxy/NetWorkProxy/NetWorkProxy";
+import { PoolProxy } from "./Logic/Proxy/PoolProxy/PoolProxy";
 import { RewardedVideoAdvertisingProxy } from "./Logic/Proxy/RewardedVideoAdvertisingProxy/RewardedVideoAdvertisingProxy";
 import { WindowProxy } from "./Logic/Proxy/WindowProxy/WindowProxy";
-import { eNotificationEnum } from "./NotificationTable";
+import { eNotice } from "./NotificationTable";
+import { MainMediator } from "./Logic/Mediator/MainMediator/MainMediator";
 
 export class GameMVCRegister extends BaseMVCRegister {
-    protected AllocCommand(commandMap: Map<eNotificationEnum, CommandConstructor>): void {
+    protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
         commandMap
-        .set(eNotificationEnum.NetAuthSuccess, AuthSuccessCommand)
-        .set(eNotificationEnum.InitGameData, InitGameDataCommand)
-        .set(eNotificationEnum.EnterGame, EnterGameCommand);
+        .set(eNotice.NetAuthSuccess, AuthSuccessCommand)
+        .set(eNotice.InitGameData, InitGameDataCommand)
+        .set(eNotice.EnterGame, EnterGameCommand);
     }  
     protected AllocMediator(mediatorMap: Map<MediatorConstructor, string>): void {
         mediatorMap
@@ -56,26 +61,30 @@ export class GameMVCRegister extends BaseMVCRegister {
             .set(FishCommonPopWindowMediator,"FishCommonPopWindowMediator")
             .set(FishMainGameMediator,"FishMainGameMediator")    
             .set(CheckFishPetLayerMediator,"CheckFishPetLayerMediator")   
-            .set(MusicControlMediator,"MusicControlMediator")   
-            .set(FightMediator,"FightMediator")  //战斗用Mediator 
-    } 
-    protected AllocProxy(proxyMap: Set<ProxyConstructor>): void {
+            .set(MusicControlMediator,"MusicControlMediator")    
+            .set(LoginMediator,"LoginMediator")  //战斗用Mediator 
+            .set(HotUpdateMediator,"HotUpdateMediator")  //战斗用Mediator 
+            .set(MainMediator,"MainMediator")  //主界面Mediator 
+    }  
+    
+    protected AllocProxy(proxyMap: Set<ProxyConstructor>): void { 
         proxyMap
-            .add(NetProxy)
-            .add(NetDispatchProxy)
-            .add(WindowProxy)
+            .add(NetProxy) 
+            .add(NetDispatchProxy) 
+            .add(PoolProxy) 
+            .add(WindowProxy) 
             //ResouceProxy.add(ResouceProxy)
-            .add(BundleProxy)
+            .add(BundleProxy) 
             .add(BannerAdvertisingProxy)
             .add(RewardedVideoAdvertisingProxy)  
             .add(InterstitialAdvertisingProxy)
             .add(FishMainProxy) 
             .add(MusicProxy) 
             .add(BuffProxy) 
-            .add(BiologyAttrProxy) 
+            .add(BiologyAttrProxy)  
             .add(BiologySatietyProxy) 
-            .add(NetWorkProxy) 
-            
+            .add(NetWorkProxy)  
+            .add(LoginProxy)//登录代理 
     }
 }  
  

@@ -1,0 +1,34 @@
+
+uief_gnkq_1.png
+size: 213,213
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow02_1
+  rotate: false
+  xy: 1, 1
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+sm1
+  rotate: true
+  xy: 114, 141
+  size: 71, 60
+  orig: 71, 60
+  offset: 0, 0
+  index: -1
+sm2
+  rotate: true
+  xy: 96, 13
+  size: 82, 66
+  orig: 82, 66
+  offset: 0, 0
+  index: -1
+sp04
+  rotate: false
+  xy: 1, 96
+  size: 112, 116
+  orig: 112, 116
+  offset: 0, 0
+  index: -1

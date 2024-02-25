@@ -1,0 +1,111 @@
+
+lingdang.png
+size: 169,847
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bizhe
+  rotate: true
+  xy: 133, 662
+  size: 36, 11
+  orig: 39, 14
+  offset: 1, 1
+  index: -1
+guang
+  rotate: false
+  xy: 2, 317
+  size: 148, 145
+  orig: 153, 149
+  offset: 3, 2
+  index: -1
+guang2
+  rotate: true
+  xy: 2, 464
+  size: 156, 157
+  orig: 159, 159
+  offset: 2, 1
+  index: -1
+guang3
+  rotate: false
+  xy: 2, 175
+  size: 152, 140
+  orig: 155, 142
+  offset: 1, 1
+  index: -1
+guang4
+  rotate: false
+  xy: 2, 73
+  size: 118, 100
+  orig: 122, 105
+  offset: 2, 3
+  index: -1
+lingdang
+  rotate: false
+  xy: 2, 622
+  size: 129, 223
+  orig: 129, 229
+  offset: 0, 6
+  index: -1
+sile
+  rotate: false
+  xy: 133, 700
+  size: 33, 23
+  orig: 35, 27
+  offset: 1, 2
+  index: -1
+tongbi
+  rotate: true
+  xy: 133, 725
+  size: 39, 27
+  orig: 39, 27
+  offset: 0, 0
+  index: -1
+tongbi2
+  rotate: false
+  xy: 133, 806
+  size: 33, 39
+  orig: 38, 43
+  offset: 5, 3
+  index: -1
+tongbi3
+  rotate: false
+  xy: 133, 766
+  size: 29, 38
+  orig: 29, 38
+  offset: 0, 0
+  index: -1
+waiguang
+  rotate: false
+  xy: 122, 57
+  size: 38, 116
+  orig: 59, 116
+  offset: 0, 0
+  index: -1
+yanjing
+  rotate: false
+  xy: 114, 2
+  size: 53, 53
+  orig: 53, 53
+  offset: 0, 0
+  index: -1
+yanjing2
+  rotate: true
+  xy: 69, 18
+  size: 53, 43
+  orig: 53, 44
+  offset: 0, 1
+  index: -1
+yanjing3
+  rotate: true
+  xy: 146, 646
+  size: 52, 7
+  orig: 53, 7
+  offset: 0, 0
+  index: -1
+z
+  rotate: true
+  xy: 2, 14
+  size: 57, 65
+  orig: 59, 67
+  offset: 1, 1
+  index: -1

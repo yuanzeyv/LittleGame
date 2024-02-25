@@ -1,0 +1,139 @@
+
+lingshou015.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shadow
+  rotate: false
+  xy: 348, 62
+  size: 235, 64
+  orig: 239, 68
+  offset: 2, 2
+  index: -1
+shen
+  rotate: true
+  xy: 370, 8
+  size: 52, 63
+  orig: 52, 63
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 269, 41
+  size: 85, 77
+  orig: 85, 77
+  offset: 0, 0
+  index: -1
+wei
+  rotate: true
+  xy: 145, 33
+  size: 93, 44
+  orig: 93, 44
+  offset: 0, 0
+  index: -1
+wei1
+  rotate: false
+  xy: 91, 4
+  size: 56, 22
+  orig: 56, 22
+  offset: 0, 0
+  index: -1
+wei2
+  rotate: true
+  xy: 435, 9
+  size: 51, 22
+  orig: 51, 22
+  offset: 0, 0
+  index: -1
+wei3
+  rotate: true
+  xy: 2, 22
+  size: 104, 87
+  orig: 104, 87
+  offset: 0, 0
+  index: -1
+wei4
+  rotate: true
+  xy: 91, 28
+  size: 98, 52
+  orig: 98, 52
+  offset: 0, 0
+  index: -1
+wei5
+  rotate: false
+  xy: 191, 39
+  size: 76, 87
+  orig: 76, 87
+  offset: 0, 0
+  index: -1
+ybi
+  rotate: false
+  xy: 348, 41
+  size: 20, 19
+  orig: 20, 19
+  offset: 0, 0
+  index: -1
+ydtui
+  rotate: true
+  xy: 238, 2
+  size: 35, 38
+  orig: 35, 38
+  offset: 0, 0
+  index: -1
+yshou
+  rotate: false
+  xy: 26, 4
+  size: 19, 16
+  orig: 19, 16
+  offset: 0, 0
+  index: -1
+yxiu
+  rotate: true
+  xy: 47, 5
+  size: 15, 25
+  orig: 15, 25
+  offset: 0, 0
+  index: -1
+yxtui
+  rotate: true
+  xy: 149, 3
+  size: 28, 41
+  orig: 28, 41
+  offset: 0, 0
+  index: -1
+zbi
+  rotate: false
+  xy: 459, 33
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+zdtui
+  rotate: false
+  xy: 278, 2
+  size: 42, 37
+  orig: 42, 37
+  offset: 0, 0
+  index: -1
+zshou
+  rotate: false
+  xy: 2, 2
+  size: 22, 18
+  orig: 22, 18
+  offset: 0, 0
+  index: -1
+zxiu
+  rotate: true
+  xy: 322, 12
+  size: 27, 25
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+zxtui
+  rotate: true
+  xy: 192, 2
+  size: 35, 44
+  orig: 35, 44
+  offset: 0, 0
+  index: -1

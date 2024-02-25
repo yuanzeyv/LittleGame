@@ -1,0 +1,41 @@
+
+uief_yunshi_1.png
+size: 285,285
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+01
+  rotate: false
+  xy: 1, 140
+  size: 148, 144
+  orig: 148, 144
+  offset: 0, 0
+  index: -1
+02
+  rotate: true
+  xy: 1, 1
+  size: 56, 149
+  orig: 56, 149
+  offset: 0, 0
+  index: -1
+03
+  rotate: true
+  xy: 1, 58
+  size: 81, 174
+  orig: 81, 174
+  offset: 0, 0
+  index: -1
+glow01
+  rotate: false
+  xy: 150, 220
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+line2
+  rotate: false
+  xy: 150, 155
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,55 @@
+
+fz06x.png
+size: 296,296
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 1, 101
+  size: 204, 194
+  orig: 204, 194
+  offset: 0, 0
+  index: -1
+2
+  rotate: true
+  xy: 1, 4
+  size: 96, 106
+  orig: 96, 106
+  offset: 0, 0
+  index: -1
+2_glow
+  rotate: false
+  xy: 108, 38
+  size: 58, 62
+  orig: 58, 62
+  offset: 0, 0
+  index: -1
+r1
+  rotate: true
+  xy: 108, 1
+  size: 36, 35
+  orig: 36, 35
+  offset: 0, 0
+  index: -1
+r2
+  rotate: true
+  xy: 144, 1
+  size: 36, 35
+  orig: 36, 35
+  offset: 0, 0
+  index: -1
+r3
+  rotate: true
+  xy: 180, 17
+  size: 36, 35
+  orig: 36, 35
+  offset: 0, 0
+  index: -1
+ring1
+  rotate: false
+  xy: 167, 54
+  size: 45, 46
+  orig: 45, 46
+  offset: 0, 0
+  index: -1

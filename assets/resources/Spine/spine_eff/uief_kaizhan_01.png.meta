@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "8548f8ec-78f1-4152-ab07-38f378924d07",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_kaizhan_01": {
+      "ver": "1.0.6",
+      "uuid": "5045b21c-9dd8-495b-ac78-c5cab87d909d",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "8548f8ec-78f1-4152-ab07-38f378924d07",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 288,
+      "height": 521,
+      "rawWidth": 292,
+      "rawHeight": 525,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "8548f8ec-78f1-4152-ab07-38f378924d07@6c48a",
+      "displayName": "uief_kaizhan_01",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8548f8ec-78f1-4152-ab07-38f378924d07",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "8548f8ec-78f1-4152-ab07-38f378924d07@6c48a"
+  }
+}

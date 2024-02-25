@@ -3,7 +3,7 @@
 import { sys } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
+import { eNotice } from "../../../NotificationTable";
 export class RewardedVideoAdvertisingProxy extends BaseProxy{
     static get ProxyName():string { return "RewardedVideoAdvertisingProxy" };
     private mVideoAd?:any;//Banner广告对象
@@ -27,30 +27,30 @@ export class RewardedVideoAdvertisingProxy extends BaseProxy{
     }
 
     private VideoADErrorHandle(error:string){//错误回调
-        _Facade.Send(eNotificationEnum.TipsShow,error);//在弹出面板弹出广告加载失败的通知
+        _Facade.Send(eNotice.TipsShow,error);//在弹出面板弹出广告加载失败的通知
     }
 
     private VideoADUserCloseHandle(data:any){//用户手动关闭回调
         //不清楚为什么要调用这一句
         //videoAdv.offClose();//需要清除回调，否则第N次广告会一次性给N个奖励
         if(data == undefined || data.isEnded == false){
-            _Facade.Send(eNotificationEnum.TipsShow,"广告未播放完成，无法获得奖励");//在弹出面板弹出广告加载失败的通知
+            _Facade.Send(eNotice.TipsShow,"广告未播放完成，无法获得奖励");//在弹出面板弹出广告加载失败的通知
             return;
         }
         //成功的情况下
-        _Facade.Send(eNotificationEnum.TipsShow,"恭喜您获得奖励");//在弹出面板弹出广告加载失败的通知
+        _Facade.Send(eNotice.TipsShow,"恭喜您获得奖励");//在弹出面板弹出广告加载失败的通知
     }
 
     public ShowVideoAD(){//显示Banner广告
         if(this.mVideoAd == undefined){
-            _Facade.Send(eNotificationEnum.TipsShow,"激励视频没有被正确初始化");//在弹出面板弹出广告加载失败的通知
+            _Facade.Send(eNotice.TipsShow,"激励视频没有被正确初始化");//在弹出面板弹出广告加载失败的通知
             return;
         }
         this.mVideoAd.show().catch(() => { 
             this.mVideoAd.load()
                 .then(() => this.mVideoAd.show())
                 .catch(err => { 
-                    _Facade.Send(eNotificationEnum.TipsShow,"激励广告播放失败");//在弹出面板弹出广告加载失败的通知
+                    _Facade.Send(eNotice.TipsShow,"激励广告播放失败");//在弹出面板弹出广告加载失败的通知
                 })
         }) 
     }

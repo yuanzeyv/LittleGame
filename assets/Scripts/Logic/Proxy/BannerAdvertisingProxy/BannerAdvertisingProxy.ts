@@ -3,7 +3,7 @@
 import { sys } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global";
-import { eNotificationEnum } from "../../../NotificationTable";
+import { eNotice } from "../../../NotificationTable";
 export class BannerAdvertisingProxy extends BaseProxy{
     static get ProxyName():string { return "BannerAdvertisingProxy" };
     private mBannerWidth:number = 300;//bannerWidth广告的宽度
@@ -38,7 +38,7 @@ export class BannerAdvertisingProxy extends BaseProxy{
     }
 
     private BannerADErrorHandle(error:string){
-        _Facade.Send(eNotificationEnum.TipsShow,error);//在弹出面板弹出广告加载失败的通知
+        _Facade.Send(eNotice.TipsShow,error);//在弹出面板弹出广告加载失败的通知
     }
 
     public ShowBanner(){//显示Banner广告

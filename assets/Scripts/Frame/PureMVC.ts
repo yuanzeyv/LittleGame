@@ -22,7 +22,7 @@
  * <code>initializeController</code> method to add your registrations.
  */
 
-import { eNotificationEnum } from "../NotificationTable";
+import { eNotice } from "../NotificationTable";
 
 type ProxyConstructor<T extends Proxy>= new (proxyName:string)=> T;
 export class Controller implements IController {
@@ -1793,7 +1793,7 @@ export class Facade implements IFacade {
      * @param type
      *        The type of the notification to send.
      */
-    Send(name: eNotificationEnum, body: any = null): void {
+    Send(name: eNotice, body: any = null): void {
         this.notifyObservers(new Notification(name, body));
     }
 

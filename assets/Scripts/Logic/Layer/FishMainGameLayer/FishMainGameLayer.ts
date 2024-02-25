@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, instantiate, RichText, Vec3, tween, UIOpacity, UITransform, director, Director, Tween, find, EventTouch, Input, math, ProgressBar, Label, Collider2D, Contact2DType, BoxCollider2D, IPhysics2DContact } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
-import { eNotificationEnum } from '../../../NotificationTable';
+import { eNotice } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
 import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { FishLoadingMediator } from '../../Mediator/FishLoadingMediator/FishLoadingMediator';

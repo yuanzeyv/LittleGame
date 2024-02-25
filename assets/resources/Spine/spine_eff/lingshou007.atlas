@@ -1,0 +1,146 @@
+
+lingshou007.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+biyan
+  rotate: false
+  xy: 17, 20
+  size: 89, 15
+  orig: 89, 15
+  offset: 0, 0
+  index: -1
+fashi
+  rotate: false
+  xy: 549, 372
+  size: 41, 49
+  orig: 41, 49
+  offset: 0, 0
+  index: -1
+hfa
+  rotate: false
+  xy: 292, 224
+  size: 255, 286
+  orig: 302, 286
+  offset: 47, 0
+  index: -1
+hfa1
+  rotate: false
+  xy: 2, 37
+  size: 145, 182
+  orig: 145, 182
+  offset: 0, 0
+  index: -1
+qfa
+  rotate: true
+  xy: 2, 221
+  size: 289, 288
+  orig: 289, 288
+  offset: 0, 0
+  index: -1
+qun
+  rotate: true
+  xy: 427, 113
+  size: 109, 91
+  orig: 109, 91
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 275, 21
+  size: 235, 64
+  orig: 239, 68
+  offset: 2, 2
+  index: -1
+shen
+  rotate: false
+  xy: 218, 9
+  size: 55, 66
+  orig: 55, 66
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 242, 87
+  size: 132, 123
+  orig: 132, 123
+  offset: 0, 0
+  index: -1
+yan
+  rotate: true
+  xy: 520, 127
+  size: 95, 41
+  orig: 95, 42
+  offset: 0, 1
+  index: -1
+ybi
+  rotate: false
+  xy: 549, 423
+  size: 45, 87
+  orig: 45, 87
+  offset: 0, 0
+  index: -1
+yjiao
+  rotate: true
+  xy: 549, 325
+  size: 45, 43
+  orig: 45, 45
+  offset: 0, 0
+  index: -1
+yshou
+  rotate: true
+  xy: 2, 11
+  size: 24, 13
+  orig: 24, 13
+  offset: 0, 0
+  index: -1
+yyi
+  rotate: false
+  xy: 367, 107
+  size: 58, 115
+  orig: 58, 115
+  offset: 0, 0
+  index: -1
+yyih
+  rotate: true
+  xy: 149, 2
+  size: 73, 67
+  orig: 73, 67
+  offset: 0, 0
+  index: -1
+zbi
+  rotate: false
+  xy: 548, 36
+  size: 64, 89
+  orig: 65, 89
+  offset: 0, 0
+  index: -1
+zjiao
+  rotate: false
+  xy: 592, 382
+  size: 34, 39
+  orig: 34, 39
+  offset: 0, 0
+  index: -1
+zshou
+  rotate: false
+  xy: 17, 3
+  size: 34, 15
+  orig: 34, 15
+  offset: 0, 0
+  index: -1
+zui
+  rotate: true
+  xy: 512, 9
+  size: 102, 34
+  orig: 102, 34
+  offset: 0, 0
+  index: -1
+zyi
+  rotate: false
+  xy: 149, 77
+  size: 91, 142
+  orig: 91, 142
+  offset: 0, 0
+  index: -1

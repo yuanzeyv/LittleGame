@@ -1,0 +1,13 @@
+
+songshu_fx.png
+size: 409,409
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fx2
+  rotate: false
+  xy: 1, 1
+  size: 99, 407
+  orig: 99, 407
+  offset: 0, 0
+  index: -1

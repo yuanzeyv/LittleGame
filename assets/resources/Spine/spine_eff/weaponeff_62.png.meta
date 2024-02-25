@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "89c59fb4-c33f-4064-af6f-defae3686205",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "weaponeff_62": {
+      "ver": "1.0.6",
+      "uuid": "4d5ee583-806c-4bb3-a734-f88ba897dd1d",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "89c59fb4-c33f-4064-af6f-defae3686205",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -32.5,
+      "offsetY": -0.5,
+      "trimX": 1,
+      "trimY": 2,
+      "width": 266,
+      "height": 330,
+      "rawWidth": 333,
+      "rawHeight": 333,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "89c59fb4-c33f-4064-af6f-defae3686205@6c48a",
+      "displayName": "weaponeff_62",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "89c59fb4-c33f-4064-af6f-defae3686205",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "89c59fb4-c33f-4064-af6f-defae3686205@6c48a"
+  }
+}

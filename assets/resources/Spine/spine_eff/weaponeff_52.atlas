@@ -1,0 +1,125 @@
+
+weaponeff_52.png
+size: 250,250
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+52/dian1_000
+  rotate: true
+  xy: 201, 24
+  size: 36, 48
+  orig: 36, 48
+  offset: 0, 0
+  index: -1
+52/dian1_001
+  rotate: false
+  xy: 1, 7
+  size: 31, 38
+  orig: 31, 38
+  offset: 0, 0
+  index: -1
+52/dian1_002
+  rotate: true
+  xy: 201, 130
+  size: 27, 31
+  orig: 27, 31
+  offset: 0, 0
+  index: -1
+52/dian1_003
+  rotate: false
+  xy: 161, 61
+  size: 58, 65
+  orig: 58, 65
+  offset: 0, 0
+  index: -1
+52/dian1_004
+  rotate: false
+  xy: 34, 12
+  size: 60, 62
+  orig: 60, 62
+  offset: 0, 0
+  index: -1
+52/dian1_005
+  rotate: true
+  xy: 205, 158
+  size: 56, 43
+  orig: 56, 43
+  offset: 0, 0
+  index: -1
+52/dian1_006
+  rotate: false
+  xy: 209, 215
+  size: 38, 34
+  orig: 38, 34
+  offset: 0, 0
+  index: -1
+52/fb1
+  rotate: false
+  xy: 34, 75
+  size: 57, 75
+  orig: 57, 75
+  offset: 0, 0
+  index: -1
+52/fb2
+  rotate: false
+  xy: 95, 13
+  size: 50, 62
+  orig: 50, 62
+  offset: 0, 0
+  index: -1
+52/fb3
+  rotate: true
+  xy: 146, 11
+  size: 49, 54
+  orig: 49, 54
+  offset: 0, 0
+  index: -1
+52/lightn1
+  rotate: true
+  xy: 101, 221
+  size: 28, 107
+  orig: 28, 107
+  offset: 0, 0
+  index: -1
+52/lightn2
+  rotate: true
+  xy: 101, 127
+  size: 31, 99
+  orig: 31, 99
+  offset: 0, 0
+  index: -1
+52/lightn3
+  rotate: true
+  xy: 101, 159
+  size: 31, 100
+  orig: 31, 100
+  offset: 0, 0
+  index: -1
+52/lightn4
+  rotate: false
+  xy: 1, 46
+  size: 32, 104
+  orig: 32, 104
+  offset: 0, 0
+  index: -1
+52/lightn5
+  rotate: true
+  xy: 101, 191
+  size: 29, 103
+  orig: 29, 103
+  offset: 0, 0
+  index: -1
+52/shieldy_1
+  rotate: true
+  xy: 92, 76
+  size: 50, 68
+  orig: 50, 68
+  offset: 0, 0
+  index: -1
+52/zaobo
+  rotate: false
+  xy: 1, 151
+  size: 99, 98
+  orig: 99, 98
+  offset: 0, 0
+  index: -1

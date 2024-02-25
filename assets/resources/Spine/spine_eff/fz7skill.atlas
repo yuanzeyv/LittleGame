@@ -1,0 +1,76 @@
+
+fz7skill.png
+size: 660,660
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+07/1
+  rotate: false
+  xy: 1, 314
+  size: 194, 194
+  orig: 194, 194
+  offset: 0, 0
+  index: -1
+07/2
+  rotate: false
+  xy: 352, 393
+  size: 266, 266
+  orig: 266, 266
+  offset: 0, 0
+  index: -1
+07/baodian_031
+  rotate: false
+  xy: 1, 509
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+07/baodian_033
+  rotate: true
+  xy: 196, 158
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+07/baodian_035
+  rotate: true
+  xy: 347, 42
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+07/baodian_037
+  rotate: true
+  xy: 498, 42
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
+07/bl1
+  rotate: false
+  xy: 1, 102
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+07/ring1
+  rotate: false
+  xy: 1, 183
+  size: 128, 130
+  orig: 128, 130
+  offset: 0, 0
+  index: -1
+07/tex_trail_007
+  rotate: false
+  xy: 619, 424
+  size: 29, 92
+  orig: 29, 92
+  offset: 0, 0
+  index: -1
+07/wq1
+  rotate: false
+  xy: 619, 517
+  size: 40, 142
+  orig: 40, 142
+  offset: 0, 0
+  index: -1

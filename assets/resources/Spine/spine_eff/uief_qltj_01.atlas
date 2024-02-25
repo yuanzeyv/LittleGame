@@ -1,0 +1,20 @@
+
+uief_qltj_01.png
+size: 167,167
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+EF_fade05_13
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+ll_little
+  rotate: false
+  xy: 1, 66
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1

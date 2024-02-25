@@ -1,0 +1,153 @@
+
+xianshu_9.png
+size: 643,643
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+atk2-baofa10001
+  rotate: true
+  xy: 178, 299
+  size: 180, 150
+  orig: 180, 150
+  offset: 0, 0
+  index: -1
+b1
+  rotate: false
+  xy: 1, 480
+  size: 176, 162
+  orig: 176, 162
+  offset: 0, 0
+  index: -1
+b2
+  rotate: false
+  xy: 1, 317
+  size: 176, 162
+  orig: 176, 162
+  offset: 0, 0
+  index: -1
+b3
+  rotate: false
+  xy: 178, 480
+  size: 176, 162
+  orig: 176, 162
+  offset: 0, 0
+  index: -1
+b4
+  rotate: false
+  xy: 1, 154
+  size: 176, 162
+  orig: 176, 162
+  offset: 0, 0
+  index: -1
+baozhaguang2
+  rotate: false
+  xy: 329, 282
+  size: 161, 84
+  orig: 161, 84
+  offset: 0, 0
+  index: -1
+ff1
+  rotate: false
+  xy: 297, 23
+  size: 142, 69
+  orig: 142, 69
+  offset: 0, 0
+  index: -1
+ff2
+  rotate: true
+  xy: 565, 500
+  size: 142, 76
+  orig: 142, 76
+  offset: 0, 0
+  index: -1
+ff3
+  rotate: false
+  xy: 491, 262
+  size: 142, 74
+  orig: 142, 74
+  offset: 0, 0
+  index: -1
+ff4
+  rotate: false
+  xy: 297, 93
+  size: 142, 78
+  orig: 142, 78
+  offset: 0, 0
+  index: -1
+guangci0003
+  rotate: true
+  xy: 202, 60
+  size: 123, 94
+  orig: 123, 94
+  offset: 0, 0
+  index: -1
+guangci0005
+  rotate: false
+  xy: 519, 337
+  size: 123, 105
+  orig: 123, 105
+  offset: 0, 0
+  index: -1
+guangci0007
+  rotate: false
+  xy: 313, 172
+  size: 132, 109
+  orig: 132, 109
+  offset: 0, 0
+  index: -1
+guangci0009
+  rotate: false
+  xy: 178, 184
+  size: 134, 114
+  orig: 134, 114
+  offset: 0, 0
+  index: -1
+guangyun
+  rotate: false
+  xy: 446, 156
+  size: 105, 105
+  orig: 105, 105
+  offset: 0, 0
+  index: -1
+radial05
+  rotate: false
+  xy: 440, 51
+  size: 98, 104
+  orig: 98, 104
+  offset: 0, 0
+  index: -1
+ring1
+  rotate: false
+  xy: 539, 54
+  size: 100, 101
+  orig: 100, 101
+  offset: 0, 0
+  index: -1
+skill2_3_1
+  rotate: false
+  xy: 355, 542
+  size: 209, 100
+  orig: 209, 100
+  offset: 0, 0
+  index: -1
+wqg1
+  rotate: true
+  xy: 1, 55
+  size: 98, 200
+  orig: 98, 200
+  offset: 0, 0
+  index: -1
+wqglow1
+  rotate: true
+  xy: 329, 367
+  size: 75, 189
+  orig: 75, 189
+  offset: 0, 0
+  index: -1
+wuqi01
+  rotate: true
+  xy: 355, 443
+  size: 98, 200
+  orig: 98, 200
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,70 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "c8584c3c-5062-4e99-8f72-ed994f620dbb",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "uief_dinglu_01": {
+      "ver": "1.0.6",
+      "uuid": "dab1794d-baa4-4671-9c94-8b5fae1e0fdd",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "c8584c3c-5062-4e99-8f72-ed994f620dbb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -59.5,
+      "offsetY": -0.5,
+      "trimX": 1,
+      "trimY": 2,
+      "width": 750,
+      "height": 868,
+      "rawWidth": 871,
+      "rawHeight": 871,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {},
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "c8584c3c-5062-4e99-8f72-ed994f620dbb@6c48a",
+      "displayName": "uief_dinglu_01",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c8584c3c-5062-4e99-8f72-ed994f620dbb",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "c8584c3c-5062-4e99-8f72-ed994f620dbb@6c48a"
+  }
+}

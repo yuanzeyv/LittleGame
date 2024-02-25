@@ -1,0 +1,62 @@
+
+fz01.png
+size: 1314,807
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+huo
+  rotate: false
+  xy: 783, 143
+  size: 139, 139
+  orig: 139, 139
+  offset: 0, 0
+  index: -1
+jin
+  rotate: false
+  xy: 783, 2
+  size: 139, 139
+  orig: 139, 139
+  offset: 0, 0
+  index: -1
+mu
+  rotate: false
+  xy: 924, 143
+  size: 139, 139
+  orig: 139, 139
+  offset: 0, 0
+  index: -1
+shui
+  rotate: false
+  xy: 924, 2
+  size: 139, 139
+  orig: 139, 139
+  offset: 0, 0
+  index: -1
+tu
+  rotate: false
+  xy: 1065, 143
+  size: 139, 139
+  orig: 139, 139
+  offset: 0, 0
+  index: -1
+wf
+  rotate: true
+  xy: 2, 21
+  size: 784, 779
+  orig: 800, 800
+  offset: 16, 4
+  index: -1
+xing
+  rotate: true
+  xy: 1065, 10
+  size: 131, 127
+  orig: 521, 529
+  offset: 195, 203
+  index: -1
+yuan
+  rotate: true
+  xy: 783, 284
+  size: 521, 529
+  orig: 586, 599
+  offset: 31, 70
+  index: -1

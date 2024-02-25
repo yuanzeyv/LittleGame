@@ -1,0 +1,181 @@
+
+uief_upgrade_01.png
+size: 1543,1543
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gl3
+  rotate: true
+  xy: 1, 1518
+  size: 24, 121
+  orig: 24, 121
+  offset: 0, 0
+  index: -1
+glowline1
+  rotate: true
+  xy: 123, 1501
+  size: 41, 120
+  orig: 41, 120
+  offset: 0, 0
+  index: -1
+shengji_00000
+  rotate: false
+  xy: 244, 1286
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00001
+  rotate: false
+  xy: 501, 1286
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00002
+  rotate: false
+  xy: 758, 1286
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00005
+  rotate: false
+  xy: 1015, 1286
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00006
+  rotate: false
+  xy: 1272, 1286
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00007
+  rotate: false
+  xy: 1, 1029
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00009
+  rotate: false
+  xy: 258, 1029
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00010
+  rotate: false
+  xy: 515, 1029
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00012
+  rotate: false
+  xy: 772, 1029
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengji_00014
+  rotate: false
+  xy: 1029, 1029
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00001
+  rotate: false
+  xy: 1286, 1029
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00003
+  rotate: false
+  xy: 1, 772
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00005
+  rotate: false
+  xy: 258, 772
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00007
+  rotate: false
+  xy: 515, 772
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00009
+  rotate: false
+  xy: 772, 772
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00010
+  rotate: false
+  xy: 1029, 772
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00012
+  rotate: false
+  xy: 1286, 772
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00014
+  rotate: false
+  xy: 1, 515
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00016
+  rotate: false
+  xy: 258, 515
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00018
+  rotate: false
+  xy: 515, 515
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00020
+  rotate: false
+  xy: 772, 515
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00022
+  rotate: false
+  xy: 1029, 515
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+shengxing_00028
+  rotate: false
+  xy: 1286, 515
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
