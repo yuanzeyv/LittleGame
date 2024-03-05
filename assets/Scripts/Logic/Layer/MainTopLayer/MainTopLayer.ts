@@ -1,12 +1,8 @@
-import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantiate,RichText,Vec3,tween,UIOpacity, find, ProgressBar, Label, native, Asset, Skeleton, sp} from 'cc';
+import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantiate,RichText,Vec3,tween,UIOpacity, find, ProgressBar, Label, native, Asset, Skeleton, sp, EventTouch} from 'cc';
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade, _G} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
-import { Facade } from '../../../Frame/PureMVC';
-import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
-import { ResouceProxy } from '../../Proxy/ResourceProxy/ResouceProxy';
 import { PlayerHead } from '../../../Compoment/PlayerHeadComp';
-import { ListenClick } from '../../../Util/Util';
 const {ccclass, property, type} = _decorator;
 
 export class MainTopLayer extends BaseLayer {   
@@ -19,11 +15,12 @@ export class MainTopLayer extends BaseLayer {
     
     InitData() {    
         this.mPlayerHead.SetHeadID(5);
-        ListenClick(find("PlayerHead",this.node),this,()=>{
-            _Facade.Send(eNotice.TipsShow,"HAHAHHAHAHAHAHHAA");
-        })
+        this.RegisterButtonEvent(find("PlayerHead",this.node),this.ButtonClickHandle,this);
     }  
  
     InitLayer() {  
     }   
+
+    private PlayerHeadClickHandle(eventTouch:EventTouch){
+    }
 }   

@@ -2,7 +2,6 @@ import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantia
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
-import { ListenClick } from '../../../Util/Util'; 
 import { NetProxy } from '../../Proxy/NetProxy/NetProxy';
 import { HotUpdateStateMachine } from './HotUpdateStateMachine/HotUpdateStateMachine';
 import { eHotUpdateStatus } from './HotUpdateStatus';
@@ -55,9 +54,9 @@ export class HotUpdateLayer extends BaseLayer {
     }
     
     InitData() {  
-        ListenClick(this.mLoginButton,this,this.LoginHandle);
-        ListenClick(this.mHotButton,this,this.HotHandle); 
-        ListenClick(this.mTestbutton,this,this.TestHandle);   
+        this.RegisterButtonEvent(this.mLoginButton,this.LoginHandle,this);
+        this.RegisterButtonEvent(this.mHotButton,this.HotHandle,this); 
+        this.RegisterButtonEvent(this.mTestbutton,this.TestHandle,this);   
         this.InitHotUpdateMachine();//初始化热更状态机
     } 
 

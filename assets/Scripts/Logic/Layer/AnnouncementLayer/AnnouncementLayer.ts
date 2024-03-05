@@ -1,6 +1,7 @@
 import { _decorator, Vec3, UITransform, Tween, tween,Node } from "cc"; 
 import { BaseLayer, LayerExecute } from "../../../Frame/BaseLayer/BaseLayer";
 import { eNotice } from "../../../NotificationTable";  
+import { TextMeshLabel } from "../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel";
 
 const { ccclass, property,type} = _decorator;
 export class AnnouncementLayer extends BaseLayer {

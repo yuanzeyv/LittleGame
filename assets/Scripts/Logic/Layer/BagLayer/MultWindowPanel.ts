@@ -1,11 +1,11 @@
-import { _decorator, Component, Node, Prefab, director, Label, find, Button, Vec3, math, UITransform, Widget, Size, view } from 'cc'; 
-import { ScrollAdapter, Holder, IElement, Layer ,View, AlwaysScroll} from '../../../adapter';
+import { _decorator, Component, Node, Prefab, director, Label, find, Button, Vec3, math, UITransform, Widget, Size } from 'cc'; 
 import { CancleClick, ListenClick } from '../../../Util/Util';
 import { IMultPanleStruct, MultPanleConfig } from '../../../Config/Cfg_MultPanle'; 
 import { _Facade, _G } from '../../../Global';
-import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
-import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
+import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
 import { MultWindowLayer } from '../MultWindowLayer/MultWindowLayer';
+import { ScrollAdapter, Holder, IElement, AlwaysScroll, View } from '../../../Util/adapter';
+import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
 const { ccclass, property } = _decorator;
 export interface IFixedModel {index:number; panelID:number,} 
 @ccclass('MultWindowPanel')
@@ -66,7 +66,7 @@ class MyHolder extends Holder<IFixedModel>{
         
         let size:Size = find("CellName",this.node).getComponent(UITransform).contentSize;
         this.node.getComponent(UITransform).setContentSize(new Size(size.x + 50,70)) ;
-        this.transform.setContentSize(new Size(size.x + 50,70)); 
+        this.transform.setContentSize(new Size(size.x + 50,70));  
     }    
     protected onDisable(): void { 
         CancleClick(this.node,this,this.ClickHandle);  

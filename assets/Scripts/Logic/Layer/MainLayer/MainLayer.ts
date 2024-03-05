@@ -5,8 +5,6 @@ import {eNotice} from '../../../NotificationTable';
 import { Facade } from '../../../Frame/PureMVC';
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
 import { ResouceProxy } from '../../Proxy/ResourceProxy/ResouceProxy';
-import { PlayerHead } from '../../../Compoment/PlayerHeadComp';
-import { ListenClick } from '../../../Util/Util';
 const {ccclass, property, type} = _decorator;
 
 export class MainLayer extends BaseLayer {  

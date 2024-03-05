@@ -2,7 +2,6 @@ import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantia
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
-import { ListenClick } from '../../../Util/Util';
 import { eNetProtocol } from '../../../NetNotification'; 
 import { NetProxy } from '../../Proxy/NetProxy/NetProxy'; 
 const {ccclass, property, type} = _decorator;
@@ -22,8 +21,8 @@ export class LoginLayer extends BaseLayer {
     } 
     
     InitData() {   
-        ListenClick(this.mLoginButton,this,this.LoginButtonHandle);  
-        ListenClick(this.mCheckVector,this,this.CheckServerListHandle);  
+        this.RegisterButtonEvent(this.mLoginButton,this.LoginButtonHandle,this);  
+        this.RegisterButtonEvent(this.mCheckVector,this.CheckServerListHandle,this);  
         this.RegisterButtonEvent(this.mAgeButton,this.AgeHandle,this,1,2,3,4,5);    
     } 
 
@@ -31,7 +30,7 @@ export class LoginLayer extends BaseLayer {
     InitLayer() {  
     } 
    
-    private CheckServerListHandle(){    
+    private CheckServerListHandle(eventTouch:EventTouch){    
         _Facade.FindProxy(NetProxy).Send(eNetProtocol.QuaryServerList,{}); 
         _Facade.Send(eNotice.TipsShow,"准备登入服务器");
     }    
@@ -40,7 +39,7 @@ export class LoginLayer extends BaseLayer {
         _Facade.Send(eNotice.MultPanleOpen,1);
     }    
     
-    private LoginButtonHandle(){   
+    private LoginButtonHandle(eventTouch:EventTouch){   
         _Facade.FindProxy(NetProxy).Connect();//准备连接 
         //_Facade.Send(eNotice.TipsShow,"准备登入服务器");
     }  

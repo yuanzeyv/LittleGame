@@ -2,7 +2,7 @@ import { _decorator, Component, Node, BlockInputEvents, Color,Animation, Sprite,
 import { BaseLayer } from '../Frame/BaseLayer/BaseLayer';
 import { INotification } from '../Frame/PureMVC';
 import { _Facade } from '../Global';
-import { CopyWidget, ListenClick, SetFullWidget } from '../Util/Util'; 
+import { CopyWidget, SetFullWidget } from '../Util/Util'; 
 import { LoadStruct } from '../Logic/Proxy/BundleProxy/BundleProxy'; 
 import { WindowParam } from '../Frame/BaseMediator/WindowBaseMediator';
 const { ccclass, property,type} = _decorator;
@@ -13,7 +13,7 @@ export class WindowInterface extends Component {
     private mWindowData:WindowParam;
 
     public InitLayer(){ 
-        ListenClick(this.Find("TouchMask"),this,this.OnCloseHandle);
+        this.Find("TouchMask").on("click",this.OnCloseHandle,this); 
     } 
 
     public Find(path:string):Node{ return find(path,this.node); }
@@ -54,6 +54,7 @@ export class WindowInterface extends Component {
     } 
 
     CloseLayer(){
+        this.Find("TouchMask").off("click",this.OnCloseHandle,this); 
         this.mLayerCompoment.CloseLayer();
         this.WindowNode.destroyAllChildren();//销毁 
         this.WindowNode.removeAllChildren();//删除 

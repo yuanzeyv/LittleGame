@@ -3,12 +3,10 @@ import {eNotice} from '../../../NotificationTable';
 import { ResouceProxy } from '../../Proxy/ResourceProxy/ResouceProxy'; 
 import { ePoolDefine } from '../../Proxy/PoolProxy/PoolDefine';
 import { PoolProxy } from '../../Proxy/PoolProxy/PoolProxy';
-import { _decorator, Vec3, find, Camera, UITransform ,Node, Sprite, SpriteFrame} from 'cc';
+import { _decorator, Vec3, find, Camera, UITransform ,Node, Sprite, SpriteFrame, EventTouch} from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
 import { BottomListConfig, IBottomListStruct } from '../../../Config/Cfg_BottomList';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
-import { ListenClick } from '../../../Util/Util';
-import { WindowProxy } from '../../Proxy/WindowProxy/WindowProxy';
 enum eBottomType{
     Bag = 5,
 }
@@ -42,7 +40,7 @@ export class BottomMenuLayer extends BaseLayer {
             find("OwnerLabel",node).getComponent(TextMeshLabel).string = cell.rightDesc; 
             find("OriginNode/CellLayout",this.node).addChild(node);    
 
-            ListenClick(node,this,this.ClickHandle,cell.key);
+            this.RegisterButtonEvent(node,this.ClickHandle,this,cell.key);
         }); 
         find("OriginNode",this.node).setWorldPosition(this.mTouchUIPos);    
     }           
@@ -54,7 +52,7 @@ export class BottomMenuLayer extends BaseLayer {
     }
 
  
-    private ClickHandle(target:Node,key:number):void{     
+    private ClickHandle(target:EventTouch,key:number):void{     
         if(eBottomType[key] == undefined)
             return; 
         _Facade.Send(eNotice.TipsShow,"AAAAA"); 

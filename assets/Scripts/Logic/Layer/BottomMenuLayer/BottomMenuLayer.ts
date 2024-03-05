@@ -7,8 +7,6 @@ import { _decorator, Vec3, find, Camera, UITransform ,Node, Sprite, SpriteFrame,
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
 import { BottomListConfig, IBottomListStruct } from '../../../Config/Cfg_BottomList';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
-import { CancleClick, ListenClick } from '../../../Util/Util';
-import { WindowProxy } from '../../Proxy/WindowProxy/WindowProxy';
 enum eBottomType{
     Bag = 5,
 }
