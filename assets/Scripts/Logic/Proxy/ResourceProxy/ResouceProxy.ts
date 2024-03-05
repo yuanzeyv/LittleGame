@@ -1,8 +1,9 @@
 import { Asset, Component } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
-import { _Facade } from "../../../Global";
+import { _Facade, _G } from "../../../Global";
 import { BundleProxy, ListenObj, LoadID, LoadStruct } from "../BundleProxy/BundleProxy";
 import { ResourceComp } from "./ResourceComp";
+import { SoltCell } from "../../../Util/Time/TimeWheel";
 export type UUID = string;
 export type UseKey = string; 
 export type KeyPartial<T> = {[Key in keyof T]: T[Key] extends Function ? never : Key;}[keyof T];
@@ -13,98 +14,100 @@ export type CompleteHandle<T extends Asset>  = (data:T | undefined) => void;
 export class ResouceProxy extends BaseProxy{  
     static get ProxyName():string { return "ResouceProxy" }; 
     private mBundleProxy:BundleProxy;
-    private mLoadMap:Map<UUID,{loadID:LoadID,count:number}> = new Map<UUID,{loadID:LoadID,count:number}>();
+    private mLoadMap:Map<UUID,{loadID:LoadID,count:number,asset:Asset,timeID:SoltCell}> = new Map<UUID,{loadID:LoadID,count:number,asset:Asset,timeID:SoltCell}>();//每个被加载过的资源，被本系统引用次数
+
+    private mLoadingMap:Map<UUID,LoadID> = new Map<UUID,LoadID>();//某个资源正在被加载中
+    private mLoadingResCompMap:Map<UUID,Set<ResourceComp>> = new Map<UUID,Set<ResourceComp>>();//某个资源需要加载的资源
+
     public onLoad(): void {
         this.mBundleProxy = _Facade.FindProxy(BundleProxy);
     }
-    /*
-    *加载一个资源并对传入的组件进行赋值
-    *comp:带传入的资源
-    *key:要修改的字段
-    *bundleName:资源所属Bundle
-    *path:资源所在路径
-    *type:资源类型
-    *加载成功后回调
-    */
+
     public Load<T extends Component>(comp:T,key:KeyPartial<T>,bundleName:string,path: string,type:ResouoceType<Asset>,successHandle?:(comp:T)=>void):void{
-        let bundleProxy:BundleProxy = _Facade.FindProxy(BundleProxy);//首先获取到当前的BundleProxy
-        if(comp == undefined || !comp.isValid)//判断资源是否有效
+        if(comp == undefined || !comp.isValid){//不存在组件 或者 组件是无效的。 代表不需要进行加载，直接返回
+            console.warn(`待设置的资源不存在 path:${path}`);
             return;
-        let uuid:UUID|undefined = this.mBundleProxy.GetAssetUUID(bundleName,path,type);//通过资源的具体路径及类型锁定到资源
-        if(uuid == undefined){//资源必须存在于游戏项目中才能够被正常的加载
+        }
+        let resUUID:UUID|undefined = this.mBundleProxy.GetAssetUUID(bundleName,path,type);//通过资源的具体路径及类型锁定到资源
+        if(resUUID == undefined){
             console.error(`尝试加载不存在于项目中的资源 bundle:${bundleName}  path:${path}`);
             return;
         } 
-        let data:{loadID:LoadID,count:number}|undefined = this.mLoadMap.get(uuid);//查看资源是否被ResourceProxy加载过
+        let loadInfo:{loadID:LoadID,count:number,asset:Asset,timeID:SoltCell}|undefined = this.GetLoadInfo(resUUID);//获取到UUID对应的资源加载情况
         let resComp:ResourceComp|undefined = comp.node.getComponent(ResourceComp) ||comp.node.addComponent(ResourceComp);//查询是否拥有组件
-        if(data != undefined){
-            let frontLoadUUID:UUID|undefined = resComp.GetLoad(comp.uuid,key.toString());//获取对对应组件的资源加载情况
-            if(frontLoadUUID != undefined){//如果之前有加载过的话
-                data.count--;
-                resComp.ReleaseRes(comp.uuid,key as string);//停止使用本资源
-                bundleProxy.UnUseAssetByUUID(bundleName,frontLoadUUID);//反引用此资源
+        if(loadInfo == undefined){
+            resComp.LoadRes(comp,key as string,resUUID,true,successHandle);//设置资源的加载状态未待加载完成  
+            let loadingComSet:Set<ResourceComp>|undefined = this.mLoadingResCompMap.get(resUUID);//获取到正在加载资源的信息
+            if(loadingComSet == undefined){
+                loadingComSet = new Set<ResourceComp>();
+                this.mLoadingResCompMap.set(resUUID,loadingComSet);
             }
-            comp[key as string] = _Facade.FindProxy(BundleProxy).UseAssetByUUID(bundleName,uuid);//使用本资源
-            resComp.LoadRes(comp.uuid,key as string,uuid);//引用资源  
-            if(successHandle) 
-                successHandle(comp);
+            loadingComSet.add(resComp);//也添加到resCop中
+            if(this.mLoadingMap.has(resUUID))//如果当前资源正在加载中的话
+                return;//立即返回
+            let loadID:LoadID = this.mBundleProxy.Load(bundleName,path,type);//准备开始加载资源 
+            this.mLoadingMap.set(resUUID,loadID);//设置资源为正在加载的状态
+            this.mBundleProxy.RegisterListen(new ListenObj(loadID,(loadStruct:LoadStruct)=>{
+                if(!loadStruct.IsFinish) return; //如果当前没有加载完成的话
+                let asset:Asset|undefined = this.mBundleProxy.UseAssetByUUID(bundleName,resUUID);//使用本资源,不可以直接对资源进行引用
+                if(asset == undefined)//如果资源加载失败的话
+                    console.error("已成功加载的资源引用失败，请检查游戏逻辑");
+                this.mLoadingMap.delete(resUUID);//删除UUID的加载状态
+                this.InitResourceInfo(resUUID,loadID,asset);//对资源进行初始化
+                //对等待中的资源进行加载
+                let resourceCompSet:Set<ResourceComp> = this.mLoadingResCompMap.get(resUUID)!;//取到所有需要这个资源的组件
+                for(let cell of resourceCompSet){
+                    if(!resComp.isValid) continue;   
+                    cell.LoadingResFinish(resUUID,asset != undefined);
+                }
+                this.mLoadingResCompMap.delete(resUUID);
+                successHandle && successHandle(comp);
+            }));
             return;
         }
-        let loadID:LoadID = bundleProxy.Load(bundleName,path,type);//开始监听资源
-        let loadHandle:(loadStruct:LoadStruct)=>void = ( loadStruct:LoadStruct)=>{//加载回调
-            if(!loadStruct.IsAllComplete()){//当前资源加载没有完成的话
-                return;
-            }
-            if(!resComp.isValid){
-                bundleProxy.DestoryLoadID(loadID);
-                return;
-            }
-            let frontLoad:UUID|undefined = this.HasLoadInfo(comp.uuid,key as string);//判断之前有没有加载
-            if(frontLoad != undefined){//组件之前有加载过这个资源
-                data.count--;
-                resComp.ReleaseRes(comp.uuid,key as string);//停止使用本资源
-                _Facade.FindProxy(BundleProxy).UnUseAssetByUUID(bundleName,frontLoad);//反引用这个资源
-                this.DelLoadInfo(comp.uuid,key as string);//毫无意义的删除
-            }
-            if(loadStruct.IsFinish() == false){
-                comp[key as string] = undefined;//设置资源信息
-                return;
-            }
-            let asset:Asset|undefined = _Facade.FindProxy(BundleProxy).UseAsset(bundleName,path,type);//获取到本轮正确的资源 
-            comp[key as string] = asset;//设置资源信息
-            resComp.LoadRes(comp.uuid,key as string,asset.uuid);//引用资源
-            this.SetLoadInfo(comp.uuid,key as string,asset.uuid);
-            if(successHandle) 
-                successHandle(comp);
-        } 
-        bundleProxy.RegisterListen(new ListenObj(loadID,loadHandle));
+        resComp.LoadRes(comp,key as string,resUUID);//设置资源加载
+        if(successHandle) 
+            successHandle(comp);
     } 
-    private DelLoadInfo(uuid:UUID,key:string):void{
-        let loadInfo:Map<UseKey,UUID>|undefined = this.mLoadInfoMap.get(uuid);
-        if(loadInfo == undefined)
-            return;
-        loadInfo.delete(key);
-        if(loadInfo.size == 0)
-            this.mLoadInfoMap.delete(uuid);
-    }
-    private HasLoadInfo(uuid:UUID,key:string):UUID|undefined{
-        let loadInfo:Map<UseKey,UUID>|undefined = this.mLoadInfoMap.get(uuid);
-        if(loadInfo == undefined)
-            return undefined;
-        return loadInfo.get(key);
-    } 
+    
+    private GetLoadInfo(uuid:UUID):{loadID:LoadID,count:number,asset:Asset,timeID:SoltCell} | undefined{
+        return this.mLoadMap.get(uuid);
+    }   
 
+    public InitResourceInfo(resUUID:string,loadID:LoadID,asset:Asset){ 
+        let timeoutDestoryCell:SoltCell = _G.TimeWheel.Set(10000,this.DecResource.bind(this),resUUID);
+        this.mLoadMap.set(resUUID,{loadID:loadID,count:0,timeID:timeoutDestoryCell,asset:asset});
+    }
+    
     //由RescourceCom调用，不可主动调用
-    public Release(uuid:string,key:string){ 
-        let loadMap:Map<UseKey,UUID>|undefined =  this.mLoadInfoMap.get(uuid);
-        if(loadMap == undefined)//没有找到加载的资源
+    private Release(resUUID:string):void{ 
+        let loadInfo:{loadID:LoadID,count:number,timeID:SoltCell} | undefined = this.GetLoadInfo(resUUID);
+        if(loadInfo == undefined)
             return;
-        let assetData:UUID|undefined = loadMap.get(key);
-        if(assetData == undefined)//没有对这个字段进行操作
-            return;
-        _Facade.FindProxy(BundleProxy).UnUseAssetByUUID(assetData.path,assetData.type);//反引用这个资源
-        loadMap.delete(key);
-        if(loadMap.size == 0)
-            this.mLoadInfoMap.get(uuid)
+        if(loadInfo.timeID != undefined){
+            loadInfo.timeID.Stop();
+            loadInfo.timeID = undefined;
+        }
+        this.mBundleProxy.UnUseAssetByUUID("resources",resUUID);//反引用这个资源
+        this.mLoadMap.delete(resUUID);
+    }
+
+    public DecResource(resUUID:UUID):void{
+        let loadInfo:{loadID:LoadID,count:number,timeID:SoltCell} | undefined = this.GetLoadInfo(resUUID);
+        if(loadInfo == undefined) return;//没有加载过本资源
+        loadInfo.count--;//减去引用 
+        if(loadInfo.count < 0 && loadInfo.timeID == undefined)
+            loadInfo.timeID = _G.TimeWheel.Set(10000,this.Release.bind(this),resUUID);
+    }
+
+    public AddResource(resUUID:UUID):Asset|undefined{
+        let loadInfo:{loadID:LoadID,count:number,asset:Asset,timeID:SoltCell} | undefined = this.GetLoadInfo(resUUID);
+        if(loadInfo == undefined) return undefined;//本资源未加载过
+        loadInfo.count++;
+        if(loadInfo.count >= 0 && loadInfo.timeID != undefined){
+            loadInfo.timeID.Stop();
+            loadInfo.timeID = undefined;
+        }
+        return loadInfo.asset;
     }
 }

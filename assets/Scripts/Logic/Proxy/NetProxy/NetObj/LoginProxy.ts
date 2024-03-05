@@ -35,8 +35,9 @@ export class LoginProxy extends BaseProxy{
         _Facade.Send(eNotice.TipsShow,"玩家登录成功");
         _Facade.Send(eNotice.LoginInClose);//关闭登录界面
         _Facade.Send(eNotice.MainLayerOpen);//主界面打开
-    }
-
+        _Facade.Send(eNotice.MainTopLayerOpen);//主界面打开 
+    }  
+ 
     //获`
     public SC_TestHandle(reply:{err:number,msg?:string}){ 
         console.log("QQQQQQQQQQQQQQQQQQQQQ");

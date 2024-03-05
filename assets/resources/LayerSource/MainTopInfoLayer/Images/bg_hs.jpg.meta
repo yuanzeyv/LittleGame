@@ -23,9 +23,101 @@
         "anisotropy": 0,
         "isUuid": true,
         "imageUuidOrDatabaseUri": "f74af3ff-d446-447d-b755-03997210dfa3",
-        "visible": true
+        "visible": false
       },
       "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "f74af3ff-d446-447d-b755-03997210dfa3@f9941",
+      "displayName": "bg_hs",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 604,
+        "height": 694,
+        "rawWidth": 604,
+        "rawHeight": 694,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -302,
+            -347,
+            0,
+            302,
+            -347,
+            0,
+            -302,
+            347,
+            0,
+            302,
+            347,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            0,
+            694,
+            604,
+            694,
+            0,
+            0,
+            604,
+            0
+          ],
+          "nuv": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "minPos": [
+            -302,
+            -347,
+            0
+          ],
+          "maxPos": [
+            302,
+            347,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f74af3ff-d446-447d-b755-03997210dfa3@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
       "imported": true,
       "files": [
         ".json"
@@ -36,7 +128,7 @@
   "userData": {
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
-    "type": "texture",
-    "redirect": "f74af3ff-d446-447d-b755-03997210dfa3@6c48a"
+    "type": "sprite-frame",
+    "redirect": "f74af3ff-d446-447d-b755-03997210dfa3@f9941"
   }
 }

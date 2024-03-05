@@ -37,6 +37,12 @@ import { RewardedVideoAdvertisingProxy } from "./Logic/Proxy/RewardedVideoAdvert
 import { WindowProxy } from "./Logic/Proxy/WindowProxy/WindowProxy";
 import { eNotice } from "./NotificationTable";
 import { MainMediator } from "./Logic/Mediator/MainMediator/MainMediator";
+import { ResouceProxy } from "./Logic/Proxy/ResourceProxy/ResouceProxy";
+import { MainTopMediator } from "./Logic/Mediator/MainTopMediator/MainTopMediator";
+import { BottomMenuMediator } from "./Logic/Mediator/BottomMenuMediator/BottomMenuMediator";
+import { BagMediator } from "./Logic/Mediator/BagMediator/BagMediator";
+import { MultWindowMediator } from "./Logic/Mediator/MultWindowMediator/MultWindowMediator";
+import { MultWindowProxy } from "./Logic/Proxy/MultWindowProxy/MultWindowProxy";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
@@ -65,6 +71,10 @@ export class GameMVCRegister extends BaseMVCRegister {
             .set(LoginMediator,"LoginMediator")  //战斗用Mediator 
             .set(HotUpdateMediator,"HotUpdateMediator")  //战斗用Mediator 
             .set(MainMediator,"MainMediator")  //主界面Mediator 
+            .set(MainTopMediator,"MainTopMediator")  //主界面Mediator 
+            .set(BottomMenuMediator,"BottomMenuMediator")  //主界面Mediator 
+            .set(BagMediator,"BagMediator")  //背包界面Mediator 
+            .set(MultWindowMediator,"MultWindowMediator")  //背包界面Mediator 
     }  
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void { 
@@ -85,6 +95,8 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(BiologySatietyProxy) 
             .add(NetWorkProxy)  
             .add(LoginProxy)//登录代理 
+            .add(ResouceProxy)//登录代理  
+            .add(MultWindowProxy) 
     }
 }  
  

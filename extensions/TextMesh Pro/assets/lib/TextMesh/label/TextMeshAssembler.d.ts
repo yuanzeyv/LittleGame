@@ -1,0 +1,31 @@
+import { Color, IAssembler, __private } from "cc";
+import { LayoutResult } from "../types/ITypeSet";
+import { CharInfo } from "./CharInfo";
+import { TextMeshLabel } from "./TextMeshLabel";
+export declare class TextMeshAssembler implements IAssembler {
+    static createData(comp: TextMeshLabel): any;
+    static fillBuffers(comp: TextMeshLabel, renderer: __private._cocos_2d_renderer_i_batcher__IBatcher): void;
+    private static _fillElementBuffers;
+    private static updateUVs;
+    private static _needCheckShdaow;
+    private static _updateUVs;
+    static updateColor(comp: TextMeshLabel, charInfo?: CharInfo, colors?: Color | Color[]): void;
+    private static _updateColor;
+    static updateColors(comp: TextMeshLabel): void;
+    private static _updateColors;
+    static updateOthers(comp: TextMeshLabel): void;
+    private static _updateOthers;
+    private static updateVertexData;
+    private static appendShadowQuad;
+    static refreshCharInfo(comp: TextMeshLabel, index: number, charInfo: CharInfo): void;
+    private static _clipInfo;
+    private static _clipX;
+    private static _clipY;
+    private static appendQuad;
+    static refreshUnderlineInfo(comp: TextMeshLabel, index: number, layout: LayoutResult): void;
+    static refreshStrikeInfo(comp: TextMeshLabel, index: number, layout: LayoutResult): void;
+    private static getRectUVs;
+    static refreshBackgroundInfo(comp: TextMeshLabel, index: number, layout: LayoutResult): void;
+    static refreshMaskInfo(comp: TextMeshLabel, index: number, layout: LayoutResult): void;
+    static updateRenderData(comp: TextMeshLabel, render: __private._cocos_2d_renderer_i_batcher__IBatcher): void;
+}

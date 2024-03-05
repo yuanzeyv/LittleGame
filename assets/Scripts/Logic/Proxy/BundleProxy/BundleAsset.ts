@@ -1,7 +1,7 @@
 import { _Facade, _G } from "../../../Global";
-import { BundleProxy, ResouoceType } from "./BundleProxy"; 
+import { BundleProxy, ResouoceType, UUID } from "./BundleProxy"; 
 import { SoltCell } from "../../../Util/Time/TimeWheel";
-import { Asset, AssetManager } from "cc";
+import { Asset, AssetManager } from "cc"; 
 class File{//描述文件信息用
     public mAssetTypeSet:Map<new ()=>Asset,string> = new Map<new ()=>Asset,string>();
 }
@@ -18,7 +18,7 @@ class DirManager{
     public InitDir(configMap:Map<string,{ctor:new ()=>Asset,path:string,uuid:string}>){
         configMap.forEach((data:{ctor:new ()=>Asset,path:string,uuid:string})=>{  
             if(data.path == undefined){
-                console.log(`解析${data.uuid}，发生错误`); 
+                console.log(`解析文件:${data.path} UUID:${data.uuid}，发生错误`); 
                 return;
             }
             let paths:Array<string> = data.path.split("/");
@@ -106,26 +106,38 @@ export class BundleAssest{
         return this.mDirManager.GetFileUUID(filePath,type);//获取到文件目录信息
     }
     //加载一个资源
-    public Load(assetPath:string,type:ResouoceType<Asset>):void{
-        let fileUUID:string|undefined = this.mDirManager.GetFileUUID(assetPath,type);
-        let asset:Asset|undefined= this.mBundle.get(assetPath);
-        if(asset != undefined){
-            this.mBundleProxy.AssetLoadFinish(this.mBundle.name,fileUUID,asset);//成功找到的话
-            return; 
-        }   
+    public Load(assetPathSet:Map<string,UUID>,type:ResouoceType<Asset>):void{
+        let loadRess:Array<string> = new Array<string>()
+        assetPathSet.forEach((uuid:UUID,path:string)=>{ 
+            let asset:Asset|undefined= this.mBundle.get(path);
+            if(asset != undefined){
+                this.mBundleProxy.AssetLoadFinish(this.mBundle.name,uuid,asset);//成功找到的话 
+                return;
+            }
+            loadRess.push(path);
+        });
+        if(loadRess.length == 0)
+            return;
         //必定是资源首次被加载
-        this.mBundle.load(assetPath,type,(err:Error|undefined,data:Asset|undefined)=>{
-            if(err != undefined){
-                this.mBundleProxy.AssetLoadFinish(this.mBundle.name,fileUUID); //添加引用
-                console.warn(`资源${assetPath} 加载失败，错误原因:${err}`);//打印资源加载错误日志
+        this.mBundle.load(loadRess,type,(err:Error|undefined,data:Asset[]|undefined)=>{
+            if(err != undefined){ 
+                for(let path of loadRess){
+                    let uuid:UUID = assetPathSet.get(path);
+                    this.mBundleProxy.AssetLoadFinish(this.mBundle.name,uuid); //添加引用
+                    console.warn(`资源${path} 加载失败，错误原因:${err}`);//打印资源加载错误日志
+                }
                 return;
             }  
-            this.mRemeberCountMap.set(data.uuid,{asset:data,loadCount:0,soltCell:undefined});
-            data.addRef(); 
-            this.mBundleProxy.AssetLoadFinish(this.mBundle.name,fileUUID,data); //添加引用
-            this.TimeOutRelease(data.uuid);//加入超时释放 
-        }); 
+            for(let asset of data){
+                this.mRemeberCountMap.set(asset.uuid,{asset:asset,loadCount:0,soltCell:undefined});
+                asset.addRef(); 
+                this.mBundleProxy.AssetLoadFinish(this.mBundle.name,asset.uuid,asset); //添加引用
+                this.TimeOutRelease(asset.uuid);//加入超时释放 
+            }
+        });  
     }
+
+    //加载
     //对某一个资源添加定时释放
     private TimeOutRelease(uuid:string):void{
         let refObj:{asset:Asset,loadCount:number,soltCell?:SoltCell}|undefined = this.mRemeberCountMap.get(uuid);

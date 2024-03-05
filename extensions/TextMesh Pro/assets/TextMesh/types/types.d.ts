@@ -1,0 +1,32 @@
+import { CharInfo } from "../label/CharInfo";
+
+type GlyphInfo = {
+    data: Uint8ClampedArray;
+    width: number;
+    height: number;
+    size: number;
+    glyphWidth: number;
+    glyphHeight: number;
+    glyphLeft: number;
+    glyphRight: number;
+    glyphAdvance: number;
+    ascent: number;
+    descent: number;
+}
+
+type SpaceInfo = {
+    code: string;
+    cid: number;
+    row: number;
+    col: number;
+    width: number;
+    height: number;
+    x: number;
+    y: number;
+}
+
+type HitTestResult = {
+    result?: boolean;
+    accurate?: boolean;
+    charInfo?: CharInfo;
+}

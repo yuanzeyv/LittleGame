@@ -2,6 +2,7 @@ import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantia
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
+import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
 
 const {ccclass, property, type} = _decorator;
 
@@ -25,7 +26,7 @@ export class TipsLayer extends BaseLayer {
     }
 
     TextADddOutLine(text: string) {
-        return "<outline color=#000000 width=2>" + text + "</outline>";
+        return text;
     }
 
     TipsShowHandle(text: string): void {
@@ -65,12 +66,12 @@ export class TipsLayer extends BaseLayer {
         let node: Node = instantiate(this.m_MoveNode); //实例化一个tips的消息
         this.node.addChild(node);
         node.setPosition(this.m_StartPosition);
-        let richText: RichText = node.getChildByPath("RichText").getComponent(RichText);
+        let richText: TextMeshLabel = node.getChildByPath("RichText").getComponent(TextMeshLabel);
         richText.string = this.m_TipsStringArray.pop();//准备弹出
         this.NodeMove(node);
         _Facade.Send(eNotice.PlayAudioEffect, "resources/Sound/shua");
     }
-
 }
 
 
+ 

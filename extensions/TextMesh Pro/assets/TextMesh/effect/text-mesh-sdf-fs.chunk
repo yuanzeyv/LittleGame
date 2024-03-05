@@ -1,0 +1,130 @@
+#extension GL_OES_standard_derivatives: enable
+precision highp float;
+
+#include <builtin/internal/embedded-alpha>
+#include <builtin/internal/alpha-test>
+#include <common/common-define>
+
+in vec4 color;
+
+in float channelId;
+in float fill;  
+in float stroke;
+in float strokeBlur;
+in vec4 strokeColor;
+
+in float strokeEnable;
+
+in float glowInnerValue;
+in float glowOuterValue;
+
+in vec4 uvs;
+
+#pragma builtin(local)
+uniform sampler2D cc_spriteTexture;
+
+#if USE_OVERLAY_TEXTURE
+  uniform sampler2D overlayTexture;
+#endif
+
+#if USE_GLOW
+  uniform Glow {
+    // 辉光颜色，会受顶点alpha值影响
+    vec4 glowColor;
+    // 辉光向内部的粗细
+    float glowInner;
+    // 辉光向外部的粗细
+    float glowOuter;
+    // 辉光强度 值为1时辉光强度最大，值越小辉光衰减系数越大
+    float glowPower;
+  };
+#endif
+
+vec4 getChannelMask() {
+  if(channelId <= 0.1) {
+    return vec4(1, 0, 0, 0);
+  }else if(channelId <= 1.1) {
+    return vec4(0, 1, 0, 0);
+  }else if(channelId <= 2.1) {
+    return vec4(0, 0, 1, 0);
+  }else{      
+    return vec4(0, 0, 0, 1);
+  }
+}
+
+vec4 outerGlow(float dist, vec4 glowColor, float radius, float glowPower) {    
+  float d = fill - dist;
+  float a_f = clamp(1.0 - d / radius, 0.0, 1.0) * step(0.0, d);
+  float b_f = min(dist, pow(a_f, glowPower));
+  return glowColor * b_f;
+}
+
+vec4 innerGlow(float dist,vec4 glowColor, float radius, float glowPower) {
+  float d = dist - fill;
+  float a_f = clamp(1.0 - d / radius, 0.0, 1.0) * step(0.0, d);
+  float b_f = min(dist, pow(a_f, glowPower));
+  return glowColor * b_f;
+}
+
+vec4 frag () {
+  vec4 o = vec4(1, 1, 1, 1);
+
+  vec4 channelMask = getChannelMask();
+  float dist = dot(channelMask, CCSampleWithAlphaSeparated(cc_spriteTexture, uvs.xy));
+
+  #if __VERSION__ < 300
+      #ifdef GL_OES_standard_derivatives
+          float smoothing = fwidth(dist);
+      #else
+          float smoothing = 0.005;
+      #endif
+  #else
+      float smoothing = fwidth(dist);
+  #endif
+
+#if USE_GLOW
+  float fillSmoothing = 0.0;
+#else
+  float fillSmoothing = smoothing*1.2;
+#endif
+
+  vec2 clipMinXY = step(vec2(0.01, 0.01), uvs.zw);
+  vec2 clipMaxXY = step(uvs.zw, vec2(0.99, 0.99));
+  float clipValue = min(clipMinXY.x, clipMinXY.y) * min(clipMaxXY.x, clipMaxXY.y);
+
+  float fillDist = smoothstep(fill - fillSmoothing, fill + fillSmoothing, dist);
+  o = vec4(color.rgb, fillDist * color.a);
+
+  float alphaStroke = smoothstep(stroke - smoothing - strokeBlur, stroke + smoothing + strokeBlur, dist);
+  vec4 outline = mix(strokeColor * color.a, color, fillDist);
+  outline.a *= alphaStroke;
+  o = mix(o, outline, strokeEnable);
+  
+  #if USE_OVERLAY_TEXTURE
+    o *= CCSampleWithAlphaSeparated(overlayTexture, uvs.zw);
+  #endif
+
+  #if USE_GLOW
+    vec4 outColor = outerGlow(dist, glowColor, glowOuter, glowPower + 0.0001);
+    vec4 inColor = innerGlow(dist, glowColor, glowInner, glowPower + 0.0001);
+    vec4 gColor = (outColor + inColor);
+    
+    o.rgb = o.rgb * step(0.00001, o.a) + outColor.rgb*step(0.0, outColor.a);
+    o.a = max(o.a, gColor.a);
+
+    o.rgb = inColor.rgb * inColor.a + o.rgb * (1.0 - inColor.a);
+  #endif
+
+  #if IS_GRAY
+      float gray  = 0.2126 * o.r + 0.7152 * o.g + 0.0722 * o.b;
+      o.r = o.g = o.b = gray;
+  #endif
+  
+  ALPHA_TEST(o);    
+
+  // 防止边缘杂色
+  o.a *= clipValue;
+
+
+  return o;    
+}

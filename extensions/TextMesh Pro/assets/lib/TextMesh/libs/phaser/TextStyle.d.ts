@@ -1,0 +1,97 @@
+import { Measure } from "./MeasureText";
+export interface IText {
+    width: number;
+    height: number;
+    updateText(): any;
+}
+export interface IFont {
+    fontFamily?: string;
+    fontSize?: string;
+    fontStyle?: string;
+}
+export interface ITextStyle {
+    fontFamily?: string;
+    fontSize?: string;
+    fontStyle?: string;
+    backgroundColor?: string;
+    color?: string;
+    stroke?: string;
+    strokeThickness?: number;
+    shadowOffsetX?: number;
+    shadowOffsetY?: number;
+    shadowColor?: string;
+    shadowBlur?: number;
+    shadowStroke?: boolean;
+    shadowFill?: boolean;
+    align?: string;
+    maxLines?: number;
+    fixedWidth?: number;
+    fixedHeight?: number;
+    resolution?: number;
+    rtl?: boolean;
+    testString?: string;
+    baselineX?: number;
+    baselineY?: number;
+    wordWrapWidth?: number;
+}
+export declare type TextStyleWordWrapCallback = (text: string, textObject: Text) => void;
+export declare class TextStyle {
+    parent: IText;
+    fontFamily?: string;
+    fontSize?: string;
+    fontStyle?: string;
+    backgroundColor?: string;
+    color?: string;
+    stroke?: string;
+    strokeThickness: number;
+    shadowOffsetX?: number;
+    shadowOffsetY?: number;
+    shadowColor?: string;
+    shadowBlur?: number;
+    shadowStroke?: boolean;
+    shadowFill?: boolean;
+    align?: string;
+    maxLines?: number;
+    fixedWidth?: number;
+    fixedHeight?: number;
+    resolution?: number;
+    rtl?: boolean;
+    testString?: string;
+    baselineX?: number;
+    baselineY?: number;
+    wordWrapWidth?: number;
+    wordWrapCallback?: TextStyleWordWrapCallback;
+    wordWrapCallbackScope?: any;
+    wordWrapUseAdvanced?: boolean;
+    metrics: Measure;
+    private _font;
+    constructor(text: IText, style?: any);
+    setStyle(style?: ITextStyle, updateText?: boolean, setDefaults?: boolean): any;
+    syncFont(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D): void;
+    syncStyle(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D): void;
+    syncShadow(context: CanvasRenderingContext2D, enabled: boolean): void;
+    update(recalculateMetrics: any): any;
+    setFont(font: IFont, updateText?: boolean): IText;
+    setFontFamily(family: string): IText;
+    setFontStyle(style: string): IText;
+    setFontSize(size: string | number): IText;
+    setTestString(string: string): any;
+    setFixedSize(width: number, height: number): any;
+    setBackgroundColor(color: string): any;
+    setFillfunction(color: string): any;
+    setColor(color: string): any;
+    setResolution(value: number): any;
+    setStroke(color: string, thickness: number): IText;
+    setShadow(x: number, y?: number, color?: string, blur?: number, shadowStroke?: boolean, shadowFill?: boolean): any;
+    setShadowOffset(x?: number, y?: number): any;
+    setShadowColor(color?: string): any;
+    setShadowBlur(blur?: number): any;
+    setShadowStroke(enabled: boolean): any;
+    setShadowFill(enabled: boolean): any;
+    setWordWrapWidth(width: number, useAdvancedWrap?: boolean): any;
+    setWordWrapCallback(callback: TextStyleWordWrapCallback, scope?: any): any;
+    setAlign(align?: string): any;
+    setMaxLines(max?: number): any;
+    getTextMetrics(): Measure;
+    destroy(): void;
+}

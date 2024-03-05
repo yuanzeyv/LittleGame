@@ -6,7 +6,7 @@ import { eNotice } from "../../NotificationTable";
 import { BundleProxy, ListenObj, LoadID, LoadStruct } from "../Proxy/BundleProxy/BundleProxy";
 import { PoolProxy } from "../Proxy/PoolProxy/PoolProxy";
 import { WindowProxy } from "../Proxy/WindowProxy/WindowProxy";
-import { Prefab } from "cc";
+import { Prefab, Sorting } from "cc";
 
 export class InitGameDataCommand extends BaseCommand{ 
     Execute(body:any,name:string,notification:INotification){  
@@ -24,9 +24,10 @@ export class InitGameDataCommand extends BaseCommand{
         _Facade.FindProxy(WindowProxy).InitNodePool();//初始化窗口对象池
         _Facade.Send(eNotice.TipsLayerOpen);//打开通知面板
         _Facade.Send(eNotice.AnnouncementOpen);//打开公告面板
-        //判断当前是否是Native平台
-        if( !NATIVE) 
-            _Facade.Send(eNotice.LongInOpen);//打开登录面板
+        Sorting
+        //判断当前是否是Native平台 
+        if(!NATIVE) 
+            _Facade.Send(eNotice.LongInOpen);//打开登录面板 
         else 
             _Facade.Send(eNotice.HotUpdateOpen);//打开登录面板 
         //_Facade.Send(NotificationEnum.FishLoadingLayerOpen);//打开小鱼加载界面

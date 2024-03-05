@@ -2,10 +2,10 @@ import { Asset, assetManager, AssetManager } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { BundleAssest } from "./BundleAsset"; 
 import { SyncMicroTask } from "../../../Util/Util";
-let GLoadID:number = 1;//可以通过注册监听 或者轮询查询
+let GLoadID:number = 1;//可以通过注册监听 或者轮询查询 
 
 type BundleName = string;
-
+export let QQQQ:number = 0;
 export type ResouoceType<T extends Asset> = new (...args: any[]) => T;
 export type LoadID = number;
 export type UUID = string;
@@ -167,7 +167,7 @@ export class BundleProxy extends BaseProxy{
         let sumCount:number = 0;
         let loadStruct:LoadStruct = new LoadStruct();//新建一个结构数组
         //去除存在的重复资源，不存在的不会并入资源计算
-        let removeDuplicatesLoadDatas:{path:string,type:ResouoceType<Asset>,bundleAsset:BundleAssest}[] = [];
+        let removeDuplicatesLoadDatas:Map<BundleAssest,Map<ResouoceType<Asset>,Map<string,UUID>>> = new Map<BundleAssest,Map<ResouoceType<Asset>,Map<string,UUID>>>();
         for(let cell of loadDatas){//生成资源Map
             sumCount++;
             let bundleAsset:BundleAssest|undefined = this.mBundleAssetMap.get(cell.bundle);//查询Bundle是否存在
@@ -194,13 +194,28 @@ export class BundleProxy extends BaseProxy{
                 this.mLoadAssetMap.set(fileUUID,loadAsset);
             }
             loadAsset.add(loadID);
-            removeDuplicatesLoadDatas.push({bundleAsset:bundleAsset, path:cell.path,type:cell.type});
+
+            let resourceMap:Map<ResouoceType<Asset>,Map<string,UUID>>|undefined = removeDuplicatesLoadDatas.get(bundleAsset);
+            if(resourceMap == undefined){
+                resourceMap = new Map<ResouoceType<Asset>,Map<string,UUID>>();
+                removeDuplicatesLoadDatas.set(bundleAsset,resourceMap);
+            }
+            let typeArray:Map<string,UUID>|undefined = resourceMap.get(cell.type);
+            if(typeArray == undefined){
+                typeArray = new Map<string,UUID>();
+                resourceMap.set(cell.type,typeArray);
+            }
+            typeArray.set(cell.path,fileUUID);
         } 
         loadStruct.SetLoadSumCount(sumCount);//设置数量
-        this.mLoadStructMap.set(loadID,loadStruct);//设置 
-        //遍历去重的资源信息 
-        for(let cell of removeDuplicatesLoadDatas)  
-            cell.bundleAsset!.Load(cell.path,cell.type);//立即加载资源
+        this.mLoadStructMap.set(loadID,loadStruct);//设置  
+        //遍历去重的资源信息  
+        for(let cell of removeDuplicatesLoadDatas) {
+            for(let pathArr of cell[1]){
+                cell[0].Load(pathArr[1],pathArr[0]);
+                //cell.bundleAsset!.Load(cell.path,cell.type);//立即加载资源
+            }
+        }
         if(loadStruct.IsFinish())
             SyncMicroTask(()=> this.NotifyCompleteHandle(loadID,loadStruct))
         return loadID;
@@ -227,12 +242,12 @@ export class BundleProxy extends BaseProxy{
             let bundle:BundleAssest|undefined = this.mBundleAssetMap.get(cell.bundleName);
             if(bundle == undefined)//存在bundle
                 continue;
-            for(let data of bundle.GetDirFiles(cell.dirName))//获取到目录下所有资源信息
+            for(let data of  bundle.GetDirFiles(cell.dirName))//获取到目录下所有资源信息
                 loadArray.push({bundle:cell.bundleName,path:data.path,type:data.ctor});
         }
         return this.LoadArr(loadArray);//加载本组内容
     }
-
+ 
     //取消加载一个指定的ID
     public DestoryLoadID(loadID:number):void{
         let loadStruct:LoadStruct|undefined = this.mLoadStructMap.get(loadID);

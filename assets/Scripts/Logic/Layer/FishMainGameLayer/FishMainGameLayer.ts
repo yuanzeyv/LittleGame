@@ -21,7 +21,7 @@ export class FishMainGameLayer extends BaseLayer {
     
     public InitLayer() {
         this.mFishMainProxy = _Facade.FindProxy(FishMainProxy)
-        this.RegisterButtonEvent<FishMainGameLayer>(find("MapBG/TouchNode",this.node),"ClickBG");  
+        this.RegisterButtonEvent(find("MapBG/TouchNode",this.node),this.ClickBG,this);  
         _Facade.FindProxy(FishMainProxy).StartGame(this.mMapBGNode);//开始游戏  
         this.mCurrencyLabel.string = `$${this.mFishMainProxy.GetGameInningCount()}`;  
     } 

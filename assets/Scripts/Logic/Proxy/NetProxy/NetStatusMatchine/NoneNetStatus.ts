@@ -13,11 +13,11 @@ export class NoneNetStatus extends NetStatusBase{
     }
     
     public Connect(proxy:NetProxy){//连接状态
-        _Facade.FindProxy(NetWorkProxy).GateConnect("127.0.0.1",3014);//开始连接搭到网关服务器
+        _Facade.FindProxy(NetWorkProxy).GateConnect("192.168.1.100",3014);//开始连接搭到网关服务器
     } 
     
     //执行事件回调
-    public GateConnectHandle(proxy:NetProxy){//验证状态
+    public GateConnectHandle(proxy:NetProxy){//验证状态 
         this.Log("准备进入GateVirify");
         proxy.ChangeStatus(eNetStatus.GateVirify);//连接上之后，立马进入验证状态
     } 

@@ -26,6 +26,9 @@ export enum eNotice {
     //游戏主界面
     MainLayerOpen = "MainLayerOpen",
     MainLayerClose = "MainLayerClose",
+    //游戏主界面
+    MainTopLayerOpen = "MainTopLayerOpen",
+    MainTopLayerClose = "MainTopLayerClose",
     //热更新界面用
     HotUpdateOpen = "HotUpdateOpen",
     HotUpdateClose = "HotUpdateClose",
@@ -134,4 +137,17 @@ export enum eNotice {
 
     //连接游戏服务器成功，准备进行登录验证
     ConnectGameServerSuccess = "ConnectGameServerSuccess",
+
+    //打开底部功能菜单
+    OpenBottomMenuLayer = "OpenBottomMenuLayer",
+    CloseBottomMenuLayer = "CloseBottomMenuLayer",
+
+    //打开背包界面
+    OpenBagLayer = "OpenBagLayer",
+    CloseBagLayer = "CloseBagLayer",
+
+    //多面板界面打开函数
+    MultPanleOpen = "MultPanleOpen",
+    MultPanleClose = "MultPanleClose",
+    MultPanleAdd = "MultPanleAdd",//添加一个面板到多面板
 }

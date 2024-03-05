@@ -1,0 +1,23 @@
+import { TTFFont } from "cc";
+import { Char } from "../font/Char";
+import { IFontData } from "./IFontData";
+export interface ITMFont {
+    font: TTFFont;
+    fontFamily: string;
+    fontSize: number;
+    padding: number;
+    padTrim: boolean;
+    textureWidth: number;
+    textureHeight: number;
+    staticChannels: number;
+    fontData: IFontData;
+    dynamic: boolean;
+    underLineOffset?: number;
+    keepUnlderLineSpace?: boolean;
+    underLineThickness?: number;
+    strikeOffset?: number;
+    strikeThickness?: number;
+    scriptThickness?: number;
+    getCharInfo(code: string): Char;
+    removeDynamicChar(code: string): void;
+}

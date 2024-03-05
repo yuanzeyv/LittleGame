@@ -5,7 +5,7 @@ const { ccclass, property,type} = _decorator;
 export class ClickComponent extends Component {
     private mClickListenMap:Map<Component,Map<(...args)=>void,(...args)=>void>> = new Map<Component,Map<(...args)=>void,(...args)=>void>>(); 
     //注册一个按钮事件
-    public RegisterClick(target:Component,handle:(...args)=>void,...args):boolean{
+    public RegisterClick(target:Component,handle:(...args)=>void,args:Array<any>):boolean{
         let listenMap:Map<(...args)=>void,(...args)=>void>|undefined = this.mClickListenMap.get(target);
         if(listenMap == undefined){
             listenMap = new Map<(...args)=>void,(...args)=>void>();
@@ -13,12 +13,12 @@ export class ClickComponent extends Component {
         }
         if(listenMap.has(handle))//已经监听了相同的函数了
             return false;
-        let button:Button|undefined = this.node.getComponent(Button);
+        let button:Button|undefined = this.node.getComponent(Button); 
         if(button == undefined)//添加一个Button按钮
-            button = this.node.addComponent(Button);
+            button = this.node.addComponent(Button);  
         let executeFunc:(button:Button)=>void = (button:Button)=>{
-            handle.bind(target)(button,args); 
-        }; 
+            handle.bind(target)(button,...args); 
+        };  
         listenMap.set(handle,executeFunc);
         this.node.on("click",executeFunc);
     }

@@ -7,8 +7,8 @@ import { _Facade } from "../../Global";
 import { eLayerOrder } from "../../Logic/Proxy/WindowProxy/Class";
 import { BaseLayer } from "../BaseLayer/BaseLayer";
 import { WindowProxy } from "../../Logic/Proxy/WindowProxy/WindowProxy";
-import { ParaseUrl, PutRunTime } from "../../Util/Util"; 
-import { ePoolDefine } from "../../Logic/Proxy/PoolProxy/PoolDefine"; 
+import { ParaseUrl } from "../../Util/Util"; 
+import { ePoolDefine } from "../../Logic/Proxy/PoolProxy/PoolDefine";  
 import { PoolProxy } from "../../Logic/Proxy/PoolProxy/PoolProxy";
 import { BundleProxy, ListenObj, LoadStruct } from "../../Logic/Proxy/BundleProxy/BundleProxy";
 export type LayerComp = new ()=>BaseLayer; 
@@ -19,10 +19,13 @@ export type WindowParam = {fullScreenBlock:boolean,//是否打开全屏的触摸
                            windowBlock:boolean,//窗口底部是否拥有遮罩
                            closeNotice?:eNotice};//如果需要点击关闭，需要传入关闭通知 
 export  abstract class WindowBaseMediator extends BaseMediator {
-    private mView:WindowInterface;//MVC视图组件
-    private mResourcePathSet:Set<string> = new Set<string>();//获取到初始资源列表 
-    private mPrefabPathObj:{path:string,layerComp:LayerComp};//获取到预制体路径
-    private mLoadResourceID:number = -1;//资源加载ID   
+    protected mView:WindowInterface;//MVC视图组件
+    protected mResourcePathSet:Set<string> = new Set<string>();//获取到初始资源列表 
+    protected mPrefabPathObj:{path:string,layerComp:LayerComp};//获取到预制体路径
+    protected mLoadResourceID:number = -1;//资源加载ID   
+
+    //节点池初始化  这个变量会在资源加载完成后，进行调用
+    private mIsInitPool:boolean = false;
     onRegister(): void {
         this.InitResourcePathSet(this.mResourcePathSet);//初始化界面资源信息参数
         this.mPrefabPathObj = this.InitPrefabInfo();//初始化预制体 及 界面代理
@@ -64,6 +67,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     protected OpenLayer(data:any){
         if(!!this.mView)//已经打开了本窗口的话，立即返回
             return;
+        
         let view:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.WindowInterface);//从对象池中取一个可用的窗口
         this.mView = view.getComponent(WindowInterface);//取到组件的Interface
         this.mView.SetWindowBaseData(this.mediatorName,this.GetWindowParam());
@@ -86,9 +90,10 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     protected CloseLayer(data:any){
         if(!this.mView)//未打开窗口的情况
             return;
-        this.mView.CloseLayer();//调用windowInterface的关闭接口，清理一些界面的数据信息
-        _Facade.FindProxy(WindowProxy).CloseWindow(this.getMediatorName());
+
+            _Facade.FindProxy(WindowProxy).CloseWindow(this.getMediatorName());
         _Facade.FindProxy(PoolProxy).Put(ePoolDefine.WindowInterface,this.mView.node);//对视图节点进行回收
+        this.mView = undefined;
     }
 
  
@@ -101,6 +106,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     private ResourceLoadComplete(loadInfo:LoadStruct,data:any){ 
         this.mView.CompleteLoadingLayer(loadInfo,()=>{
             if(loadInfo.IsAllComplete()){ 
+                this.InitNodePool();
                 this.mView.CreateWindow(this.GenWindowNode(),data);//创建游戏窗口
                 _Facade.Send(eNotice.OpenLayer,this.getMediatorName());
             }else{ 
@@ -109,5 +115,15 @@ export  abstract class WindowBaseMediator extends BaseMediator {
             }
         }); 
     } 
+
+    //初始化节点池
+    private InitNodePool():void{
+        if(this.mIsInitPool)
+            return;
+        this.CreateNodePool()
+        this.mIsInitPool = true;
+    }
+    protected CreateNodePool():void{
+    }
 } 
 

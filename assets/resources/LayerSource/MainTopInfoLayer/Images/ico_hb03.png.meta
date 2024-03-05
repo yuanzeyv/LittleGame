@@ -23,9 +23,101 @@
         "anisotropy": 0,
         "isUuid": true,
         "imageUuidOrDatabaseUri": "1d07fbaa-4fc7-4892-a741-ab99fc4628ed",
-        "visible": true
+        "visible": false
       },
       "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "1d07fbaa-4fc7-4892-a741-ab99fc4628ed@f9941",
+      "displayName": "ico_hb03",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0.5,
+        "offsetY": 0,
+        "trimX": 1,
+        "trimY": 0,
+        "width": 46,
+        "height": 32,
+        "rawWidth": 47,
+        "rawHeight": 32,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -23,
+            -16,
+            0,
+            23,
+            -16,
+            0,
+            -23,
+            16,
+            0,
+            23,
+            16,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            1,
+            32,
+            47,
+            32,
+            1,
+            0,
+            47,
+            0
+          ],
+          "nuv": [
+            0.02127659574468085,
+            0,
+            1,
+            0,
+            0.02127659574468085,
+            1,
+            1,
+            1
+          ],
+          "minPos": [
+            -23,
+            -16,
+            0
+          ],
+          "maxPos": [
+            23,
+            16,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1d07fbaa-4fc7-4892-a741-ab99fc4628ed@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
       "imported": true,
       "files": [
         ".json"
@@ -36,7 +128,7 @@
   "userData": {
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "1d07fbaa-4fc7-4892-a741-ab99fc4628ed@6c48a"
+    "type": "sprite-frame",
+    "redirect": "1d07fbaa-4fc7-4892-a741-ab99fc4628ed@f9941"
   }
 }

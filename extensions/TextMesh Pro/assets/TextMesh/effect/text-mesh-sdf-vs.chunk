@@ -1,0 +1,70 @@
+precision highp float;
+
+#include <builtin/uniforms/cc-global>
+#if USE_LOCAL
+  #include <builtin/uniforms/cc-local>
+#endif
+#if SAMPLE_FROM_RT
+  #include <common/common-define>
+#endif
+
+// pos 3
+in vec3 a_position;
+// uv 2
+in vec2 a_texCoord;
+// uv2 2
+in vec2 a_texCoord1;
+// color 4
+in vec4 a_color;
+
+// channelId,fill 2
+in vec2 a_texCoord2;
+// stroke,strokeBlur 2
+in vec2 a_texCoord3;
+
+// strokeColor.rg 2
+in vec2 a_strokeColor0;
+// strokeColor.ba 2
+in vec2 a_strokeColor1;
+
+out vec4 color;
+out vec4 uvs;
+
+out float channelId;
+out float fill;  
+out float stroke;
+out float strokeBlur;
+out vec4 strokeColor;
+out float stokeBlur;
+
+out float strokeEnable;
+
+vec4 vert () {
+  vec4 pos = vec4(a_position, 1);
+
+  #if USE_LOCAL
+    pos = cc_matWorld * pos;
+  #endif
+
+  #if USE_PIXEL_ALIGNMENT
+    pos = cc_matView * pos;
+    pos.xyz = floor(pos.xyz);
+    pos = cc_matProj * pos;
+  #else
+    pos = cc_matViewProj * pos;
+  #endif
+
+  uvs = vec4(a_texCoord, a_texCoord1);
+  color = a_color;
+
+  channelId = a_texCoord2.x; 
+  fill = 1.0 - a_texCoord2.y;
+  strokeBlur = a_texCoord3.y;
+
+  stroke = fill - fill * a_texCoord3.x; 
+  strokeColor = vec4(a_strokeColor0, a_strokeColor1);
+
+  strokeEnable = step(0.001, a_texCoord3.x);
+
+  return pos;
+}

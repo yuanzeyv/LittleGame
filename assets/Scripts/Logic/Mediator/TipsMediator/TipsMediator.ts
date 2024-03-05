@@ -1,5 +1,4 @@
 import { Color } from "cc";
-import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
 import { LayerComp, WindowBaseMediator, WindowParam } from "../../../Frame/BaseMediator/WindowBaseMediator";
 import { _Facade } from "../../../Global";
@@ -14,15 +13,14 @@ export class TipsMediator extends WindowBaseMediator{
         .set(eNotice.TipsLayerClose,this.CloseLayer.bind(this))
         .set(eNotice.TipsShow,this.LayerHandle.bind(this));
     }  
-     
+      
     protected InitResourcePathSet(resourceSet:Set<string>):void{
-        resourceSet.add("resources/Perfab/TipsLayer");
-        resourceSet.add("resources/LayerSource/Basics");
+        resourceSet.add("resources/LayerSource/TipsLayer");  
     } 
     protected InitPrefabInfo(): { path: string; layerComp:LayerComp;} {
-        return { path:"resources/Perfab/TipsLayer/TipsLayer",layerComp:TipsLayer};
+        return { path:"resources/LayerSource/TipsLayer/Prefab/TipsLayer",layerComp:TipsLayer};  
     } 
-    
+      
     protected GetWindowParam(): WindowParam {
         return {
             fullScreenBlock:false,

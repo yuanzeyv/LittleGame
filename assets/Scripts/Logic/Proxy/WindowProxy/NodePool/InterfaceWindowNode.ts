@@ -1,8 +1,7 @@
 import { WindowInterface } from "../../../../Compoment/WindowInterface";
 import { NodeCellControl } from "../../PoolProxy/NodeCellControl";
 import {Node} from "cc";
-export class InterfaceWindowNode extends NodeCellControl{
-    
+export class InterfaceWindowNode extends NodeCellControl{ 
     protected InitNode(node:Node):void{//获取到对象池中的一个对象
         node.addComponent(WindowInterface).InitLayer();
     }

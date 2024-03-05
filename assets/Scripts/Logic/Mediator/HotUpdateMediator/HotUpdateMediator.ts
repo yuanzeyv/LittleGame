@@ -24,10 +24,10 @@ export class HotUpdateMediator extends WindowBaseMediator{
     } 
      
     protected GetWindowParam():{fullScrenMask:boolean,touchClose:boolean,openBg:boolean,bgColor:Color,showLoading:boolean,windowBlock:boolean}{
-        return {fullScrenMask:false,touchClose:false,openBg:false,bgColor:new Color(0,255,0,125),showLoading:true,windowBlock:false}; 
+        return {fullScrenMask:false,touchClose:false,openBg:false,bgColor:new Color(0,255,0,125),showLoading:false,windowBlock:false}; 
     }
       
     public WindowOrder():eLayerOrder{
         return eLayerOrder.Bottom; 
     }  
-}
+} 

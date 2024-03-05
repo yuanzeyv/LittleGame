@@ -77,7 +77,7 @@ export class FishMenuLayer extends BaseLayer {
     }
 
  
-    public Close(){
+    public onClose(){
         this.mSoltCell.Stop();
         this.mSoltCell = undefined;
     }
