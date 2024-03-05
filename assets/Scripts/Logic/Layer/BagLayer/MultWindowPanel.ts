@@ -1,14 +1,13 @@
 import { _decorator, Component, Node, Prefab, director, Label, find, Button, Vec3, math, UITransform, Widget, Size } from 'cc'; 
-import { CancleClick, ListenClick } from '../../../Util/Util';
 import { IMultPanleStruct, MultPanleConfig } from '../../../Config/Cfg_MultPanle'; 
 import { _Facade, _G } from '../../../Global';
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
 import { MultWindowLayer } from '../MultWindowLayer/MultWindowLayer';
 import { ScrollAdapter, Holder, IElement, AlwaysScroll, View } from '../../../Util/adapter';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
+import { MultWindowParamMap } from '../../Proxy/MultWindowProxy/MultWindowTypeDefine';
 const { ccclass, property } = _decorator;
 export interface IFixedModel {index:number; panelID:number,} 
-@ccclass('MultWindowPanel')
 export class MultWindowPanel extends ScrollAdapter<IFixedModel> { 
     public mLayer:MultWindowLayer;
     public mSelectWindowID:number = 0; //默认选中2面板  
@@ -44,6 +43,8 @@ export class MultWindowPanel extends ScrollAdapter<IFixedModel> {
         this.mSelectWindowID = windowID;
         this.scrollManager.scrollToGroupIndex(0,index + 1);  
         this.mLayer.SetWindowTitle(config.btnName); 
+
+        _Facade.Send(MultWindowParamMap[windowID].openNotice,windowID);
     } 
 }
  
@@ -58,7 +59,7 @@ class MyHolder extends Holder<IFixedModel>{
         this.mFixedComp = this.adapter.getComponent(MultWindowPanel);
     }
     protected onVisible(): void {    
-        ListenClick(this.node,this,this.ClickHandle); 
+        this.mFixedComp.mLayer.RegisterButtonEvent(this.node,this.ClickHandle,this); 
  
         let config:IMultPanleStruct = MultPanleConfig.GetData(this.data.panelID)!; 
         find("CellName",this.node).getComponent(TextMeshLabel).string = config.btnName;
@@ -69,7 +70,7 @@ class MyHolder extends Holder<IFixedModel>{
         this.transform.setContentSize(new Size(size.x + 50,70));  
     }    
     protected onDisable(): void { 
-        CancleClick(this.node,this,this.ClickHandle);  
+        this.mFixedComp.mLayer.UnregisterButtonClick(this.node,this.ClickHandle);  
     }  
  
     private ClickHandle(){

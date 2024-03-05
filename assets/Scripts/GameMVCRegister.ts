@@ -43,6 +43,7 @@ import { BottomMenuMediator } from "./Logic/Mediator/BottomMenuMediator/BottomMe
 import { BagMediator } from "./Logic/Mediator/BagMediator/BagMediator";
 import { MultWindowMediator } from "./Logic/Mediator/MultWindowMediator/MultWindowMediator";
 import { MultWindowProxy } from "./Logic/Proxy/MultWindowProxy/MultWindowProxy";
+import { BagMultMediator } from "./Logic/Mediator/BagMediator/BagMultMediator";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
@@ -74,7 +75,8 @@ export class GameMVCRegister extends BaseMVCRegister {
             .set(MainTopMediator,"MainTopMediator")  //主界面Mediator 
             .set(BottomMenuMediator,"BottomMenuMediator")  //主界面Mediator 
             .set(BagMediator,"BagMediator")  //背包界面Mediator 
-            .set(MultWindowMediator,"MultWindowMediator")  //背包界面Mediator 
+            .set(BagMultMediator,"BagMultMediator")  //背包界面Mediator 
+            .set(MultWindowMediator,"MultWindowMediator")  //背包界面Mediator  
     }  
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void { 

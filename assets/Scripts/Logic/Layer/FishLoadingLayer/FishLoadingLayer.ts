@@ -6,6 +6,7 @@ import { SoltCell } from '../../../Util/Time/TimeWheel';
 import { FishLoadingMediator } from '../../Mediator/FishLoadingMediator/FishLoadingMediator';
 import { parseStyle } from '../../../Util/StyleParse/StyleParse';
 const { ccclass, property,type} = _decorator;
+@ccclass('FishLoadingLayer')
 export class FishLoadingLayer extends BaseLayer { 
     private mTouchID:number = -1;//触摸ID用，确保只存在一个触摸节点
     private mPlayGameButton:Node;//玩家游戏按钮

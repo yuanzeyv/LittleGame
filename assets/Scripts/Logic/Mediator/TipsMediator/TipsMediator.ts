@@ -22,16 +22,10 @@ export class TipsMediator extends WindowBaseMediator{
     } 
       
     protected GetWindowParam(): WindowParam {
-        return {
-            fullScreenBlock:false,
-            canTouchClose: false,
-            bgColor:new Color(0,0,0,125), 
-            showLoading: false,
-            windowBlock:false,
-            closeNotice: eNotice.TipsLayerClose
-        } 
+        return {fullScreenBlock:false,bgColor:new Color(0,0,0,125), showLoading: false,closeNotice: eNotice.TipsLayerClose,windowBlock:false,} 
     }
+    
     public WindowOrder():eLayerOrder{
-        return eLayerOrder.MaxTop;
+        return eLayerOrder.MaxTop; 
     }  
 }

@@ -4,11 +4,11 @@ import {_Facade, _G} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
 import { PlayerHead } from '../../../Compoment/PlayerHeadComp';
 const {ccclass, property, type} = _decorator;
-
+@ccclass('MainTopLayer')
 export class MainTopLayer extends BaseLayer {   
     private mPlayerHead:PlayerHead;//玩家头像 
     RegisterExecuteHandle(executeMap: Map<eNotice, LayerExecute>) {} 
-    
+     
     InitNode() {   
         this.mPlayerHead = find("PlayerHead",this.node).getComponent(PlayerHead);
     } 

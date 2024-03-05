@@ -26,7 +26,7 @@ export class BottomMenuMediator extends WindowBaseMediator{
     }  
     
     protected GetWindowParam():WindowParam{
-        return {fullScreenBlock:true,canTouchClose:true,bgColor:new Color(0,255,0,0),showLoading:false,windowBlock:false,closeNotice:eNotice.CloseBottomMenuLayer}; 
+        return {fullScreenBlock:true,bgColor:new Color(0,255,0,0),showLoading:false,closeNotice:eNotice.CloseBottomMenuLayer,windowBlock:false,}; 
     } 
   
     public WindowOrder():eLayerOrder{

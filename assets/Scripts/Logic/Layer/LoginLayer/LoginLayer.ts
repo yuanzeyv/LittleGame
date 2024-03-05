@@ -5,7 +5,7 @@ import {eNotice} from '../../../NotificationTable';
 import { eNetProtocol } from '../../../NetNotification'; 
 import { NetProxy } from '../../Proxy/NetProxy/NetProxy'; 
 const {ccclass, property, type} = _decorator;
-
+@ccclass('LoginLayer') 
 export class LoginLayer extends BaseLayer {  
     private mLoginButton:Node; 
     private mCheckVector:Node; 

@@ -61,7 +61,7 @@ export class BaseLayer extends Component{
     } 
 
     //反注册一个按钮事件
-    protected UnregisterButtonClick(node:Node,func:(event:EventTouch,...args)=>void):void{ 
+    public UnregisterButtonClick(node:Node,func:(event:EventTouch,...args)=>void):void{ 
         this.mButtonEvent.UnregisterButtonClick(node,func);//反注册指定的回调 
     }
 }

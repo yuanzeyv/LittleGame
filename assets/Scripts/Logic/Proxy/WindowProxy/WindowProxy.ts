@@ -8,6 +8,8 @@ import { PoolProxy } from "../PoolProxy/PoolProxy";
 import { ePoolDefine } from "../PoolProxy/PoolDefine";
 import { InterfaceWindowNode } from "./NodePool/InterfaceWindowNode";
 import { eNotice } from "../../../NotificationTable"; 
+import { MultWindowProxy } from "../MultWindowProxy/MultWindowProxy";
+import { MultWindowParam, MultWindowParamMap } from "../MultWindowProxy/MultWindowTypeDefine";
 //用于管理当前游戏中的所有窗口 以及 预制体缓存
 export class WindowProxy extends BaseProxy{
     static get ProxyName():string { return "WindowProxy" }; 
@@ -67,13 +69,16 @@ export class WindowProxy extends BaseProxy{
 
     
     //打开多面板用
-    public OpenMultWindow(windowName:string,windowComp:WindowInterface,order:eLayerOrder):boolean{
+    public OpenMultWindow(windowName:string,windowComp:WindowInterface,windowID:number):boolean{
         if(this.WindowIsEarlyOpen(windowName))
             return false;
-        if(this.WindowIsEarlyOpen("MultWindowMediator"))
+        let oneWindowID:number = _Facade.FindProxy(MultWindowProxy).GetOneLevelWindowID(windowID);//通过窗口ID获取到主窗口ID
+        if(oneWindowID == 0)
             return false;
-        let interfaceWindow:WindowInterface = this.mWindowMap.get("MultWindowMediator");
-        interfaceWindow.node.addChild(windowComp.node);//将当前界面添加到层级下
+        let multParam:MultWindowParam = MultWindowParamMap[oneWindowID];
+        if(!this.WindowIsEarlyOpen(multParam.MainMediator))//判断主面板是否被创建
+            return false;  
+        _Facade.Send(multParam.addNotice,windowComp.node);//将组件添加到节点下
         this.mWindowMap.set(windowName,windowComp);//设置插入到节点中去 
         return true;
     }

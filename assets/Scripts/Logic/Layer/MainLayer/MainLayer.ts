@@ -5,8 +5,8 @@ import {eNotice} from '../../../NotificationTable';
 import { Facade } from '../../../Frame/PureMVC';
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
 import { ResouceProxy } from '../../Proxy/ResourceProxy/ResouceProxy';
-const {ccclass, property, type} = _decorator;
-
+const {ccclass, property, type} = _decorator; 
+@ccclass('MainLayer')
 export class MainLayer extends BaseLayer {  
     private mSpineBGSpine:sp.Skeleton;//Spine背景节点 
     private mBottomFunctionButtonArray:Array<Node> = new Array<Node>();

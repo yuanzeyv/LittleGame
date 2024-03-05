@@ -8,6 +8,7 @@ import { FishCommonPopWindowMediator } from '../../Mediator/FishCommonPopWindowM
 import { FishMainProxy } from '../../Proxy/FishMainProxy/FishMainProxy';
 import { MusicProxy } from '../../Proxy/MusicProxy/MusicProxy';
 const { ccclass, property,type} = _decorator;
+@ccclass('FishMenuLayer')
 export class FishMenuLayer extends BaseLayer {
     private mTailSpine:sp.Skeleton;
     private mMoveButton:Node;//点击尾巴 运动

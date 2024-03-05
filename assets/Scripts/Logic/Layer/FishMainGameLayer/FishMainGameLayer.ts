@@ -8,7 +8,7 @@ import { FishMainProxy } from '../../Proxy/FishMainProxy/FishMainProxy';
 import { EventHandle } from 'cc';
 import { EventHandler } from 'cc';
 import { Vec2 } from 'cc';
-const { ccclass, property,type} = _decorator; 
+const { ccclass, property,type} = _decorator;  
 @ccclass('FishMainGameLayer') 
 export class FishMainGameLayer extends BaseLayer {  
     private mFishMainProxy:FishMainProxy;

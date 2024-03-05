@@ -3,7 +3,8 @@ import { BaseLayer } from '../../../Frame/BaseLayer/BaseLayer';
 import { _Facade } from '../../../Global';
 import { eNotice } from '../../../NotificationTable';
 import { TipsWindowMediator } from '../../Mediator/TipsWindowMediator/TipsWindowMediator';
-const { ccclass, property,type} = _decorator;
+const { ccclass, property,type} = _decorator; 
+@ccclass('TipsWindowLayer')
 export class TipsWindowLayer extends BaseLayer {
     private mCloseButton:Node;//获取到返回按钮
     private mBackground:Node;//获取到背景板

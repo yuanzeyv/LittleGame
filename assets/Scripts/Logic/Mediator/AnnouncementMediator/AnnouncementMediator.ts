@@ -22,7 +22,7 @@ export class AnnouncementMediator extends WindowBaseMediator{
     } 
       
     protected GetWindowParam():WindowParam{
-        return {fullScreenBlock:false,canTouchClose:false,bgColor:new Color(0,255,0,141),showLoading:false,windowBlock:false}; 
+        return {fullScreenBlock:false,bgColor:new Color(0,255,0,141),showLoading:false,windowBlock:false,}; 
     } 
 
     public WindowOrder():eLayerOrder{ 

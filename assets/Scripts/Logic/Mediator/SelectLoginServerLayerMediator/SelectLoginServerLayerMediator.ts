@@ -1,7 +1,7 @@
 import { Color } from "cc";
 import { BaseLayer } from "../../../Frame/BaseLayer/BaseLayer";
 import { NotificationHandle } from "../../../Frame/BaseMediator/BaseMediator";
-import { LayerComp, WindowBaseMediator } from "../../../Frame/BaseMediator/WindowBaseMediator";
+import { LayerComp, WindowBaseMediator, WindowParam } from "../../../Frame/BaseMediator/WindowBaseMediator";
 import { _Facade } from "../../../Global";
 import { eNotice } from "../../../NotificationTable"; 
 import { eLayerOrder } from "../../Proxy/WindowProxy/Class";
@@ -21,10 +21,10 @@ export class SelectLoginServerLayerMediator extends WindowBaseMediator{
     protected InitPrefabInfo(): { path: string; layerComp:LayerComp;} {
         return { path:"resources/Perfab/LoginLayer/LoginLayer",layerComp:LoginLayer};
     } 
-    
-    protected GetWindowParam():{fullScrenMask:boolean,touchClose:boolean,openBg:boolean,bgColor:Color,showLoading:boolean,windowBlock:boolean}{
-        return {fullScrenMask:false,touchClose:false,openBg:false,bgColor:new Color(0,255,0,125),showLoading:false,windowBlock:false}; 
-    }
+     
+    protected GetWindowParam():WindowParam{
+        return {fullScreenBlock:false,bgColor:new Color(0,255,0,0),showLoading:false,windowBlock:false,}; 
+    } 
       
     public WindowOrder():eLayerOrder{
         return eLayerOrder.Bottom; 

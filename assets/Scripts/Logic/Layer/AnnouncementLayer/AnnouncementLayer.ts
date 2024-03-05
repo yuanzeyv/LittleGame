@@ -4,6 +4,7 @@ import { eNotice } from "../../../NotificationTable";
 import { TextMeshLabel } from "../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel";
 
 const { ccclass, property,type} = _decorator;
+@ccclass('AnnouncementLayer')
 export class AnnouncementLayer extends BaseLayer {
     public mMoveNode:Node; 
     public m_StartPosition:Vec3 = new Vec3(0,0,0);

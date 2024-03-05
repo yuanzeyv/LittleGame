@@ -1,60 +1,53 @@
-import { _decorator, Component, Node, BlockInputEvents, Color,Animation, Sprite, UITransform, math, Prefab, instantiate, Layers, Widget, find, Button, Vec3, tween } from 'cc';
+import { _decorator, Component, Node, BlockInputEvents, Color,Animation, Sprite, UITransform, Widget, find, Button, Vec3, tween } from 'cc';
 import { BaseLayer } from '../Frame/BaseLayer/BaseLayer';
 import { INotification } from '../Frame/PureMVC';
 import { _Facade } from '../Global';
 import { CopyWidget, SetFullWidget } from '../Util/Util'; 
 import { LoadStruct } from '../Logic/Proxy/BundleProxy/BundleProxy'; 
 import { WindowParam } from '../Frame/BaseMediator/WindowBaseMediator';
-const { ccclass, property,type} = _decorator;
-@ccclass('WindowInterface')
+const { ccclass} = _decorator;
 export class WindowInterface extends Component {   
     private mLayerCompoment:BaseLayer;//界面用组件 
-    private mMediatorName:string;
     private mWindowData:WindowParam;
-
-    public InitLayer(){ 
-        this.Find("TouchMask").on("click",this.OnCloseHandle,this); 
+    public InitLayer(){
+        find("TouchMask",this.node).on("click",this.OnCloseHandle,this); 
+    } 
+    
+    public OnCloseHandle(button:Button){
+        if(this.mWindowData.closeNotice == undefined) //触摸是否关闭
+            return; 
+        _Facade.Send(this.mWindowData.closeNotice);
     } 
 
-    public Find(path:string):Node{ return find(path,this.node); }
-
-    public SetWindowBaseData(mediatorName:string,data:WindowParam):void{
-        this.mMediatorName = mediatorName;
+    public SetWindowBaseData(data:WindowParam):void{
         this.mWindowData = data;
     }
     
-    public OnCloseHandle(button:Button){
-        if(!this.mWindowData.canTouchClose || this.mWindowData.closeNotice == undefined) //触摸是否关闭
-            return; 
-        _Facade.Send(this.mWindowData.closeNotice,this.mMediatorName);
-    } 
- 
     CreateWindow(layer:Node,windowData:any):boolean{//创建一个窗口对象    
-        this.WindowNode.active = true;//关闭窗口的显示
+        this.WindowNode.active = true;//关闭窗口的显示 
         this.WindowNode.getComponent(BlockInputEvents).enabled = this.mWindowData.windowBlock;
 
         let prefabWidget:Widget = layer.getComponent(Widget);//获取到当前Layer的窗口信息
         if(prefabWidget != undefined){ //如果当前非窗口类型的组件 并且拥有widget时 
             let windowWidget:Widget = this.WindowNode.getComponent(Widget);
             if(windowWidget == undefined)
-                windowWidget = this.Find("Window").addComponent(Widget);
+                windowWidget = find("Window",this.node).addComponent(Widget);
             CopyWidget(prefabWidget,windowWidget);//window的widget变更为与窗口一致的widget
             SetFullWidget(prefabWidget);//设置窗口的widget为全屏widget
         }
-        this.Find("Window").getComponent(UITransform).setContentSize(layer.getComponent(UITransform).contentSize);
+        find("Window",this.node).getComponent(UITransform).setContentSize(layer.getComponent(UITransform).contentSize);
         try{
             this.mLayerCompoment  = layer.getComponent(BaseLayer);//加入组件
             this.mLayerCompoment.InitBaseLayer(windowData);//初始化组件数据信息
             layer.setParent(this.WindowNode);
-        }catch(error){ 
+        }catch(error){
             console.error(error);
             return false;
-        } 
+        }
         return true;
-    } 
+    }
 
     CloseLayer(){
-        this.Find("TouchMask").off("click",this.OnCloseHandle,this); 
         this.mLayerCompoment.CloseLayer();
         this.WindowNode.destroyAllChildren();//销毁 
         this.WindowNode.removeAllChildren();//删除 
@@ -129,6 +122,6 @@ export class WindowInterface extends Component {
 
     /*窗口节点控制*/
     public get WindowNode():Node{
-        return this.Find("Window");
+        return  find("Window",this.node);
     } 
 }

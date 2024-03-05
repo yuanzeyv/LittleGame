@@ -12,12 +12,14 @@ import { ePoolDefine } from "../../Logic/Proxy/PoolProxy/PoolDefine";
 import { PoolProxy } from "../../Logic/Proxy/PoolProxy/PoolProxy";
 import { BundleProxy, ListenObj, LoadStruct } from "../../Logic/Proxy/BundleProxy/BundleProxy";
 export type LayerComp = new ()=>BaseLayer; 
-export type WindowParam = {fullScreenBlock:boolean,//是否打开全屏的触摸遮罩
-                           canTouchClose:boolean,//在打开全屏触摸遮罩时，是否可以点击关闭
+export type WindowParam = {
+                            windowBlock:boolean,//窗口底部是否拥有遮罩
+                           fullScreenBlock:boolean,//是否打开全屏的触摸遮罩 
                            bgColor?:Color,//再打开全屏触摸遮罩时，是否显示颜色，及 显示数目颜色
-                           showLoading:boolean,//是否显示资源加载时的Loading图
-                           windowBlock:boolean,//窗口底部是否拥有遮罩
-                           closeNotice?:eNotice};//如果需要点击关闭，需要传入关闭通知 
+                           showLoading:boolean,//是否显示资源加载时的Loading图 
+                           closeNotice?:eNotice,//如果需要点击关闭，需要传入关闭通知  
+                           isChildWindow?:boolean,//当前界面是否属于子界面
+                        };
 export  abstract class WindowBaseMediator extends BaseMediator {
     protected mView:WindowInterface;//MVC视图组件
     protected mResourcePathSet:Set<string> = new Set<string>();//获取到初始资源列表 
@@ -46,7 +48,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     protected abstract InitPrefabInfo():{path:string,layerComp:LayerComp};
     public WindowOrder():eLayerOrder{ return eLayerOrder.MinBottom; }  //返回界面要加入的游戏层级
     protected GetWindowParam():WindowParam{
-        return {fullScreenBlock:true,canTouchClose:true,bgColor:new Color(255,0,0,125),showLoading:true,windowBlock:true,closeNotice:eNotice.TipsLayerClose};
+        return {fullScreenBlock:true,bgColor:new Color(255,0,0,125),showLoading:true,windowBlock:false,};
     }  
     public GenWindowNode():Node{
         let realPath:{bundleName:string,url:string}  = ParaseUrl(this.mPrefabPathObj.path);
@@ -70,7 +72,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
         
         let view:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.WindowInterface);//从对象池中取一个可用的窗口
         this.mView = view.getComponent(WindowInterface);//取到组件的Interface
-        this.mView.SetWindowBaseData(this.mediatorName,this.GetWindowParam());
+        this.mView.SetWindowBaseData(this.GetWindowParam());
         let canOpen:boolean = _Facade.FindProxy(WindowProxy).OpenWindow(this.getMediatorName(),this.mView,this.WindowOrder());//判断组件是否被正常的添加
         if(!canOpen){//没有被正常打开的话
             _Facade.FindProxy(PoolProxy).Put(ePoolDefine.WindowInterface,view);//对视图节点进行回收
@@ -90,8 +92,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     protected CloseLayer(data:any){
         if(!this.mView)//未打开窗口的情况
             return;
-
-            _Facade.FindProxy(WindowProxy).CloseWindow(this.getMediatorName());
+        _Facade.FindProxy(WindowProxy).CloseWindow(this.getMediatorName());
         _Facade.FindProxy(PoolProxy).Put(ePoolDefine.WindowInterface,this.mView.node);//对视图节点进行回收
         this.mView = undefined;
     }

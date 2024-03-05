@@ -2,7 +2,8 @@ import { _decorator, Component, Node, BlockInputEvents, Color, Sprite, Button, i
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
 import { eNotice } from '../../../NotificationTable';
 import { _Facade, _G } from '../../../Global';
-const { ccclass, property,type} = _decorator;
+const { ccclass, property,type} = _decorator; 
+@ccclass('FishSettingLayer')
 export class FishSettingLayer extends BaseLayer {
     private mExitButton:Node;
 

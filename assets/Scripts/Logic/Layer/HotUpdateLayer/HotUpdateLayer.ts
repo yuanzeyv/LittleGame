@@ -14,7 +14,8 @@ import { HotUpdateProgressStateMachine } from './HotUpdateStateMachine/HotUpdate
 import { HotUpdateFailStateMachine } from './HotUpdateStateMachine/HotUpdateFailStateMachine';
 import { HotUpdateFinishStateMachine } from './HotUpdateStateMachine/HotUpdateFinishStateMachine';
 import { SkipHotUpdateStateMachine } from './HotUpdateStateMachine/SkipHotUpdateStateMachine';
-const {ccclass, property, type} = _decorator;
+const {ccclass, property, type} = _decorator;  
+@ccclass('HotUpdateLayer')
 export class HotUpdateLayer extends BaseLayer { 
     private mLoginButton:Node;//登录按钮
     private mHotButton:Node;//热更按钮

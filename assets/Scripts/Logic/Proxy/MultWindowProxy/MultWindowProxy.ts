@@ -82,9 +82,9 @@ export class MultWindowProxy extends BaseProxy{
     public GetOneLevelWindowID(windowID:number):number{
         let ret:number = windowID;
         while(true){
-            let config:{type:eWindowLevel,parent:number,children:Array<number>,config:IMultPanleStruct}|undefined = this.mWindowConfigMap.get(windowID);
+            let config:{type:eWindowLevel,parent:number,children:Array<number>,config:IMultPanleStruct}|undefined = this.mWindowConfigMap.get(ret);
             if(config == undefined){
-                ret = 0;
+                ret = 0; 
                 break;
             }
             if(config.type == eWindowLevel.One)

@@ -8,7 +8,7 @@ export interface ICommonData{
     desc:string;
     funcDesc:string;
     handleFunc:()=>void;
-}
+} 
 export class FishCommonPopWindowLayer extends BaseLayer {
     private mTitleLabel:Label;
     private mDescLabel:Label;

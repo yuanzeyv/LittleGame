@@ -145,9 +145,15 @@ export enum eNotice {
     //打开背包界面
     OpenBagLayer = "OpenBagLayer",
     CloseBagLayer = "CloseBagLayer",
+    OpenMultBagLayer = "OpenMultBagLayer",
+    ClosMultBagLayer = "ClosMulteBagLayer",
+    AddMultBagLayer = "AddMultBagLayer",
 
     //多面板界面打开函数
     MultPanleOpen = "MultPanleOpen",
     MultPanleClose = "MultPanleClose",
     MultPanleAdd = "MultPanleAdd",//添加一个面板到多面板
+    
+    //背包多面板节点
+    BagPanelAdd = "BagPanelAdd",//背包多面板添加
 }
