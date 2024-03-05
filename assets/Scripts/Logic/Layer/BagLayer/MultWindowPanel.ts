@@ -8,6 +8,7 @@ import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/Tex
 import { MultWindowParamMap } from '../../Proxy/MultWindowProxy/MultWindowTypeDefine';
 const { ccclass, property } = _decorator;
 export interface IFixedModel {index:number; panelID:number,} 
+@ccclass('MultWindowPanel')
 export class MultWindowPanel extends ScrollAdapter<IFixedModel> { 
     public mLayer:MultWindowLayer;
     public mSelectWindowID:number = 0; //默认选中2面板  
