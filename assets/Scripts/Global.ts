@@ -3,9 +3,7 @@ import {Facade} from "./Frame/PureMVC";
 import {TimeWheel} from "./Util/Time/TimeWheel";
 class Global {
     private m_Facade: Facade = new Facade();
-    get Facade(): Facade {
-        return this.m_Facade;
-    }//返回MVC外观对象
+    get Facade(): Facade { return this.m_Facade; }//返回MVC外观对象
     private m_TimeWheel: TimeWheel = new TimeWheel(10, "Global");
 
     get TimeWheel(): TimeWheel { return this.m_TimeWheel; }

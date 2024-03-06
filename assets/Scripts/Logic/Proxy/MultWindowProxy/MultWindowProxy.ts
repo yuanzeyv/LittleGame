@@ -15,7 +15,6 @@ export class MultWindowProxy extends BaseProxy{
     private mWindowConfigMap:Map<number,{type:eWindowLevel,parent:number,children:Array<number>,config:IMultPanleStruct}> = new Map<number,{type:eWindowLevel,parent:number,children:Array<number>,config:IMultPanleStruct}>();//初始化当前界面的表信息
     //value 窗口的控制组件 key mediator分配的名称
     private mWindowMap:Map<string,WindowInterface> = new Map<string,WindowInterface>()//保存所有的窗口对象信息，支持打开一个窗口，支持关闭一个窗口。
-    private mOrderNodeMap:Array<Node> = new Array<Node>();
     public onLoad(): void {  
         this.InitMultWindowTable();
     }    

@@ -10,8 +10,7 @@ const { ccclass, property } = _decorator;
 export interface IFixedModel {index:number; panelID:number,} 
 @ccclass('MultWindowPanel')
 export class MultWindowPanel extends ScrollAdapter<IFixedModel> { 
-    public mLayer:MultWindowLayer;
-    public mSelectWindowID:number = 0; //默认选中2面板  
+    public mLayer:MultWindowLayer; 
     private mPanelBtnMap:Map<number,number> = new Map<number,number>(); 
     public getPrefab(data: IFixedModel): Node | Prefab { 
         return _Facade.FindProxy(BundleProxy).UseAsset("resources","LayerSource/MultWindowLayer/Prefab/MultWindowCell",Prefab); 
@@ -25,7 +24,7 @@ export class MultWindowPanel extends ScrollAdapter<IFixedModel> {
         this.mLayer = windowLayer;
     }
 
-    public SetTableViewData(viewData:Array<number>):void{
+    public SetTableViewData(viewData:Array<number>,defaultID:number = -1):void{
         this.mPanelBtnMap.clear(); 
         let list:IFixedModel[] = []; 
         for(let index = 0;index < viewData.length;index++){
@@ -33,20 +32,43 @@ export class MultWindowPanel extends ScrollAdapter<IFixedModel> {
             list.push({index:index,panelID:viewData[index]});  
         }
         this.modelManager.insert(list);//可以打开面板了 
-        this.SetSelectWindow(viewData[0]);
-    }   
+        this.SetSelectWindow(defaultID == -1 ? viewData[0] : defaultID); 
+    }    
 
     public SetSelectWindow(windowID:number){
+        let selectWindowID:number = this.mLayer.GetSelectWindowID();
         let index:number|undefined = this.mPanelBtnMap.get(windowID);
         if(index == undefined)//如果没有设置的话，将会直接返回
             return;
+        if(MultWindowParamMap[selectWindowID])
+            _Facade.Send(MultWindowParamMap[selectWindowID].closeNotice);
         let config:IMultPanleStruct = MultPanleConfig.GetData(windowID)!;
-        this.mSelectWindowID = windowID;
         this.scrollManager.scrollToGroupIndex(0,index + 1);  
         this.mLayer.SetWindowTitle(config.btnName); 
-
-        _Facade.Send(MultWindowParamMap[windowID].openNotice,windowID);
+        this.SetBtnSelectStatus(windowID);
+        this.mLayer.SetSelectWindowID(windowID);
+        if(MultWindowParamMap[windowID])
+            _Facade.Send(MultWindowParamMap[windowID].openNotice,windowID);
     } 
+
+    public SetBtnSelectStatus(windowID:number):boolean{
+        let selectWindowID:number = this.mLayer.GetSelectWindowID();
+        let nowWindowIndex:number|undefined = this.mPanelBtnMap.get(selectWindowID);
+        let windowIndex:number|undefined = this.mPanelBtnMap.get(windowID);
+        if(windowIndex == undefined)
+            return false;  
+        let nowVisibleIndex:number = this.viewManager.getVisibleIndexByGroupIndex(nowWindowIndex);
+        if(nowVisibleIndex != -1){
+            let view = this.viewManager.getVisibleView(nowVisibleIndex); 
+            (view.holderList[0] as MyHolder).node.getComponent(Button).interactable = true;
+        }
+        let visibleIndex:number = this.viewManager.getVisibleIndexByGroupIndex(windowIndex);
+        if(visibleIndex != -1){
+            let view = this.viewManager.getVisibleView(visibleIndex); 
+            (view.holderList[0] as MyHolder).node.getComponent(Button).interactable = false;
+        }
+        return true;        
+    }
 }
  
 class MyView extends View<IFixedModel> {  
@@ -64,7 +86,7 @@ class MyHolder extends Holder<IFixedModel>{
  
         let config:IMultPanleStruct = MultPanleConfig.GetData(this.data.panelID)!; 
         find("CellName",this.node).getComponent(TextMeshLabel).string = config.btnName;
-        this.node.getComponent(Button).interactable = config.key != this.mFixedComp.mSelectWindowID; 
+        this.node.getComponent(Button).interactable = config.key != this.mFixedComp.mLayer.GetSelectWindowID(); 
         
         let size:Size = find("CellName",this.node).getComponent(UITransform).contentSize;
         this.node.getComponent(UITransform).setContentSize(new Size(size.x + 50,70)) ;
@@ -76,19 +98,11 @@ class MyHolder extends Holder<IFixedModel>{
  
     private ClickHandle(){
         let config:IMultPanleStruct = MultPanleConfig.GetData( this.data.panelID)!;//
-        if(this.mFixedComp.mSelectWindowID == config.key)//已经被选中了
+        if( this.mFixedComp.mLayer.GetSelectWindowID() == config.key)//已经被选中了
             return; 
         this.mFixedComp.mLayer.SetWindowTitle(config.title);//设置当前的窗口名称
         let index:number = this.mFixedComp.GetIndex(this.data.panelID);//获取到当前选中的index
         this.adapter.scrollManager.scrollToGroupIndex(0.1,index + 1,AlwaysScroll.Footer);//移动到指定index
-        
-        let chooseIndex:number = this.mFixedComp.GetIndex(this.mFixedComp.mSelectWindowID);
-        let visibleIndex:number = this.mFixedComp.viewManager.getVisibleIndexByGroupIndex(chooseIndex) ;
-        this.mFixedComp.mSelectWindowID = this.data.panelID;//设置当前选中的面板ID
-        this.node.getComponent(Button).interactable = false;   
-        if(visibleIndex == -1)  
-            return;  
-        let view = this.mFixedComp.viewManager.getVisibleView(visibleIndex); 
-        (view.holderList[0] as MyHolder).node.getComponent(Button).interactable = true;
+        this.mFixedComp.SetSelectWindow(config.key);
     }
-} 
+}  

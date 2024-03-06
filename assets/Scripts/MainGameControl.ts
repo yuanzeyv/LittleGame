@@ -1,7 +1,6 @@
 import {_decorator, Component} from "cc";
 import {_Facade, _G} from "./Global"; 
 import { BundleProxy } from "./Logic/Proxy/BundleProxy/BundleProxy";
-import { FishMainProxy } from "./Logic/Proxy/FishMainProxy/FishMainProxy";
 import { GameMVCRegister } from "./GameMVCRegister";
 import { eNotice } from "./NotificationTable";
 const { ccclass, property } = _decorator;
@@ -15,8 +14,7 @@ class MainGameControl extends Component{
         _Facade.FindProxy(BundleProxy).LoadBundle("resources",this.BundleLoadResult.bind(this)); //加载游戏必要的基础资源信息
     }
     
-    protected update(tick:number){
-        _Facade.FindProxy(FishMainProxy).Update(tick); 
+    protected update(tick:number){ 
         _G.TimeWheel.Tick(Math.ceil(tick * 1000));
     }
     private BundleLoadResult(bundleName:string,isComplete:boolean){

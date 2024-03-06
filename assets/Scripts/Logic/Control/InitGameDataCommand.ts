@@ -24,7 +24,6 @@ export class InitGameDataCommand extends BaseCommand{
         _Facade.FindProxy(WindowProxy).InitNodePool();//初始化窗口对象池
         _Facade.Send(eNotice.TipsLayerOpen);//打开通知面板
         _Facade.Send(eNotice.AnnouncementOpen);//打开公告面板
-        Sorting
         //判断当前是否是Native平台 
         if(!NATIVE) 
             _Facade.Send(eNotice.LongInOpen);//打开登录面板 

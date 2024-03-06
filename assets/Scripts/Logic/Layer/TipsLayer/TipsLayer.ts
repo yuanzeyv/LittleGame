@@ -12,6 +12,7 @@ export class TipsLayer extends BaseLayer {
     public m_StartPosition: Vec3 = new Vec3(0, 0, 0);
     public m_EndPosition: Vec3 = new Vec3(0, 0, 0);
     //拥有一个Tips队列，用以收集需要播放的tips
+    
     private m_TipsStringArray: Array<string> = new Array<string>();
     //当前是否是等待状态
     private m_IsWaitStatus: boolean = false;

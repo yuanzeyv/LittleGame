@@ -6,16 +6,15 @@ import { _decorator, find,Node } from "cc";
 import { MultWindowProxy } from "../../Proxy/MultWindowProxy/MultWindowProxy";
 import { MultWindowPanel } from "../BagLayer/MultWindowPanel"; 
 import { TextMeshLabel } from "../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel"; 
+import { MultWindowParamMap } from "../../Proxy/MultWindowProxy/MultWindowTypeDefine";
 const {ccclass, property, type} = _decorator; 
 @ccclass('MultWindowLayer')
 export class MultWindowLayer extends BaseLayer {   
     private mMainID:number = 0;//当前界面的主ID
-    private mSelectID:number = 0;//当前打开的界面ID 
+    private mSelectWindowID:number = 0;//当前打开的界面ID 
     private mContent:Node//获取到当前窗口的承载节点
 
     private mTwoWindowIDArray:Array<number> = new Array<number>();//当前打开的界面ID 
-
-
     
     private mTwoTableView:MultWindowPanel = undefined;//当前界面的2级窗口TableView 
     RegisterExecuteHandle(executeMap: Map<eNotice, LayerExecute>) {
@@ -28,13 +27,13 @@ export class MultWindowLayer extends BaseLayer {
     } 
     InitData(windowInfo:{mainID:number,selectID:number}) {
         this.mMainID = windowInfo.mainID;
-        this.mSelectID = windowInfo.selectID;
+        this.mSelectWindowID = windowInfo.selectID;
         this.mTwoWindowIDArray = _Facade.FindProxy(MultWindowProxy).GetWindowArrayByParentWindow(this.mMainID);//设置当前窗口的子窗口列表
     }  
 
     InitLayer() {
         this.mTwoTableView.SetWindowLayer(this);
-        this.mTwoTableView.SetTableViewData(this.mTwoWindowIDArray);
+        this.mTwoTableView.SetTableViewData(this.mTwoWindowIDArray,this.mSelectWindowID);
         _Facade.Send(eNotice.OpenBagLayer);
     }   
   
@@ -48,5 +47,17 @@ export class MultWindowLayer extends BaseLayer {
     public AddNodeToContent(node:Node):void{
         this.mContent.addChild(node);
     }
-
-}   
+    
+    //获取到当前选中的界面
+    public GetSelectWindowID():number{
+        return this.mSelectWindowID;
+    }
+    //设置当前选中的界面ID
+    public SetSelectWindowID(windowID:number):void{
+        this.mSelectWindowID = windowID;
+    }
+    onClose(){
+        if(MultWindowParamMap[this.GetSelectWindowID()])
+            _Facade.Send(MultWindowParamMap[this.GetSelectWindowID()].closeNotice,this.GetSelectWindowID());
+    }   
+}    

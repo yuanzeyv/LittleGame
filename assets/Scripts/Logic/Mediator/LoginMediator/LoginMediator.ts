@@ -19,10 +19,10 @@ export class LoginMediator extends WindowBaseMediator{
     }  
     protected InitPrefabInfo(): { path: string; layerComp:LayerComp;} {
         return { path:"resources/LayerSource/LoginLayer/Prefab/LoginLayer",layerComp:LoginLayer};
-    } 
+    }  
      
     protected GetWindowParam():WindowParam{ 
-        return {fullScreenBlock:false,bgColor:new Color(0,255,0,0),showLoading:false,closeNotice:eNotice.LoginInClose,windowBlock:false,}; 
+        return {fullScreenBlock:false,bgColor:new Color(0,255,0,0),showLoading:true,closeNotice:eNotice.LoginInClose,windowBlock:false,}; 
     } 
     
     public WindowOrder():eLayerOrder{

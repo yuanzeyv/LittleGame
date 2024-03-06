@@ -30,8 +30,8 @@ export class BaseLayer extends Component{
 
     //界面预制体被生成完成后，优先调用的
     public InitBaseLayer(data:any):void{
-        this.mButtonEvent = new ButtonEvent(this.node);
         this.RegisterExecuteHandle(this.mExecuteHandle);
+        this.mButtonEvent = new ButtonEvent(this.node);
         this.InitNode();//创建界面时，直接初始化节点
         this.InitData(data);//初始化数据信息
     }

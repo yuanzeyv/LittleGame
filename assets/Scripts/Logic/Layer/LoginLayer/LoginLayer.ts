@@ -36,8 +36,8 @@ export class LoginLayer extends BaseLayer {
     }    
     private AgeHandle(eventTouch:EventTouch,a,b,c,d){    
         _Facade.Send(eNotice.TipsShow,`准备登入服务器 ${a} ${b} ${c}`);
-        _Facade.Send(eNotice.MultPanleOpen,1);
-    }    
+        _Facade.Send(eNotice.MultPanleOpen,2);
+    }     
     
     private LoginButtonHandle(eventTouch:EventTouch){   
         _Facade.FindProxy(NetProxy).Connect();//准备连接 
