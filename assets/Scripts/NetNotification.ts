@@ -13,5 +13,7 @@ export enum eNetProtocol {
     
     CS_Test = "game.gameHandler.Check",//登入Connector服务器
     SC_Test = "game.gameHandler.Check",//登入Connector服务器
-    
+
+    SC_BagInit = "game.gameHandler.BagInfo",//游戏中背包状态初始化消息
+    SC_AttrInit = "game.gameHandler.AttrInfo",//游戏中属性状态初始化消息 
 }

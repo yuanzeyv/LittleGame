@@ -47,7 +47,7 @@ export class BottomMenuLayer extends BaseLayer {
     
     onClose():void{     
         let nodeArr:Array<Node> = find("OriginNode/CellLayout",this.node).children;
-        while(nodeArr.length > 0){ 
+        while(nodeArr.length > 0){
             _Facade.FindProxy(PoolProxy).Put(ePoolDefine.ButtomMenuCell,nodeArr[0]);
         } 
     }
@@ -55,7 +55,7 @@ export class BottomMenuLayer extends BaseLayer {
     private ClickHandle(target:EventTouch,key:number):void{     
         if(eBottomType[key] == undefined)
             return;    
-        _Facade.Send(eNotice.OpenBagLayer); 
-        _Facade.Send(eNotice.CloseBottomMenuLayer);
+        _Facade.Send(eNotice.MultPanleOpen,2);
+        _Facade.Send(eNotice.CloseBottomMenuLayer); 
     }
 }       

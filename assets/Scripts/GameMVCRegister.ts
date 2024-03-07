@@ -12,10 +12,9 @@ import { RewardedVideoAdvertisingMediator } from "./Logic/Mediator/RewardedVideo
 import { TipsMediator } from "./Logic/Mediator/TipsMediator/TipsMediator"; 
 import { WindowMediator } from "./Logic/Mediator/WindowMediator/WindowMediator";
 import { BannerAdvertisingProxy } from "./Logic/Proxy/BannerAdvertisingProxy/BannerAdvertisingProxy"; 
-import { BuffProxy } from "./Logic/Proxy/BuffProxy/BuffProxy";
 import { BundleProxy } from "./Logic/Proxy/BundleProxy/BundleProxy";
 import { InterstitialAdvertisingProxy } from "./Logic/Proxy/InterstitialAdvertisingProxy/InterstitialAdvertisingProxy";
-import { LoginProxy } from "./Logic/Proxy/NetProxy/NetObj/LoginProxy";
+import { LoginProxy } from "./Logic/Proxy/LoginProxy/LoginProxy";
 import { MusicProxy } from "./Logic/Proxy/MusicProxy/MusicProxy";
 import { NetDispatchProxy } from "./Logic/Proxy/NetDispatchProxy/NetDispatchProxy"; 
 import { NetProxy } from "./Logic/Proxy/NetProxy/NetProxy";
@@ -32,6 +31,8 @@ import { BagMediator } from "./Logic/Mediator/BagMediator/BagMediator";
 import { MultWindowMediator } from "./Logic/Mediator/MultWindowMediator/MultWindowMediator";
 import { MultWindowProxy } from "./Logic/Proxy/MultWindowProxy/MultWindowProxy";
 import { BagMultMediator } from "./Logic/Mediator/BagMediator/BagMultMediator";
+import { BagProxy } from "./Logic/Proxy/BagProxy/BagProxy";
+import { PlayerAttrProxy } from "./Logic/Proxy/PlayerAttrProxy/PlayerAttrProxy";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
@@ -65,17 +66,17 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(NetDispatchProxy) 
             .add(PoolProxy) 
             .add(WindowProxy) 
-            //ResouceProxy.add(ResouceProxy)
             .add(BundleProxy) 
             .add(BannerAdvertisingProxy)
             .add(RewardedVideoAdvertisingProxy)  
             .add(InterstitialAdvertisingProxy)
             .add(MusicProxy) 
-            .add(BuffProxy)  
             .add(NetWorkProxy)  
             .add(LoginProxy)//登录代理 
             .add(ResouceProxy)//登录代理  
             .add(MultWindowProxy) 
+            .add(BagProxy) 
+            .add(PlayerAttrProxy) 
     }
 }  
  

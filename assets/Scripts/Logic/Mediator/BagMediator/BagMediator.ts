@@ -56,14 +56,4 @@ export class BagMediator extends WindowBaseMediator{
             _Facade.Send(eNotice.OpenLayer,this.getMediatorName()); 
         }
     } 
-
-    //关闭本界面
-    protected CloseLayer(data:any){
-        if(!this.mView)//未打开窗口的情况
-            return;
-
-            _Facade.FindProxy(WindowProxy).CloseWindow(this.getMediatorName());
-        _Facade.FindProxy(PoolProxy).Put(ePoolDefine.WindowInterface,this.mView.node);//对视图节点进行回收
-        this.mView = undefined;
-    } 
 }  

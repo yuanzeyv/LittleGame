@@ -68,8 +68,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     //打开一个界面
     protected OpenLayer(data:any){
         if(!!this.mView)//已经打开了本窗口的话，立即返回
-            return;
-        
+            return; 
         let view:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.WindowInterface);//从对象池中取一个可用的窗口
         this.mView = view.getComponent(WindowInterface);//取到组件的Interface
         this.mView.SetWindowBaseData(this.GetWindowParam());
@@ -100,11 +99,15 @@ export  abstract class WindowBaseMediator extends BaseMediator {
  
     //资源加载中
     private ResourceLoadProgress(loadInfo:LoadStruct){ 
+        if(!this.mView)//未打开窗口的情况
+            return;
         this.mView.UpdateLoadingLayer(loadInfo);
     } 
   
     //加载完成回调
     private ResourceLoadComplete(loadInfo:LoadStruct,data:any){ 
+        if(!this.mView)//未打开窗口的情况
+            return; 
         this.mView.CompleteLoadingLayer(loadInfo,()=>{
             if(loadInfo.IsAllComplete()){ 
                 this.InitNodePool();

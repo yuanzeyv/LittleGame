@@ -2,7 +2,7 @@ import { _Facade } from "../../../../Global";
 import { eNetProtocol } from "../../../../NetNotification";
 import { eNotice } from "../../../../NotificationTable";
 import { NetWorkProxy } from "../../NetWorkProxy/NetWorkProxy";
-import { LoginProxy } from "../NetObj/LoginProxy";
+import { LoginProxy } from "../../LoginProxy/LoginProxy";
 import { NetProxy } from "../NetProxy";
 import { NetStatusBase, eNetStatus } from "./NetStatusBase";
 //进入条件

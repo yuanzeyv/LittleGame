@@ -19,1030 +19,18 @@
     "_children": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 9
-      },
-      {
-        "__id__": 16
-      },
-      {
-        "__id__": 23
-      },
+      }
+    ],
+    "_active": true,
+    "_components": [
       {
         "__id__": 30
       },
       {
-        "__id__": 37
+        "__id__": 32
       },
       {
-        "__id__": 44
-      }
-    ],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 51
-      },
-      {
-        "__id__": 53
-      }
-    ],
-    "_prefab": {
-      "__id__": 55
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "TextMeshLabel",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 3
-      },
-      {
-        "__id__": 5
-      }
-    ],
-    "_prefab": {
-      "__id__": 8
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.UITransform",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 4
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 317.39130434782606,
-      "height": 40
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "42dx+0Vd5BMYttoDcNNhoN"
-  },
-  {
-    "__type__": "412cf1tW7RBk6wllzPLYEYs",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 6
-    },
-    "_customMaterial": {
-      "__uuid__": "456042ba-7dd1-452c-a76b-cf79a55fcd6c",
-      "__expectedType__": "cc.Material"
-    },
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_saveTag": 0,
-    "_fontData": {
-      "__uuid__": "6eda666d-638c-4b13-819b-40249f5b7658",
-      "__expectedType__": "cc.BufferAsset"
-    },
-    "_string": "我是一个宝贝界面，我将会变成一个背包",
-    "_rich": false,
-    "_direction": 0,
-    "_horizontalAlign": 1,
-    "_verticalAlign": 1,
-    "_overflow": 0,
-    "_multiline": false,
-    "_enableItalic": false,
-    "_enableUnderline": false,
-    "_enableStrike": false,
-    "_enableBackground": false,
-    "_enableMask": false,
-    "_lineSpace": 5,
-    "_letterSpace": 0,
-    "_enableColorRT": false,
-    "_colorRT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorRB": false,
-    "_colorRB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLT": false,
-    "_colorLT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLB": false,
-    "_colorLB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_maskColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 128
-    },
-    "_strokeColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_shadow": 0,
-    "_shadowOffsetX": 0,
-    "_shadowOffsetY": 0,
-    "_shadowBlur": 0.1,
-    "_shadowColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_handleTouchEvent": false,
-    "_autoWarp": false,
-    "_lineHeight": 40,
-    "_fixedLineHeight": true,
-    "_padding": {
-      "__id__": 7
-    },
-    "_dilate": 0.25,
-    "_stroke": 0,
-    "_strokeBlur": 0.1,
-    "_aspect": 1,
-    "_charVisibleRatio": 1,
-    "_equalWidth": false,
-    "_overlayTexture": null,
-    "_enableGlow": false,
-    "_glowColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_glowInner": 0,
-    "_glowOuter": 0,
-    "_glowPower": 0,
-    "_breakWestern": false,
-    "_fontSize": 20,
-    "slotsContainer": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "eeaGQh7s1BdLkvWSXZ4n5e"
-  },
-  {
-    "__type__": "Margin",
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "6bBrbtNHtKY6IAohYf4lTc",
-    "instance": null,
-    "targetOverrides": null,
-    "nestedPrefabInstanceRoots": null
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "TextMeshLabel-001",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 10
-      },
-      {
-        "__id__": 12
-      }
-    ],
-    "_prefab": {
-      "__id__": 15
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": -81,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.UITransform",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 9
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 11
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 317.39130434782606,
-      "height": 40
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "eatNfni9FMmZX6TvvdiXxv"
-  },
-  {
-    "__type__": "412cf1tW7RBk6wllzPLYEYs",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 9
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 13
-    },
-    "_customMaterial": {
-      "__uuid__": "456042ba-7dd1-452c-a76b-cf79a55fcd6c",
-      "__expectedType__": "cc.Material"
-    },
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_saveTag": 0,
-    "_fontData": {
-      "__uuid__": "6eda666d-638c-4b13-819b-40249f5b7658",
-      "__expectedType__": "cc.BufferAsset"
-    },
-    "_string": "我是一个宝贝界面，我将会变成一个背包",
-    "_rich": false,
-    "_direction": 0,
-    "_horizontalAlign": 1,
-    "_verticalAlign": 1,
-    "_overflow": 0,
-    "_multiline": false,
-    "_enableItalic": false,
-    "_enableUnderline": false,
-    "_enableStrike": false,
-    "_enableBackground": false,
-    "_enableMask": false,
-    "_lineSpace": 5,
-    "_letterSpace": 0,
-    "_enableColorRT": false,
-    "_colorRT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorRB": false,
-    "_colorRB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLT": false,
-    "_colorLT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLB": false,
-    "_colorLB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_maskColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 128
-    },
-    "_strokeColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_shadow": 0,
-    "_shadowOffsetX": 0,
-    "_shadowOffsetY": 0,
-    "_shadowBlur": 0.1,
-    "_shadowColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_handleTouchEvent": false,
-    "_autoWarp": false,
-    "_lineHeight": 40,
-    "_fixedLineHeight": true,
-    "_padding": {
-      "__id__": 14
-    },
-    "_dilate": 0.25,
-    "_stroke": 0,
-    "_strokeBlur": 0.1,
-    "_aspect": 1,
-    "_charVisibleRatio": 1,
-    "_equalWidth": false,
-    "_overlayTexture": null,
-    "_enableGlow": false,
-    "_glowColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_glowInner": 0,
-    "_glowOuter": 0,
-    "_glowPower": 0,
-    "_breakWestern": false,
-    "_fontSize": 20,
-    "slotsContainer": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "d7TLb2FxxIA7CFeBhUUzqK"
-  },
-  {
-    "__type__": "Margin",
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "29Z6r5Ap5MRZhVXabiGABQ",
-    "instance": null,
-    "targetOverrides": null,
-    "nestedPrefabInstanceRoots": null
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "TextMeshLabel-002",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 17
-      },
-      {
-        "__id__": 19
-      }
-    ],
-    "_prefab": {
-      "__id__": 22
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": -184.719,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.UITransform",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 16
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 18
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 317.39130434782606,
-      "height": 40
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "9ew4gYEX5ITaLncy3P8H4h"
-  },
-  {
-    "__type__": "412cf1tW7RBk6wllzPLYEYs",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 16
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 20
-    },
-    "_customMaterial": {
-      "__uuid__": "456042ba-7dd1-452c-a76b-cf79a55fcd6c",
-      "__expectedType__": "cc.Material"
-    },
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_saveTag": 0,
-    "_fontData": {
-      "__uuid__": "6eda666d-638c-4b13-819b-40249f5b7658",
-      "__expectedType__": "cc.BufferAsset"
-    },
-    "_string": "我是一个宝贝界面，我将会变成一个背包",
-    "_rich": false,
-    "_direction": 0,
-    "_horizontalAlign": 1,
-    "_verticalAlign": 1,
-    "_overflow": 0,
-    "_multiline": false,
-    "_enableItalic": false,
-    "_enableUnderline": false,
-    "_enableStrike": false,
-    "_enableBackground": false,
-    "_enableMask": false,
-    "_lineSpace": 5,
-    "_letterSpace": 0,
-    "_enableColorRT": false,
-    "_colorRT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorRB": false,
-    "_colorRB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLT": false,
-    "_colorLT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLB": false,
-    "_colorLB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_maskColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 128
-    },
-    "_strokeColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_shadow": 0,
-    "_shadowOffsetX": 0,
-    "_shadowOffsetY": 0,
-    "_shadowBlur": 0.1,
-    "_shadowColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_handleTouchEvent": false,
-    "_autoWarp": false,
-    "_lineHeight": 40,
-    "_fixedLineHeight": true,
-    "_padding": {
-      "__id__": 21
-    },
-    "_dilate": 0.25,
-    "_stroke": 0,
-    "_strokeBlur": 0.1,
-    "_aspect": 1,
-    "_charVisibleRatio": 1,
-    "_equalWidth": false,
-    "_overlayTexture": null,
-    "_enableGlow": false,
-    "_glowColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_glowInner": 0,
-    "_glowOuter": 0,
-    "_glowPower": 0,
-    "_breakWestern": false,
-    "_fontSize": 20,
-    "slotsContainer": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "5b4U/4EoJCea4yMSZwxaeK"
-  },
-  {
-    "__type__": "Margin",
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "84ZCXw+ttMEaJCT+PHxc7O",
-    "instance": null,
-    "targetOverrides": null,
-    "nestedPrefabInstanceRoots": null
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "TextMeshLabel-003",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 24
-      },
-      {
-        "__id__": 26
-      }
-    ],
-    "_prefab": {
-      "__id__": 29
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": -81,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.UITransform",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 23
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 25
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 317.39130434782606,
-      "height": 40
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "cdGH6ywgZK0q2Bh7yp83Pz"
-  },
-  {
-    "__type__": "412cf1tW7RBk6wllzPLYEYs",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 23
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 27
-    },
-    "_customMaterial": {
-      "__uuid__": "456042ba-7dd1-452c-a76b-cf79a55fcd6c",
-      "__expectedType__": "cc.Material"
-    },
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_saveTag": 0,
-    "_fontData": {
-      "__uuid__": "6eda666d-638c-4b13-819b-40249f5b7658",
-      "__expectedType__": "cc.BufferAsset"
-    },
-    "_string": "我是一个宝贝界面，我将会变成一个背包",
-    "_rich": false,
-    "_direction": 0,
-    "_horizontalAlign": 1,
-    "_verticalAlign": 1,
-    "_overflow": 0,
-    "_multiline": false,
-    "_enableItalic": false,
-    "_enableUnderline": false,
-    "_enableStrike": false,
-    "_enableBackground": false,
-    "_enableMask": false,
-    "_lineSpace": 5,
-    "_letterSpace": 0,
-    "_enableColorRT": false,
-    "_colorRT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorRB": false,
-    "_colorRB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLT": false,
-    "_colorLT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLB": false,
-    "_colorLB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_maskColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 128
-    },
-    "_strokeColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_shadow": 0,
-    "_shadowOffsetX": 0,
-    "_shadowOffsetY": 0,
-    "_shadowBlur": 0.1,
-    "_shadowColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_handleTouchEvent": false,
-    "_autoWarp": false,
-    "_lineHeight": 40,
-    "_fixedLineHeight": true,
-    "_padding": {
-      "__id__": 28
-    },
-    "_dilate": 0.25,
-    "_stroke": 0,
-    "_strokeBlur": 0.1,
-    "_aspect": 1,
-    "_charVisibleRatio": 1,
-    "_equalWidth": false,
-    "_overlayTexture": null,
-    "_enableGlow": false,
-    "_glowColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_glowInner": 0,
-    "_glowOuter": 0,
-    "_glowPower": 0,
-    "_breakWestern": false,
-    "_fontSize": 20,
-    "slotsContainer": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "b5kjWB87hPmJ5WKgI3G4Ms"
-  },
-  {
-    "__type__": "Margin",
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "416k8V95ZNopJwoXFSuUMa",
-    "instance": null,
-    "targetOverrides": null,
-    "nestedPrefabInstanceRoots": null
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "TextMeshLabel-004",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 31
-      },
-      {
-        "__id__": 33
+        "__id__": 34
       }
     ],
     "_prefab": {
@@ -1051,7 +39,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 136.557,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -1078,217 +66,144 @@
     "_id": ""
   },
   {
-    "__type__": "cc.UITransform",
-    "_name": "",
+    "__type__": "cc.Node",
+    "_name": "ScrollView",
     "_objFlags": 0,
-    "node": {
-      "__id__": 30
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 32
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 317.39130434782606,
-      "height": 40
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "875Ha4GlNNZLRcPcovmhaI"
-  },
-  {
-    "__type__": "412cf1tW7RBk6wllzPLYEYs",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 30
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 34
-    },
-    "_customMaterial": {
-      "__uuid__": "456042ba-7dd1-452c-a76b-cf79a55fcd6c",
-      "__expectedType__": "cc.Material"
-    },
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_saveTag": 0,
-    "_fontData": {
-      "__uuid__": "6eda666d-638c-4b13-819b-40249f5b7658",
-      "__expectedType__": "cc.BufferAsset"
-    },
-    "_string": "我是一个宝贝界面，我将会变成一个背包",
-    "_rich": false,
-    "_direction": 0,
-    "_horizontalAlign": 1,
-    "_verticalAlign": 1,
-    "_overflow": 0,
-    "_multiline": false,
-    "_enableItalic": false,
-    "_enableUnderline": false,
-    "_enableStrike": false,
-    "_enableBackground": false,
-    "_enableMask": false,
-    "_lineSpace": 5,
-    "_letterSpace": 0,
-    "_enableColorRT": false,
-    "_colorRT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorRB": false,
-    "_colorRB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLT": false,
-    "_colorLT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLB": false,
-    "_colorLB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_maskColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 128
-    },
-    "_strokeColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_shadow": 0,
-    "_shadowOffsetX": 0,
-    "_shadowOffsetY": 0,
-    "_shadowBlur": 0.1,
-    "_shadowColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_handleTouchEvent": false,
-    "_autoWarp": false,
-    "_lineHeight": 40,
-    "_fixedLineHeight": true,
-    "_padding": {
-      "__id__": 35
-    },
-    "_dilate": 0.25,
-    "_stroke": 0,
-    "_strokeBlur": 0.1,
-    "_aspect": 1,
-    "_charVisibleRatio": 1,
-    "_equalWidth": false,
-    "_overlayTexture": null,
-    "_enableGlow": false,
-    "_glowColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_glowInner": 0,
-    "_glowOuter": 0,
-    "_glowPower": 0,
-    "_breakWestern": false,
-    "_fontSize": 20,
-    "slotsContainer": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "b4ebseA5ZGurosh7Yj0OJe"
-  },
-  {
-    "__type__": "Margin",
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
+    "__editorExtras__": {},
+    "_parent": {
       "__id__": 1
     },
-    "asset": {
-      "__id__": 0
+    "_children": [
+      {
+        "__id__": 3
+      }
+    ],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 19
+      },
+      {
+        "__id__": 21
+      }
+    ],
+    "_prefab": {
+      "__id__": 29
     },
-    "fileId": "d16EJEanBEwLaAiywydbyw",
-    "instance": null,
-    "targetOverrides": null,
-    "nestedPrefabInstanceRoots": null
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
   },
   {
     "__type__": "cc.Node",
-    "_name": "TextMeshLabel-005",
+    "_name": "view",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
-      "__id__": 1
+      "__id__": 2
+    },
+    "_children": [
+      {
+        "__id__": 4
+      }
+    ],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 10
+      },
+      {
+        "__id__": 12
+      },
+      {
+        "__id__": 14
+      },
+      {
+        "__id__": 16
+      }
+    ],
+    "_prefab": {
+      "__id__": 18
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "content",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_parent": {
+      "__id__": 3
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 38
+        "__id__": 5
       },
       {
-        "__id__": 40
+        "__id__": 7
       }
     ],
     "_prefab": {
-      "__id__": 43
+      "__id__": 9
     },
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 225.098,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -1305,7 +220,7 @@
       "z": 1
     },
     "_mobility": 0,
-    "_layer": 1073741824,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -1318,176 +233,57 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
-      "__id__": 37
+      "__id__": 4
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 39
+      "__id__": 6
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 317.39130434782606,
-      "height": 40
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0.5
+      "y": 1
     },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "81UZh+1ixB17EzBPrFPtAe"
+    "fileId": "f4zuHCab1M+7Syc7u9jJ52"
   },
   {
-    "__type__": "412cf1tW7RBk6wllzPLYEYs",
+    "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
-      "__id__": 37
+      "__id__": 4
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 41
+      "__id__": 8
     },
-    "_customMaterial": {
-      "__uuid__": "456042ba-7dd1-452c-a76b-cf79a55fcd6c",
-      "__expectedType__": "cc.Material"
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
     },
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 1
     },
-    "_saveTag": 0,
-    "_fontData": {
-      "__uuid__": "6eda666d-638c-4b13-819b-40249f5b7658",
-      "__expectedType__": "cc.BufferAsset"
-    },
-    "_string": "我是一个宝贝界面，我将会变成一个背包",
-    "_rich": false,
-    "_direction": 0,
-    "_horizontalAlign": 1,
-    "_verticalAlign": 1,
-    "_overflow": 0,
-    "_multiline": false,
-    "_enableItalic": false,
-    "_enableUnderline": false,
-    "_enableStrike": false,
-    "_enableBackground": false,
-    "_enableMask": false,
-    "_lineSpace": 5,
-    "_letterSpace": 0,
-    "_enableColorRT": false,
-    "_colorRT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorRB": false,
-    "_colorRB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLT": false,
-    "_colorLT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_enableColorLB": false,
-    "_colorLB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_maskColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 128
-    },
-    "_strokeColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_shadow": 0,
-    "_shadowOffsetX": 0,
-    "_shadowOffsetY": 0,
-    "_shadowBlur": 0.1,
-    "_shadowColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_handleTouchEvent": false,
-    "_autoWarp": false,
-    "_lineHeight": 40,
-    "_fixedLineHeight": true,
-    "_padding": {
-      "__id__": 42
-    },
-    "_dilate": 0.25,
-    "_stroke": 0,
-    "_strokeBlur": 0.1,
-    "_aspect": 1,
-    "_charVisibleRatio": 1,
-    "_equalWidth": false,
-    "_overlayTexture": null,
-    "_enableGlow": false,
-    "_glowColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_glowInner": 0,
-    "_glowOuter": 0,
-    "_glowPower": 0,
-    "_breakWestern": false,
-    "_fontSize": 20,
-    "slotsContainer": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "d0nZ/HF+BJHb9y62TUKfk0"
-  },
-  {
-    "__type__": "Margin",
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0
+    "fileId": "ef6jRe4h5D6ZfN5q1hzUEj"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1497,75 +293,182 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "91ca2BxgFPEbdV4X1cBlbf",
+    "fileId": "fexWuEALFGfrNKx1/9i65+",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
-    "__type__": "cc.Node",
-    "_name": "TextMeshLabel-006",
+    "__type__": "cc.UITransform",
+    "_name": "",
     "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 3
     },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 45
-      },
-      {
-        "__id__": 47
-      }
-    ],
-    "_prefab": {
-      "__id__": 50
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 11
     },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 313.639,
-      "z": 0
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 240,
+      "height": 250
     },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
       "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
+      "y": 0.5
     },
     "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "b0qF/vCFJJlozYF4PDs4dh"
+  },
+  {
+    "__type__": "cc.Mask",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 3
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 13
+    },
+    "_type": 0,
+    "_inverted": false,
+    "_segments": 64,
+    "_alphaThreshold": 0.1,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "53f2Ul0yhNBK8SH2VG7FqL"
+  },
+  {
+    "__type__": "cc.Graphics",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 3
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 15
+    },
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_lineWidth": 1,
+    "_strokeColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_lineJoin": 2,
+    "_lineCap": 0,
+    "_fillColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 0
+    },
+    "_miterLimit": 10,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "dfjLIgTmVDgJNkHN6E6NQb"
+  },
+  {
+    "__type__": "cc.Graphics",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 3
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 17
+    },
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_lineWidth": 1,
+    "_strokeColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_lineJoin": 2,
+    "_lineCap": 0,
+    "_fillColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 0
+    },
+    "_miterLimit": 10,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "f2r2MpYZNBCq7KOCbcT56e"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "958GEQDipFRZXLLmtlIEE4",
+    "instance": null,
+    "targetOverrides": null,
+    "nestedPrefabInstanceRoots": null
   },
   {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
-      "__id__": 44
+      "__id__": 2
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 46
+      "__id__": 20
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 317.39130434782606,
-      "height": 40
+      "width": 600,
+      "height": 800
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1576,155 +479,115 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "75I6WVqmhKMJDBNqd+gFk2"
+    "fileId": "5a5HaOSXNAMLCClgVi1CvM"
   },
   {
-    "__type__": "412cf1tW7RBk6wllzPLYEYs",
+    "__type__": "8603dHQdo5EN6MzfsmKjsSc",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 44
+      "__id__": 2
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 48
+      "__id__": 22
     },
-    "_customMaterial": {
-      "__uuid__": "456042ba-7dd1-452c-a76b-cf79a55fcd6c",
-      "__expectedType__": "cc.Material"
+    "scrollManager": {
+      "__id__": 23
     },
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+    "viewManager": {
+      "__id__": 24
     },
-    "_saveTag": 0,
-    "_fontData": {
-      "__uuid__": "6eda666d-638c-4b13-819b-40249f5b7658",
-      "__expectedType__": "cc.BufferAsset"
+    "layoutManager": {
+      "__id__": 25
     },
-    "_string": "我是一个宝贝界面，我将会变成一个背包",
-    "_rich": false,
-    "_direction": 0,
-    "_horizontalAlign": 1,
-    "_verticalAlign": 1,
-    "_overflow": 0,
-    "_multiline": false,
-    "_enableItalic": false,
-    "_enableUnderline": false,
-    "_enableStrike": false,
-    "_enableBackground": false,
-    "_enableMask": false,
-    "_lineSpace": 5,
-    "_letterSpace": 0,
-    "_enableColorRT": false,
-    "_colorRT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+    "pageViewManager": {
+      "__id__": 26
     },
-    "_enableColorRB": false,
-    "_colorRB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+    "releaseManager": {
+      "__id__": 27
     },
-    "_enableColorLT": false,
-    "_colorLT": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+    "centerManager": {
+      "__id__": 28
     },
-    "_enableColorLB": false,
-    "_colorLB": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_maskColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 128
-    },
-    "_strokeColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_shadow": 0,
-    "_shadowOffsetX": 0,
-    "_shadowOffsetY": 0,
-    "_shadowBlur": 0.1,
-    "_shadowColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_handleTouchEvent": false,
-    "_autoWarp": false,
-    "_lineHeight": 40,
-    "_fixedLineHeight": true,
-    "_padding": {
-      "__id__": 49
-    },
-    "_dilate": 0.25,
-    "_stroke": 0,
-    "_strokeBlur": 0.1,
-    "_aspect": 1,
-    "_charVisibleRatio": 1,
-    "_equalWidth": false,
-    "_overlayTexture": null,
-    "_enableGlow": false,
-    "_glowColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_glowInner": 0,
-    "_glowOuter": 0,
-    "_glowPower": 0,
-    "_breakWestern": false,
-    "_fontSize": 20,
-    "slotsContainer": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "2d4HgBibNF4Zs429akwa6+"
+    "fileId": "59xG48GfZNxL2J9xfbMUAj"
   },
   {
-    "__type__": "Margin",
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0
+    "__type__": "ScrollManager",
+    "_view": {
+      "__id__": 10
+    },
+    "_content": {
+      "__id__": 5
+    },
+    "_orientation": 0,
+    "touchMode": 0,
+    "movementType": 1,
+    "elasticity": 0.1,
+    "inertia": true,
+    "decelerationRate": 0.135,
+    "aboutToStopVelocity": 100,
+    "cancelInnerEvents": true,
+    "nestedMinThreshold": 0.001,
+    "nestedMaxThreshold": 0.999
+  },
+  {
+    "__type__": "ViewManager",
+    "_arrangeAxis": 0,
+    "stretchDirection": 1,
+    "overflowOffset": 0.3,
+    "enterOffset": 0,
+    "_spacing": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0,
+    "magnetic": false,
+    "magneticDirection": 0,
+    "magneticDuration": 0.5,
+    "magneticSizeChanges": false,
+    "loopHeader": false,
+    "loopFooter": false
+  },
+  {
+    "__type__": "LayoutManager",
+    "_childAlignment": 0,
+    "_spacing": 0,
+    "_reverseArrangement": false,
+    "delayLayout": true,
+    "_forceExpandWidth": false,
+    "_forceExpandHeight": false,
+    "_controlSizeWidth": false,
+    "_controlSizeHeight": false,
+    "_controlScaleWidth": false,
+    "_controlScaleHeight": false
+  },
+  {
+    "__type__": "PageViewManager",
+    "_enabled": false,
+    "scrollThreshold": 0.5,
+    "pageTurningEventTiming": 0.1,
+    "autoPageTurningThreshold": 100,
+    "pageTurningSpeed": 0.3
+  },
+  {
+    "__type__": "ReleaseManager",
+    "_enabled": false,
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+  },
+  {
+    "__type__": "CenterManager",
+    "_enabled": false,
+    "duration": 1,
+    "containerAnchorPoint": 0,
+    "elementAnchorPoint": 0
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1734,7 +597,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "fejAPgXHdDw6updiaNLche",
+    "fileId": "2aSmaKNNVKLJTwDbGR2dRr",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -1749,12 +612,12 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 52
+      "__id__": 31
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 650,
-      "height": 900
+      "width": 600,
+      "height": 800
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1768,7 +631,7 @@
     "fileId": "2cZ8I9suxNcpY2bCvITBpw"
   },
   {
-    "__type__": "cc.Widget",
+    "__type__": "cc.Mask",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1776,31 +639,62 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 54
+      "__id__": 33
     },
-    "_alignFlags": 45,
-    "_target": null,
-    "_left": 50,
-    "_right": 50,
-    "_top": 217,
-    "_bottom": 217,
-    "_horizontalCenter": 0,
-    "_verticalCenter": 0,
-    "_isAbsLeft": true,
-    "_isAbsRight": true,
-    "_isAbsTop": true,
-    "_isAbsBottom": true,
-    "_isAbsHorizontalCenter": true,
-    "_isAbsVerticalCenter": true,
-    "_originalWidth": 750,
-    "_originalHeight": 1334,
-    "_alignMode": 2,
-    "_lockFlags": 0,
+    "_type": 0,
+    "_inverted": false,
+    "_segments": 64,
+    "_alphaThreshold": 0.1,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a3t6YYmhlEorMJza/S4yFc"
+    "fileId": "2014CL3MFOLpQlVs08NL0c"
+  },
+  {
+    "__type__": "cc.Graphics",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 35
+    },
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_lineWidth": 1,
+    "_strokeColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_lineJoin": 2,
+    "_lineCap": 0,
+    "_fillColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 0
+    },
+    "_miterLimit": 10,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "f1UGf0zU1IiI4KDAbMPXvw"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1812,6 +706,6 @@
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
     "instance": null,
-    "targetOverrides": []
+    "targetOverrides": null
   }
 ]

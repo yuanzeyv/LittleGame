@@ -1,8 +1,8 @@
-import { BaseProxy } from "../../../../Frame/BaseProxy/BaseProxy";
-import { _Facade } from "../../../../Global";
-import { eNetProtocol } from "../../../../NetNotification";
-import { eNotice } from "../../../../NotificationTable";
-import { NetWorkProxy } from "../../NetWorkProxy/NetWorkProxy";
+import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
+import { _Facade } from "../../../Global";
+import { eNetProtocol } from "../../../NetNotification";
+import { eNotice } from "../../../NotificationTable";
+import { NetWorkProxy } from "../NetWorkProxy/NetWorkProxy";
 
 //用于管理当前游戏中的所有窗口 以及 预制体缓存
 export class LoginProxy extends BaseProxy{ 

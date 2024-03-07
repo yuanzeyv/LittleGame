@@ -104,7 +104,7 @@ exports.methods = {
         }
     },
     checkComponetInParent(node, name) {
-        let result = false;
+        let result = false; 
         node.components.forEach((component) => {
             if (component.name.indexOf(name) >= 0) {
                 result = true;

@@ -156,4 +156,7 @@ export enum eNotice {
     
     //背包多面板节点
     BagPanelAdd = "BagPanelAdd",//背包多面板添加
+
+    //刷新玩家属性信息
+    RefreshAttr = "RefreshAttr",
 }

@@ -81,18 +81,7 @@ export class WindowProxy extends BaseProxy{
         _Facade.Send(multParam.addNotice,windowComp.node);//将组件添加到节点下
         this.mWindowMap.set(windowName,windowComp);//设置插入到节点中去 
         return true;
-    }
-
-    public CloseMultWindow(windowName:string):boolean{ 
-        if(!this.WindowIsEarlyOpen(windowName))
-            return;
-        let interfaceWindow:WindowInterface = this.mWindowMap.get(windowName);
-        this.mWindowMap.delete(windowName); 
-        interfaceWindow.node.removeFromParent();//删除自己
-        interfaceWindow.CloseLayer();
-        _Facade.Send(eNotice.DelWindowNode,windowName);//发送关闭节点的消息
     } 
- 
     //实例化一个窗口预制体
     public InitNodePool():void{
         _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.WindowInterface,new InterfaceWindowNode("LayerSource/Basics/Component/WindowInterface"));

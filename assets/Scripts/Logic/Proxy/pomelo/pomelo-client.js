@@ -1083,8 +1083,7 @@
         var length = codec.decodeUInt32(getBytes());
 
         var str =  codec.decodeStr(buffer, offset, length);
-        offset += length;
-
+        offset += length; 
         return str;
       default :
         var message = protos && (protos.__messages[type] || MsgDecoder.protos['message ' + type]);
