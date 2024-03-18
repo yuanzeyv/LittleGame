@@ -28,15 +28,16 @@ export class NodeCellControl{
             this.InitNode(node);
             this.mSumCount++;
         }
-        this.mUsingCount++;
+        this.mUsingCount++; 
+        this.Use(node,args);
         return node;
     }
     protected InitNode(node:Node):void{
     }
 
     public Put(node:Node):void{//放回一个节点到对象池中
-        this.mNodePool.put(node);
         this.UnUse(node);
+        this.mNodePool.put(node);
         this.mUsingCount--;
     }
     

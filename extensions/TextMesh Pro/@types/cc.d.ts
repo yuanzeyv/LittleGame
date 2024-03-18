@@ -39787,7 +39787,7 @@ declare module "cc" {
              * @en Indicates whether open debug slots.
              * @zh 是否显示 slot 的 debug 信息。
              */
-            get debugSlots(): boolean;
+            get debugSlots(): boolean; 
             set debugSlots(v: boolean);
             /**
              * @en Indicates whether open debug bones.

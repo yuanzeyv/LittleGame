@@ -33,6 +33,8 @@ import { MultWindowProxy } from "./Logic/Proxy/MultWindowProxy/MultWindowProxy";
 import { BagMultMediator } from "./Logic/Mediator/BagMediator/BagMultMediator";
 import { BagProxy } from "./Logic/Proxy/BagProxy/BagProxy";
 import { PlayerAttrProxy } from "./Logic/Proxy/PlayerAttrProxy/PlayerAttrProxy";
+import { FightLayerMediator } from "./Logic/Mediator/FightLayerMediator/FightLayerMediator";
+import { SkeletonProxy } from "./Logic/Proxy/SkeletonProxy/SkeletonProxy";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
@@ -58,6 +60,7 @@ export class GameMVCRegister extends BaseMVCRegister {
             .set(BagMediator,"BagMediator")  //背包界面Mediator 
             .set(BagMultMediator,"BagMultMediator")  //背包界面Mediator 
             .set(MultWindowMediator,"MultWindowMediator")  //背包界面Mediator  
+            .set(FightLayerMediator,"FightLayerMediator")  //背包界面Mediator  
     }  
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void { 
@@ -77,6 +80,7 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(MultWindowProxy) 
             .add(BagProxy) 
             .add(PlayerAttrProxy) 
+            .add(SkeletonProxy) 
     }
 }  
  

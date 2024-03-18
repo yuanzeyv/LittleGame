@@ -1,5 +1,5 @@
 import {IBaseMVCRegister} from "./Frame/MVCRegister/BaseMVCRegister";
-import {Facade} from "./Frame/PureMVC";
+import {Facade} from "./Frame/PureMVC"; 
 import {TimeWheel} from "./Util/Time/TimeWheel";
 class Global {
     private m_Facade: Facade = new Facade();
@@ -17,4 +17,4 @@ class Global {
     }
 }
 export let _G: Global = new Global();//向外导出Gloabl对象
-export let _Facade: Facade = _G.Facade;//向外导出Gloabl对象
+export let _Facade: Facade = _G.Facade;//向外导出Gloabl对象 

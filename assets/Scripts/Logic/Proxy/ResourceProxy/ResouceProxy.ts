@@ -23,6 +23,31 @@ export class ResouceProxy extends BaseProxy{
         this.mBundleProxy = _Facade.FindProxy(BundleProxy);
     }
 
+    //解除对一个资源的应用
+    public UnLoad<T extends Component>(comp:T,key:KeyPartial<T>):void{
+        if(comp == undefined || !comp.isValid){//不存在组件 或者 组件是无效的。 代表不需要进行加载，直接返回
+            console.warn(`待删除资源的组件不存在`);
+            return;
+        }
+        let resComp:ResourceComp|undefined = comp.node.getComponent(ResourceComp);//查询是否拥有资源组件
+        if(resComp == undefined){
+            console.warn(`被删除资源不存在ResourceComp，无法获取到被删除的信息`);
+            return;
+        }
+        let resUUID:UUID|undefined = resComp.RemoveRes(comp,key as string);//设置资源加载 
+        if(resUUID == undefined)
+            return;
+        //判断资源是否正在加载
+        let resourceCompSet:Set<ResourceComp>|undefined = this.mLoadingResCompMap.get(resUUID)!;//取到所有需要这个资源的组件
+        if(resourceCompSet == undefined)
+            return;
+        this.mLoadingMap.delete(resUUID);//设置资源为正在加载的状态
+        if( resourceCompSet != undefined)
+            resourceCompSet.delete(comp.node.getComponent(ResourceComp));
+        if(resourceCompSet.size == 0)    
+            this.mLoadingResCompMap.delete(resUUID);
+    }
+
     public Load<T extends Component>(comp:T,key:KeyPartial<T>,bundleName:string,path: string,type:ResouoceType<Asset>,successHandle?:(comp:T)=>void):void{
         if(comp == undefined || !comp.isValid){//不存在组件 或者 组件是无效的。 代表不需要进行加载，直接返回
             console.warn(`待设置的资源不存在 path:${path}`);
@@ -88,17 +113,20 @@ export class ResouceProxy extends BaseProxy{
             loadInfo.timeID.Stop();
             loadInfo.timeID = undefined;
         }
+        this.mBundleProxy.DestoryLoadID(loadInfo.loadID);//删除这个Load
         this.mBundleProxy.UnUseAssetByUUID("resources",resUUID);//反引用这个资源
         this.mLoadMap.delete(resUUID);
     }
 
     public DecResource(resUUID:UUID):void{
         let loadInfo:{loadID:LoadID,count:number,timeID:SoltCell} | undefined = this.GetLoadInfo(resUUID);
-        if(loadInfo == undefined) return;//没有加载过本资源
+        //没有加载过本资源
+        if(loadInfo == undefined)
+            return;
         loadInfo.count--;//减去引用 
-        if(loadInfo.count < 0 && loadInfo.timeID == undefined)
-            loadInfo.timeID = _G.TimeWheel.Set(10000,this.Release.bind(this),resUUID);
-    }
+        if(loadInfo.count <= 0 && loadInfo.timeID == undefined)
+            loadInfo.timeID = _G.TimeWheel.Set(100,this.Release.bind(this),resUUID);
+    }   
 
     public AddResource(resUUID:UUID):Asset|undefined{
         let loadInfo:{loadID:LoadID,count:number,asset:Asset,timeID:SoltCell} | undefined = this.GetLoadInfo(resUUID);

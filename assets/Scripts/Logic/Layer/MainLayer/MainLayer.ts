@@ -9,6 +9,7 @@ import { eAttrBaseType } from '../../Proxy/PlayerAttrProxy/AttrDefine/AttrDefine
 import { AttrCalcRelevanceConfig } from '../../../Config/Cfg_AttrCalcRelevance';
 import { PlayerAttrProxy } from '../../Proxy/PlayerAttrProxy/PlayerAttrProxy';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
+import { SkeletonProxy } from '../../Proxy/SkeletonProxy/SkeletonProxy';
 const {ccclass, property, type} = _decorator; 
 @ccclass('MainLayer')
 export class MainLayer extends BaseLayer {  
@@ -29,23 +30,26 @@ export class MainLayer extends BaseLayer {
     } 
     
     InitData() {    
-        _Facade.FindProxy(ResouceProxy).Load(this.mSpineBGSpine,"skeletonData","resources","Spine/spine_eff/beijing",sp.SkeletonData,()=>{
-            this.mSpineBGSpine.premultipliedAlpha = false;
-            this.mSpineBGSpine.setAnimation(0,"animation",true);
-        }); 
-        this.RegisterButtonEvent(this.mBottomFunctionButtonArray[1],this.OpenBottomMenu,this,1);
+        _Facade.FindProxy(SkeletonProxy).CreateSpineEffect(find("BackGround/BGSpine",this.node),"spine_eff/beijing").SetAction("animation");
+        
+        this.RegisterButtonEvent(this.mBottomFunctionButtonArray[1],this.OpenBottomMenu,this,1); 
         this.RegisterButtonEvent(this.mBottomFunctionButtonArray[2],this.OpenBottomMenu,this,2);
+        this.RegisterButtonEvent(this.mBottomFunctionButtonArray[3],this.OpenFightLayer,this,2);
         this.RegisterButtonEvent(find("BottomNode/img_sxk/ViewDetailsBtn",this.node),this.AttrViewDetailsBtnHandle,this);
     }  
   
     InitLayer() {  
         this.RefreshPlayerAttr(undefined);
-        this.RefreshAttrViewDetails();
+        this.RefreshAttrViewDetails(); 
     } 
     
     private OpenBottomMenu(touchEvent:EventTouch,type:number){  
         let worldPos = find("Canvas/Camera").getComponent(Camera).screenToWorld(new Vec3(touchEvent.getLocationX(),touchEvent.getLocationY(),0));
         _Facade.Send(eNotice.OpenBottomMenuLayer,{worldPos:worldPos,type:type});
+    }  
+
+    private OpenFightLayer(touchEvent:EventTouch,type:number){  
+        _Facade.Send(eNotice.OpenFightLayer);
     }  
     
     private RefreshPlayerAttr(refreshArray:Array<eAttrBaseType>|undefined){

@@ -8,9 +8,7 @@ export class ResourceComp extends Component {//配合资源管理器，来动态
     //本处数据格式冗余
     private mLoadUUIDMap:Map<UUID,Map<Component,Map<UseKey,{waitLoad:boolean,finishHandle?:(comp:Component)=>void}>>> = new Map<UUID,Map<Component,Map<UseKey,{waitLoad:boolean,finishHandle:(comp:Component)=>void}>>>();//组件ID，变量key，资源UID
     private mLoadCompMap:Map<Component,Map<UseKey,UUID>> = new Map<Component,Map<UseKey,UUID>>();//组件ID，变量key，资源UID
-    public onLoad(): void {
-        this.node.on(NodeEventType.COMPONENT_REMOVED,this.ComponentRemoveHandle,this);
-    } 
+    public onLoad(): void {} 
  
     //尝试通过资源UUID 组件 及 组件KEY删除一个资源的引用
     public UnLoadRes(resUUID:UUID,comp:Component,key:UseKey):void{
@@ -20,7 +18,7 @@ export class ResourceComp extends Component {//配合资源管理器，来动态
         if(keyMap == undefined) return;
         let loadInfo:{waitLoad:boolean,finishHandle?:(comp:Component)=>void}|undefined = keyMap.get(key);
         if(loadInfo == undefined) return;
-        if(loadInfo.waitLoad == false){//如果资源处于意见加载完成的话
+        if(loadInfo.waitLoad == false){//如果资源处于等待加载状态的话
             _Facade.FindProxy(ResouceProxy).DecResource(resUUID);//立即删除这个资源的引用
             comp[key] = undefined;//设置为空
         }
@@ -53,12 +51,22 @@ export class ResourceComp extends Component {//配合资源管理器，来动态
         compMap.forEach((value: Map<string, { waitLoad: boolean; finishHandle?: (comp: Component) => void; }>, compCell: Component)=>{
             value.forEach((data: { waitLoad: boolean; finishHandle?: (comp: Component) => void; }, key: string)=>{
                 if(data.waitLoad == false) return;//没有加载的话
-                if(isSuccess)
+                if(isSuccess){
                     compCell[key] = _Facade.FindProxy(ResouceProxy).AddResource(resUUID);
-                else    
+                    data.waitLoad = false;
+                } else    
                     this.UnLoadRes(resUUID,compCell,key);
             })
-        });
+        }); 
+    }
+    
+    public RemoveRes(comp:Component,key:UseKey):UUID|undefined{
+        let useUUID:UUID|undefined = this.GetCompCiteResByKey(comp,key);//判断当前组件的Key是否正在使用资源 
+        if(useUUID != undefined){//如果当前组件使用了资源
+            this.UnLoadRes(useUUID,comp,key);//设置为不加载
+            return useUUID;
+        }
+        return undefined;
     }
 
     //表示组件将加载一个资源
@@ -92,21 +100,14 @@ export class ResourceComp extends Component {//配合资源管理器，来动态
     
     //当节点收到destory消息的时候 
     protected onDestroy(): void { 
-        this.node.off(NodeEventType.COMPONENT_REMOVED,this.ComponentRemoveHandle,this);
         let resouceProxy:ResouceProxy = _Facade.FindProxy(ResouceProxy);
         for(let cell of this.mLoadCompMap){
             let comp:Component = cell[0];
             for(let keyMap of cell[1]){
-                comp[keyMap[0]] = undefined;//对变量进行赋值
+                if(comp.isValid) 
+                    comp[keyMap[0]] = undefined;//对变量进行赋值
                 resouceProxy.DecResource(keyMap[1]);
             }
         }
-    }
-
-    //当节点收到组件移除的事件时
-    protected ComponentRemoveHandle(a,b,c,d,e,f,g){
-        //目标功能，对组件所绑定的所有的资源进行回收
-        //删除此Comp下的所有引用
     } 
-    
 }

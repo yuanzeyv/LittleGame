@@ -159,4 +159,7 @@ export enum eNotice {
 
     //刷新玩家属性信息
     RefreshAttr = "RefreshAttr",
+
+    OpenFightLayer = "OpenFightLayer",//打开战斗界面
+    CloseFightLayer = "CloseFightLayer",//关闭战斗界面
 }

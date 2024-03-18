@@ -144,12 +144,13 @@ export class BundleAssest{
         if(refObj == undefined || refObj.loadCount != 0)
             return;
         refObj.soltCell?.Stop();//停止定时器 
-        refObj.soltCell =  _G.TimeWheel.Set(20 * 1000,()=>{
+        refObj.soltCell =  _G.TimeWheel.Set(1 * 1000,()=>{
             if(refObj.loadCount != 0)//不可能出现这种情况
                return;
             refObj.soltCell = undefined;//清空本次的定时器（无用逻辑）
-            this.mRemeberCountMap.delete(uuid);//删除引用
+            this.mRemeberCountMap.delete(uuid);//删除引用 
             refObj.asset.decRef();//删除引用
+            console.log(`清理了游戏资源 ${uuid}`); 
         });
     }
     //增加引用
