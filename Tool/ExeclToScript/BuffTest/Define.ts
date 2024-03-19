@@ -58,8 +58,8 @@ export enum eTriggerType{
 
 export interface IBuffObj{
     TriggerType:eTriggerType;//触发条件
-    WhyAdd?:string;//谁被添加
-    BuffID?:number;//BuffID
-    ExecIndex?:number;//满足Index
-    Attrs?:Array<{k:number,v:number}>//添加属性数组
+    WhyAdd:number;//谁被添加
+    BuffID:number;//BuffID
+    ExecIndex:number;//满足Index
+    Attrs:Array<{k:number,v:number}>//添加属性数组
 }
