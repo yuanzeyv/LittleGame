@@ -2,7 +2,7 @@ import { IMonsterStruct, MonsterConfig } from "../Work/OutputScript/Monster";
 import { AttrCell } from "./Battle/AttrCell";
 import { eAttrType, eCampType } from "./Battle/BattleDefine"; 
 import { BuffProxy } from "./BuffProxy";
-import { eBuffType, eTriggerType } from "./Define";
+import { IBuffObj, eBuffType, eTriggerType } from "./Define";
 let buffProxy:BuffProxy = new BuffProxy();
 
 class Player{
@@ -126,12 +126,16 @@ class BattleSimulation{
     }
 
     //触发一次Buff的事件
-    private TriggerBuffEvent(camp:eCampType,triggerType:eTriggerType){
+    private TriggerBuffEvent(camp:eCampType,triggerType:eTriggerType):Array<IBuffObj>{
+        let retInfo:Array<IBuffObj> = new Array<IBuffObj>();//触发的同时，也会记录所有触发的详细数据信息
         buffProxy.TriggerEvent(this.mPlayerCampArray[camp].BuffControlID,triggerType);
+        return retInfo;
     }
-    private TriggerBothBuffEvent(triggerType:eTriggerType){
-        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Initiative].BuffControlID,triggerType);
-        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Passivity].BuffControlID,triggerType);
+    private TriggerBothBuffEvent(triggerType:eTriggerType):Array<IBuffObj>{
+        let retInfo:Array<IBuffObj> = new Array<IBuffObj>();//触发的同时，也会记录所有触发的详细数据信息
+        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Initiative].BuffControlID,triggerType,retInfo);
+        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Passivity].BuffControlID,triggerType,retInfo);
+        return retInfo;
     }
     //开始一回合
     private* StartRound(){//返回值代表战斗是否结束

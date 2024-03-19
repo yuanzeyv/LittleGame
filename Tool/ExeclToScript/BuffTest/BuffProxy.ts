@@ -1,6 +1,6 @@
 import { AttrCell } from "./Battle/AttrCell";
 import { BuffControl } from "./BuffControl";
-import { eTriggerType } from "./Define";
+import { IBuffObj, eTriggerType } from "./Define";
 
 export class BuffProxy{
     private static sControlID:number = 0;
@@ -20,10 +20,10 @@ export class BuffProxy{
         return controlObj.AddBuff(buffID);
     }
  
-    public TriggerEvent(controlID:number,triggerType:eTriggerType,data?:any):boolean{
+    public TriggerEvent(controlID:number,triggerType:eTriggerType,data?:any,trrigerArr?:Array<IBuffObj>):void{
         let controlObj:BuffControl|undefined = this.mControlMap.get(controlID);
         if(controlObj == undefined)//首先判断是否拥有这个控制ID
-            return false;
-        return controlObj.Trigger(triggerType,data);
+            return;
+        controlObj.Trigger(triggerType,data);
     }  
 }
