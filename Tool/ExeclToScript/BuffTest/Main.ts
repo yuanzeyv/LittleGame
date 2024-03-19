@@ -133,8 +133,8 @@ class BattleSimulation{
     }
     private TriggerBothBuffEvent(triggerType:eTriggerType):Array<IBuffObj>{
         let retInfo:Array<IBuffObj> = new Array<IBuffObj>();//触发的同时，也会记录所有触发的详细数据信息
-        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Initiative].BuffControlID,triggerType,retInfo);
-        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Passivity].BuffControlID,triggerType,retInfo);
+        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Initiative].BuffControlID,triggerType,undefined,retInfo);
+        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Passivity].BuffControlID,triggerType,undefined,retInfo);
         return retInfo;
     }
     //开始一回合

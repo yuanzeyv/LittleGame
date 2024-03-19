@@ -24,6 +24,6 @@ export class BuffProxy{
         let controlObj:BuffControl|undefined = this.mControlMap.get(controlID);
         if(controlObj == undefined)//首先判断是否拥有这个控制ID
             return;
-        controlObj.Trigger(triggerType,data);
+        controlObj.Trigger(triggerType,data,trrigerArr);
     }  
 }

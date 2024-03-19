@@ -26,8 +26,10 @@ export class TriggerControl{
             let data:{k:number,v:number}[] | undefined = cell.ExecuteTriggerEvent(triggerType,param);
             if(data == undefined)
                 continue;
+            for(let cell of data)
+                this.mBuffBase.Control.AttrObj.SetAddiAttr(cell.k,cell.v)//对属性进行改动
             if(trrigerArr)//是否需要返回
-                trrigerArr.push({WhyAdd:this.mBuffBase.ControlID,TriggerType:triggerType,BuffID:this.mBuffBase.ID,ExecIndex:Number(index),Attrs:data});
+                trrigerArr.push({WhyAdd:this.mBuffBase.Control.ID,TriggerType:triggerType,BuffID:this.mBuffBase.ID,ExecIndex:Number(index),Attrs:data});
         }
     }
     

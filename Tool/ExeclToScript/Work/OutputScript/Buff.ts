@@ -71,7 +71,7 @@ class Buff{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"护身辟邪","Level":1,"Desc":"战斗开始时增加角色10%的基础生命值加成。每次触发闪避时，对攻击者造成相当于本次攻击20%攻击的伤害","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[0],"Con":[9],"Do":[500001]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[{"Type":1,"Value":1000}]};
+       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"护身辟邪","Level":1,"Desc":"战斗开始时增加角色10%的基础生命值加成。每次触发闪避时，对攻击者造成相当于本次攻击20%攻击的伤害","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[0],"Con":[9],"Do":[1000001]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[{"Type":1,"Value":1000}]};
        this.mConfigObject[2] = {"Key":2,"BuffID":2,"Name":"赐福增寿","Level":1,"Desc":"战斗开始时，增加角色100%的复活概率，且复活后回复12%总血量","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
        this.mConfigObject[3] = {"Key":3,"BuffID":3,"Name":"鬼影重重","Level":1,"Desc":"战斗开始时，基础攻击力提升10%，每次触发连击，将偷取敌方英雄10%的基础攻击力。","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
        this.mConfigObject[4] = {"Key":4,"BuffID":4,"Name":"鬼影重重-汲取","Level":0,"Desc":"触发鬼影重重判定用","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};

@@ -1,14 +1,15 @@
-import { IBuffStruct, BuffConfig } from "../Config/Buff";
+import { IBuffStruct, BuffConfig } from "../../Work/OutputScript/Buff";
+import { BuffControl } from "../BuffControl";
 import { IBuffObj, eTriggerType } from "../Define";
 import { TriggerControl } from "../TriggerControl/TriggerControl";
 export class BuffBase{
-    private mControlID:number;//当前Buff的唯一ID 
+    private mBuffControl:BuffControl;//当前Buff的唯一ID 
     private mID:number;//当前Buff的唯一ID 
     protected mBuffCfg:IBuffStruct;//当前Buff的配置表
     protected mLifeCount:number;//生命次数 每次触发对应的扣除逻辑后，就会进行-1,当LifeCount为0时，删除本Buff 
     protected mBuffTriggerControl:TriggerControl;
-    public constructor(controlID:number,buffID:number){
-        this.mControlID = controlID;
+    public constructor(buffControl:BuffControl,buffID:number){
+        this.mBuffControl = buffControl;
         this.mBuffCfg = BuffConfig.GetData(buffID)!;
         this.ResetLifeCount();
         this.mBuffTriggerControl = new TriggerControl(this);
@@ -40,7 +41,7 @@ export class BuffBase{
         return this.mBuffTriggerControl;
     }
 
-    public get ControlID():number{
-        return this.mControlID;
+    public get Control():BuffControl{
+        return this.mBuffControl;
     }
 }

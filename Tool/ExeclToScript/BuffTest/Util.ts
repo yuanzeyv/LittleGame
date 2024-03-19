@@ -1,4 +1,4 @@
-import { IBuffStruct, BuffConfig } from "./Config/Buff";
+import { IBuffStruct, BuffConfig } from "../Work/OutputScript/Buff";
 
 export function GetKV(data:number):{k:number,v:number}{
     data = Math.floor(data);

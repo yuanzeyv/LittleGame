@@ -1,12 +1,11 @@
+import { IBuffStruct, BuffConfig } from "../Work/OutputScript/Buff";
 import { AttrCell } from "./Battle/AttrCell";
 import { BuffBase } from "./BuffBase/BuffBase";
 import { LevelBuff } from "./BuffBase/LevelBuff";
 import { NormalBuff } from "./BuffBase/NormalBuff";
 import { StackBuff } from "./BuffBase/StackBuff";
 import { TerritoryBuff } from "./BuffBase/TerritoryBuff";
-import { IBuffStruct, BuffConfig } from "./Config/Buff";
 import { TBuffType, TBuffID, eTriggerType, eBuffType, IBuffObj } from "./Define";
-
 //Buff控制器,可能同时存在N场战斗
 export class BuffControl{
     private mControlID:number = 0;//当前buff控制器的唯一ID
@@ -31,14 +30,11 @@ export class BuffControl{
             this.mTriggerBuffmap[index] = new Set<BuffBase>(); 
     }
 
-    public Trigger(triggerType:eTriggerType,param?:any,trrigerArr?:Array<IBuffObj>):Array<IBuffObj>{
-        let triggerArray:Array<IBuffObj> = new Array<IBuffObj>();
+    public Trigger(triggerType:eTriggerType,param?:any,trrigerArr?:Array<IBuffObj>):void{
         if(this.mTriggerBuffmap[triggerType] == undefined)
-            return triggerArray;
-        for(let buffBase of this.mTriggerBuffmap[triggerType]){
+            return;
+        for(let buffBase of this.mTriggerBuffmap[triggerType])
             buffBase.TriggerEvent(triggerType,param,trrigerArr);
-        }
-        return triggerArray;
     }
 
     private GetBuffCountByKey(buffKey:number):number{
@@ -136,7 +132,7 @@ export class BuffControl{
         let ownerCount:number = this.GetBuffCountByKey(buffKey);//判断当前是否没有次数
         if(ownerCount != 0)
             return false;
-        let buffBase:BuffBase = new TerritoryBuff(this.mControlID,buffKey);
+        let buffBase:BuffBase = new TerritoryBuff(this,buffKey);
         this.InsertBaseBuff(buffBase);
         return true;
     }
@@ -146,7 +142,7 @@ export class BuffControl{
         let typeArray:BuffBase[]|undefined  = this.GetBuffArrayByKey(buffKey);//判断当前是否没有次数
         let buffBase:BuffBase|undefined;
         if(typeArray == undefined || typeArray.length == 0){
-            buffBase = new LevelBuff(buffKey);
+            buffBase = new LevelBuff(this,buffKey);
             this.InsertBaseBuff(buffBase);
         } else 
             buffBase = typeArray![0];
@@ -154,7 +150,7 @@ export class BuffControl{
         let buffConfig:IBuffStruct = BuffConfig.GetData(buffKey)!;//获取到当前是否存在对应BuffID的配置表
         if( buffBase.Config.Level < buffConfig.Level ){  
             this.DeleteBaseBuff(buffBase);//删除老的Buff
-            buffBase = new NormalBuff(this.mControlID,buffKey);
+            buffBase = new NormalBuff(this,buffKey);
             this.InsertBaseBuff(buffBase); 
         }
         buffBase.ResetLifeCount();
@@ -169,7 +165,7 @@ export class BuffControl{
         let typeArray:BuffBase[]|undefined  = this.GetBuffArrayByKey(buffKey);//判断当前是否没有次数 
         let buffBase:BuffBase|undefined = undefined;
         if(typeArray == undefined || typeArray.length == 0){
-            buffBase = new LevelBuff(buffKey);
+            buffBase = new LevelBuff(this,buffKey);
             this.InsertBaseBuff(buffBase);
         }else   
             buffBase = typeArray[0];
@@ -186,8 +182,18 @@ export class BuffControl{
         let maxStack:number = buffConfig.MaxStack;
         let nowStack:number  = this.GetBuffCountByKey(buffKey);//判断当前是否没有次数
         if(nowStack < maxStack)
-            this.InsertBaseBuff(new StackBuff(this.mControlID,buffKey));
+            this.InsertBaseBuff(new StackBuff(this,buffKey));
         console.log(`当前的数据信息 ${nowStack}`);
         return true;
     } 
+
+    //获取到当前的ID
+    public get ID():number{
+        return this.mControlID;
+    }
+    
+    //获取到属性对象
+    public get AttrObj():AttrCell{
+        return this.mAttrObj;
+    }
 }
