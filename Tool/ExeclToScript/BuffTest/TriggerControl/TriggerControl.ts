@@ -29,7 +29,7 @@ export class TriggerControl{
             for(let cell of data)
                 this.mBuffBase.Control.AttrObj.SetAddiAttr(cell.k,cell.v)//对属性进行改动
             if(trrigerArr)//是否需要返回
-                trrigerArr.push({WhyAdd:this.mBuffBase.Control.ID,TriggerType:triggerType,BuffID:this.mBuffBase.ID,ExecIndex:Number(index),Attrs:data});
+                trrigerArr.push({BuffID:this.mBuffBase.ID,ExecIndex:Number(index),Attrs:data});
         }
     }
     

@@ -41,24 +41,17 @@ export enum eTriggerType{
     RoundStart         = 1 ,//回合开始
     RoundEnd           = 2 ,//回合结束
     BuffInsert         = 3 ,//Buff被插入时
-    AttackFront        = 4 ,//进行攻击前
-    DoubleHitFront     = 5 ,//进行连击前
-    MissFornt          = 6 ,//进行闪避前
-    BackHitFront       = 7 ,//进行反击前
-    SuckBloodFront     = 8 ,//进行吸血前
-    AttackAfter        = 9 ,//进行攻击后
-    MissAfter          = 10,//进行闪避后
-    DoubleHitAfter     = 11,//进行连击后
-    BackHitAfter       = 12,//进行反击后
-    SuckBloodAfter     = 13,//进行吸血后
-    HPChangeFront      = 14,//血量变动前
-    HPChangeAfter      = 15,//血量变动后
+    AttackFront        = 4 ,//进行攻击前    
+    AttackAfter        = 5 ,//进行攻击后    
+    BeAttackFront        = 4 ,//被攻击前 
+    BeAttackAfter        = 5 ,//被攻击后
+    HPChangeFront      = 6,//血量变动前
+    HPChangeAfter      = 7,//血量变动后
     FINAL                  ,//占位
 };
 
+
 export interface IBuffObj{
-    TriggerType:eTriggerType;//触发条件
-    WhyAdd:number;//谁被添加
     BuffID:number;//BuffID
     ExecIndex:number;//满足Index
     Attrs:Array<{k:number,v:number}>//添加属性数组

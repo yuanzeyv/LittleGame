@@ -47,6 +47,38 @@ export class AttrCell{
         this.ReCalcAttrByType(attrType);
     }
     /*
+    *获取到玩家的完整属性KV表
+    */
+    public GetOriginAttrTable():{[key:number]:number}{
+        let ret:{[key:number]:number} = {};
+        for(let index in this.mOriginAttrArray){
+            if( !this.mOriginAttrArray[index] )
+                continue;
+            ret[index] = this.mOriginAttrArray[index];
+        }
+        return ret;
+    }
+
+    public GetAddtionAttrTable():{[key:number]:number}{
+        let ret:{[key:number]:number} = {};
+        for(let index in this.mAddtionAttrArray){
+            if( !this.mAddtionAttrArray[index] )
+                continue;
+            ret[index] = this.mAddtionAttrArray[index];
+        }
+        return ret;
+    }
+
+    public GetFinalAttrTable():{[key:number]:number}{
+        let ret:{[key:number]:number} = {};
+        for(let index in this.mRealAttrArray){
+            if( !this.mRealAttrArray[index] )
+                continue;
+            ret[index] = this.mRealAttrArray[index];
+        }
+        return ret;
+    }
+    /*
     *玩家最终属性区域
     */
     public GetFinalAttr(attrType:eAttrType){
