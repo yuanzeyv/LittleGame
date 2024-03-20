@@ -3,30 +3,37 @@ import { AttrCell } from "./Battle/AttrCell";
 import { eCampType, eAttrType } from "./Battle/BattleDefine";
 import { BuffProxy } from "./BuffProxy";
 import { eTriggerType, IBuffObj } from "./Define";
-let buffProxy:BuffProxy = new BuffProxy();
-
-enum eRecordType{
-    InitData,//初始化数据用
+let buffProxy:BuffProxy = new BuffProxy(); 
+export enum eRecordType{
+    InitAttrs,//初始化数据用
+    InitBuffs,//初始化数据用
     Attack,//玩家进行基础攻击用 
+    BuffInsert,//插入一个Buff 
     BuffTrigger,//触发一个Buff 
     EndBattle,//战斗记录，战斗结束
 };
 
-interface RecordBase{
+export interface RecordBase{
     RecordType:eRecordType;//记录类型
 }
-
-//希望有一场数据齐全的战斗，必须记录到战斗中的每一个数值变动。
+ 
 //游戏内的各项数值主要被记录在玩家的属性中，所以此处会从玩家属性中拉取到战斗必要的数值内容
-interface RecordInitData extends RecordBase{
+export interface RecordInitData extends RecordBase{
     Camp:eCampType;//玩家阵营类型
     BaseAttrs:{[key:number]:number};//需要获取到玩家的基础属性
     AdditionAttrs:{[key:number]:number};//需要获取到玩家的附加属性
     FinalAttrs:{[key:number]:number};//需要获取到玩家的所有最终属性值
 };
+ 
+//游戏内Buff被插入时的日志记录
+export interface RecordBuffInsert extends RecordBase{
+    Camp:eCampType;//玩家阵营类型
+    BuffID:number;//插入Buff的唯一ID
+    BuffKey:number;//插入Buff的Key
+};
 
 //当Buff被触发时，我希望Buff所关联的所有数据信息，能够一览无余
-interface RecordBuffTrigger extends RecordBase{
+export interface RecordBuffTrigger extends RecordBase{
     TriggerType:eTriggerType;//Buff的触发类型
     Camp:eCampType;//玩家阵营类型
     BuffID:number;//造成属性变动的BuffID
@@ -36,14 +43,15 @@ interface RecordBuffTrigger extends RecordBase{
 
 //玩家攻击时，也会进行判定，但是因为攻击仅会影响到玩家的生命值
 interface RecordAttack extends RecordBase{
+    AttackCamp:eCampType;//攻击者玩家阵营
+    BeAttackCamp:eCampType;//被攻击者玩家阵营
     Attrs:{[key:number]:number};//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
 }
 
 //玩家攻击时，也会进行判定，但是因为攻击仅会影响到玩家的生命值
 interface RecordEndBattle extends RecordBase{
-    WinCamp:eCampType;//胜利的玩家阵营类型
-}  
-
+    Result:number;//胜利的玩家阵营类型
+}   
  
 class AttackType{
     public Round:number;     //第几回合
@@ -62,8 +70,7 @@ class AttackType{
         this.ResdiueHP = resdiueHP;
     }
 }
-
-
+ 
 class Player{
     private mName:string;//玩家名称
     private mCamp:PlayerCamp;//玩家所属阵营
@@ -98,16 +105,14 @@ class PlayerCamp{
     private mMainPlayer:Player;//阵营主角
     private mPlayerArray:Array<Player> = new Array<Player>();//阵营玩家 
     private mBuffControlID:number;//每个阵营维护一个Buff
+
     private mAttrCell:AttrCell = new AttrCell();//阵营属性信息
     private mEnemyCamp:PlayerCamp;//敌人阵营
 
-    public constructor(campType:eCampType,attrs:Array<{k:number,v:number}>,buffs:number[],name:string){
+    public constructor(campType:eCampType,name:string){
         this.mCampType = campType;
-        this.mBuffControlID = buffProxy.GenBuffControl(this.mAttrCell);
-        this.mAttrCell.InitAttr(attrs); 
-        this.InsertPlayer(name);
-        for(let cell of buffs)
-            buffProxy.AddBuff(this.mBuffControlID,cell); 
+        this.mBuffControlID = buffProxy.GenBuffControl(campType,this.mAttrCell);
+        this.InsertPlayer(name); 
     }
 
     public get CampType():eCampType{
@@ -149,24 +154,18 @@ class PlayerCamp{
 //一个战斗模拟对象
 export class BattleSimulation{ 
     private mMaxRound:number = 0;//最大回合数
-    private mPlayerCampArray:Array<PlayerCamp> = new Array<PlayerCamp>();//当前的所有玩家阵营
-
-    private mRecordArray:Array<AttackType> = new Array<AttackType>();
+    private mPlayerCampArray:Array<PlayerCamp> = new Array<PlayerCamp>();//当前的所有玩家阵营 
     public set MaxRound(round:number){
         this.mMaxRound = round;
     }
 
     public get MaxRound():number{
         return this.mMaxRound;
-    }
-    //通过配置设置战斗角色的属性
-    public SetBattleConfig(type:eCampType,battleID:number):void{
-        let mosnterConfig:IMonsterStruct = MonsterConfig.GetData(battleID)!;
-        this.SetBattleData(type,mosnterConfig.Attrs,mosnterConfig.Buffs,mosnterConfig.Name);
-    }
+    } 
+
     //通过属性设置战斗角色的属性
-    public SetBattleData(type:eCampType,attrs:Array<{k:number,v:number}>,buffs:number[],name:string):void{
-        this.mPlayerCampArray[type] = new PlayerCamp(type,attrs,buffs,name);
+    public InitCampInfo(type:eCampType,name:string):void{
+        this.mPlayerCampArray[type] = new PlayerCamp(type,name);
     }
     
     //获取到玩家的阵营信息
@@ -182,72 +181,26 @@ export class BattleSimulation{
                 playerArray.push(player)
         }
         return playerArray;
-    }
-
-    //触发一次Buff的事件
-    private TriggerBuffEvent(camp:eCampType,triggerType:eTriggerType):Array<IBuffObj>{
-        let retInfo:Array<IBuffObj> = new Array<IBuffObj>();//触发的同时，也会记录所有触发的详细数据信息
-        buffProxy.TriggerEvent(this.mPlayerCampArray[camp].BuffControlID,triggerType);
-        return retInfo;
-    }
-    private TriggerBothBuffEvent(triggerType:eTriggerType):Array<AttackType>{
-        let retInfo:Array<IBuffObj> = new Array<IBuffObj>();//触发的同时，也会记录所有触发的详细数据信息
-        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Initiative].BuffControlID,triggerType,undefined,retInfo);//对主动攻击的一方添加一个Buff
-        buffProxy.TriggerEvent(this.mPlayerCampArray[eCampType.Passivity].BuffControlID,triggerType,undefined,retInfo);//对被动攻击的一方添加一个Buff
-
-        let retRecord:Array<AttackType> = new Array<AttackType>();
-        for(let cell of retInfo)
-            retRecord.push(new AttackType(0,"未知","未知",2,cell.BuffID,0));
-        return retRecord;
-    }
-    //开始一回合
-    private* StartRound(){//返回值代表战斗是否结束
-        //初始化战斗数据,并返回到主界面中去
-
-        yield this.TriggerBothBuffEvent(eTriggerType.BattleStart);//触发战斗开始类型的
-        //确保15回合
-        for(let nowRound = 1; nowRound <= this.mMaxRound ;nowRound++){
-            let playerArray:Array<Player> = this.GetAllPlayer();
-            let attackedArray:Array<Player> = new Array<Player>();//已出手的玩家集合
-            while(playerArray.length != 0){
-                playerArray.sort((playerA:Player,playerB:Player)=>{ 
-                    return playerA.Camp.GetAttrByType(eAttrType.Speed) - playerB.Camp.GetAttrByType(eAttrType.Speed);
-                });//对玩家速度进行排序
-                let attackPlayer:Player = playerArray.pop()!;
-                attackedArray.push(attackPlayer);
-                //首先计算执行玩家的技能信息（目前只有普通攻击）
-                let harm = attackPlayer.GetAttr(eAttrType.Attack) - attackPlayer.Enemy.GetAttr(eAttrType.Defense) ; 
-                harm = harm <= 0 ? 0 : harm
-                attackPlayer.Enemy.UpdateHP( attackPlayer.Enemy.GetAttr(eAttrType.FinalHP) - harm);//修改玩家的血量
-                yield [new AttackType(nowRound,attackPlayer.Name,attackPlayer.Enemy.Name,1,harm,attackPlayer.Enemy.GetAttr(eAttrType.FinalHP))];
-                if(attackPlayer.Enemy.GetAttr(eAttrType.FinalHP) <= 0)
-                    return [new AttackType(nowRound,attackPlayer.Name,attackPlayer.Enemy.Name,1,harm,attackPlayer.Enemy.GetAttr(eAttrType.FinalHP))];
-            }
-        }
-    }
+    } 
 
     public InitEnemyCamp(){
         this.mPlayerCampArray[eCampType.Initiative].SetEnemyCamp(this.mPlayerCampArray[eCampType.Passivity]);
         this.mPlayerCampArray[eCampType.Passivity].SetEnemyCamp(this.mPlayerCampArray[eCampType.Initiative]);
-    }
- 
-    public StartSimulation():void{ 
-        this.InitEnemyCamp();
-        let handle:Generator<Array<AttackType>, Array<AttackType> | undefined, unknown> = this.StartRound();
-        let result:IteratorResult<Array<AttackType>, Array<AttackType> | undefined>;
-        do{
-            result = handle.next(); 
-            for(let cell of result.value!)
-                console.log(`第${cell.Round} ${cell.AttackName} 攻击 ${cell.BeAttackName} 造成 ${cell.Harm} 剩余血量:${cell.ResdiueHP}`);
-        }while(!result.done);//已经结束了的话
-    }
+    } 
 };
  
 //本类是对战斗模拟类的一个外观封装，以达到更好的操作战斗模拟类的效果
 export class BattleSimulationFacade{
     private mBattleSimulation:BattleSimulation;
+    public mRecordArray:Array<RecordBase> = new Array<RecordBase>();
+    private mAttrInfo:{attrs:{k:number,v:number}[],buffs:number[]}[] = [];
     constructor(battleSimulationObj:BattleSimulation){
         this.mBattleSimulation = battleSimulationObj;
+    }
+
+    //压入一个日志记录
+    public PushBattleRecord<T extends RecordBase>(record:T){
+        this.mRecordArray.push(record);
     }
     
     /*
@@ -256,86 +209,104 @@ export class BattleSimulationFacade{
     passivityConfig:被动攻击者的战斗数据信息
     */
     public SetBattleInfo(round:number,initiativeConfig:number,passivityConfig:number):void{
-        this.mBattleSimulation.MaxRound = 15;
-        this.mBattleSimulation.SetBattleConfig(eCampType.Initiative,1);
-        this.mBattleSimulation.SetBattleConfig(eCampType.Passivity,2);
-    }
-    
+        this.mBattleSimulation.MaxRound = round;
+        this.mAttrInfo[eCampType.Initiative] = {attrs:MonsterConfig.GetData(initiativeConfig)?.Attrs!,buffs:MonsterConfig.GetData(initiativeConfig)?.Buffs!,}
+        this.mAttrInfo[eCampType.Passivity] = {attrs:MonsterConfig.GetData(passivityConfig)?.Attrs!,buffs:MonsterConfig.GetData(passivityConfig)?.Buffs!,}
+        this.mBattleSimulation.InitCampInfo(eCampType.Passivity,MonsterConfig.GetData(initiativeConfig)?.Name!);
+        this.mBattleSimulation.InitCampInfo(eCampType.Initiative,MonsterConfig.GetData(passivityConfig)?.Name!);
+        this.mBattleSimulation.InitEnemyCamp();
+    }  
     /*
-    *获取到玩家的详细属性记录信息，并进行返回
+    *初始化指定阵营的属性信息，并返回属性记录
     */
-    public GetCampAttrRecord(campType:eCampType):RecordBase{
+    public InitCampAttr(campType:eCampType):void{
         let playerCamp:PlayerCamp = this.mBattleSimulation.GetPlayerCampInfo(campType);
+        playerCamp.AttrObj.InitAttr(this.mAttrInfo[campType].attrs);//进行属性的初始化
         let attrObj:AttrCell = playerCamp.AttrObj;//获取到玩家的属性对象
-        let retInitData:RecordInitData = {
+        this.PushBattleRecord<RecordInitData>({
             Camp: campType,
             BaseAttrs: attrObj.GetOriginAttrTable(),
             AdditionAttrs: attrObj.GetAddtionAttrTable(),
-            FinalAttrs: attrObj.GetFinalAttrTable(),
-            RecordType: eRecordType.InitData
-        };
-        return retInitData;
+            FinalAttrs: attrObj.GetFinalAttrTable(), RecordType: eRecordType.InitAttrs 
+        }); 
+    }
+    /*
+    *初始化阵营属性的Buff，并返回插入Buff的记录
+    */
+    public InitCampBuffs(campType:eCampType):void{
+        let playerCamp:PlayerCamp = this.mBattleSimulation.GetPlayerCampInfo(campType);
+        for(let cell of this.mAttrInfo[campType].buffs)
+            buffProxy.AddBuff(playerCamp.BuffControlID,cell);
     }
     /*
     *触发并设置玩家开局Buff
     */
-    public TriggerBuff(campType:eCampType,triggerType:eTriggerType):Array<RecordBase>{
+    TriggerBuff(campType:eCampType,triggerType:eTriggerType):void {
         let trrigerArr:Array<IBuffObj> = new Array<IBuffObj>();
         buffProxy.TriggerEvent(this.mBattleSimulation.GetPlayerCampInfo(campType).BuffControlID,triggerType,undefined,trrigerArr);//对主动攻击的一方添加一个Buff
-        let retRecord:Array<RecordBuffTrigger> = new Array<RecordBuffTrigger>();
-        for(let cell of trrigerArr)
-            retRecord.push({Camp: campType,BuffID: cell.BuffID,TriggerIndex: cell.ExecIndex,Attrs:cell.Attrs,RecordType: eRecordType.BuffTrigger,TriggerType:triggerType});
-        return retRecord;
-    }    
+    }  
 
-    public* StartSimulationBattle(){ 
+    /*
+    *玩家攻击消息通知
+    */
+    AttackRecord(attackCamp:eCampType,beAttackCamp:eCampType,harm:number):void{
+        this.PushBattleRecord<RecordAttack>({
+            RecordType:eRecordType.Attack,//记录类型
+            AttackCamp:attackCamp,//攻击者玩家阵营
+            BeAttackCamp:beAttackCamp,//被攻击者玩家阵营
+            Attrs: {[eAttrType.FinalHP]:harm}//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
+        });
+    }
+
+    EndBattleRecord(winCamp:number):void{
+        this.PushBattleRecord<RecordEndBattle>({
+            RecordType:eRecordType.EndBattle,//记录类型 
+            Result:winCamp
+        }); 
+    }
+
+    public StartSimulationBattle(){  
         //开局之前首先初始化玩家的所有基础属性信息
-        yield this.GetCampAttrRecord(eCampType.Initiative);
-        yield this.GetCampAttrRecord(eCampType.Passivity); 
+        this.InitCampAttr(eCampType.Initiative);
+        this.InitCampAttr(eCampType.Passivity);  
+        //随后初始化阵营属性的Buff，并返回属性变动的差值
+        this.InitCampBuffs(eCampType.Initiative);
+        this.InitCampBuffs(eCampType.Passivity);
+ 
         //开始启用游戏的开局Buff
-        yield this.TriggerBuff(eCampType.Initiative,eTriggerType.BattleStart);//触发战斗开始类型的
-        yield this.TriggerBuff(eCampType.Passivity,eTriggerType.BattleStart);//触发战斗开始类型的
+        this.TriggerBuff(eCampType.Initiative,eTriggerType.BattleStart);//触发战斗开始类型的
+        this.TriggerBuff(eCampType.Passivity,eTriggerType.BattleStart);//触发战斗开始类型的
         //准备开始游戏回合
-        let battleSimulationOver:boolean = false;
+        let battleSimulationOver:number = 0;
         for(let round = 1 ; round <= this.mBattleSimulation.MaxRound &&  !battleSimulationOver ; round++){
             //回合开始时，需要优先触发一次回合开启时的Buff
-            yield this.TriggerBuff(eCampType.Initiative,eTriggerType.BattleStart);//触发战斗开始类型的
-            yield this.TriggerBuff(eCampType.Passivity,eTriggerType.BattleStart);//触发战斗开始类型的
+            this.TriggerBuff(eCampType.Initiative,eTriggerType.RoundStart);//触发战斗开始类型的
+            this.TriggerBuff(eCampType.Passivity,eTriggerType.RoundStart);//触发战斗开始类型的
             //获取到回合出手玩家列表
             let playerArray:Array<Player> = this.mBattleSimulation.GetAllPlayer();
             while(playerArray.length != 0){
                 //对玩家速度进行排序
-                playerArray.sort((playerA:Player,playerB:Player)=> playerA.Camp.GetAttrByType(eAttrType.Speed) - playerB.Camp.GetAttrByType(eAttrType.Speed) );
+                playerArray.sort((playerA:Player,playerB:Player)=> playerA.Camp.GetAttrByType(eAttrType.Speed) - playerB.Camp.GetAttrByType(eAttrType.Speed));
                 let attackPlayer:Player = playerArray.pop()!; 
-                //攻击开始前
-                yield this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackFront);
                 let attackCamp:PlayerCamp = this.mBattleSimulation.GetPlayerCampInfo(attackPlayer.Camp.CampType);
                 let beAttackCamp:PlayerCamp = this.mBattleSimulation.GetPlayerCampInfo(attackPlayer.Enemy.Camp.CampType); 
+
+                //准备攻击前，进行一次Buff的触发操作
+                this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackFront);
                 let harm:number = attackCamp.GetAttrByType(eAttrType.Attack) - beAttackCamp.GetAttrByType(eAttrType.Defense);  
-                yield this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeFront);  
-                harm = harm <= 0 ? 0 : harm;//伤害不可以高于剩余最大生命值
-                beAttackCamp.SetAttrByType( eAttrType.FinalHP,beAttackCamp.GetAttrByType(eAttrType.FinalHP) - harm);//修改玩家的血量 
-                yield this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeAfter); 
-                yield this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackAfter);   
-
-                //计算连击
-                //计算暴击
-
-
-                if(attackPlayer.Enemy.GetAttr(eAttrType.FinalHP) <= 0){
-                    battleSimulationOver = true;
+                this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeFront);  
+                beAttackCamp.SetAttrByType( eAttrType.FinalHP,beAttackCamp.GetAttrByType(eAttrType.FinalHP) - (harm <= 0 ? 0 : harm));//修改玩家的血量 
+                this.AttackRecord(attackCamp.CampType,beAttackCamp.CampType,(harm <= 0 ? 0 : harm));
+                this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeAfter); 
+                this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackAfter);   
+                if(beAttackCamp.GetAttrByType(eAttrType.FinalHP) <= 0){
+                    battleSimulationOver = beAttackCamp.CampType == eCampType.Initiative ? 1 : 2;
                     break;
                 }
             } 
-            yield this.TriggerBuff(eCampType.Initiative,eTriggerType.BattleStart);//触发战斗开始类型的
-            yield this.TriggerBuff(eCampType.Passivity,eTriggerType.BattleStart);//触发战斗开始类型的
-        }
-        //let handle:Generator<Array<AttackType>, Array<AttackType> | undefined, unknown> = this.StartRound();
-        //let result:IteratorResult<Array<AttackType>, Array<AttackType> | undefined>;
-        //do{
-        //    result = handle.next(); 
-        //    for(let cell of result.value!)
-        //        console.log(`第${cell.Round} ${cell.AttackName} 攻击 ${cell.BeAttackName} 造成 ${cell.Harm} 剩余血量:${cell.ResdiueHP}`);
-        //}while(!result.done);//已经结束了的话
+            this.TriggerBuff(eCampType.Initiative,eTriggerType.BattleStart);//触发战斗开始类型的
+            this.TriggerBuff(eCampType.Passivity,eTriggerType.BattleStart);//触发战斗开始类型的
+        } 
+        this.EndBattleRecord(battleSimulationOver);
     }  
-}
+} 

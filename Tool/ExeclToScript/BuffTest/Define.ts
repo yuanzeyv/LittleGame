@@ -52,7 +52,8 @@ export enum eTriggerType{
 
 
 export interface IBuffObj{
-    BuffID:number;//BuffID
+    BuffID:number;//buff的唯一ID
+    BuffKey:number;
     ExecIndex:number;//满足Index
     Attrs:Array<{k:number,v:number}>//添加属性数组
 }

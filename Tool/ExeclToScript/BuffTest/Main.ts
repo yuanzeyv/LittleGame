@@ -1,12 +1,7 @@
-import { IMonsterStruct, MonsterConfig } from "../Work/OutputScript/Monster";
-import { AttrCell } from "./Battle/AttrCell";
-import { eAttrType, eCampType } from "./Battle/BattleDefine"; 
-import { BuffProxy } from "./BuffProxy"; 
-let buffProxy:BuffProxy = new BuffProxy();
+import { BattleSimulation, BattleSimulationFacade } from "./BattleSimulationFacade"; 
 
 //首先创建一个战斗模拟对象
-let battleSimulation:BattleSimulation = new BattleSimulation()
-battleSimulation.SetMaxRound(15);
-battleSimulation.SetBattleConfig(eCampType.Initiative,1);
-battleSimulation.SetBattleConfig(eCampType.Passivity,2);
-battleSimulation.StartSimulation();//开始进行战斗模拟
+export let battleSimulation:BattleSimulationFacade = new BattleSimulationFacade(new BattleSimulation())
+battleSimulation.SetBattleInfo(15,1,2);
+battleSimulation.StartSimulationBattle(); 
+console.log(battleSimulation.mRecordArray); 

@@ -1,27 +1,27 @@
 export enum eBaseAttr{//用于计算属性的基础信息
-    Attack              =    0,//攻击
-    AttackPercent       =    1,//攻击百分比加成
-    AttackFinalPercent  =    2,//攻击力最终百分比加成
-    Defense             =    3,//防御
-    DefensePercent      =    4,//防御百分比加成
-    DefenseFinalPercent =    5,//防御力最终百分比加成
-    Speed               =    6,//速度
-    SpeedPercent        =    7,//速度百分比加成
-    SpeedFinalPercent   =    8,//速度力最终百分比加成
-    Life                =    9,//速度
-    LifePercent         =   10,//速度百分比加成
-    LifeFinalPercent    =   11,//速度力最终百分比加成
-    Final               =   12,//最大
+    //玩家的基础属性
+    BaseAttack              =    0,//攻击
+    BaseAttackPercent       =    1,//攻击百分比加成
+    BaseAttackFinalPercent  =    2,//攻击力最终百分比加成
+    BaseDefense             =    3,//防御
+    BaseDefensePercent      =    4,//防御百分比加成
+    BaseDefenseFinalPercent =    5,//防御力最终百分比加成
+    BaseSpeed               =    6,//速度
+    BaseSpeedPercent        =    7,//速度百分比加成
+    BaseSpeedFinalPercent   =    8,//速度力最终百分比加成
+    BaseLife                =    9,//生命
+    BaseLifePercent         =   10,//生命百分比
+    BaseLifeFinalPercent    =   11,//生命最终加成
+ 
+    //玩家的额外基础属性
+    SumAttack           =   100,//总攻击力 
+    SumDefense          =   101,//总防御力
+    SumHPLimit          =   102,//最大生命值
+    SumSpeed            =   103,//总速度
+    SumFinalHP          =   104,//角色当前生命值
+    Final               ,//最大
 };
-
-export enum eAttrType{//玩家的属性
-    Attack  = 0,//总攻击力 
-    Defense = 1,//总防御力
-    HPLimit = 2,//最大生命值
-    Speed   = 3,//总速度
-    FinalHP = 4,//角色当前生命值
-    Final      ,
-}
+ 
 
 //阵营信息
 export enum eCampType{

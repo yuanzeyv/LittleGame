@@ -13,8 +13,8 @@ export class TriggerControl{
     }
 
     private InitEffectCellArray():void{
-        for(let cell of this.mBuffBase.Config.Trigger)
-            this.mBuffEffectCellArray.push(new BuffEffectBase(cell));
+        for(let index in this.mBuffBase.Config.Trigger)
+            this.mBuffEffectCellArray.push(new BuffEffectBase(this.mBuffBase,Number(index),this.mBuffBase.Config.Trigger[index]));
     }
     
     public TriggerEvent(triggerType:eTriggerType,param?:any,trrigerArr?:Array<IBuffObj>):void{
@@ -23,13 +23,7 @@ export class TriggerControl{
             let cell:BuffEffectBase = this.mBuffEffectCellArray[index];
             if(!cell.IsAppointTriggerType(triggerType))
                 continue;
-            let data:{k:number,v:number}[] | undefined = cell.ExecuteTriggerEvent(triggerType,param);
-            if(data == undefined)
-                continue;
-            for(let cell of data)
-                this.mBuffBase.Control.AttrObj.SetAddiAttr(cell.k,cell.v)//对属性进行改动
-            if(trrigerArr)//是否需要返回
-                trrigerArr.push({BuffID:this.mBuffBase.ID,ExecIndex:Number(index),Attrs:data});
+            cell.ExecuteTriggerEvent(triggerType,this.mBuffBase,trrigerArr,param);  
         }
     }
     

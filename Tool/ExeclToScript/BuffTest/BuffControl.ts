@@ -1,15 +1,19 @@
 import { IBuffStruct, BuffConfig } from "../Work/OutputScript/Buff";
 import { AttrCell } from "./Battle/AttrCell";
+import { eCampType } from "./Battle/BattleDefine";
+import { BattleSimulationFacade, RecordBase, RecordBuffInsert, eRecordType } from "./BattleSimulationFacade";
 import { BuffBase } from "./BuffBase/BuffBase";
 import { LevelBuff } from "./BuffBase/LevelBuff";
 import { NormalBuff } from "./BuffBase/NormalBuff";
 import { StackBuff } from "./BuffBase/StackBuff";
 import { TerritoryBuff } from "./BuffBase/TerritoryBuff";
 import { TBuffType, TBuffID, eTriggerType, eBuffType, IBuffObj } from "./Define";
+import { battleSimulation } from "./Main";
 //Buff控制器,可能同时存在N场战斗
 export class BuffControl{
+    private mCampType:eCampType;
     private mControlID:number = 0;//当前buff控制器的唯一ID
-    private mBuffGenID:number;//用以对新添加的Buff赋ID
+    private mBuffGenID:number = 0;//用以对新添加的Buff赋ID
     //通过Buff的触发类型，快速定位到
     //通过Buff唯一ID，快速索引到指定的角色Buff
     private mBuffMap:Map<number,BuffBase> = new Map<number,BuffBase>();//当前所有存活的Buff 
@@ -20,8 +24,9 @@ export class BuffControl{
     //属性对象地址 Buff 与 玩家之间的桥梁
     private mAttrObj:AttrCell;
 
-    constructor(controlID:number,attrObj:AttrCell){
+    constructor(controlID:number,campType:eCampType,attrObj:AttrCell){
         this.mControlID = controlID;//当前的控制ID 
+        this.mCampType = campType;
         this.InitTriggerMap();
         this.mAttrObj = attrObj;
     }
@@ -94,6 +99,13 @@ export class BuffControl{
         //获取到Buff的触发类型，进行设置
         for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
             this.mTriggerBuffmap[type].add(buffBase);
+
+        battleSimulation.PushBattleRecord<RecordBuffInsert>({RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key})
+        buffBase.TriggerEvent(eTriggerType.BuffInsert,undefined);
+    }
+    //获取到玩家的阵营信息
+    public GetCampInfo():eCampType{
+        return this.mCampType;
     }
     
     //删除一个Buff到对应的Type
@@ -136,7 +148,7 @@ export class BuffControl{
         this.InsertBaseBuff(buffBase);
         return true;
     }
- 
+    
     //插入一个固定等级的Buff
     public InsertNormalBuff(buffKey:number):boolean{
         let typeArray:BuffBase[]|undefined  = this.GetBuffArrayByKey(buffKey);//判断当前是否没有次数

@@ -1,4 +1,5 @@
 import { AttrCell } from "./Battle/AttrCell";
+import { eCampType } from "./Battle/BattleDefine";
 import { BuffControl } from "./BuffControl";
 import { IBuffObj, eTriggerType } from "./Define";
 
@@ -6,9 +7,9 @@ export class BuffProxy{
     private static sControlID:number = 0;
     private mControlMap:Map<number,BuffControl> = new Map<number,BuffControl>();//当前所有存活的Buff
     //生成一个Buff控制单元
-    public GenBuffControl(attrObj:AttrCell):number{
+    public GenBuffControl(campType:eCampType,attrObj:AttrCell):number{
         let controlID:number = BuffProxy.sControlID++;
-        this.mControlMap.set(controlID,new BuffControl(controlID,attrObj));
+        this.mControlMap.set(controlID,new BuffControl(controlID,campType,attrObj));
         return controlID;
     }
     

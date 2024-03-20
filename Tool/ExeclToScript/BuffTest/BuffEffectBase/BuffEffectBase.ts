@@ -1,12 +1,19 @@
-import { eTriggerType, TKV } from "../Define";
+import { eRecordType, RecordBuffTrigger } from "../BattleSimulationFacade";
+import { BuffBase } from "../BuffBase/BuffBase";
+import { eTriggerType, IBuffObj, TKV } from "../Define";
+import { battleSimulation } from "../Main";
 import { GetKV } from "../Util";
 
 export class BuffEffectBase{
+    private mBuffBase:BuffBase;
+    private mIndex:number;
     private mTriggerSet:Set<eTriggerType> = new Set<eTriggerType>();//Buff的触发时机
     private mRunConditionArray:Array<TKV> = new Array<TKV>();//Buff的执行条件
     private mDoSomeingArray:Array<TKV> = new Array<TKV>();//Buff的执行效果
     private mIsActive:boolean = false;//Buff当前是否生效
-    constructor(data:{Tri:number[];Con:number[];Do:number[];}){
+    constructor(buffBase:BuffBase,index:number,data:{Tri:number[];Con:number[];Do:number[];}){
+        this.mBuffBase = buffBase;
+        this.mIndex = index;
         for(let tri of data.Tri)
             this.mTriggerSet.add(tri);
         for(let con of data.Con)
@@ -20,14 +27,23 @@ export class BuffEffectBase{
     }
 
     //准备执行对应的Buff
-    public ExecuteTriggerEvent(type:eTriggerType,param?:any):Array<{k:number,v:number}>|undefined{
+    public ExecuteTriggerEvent(type:eTriggerType,buffBase:BuffBase,trrigerArr?:Array<IBuffObj>,param?:any){
         let isCompare:boolean = true;
-        for(let cell of this.mRunConditionArray);//进行判断，只要有一个不满足，那么就不执行
+        for(let cell of this.mRunConditionArray){//进行判断，只要有一个不满足，那么就不执行
+        }
         if(!((isCompare && !this.mIsActive) || (!isCompare && this.mIsActive)) || this.mDoSomeingArray.length == 0)//如果匹配并且未激活的话
-            return undefined;
+            return;
         this.mIsActive = !this.mIsActive; 
-        console.log(`执行了${type}事件`);
-        return [...this.mDoSomeingArray];
+        for(let cell of this.mDoSomeingArray)
+            buffBase.Control.AttrObj.SetAddiAttr(cell.k,cell.v)//对属性进行改动
+        battleSimulation.PushBattleRecord<RecordBuffTrigger>({
+            TriggerType: type, 
+            Camp: buffBase.Control.GetCampInfo(), 
+            BuffID: buffBase.ID, 
+            TriggerIndex: this.mIndex, 
+            RecordType: eRecordType.BuffTrigger,
+            Attrs: this.mDoSomeingArray,
+        });
     } 
 
     public GetTriggerSet():Set<eTriggerType>{
