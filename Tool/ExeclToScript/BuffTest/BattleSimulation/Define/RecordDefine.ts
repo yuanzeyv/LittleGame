@@ -5,8 +5,7 @@ import { eCampType } from "./BattleDefine";
 import { eTriggerType } from "../../Buff/Define/Define";
 import { eAttrType } from "../../AttrControl/Define/AttrDefine";
 export enum eRecordType{
-    InitAttrs,//初始化数据用
-    InitBuffs,//初始化数据用
+    InitAttrs,//初始化数据用 
     Attack,//玩家进行基础攻击用 
     BuffInsert,//插入一个Buff 
     BuffTrigger,//触发一个Buff 
@@ -35,8 +34,7 @@ export interface RecordBuffTrigger extends RecordBase{
     TriggerType:eTriggerType;//Buff的触发类型
     Camp:eCampType;//玩家阵营类型
     BuffID:number;//造成属性变动的BuffID
-    TriggerIndex:number;//触发的Buff对应的增益索引
-    Attrs:Array<{k:number,v:number}>;//需要获取到的最终属性值
+    TriggerIndex:number;//触发的Buff对应的增益索引 
 };
 
 //玩家攻击时，也会进行判定，但是因为攻击仅会影响到玩家的生命值

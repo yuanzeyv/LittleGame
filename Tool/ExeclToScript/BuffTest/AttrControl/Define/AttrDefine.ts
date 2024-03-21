@@ -12,7 +12,6 @@ export enum eAttrType{//用于计算属性的基础信息
     Life                =    9,//生命
     LifePercent         =   10,//生命百分比
     LifeFinalPercent    =   11,//生命最终加成
- 
     //玩家的额外基础属性
     SumAttack           =   50,//总攻击力 
     SumDefense          =   51,//总防御力
@@ -21,7 +20,25 @@ export enum eAttrType{//用于计算属性的基础信息
     SumFinalHP          =   54,//角色当前生命值
     Final               ,//最大
 };
- 
+
+export let AttrNameMap:Map<eAttrType,string> = new Map<eAttrType,string>();
+AttrNameMap.set(eAttrType.Attack             ,"攻击加成");
+AttrNameMap.set(eAttrType.AttackPercent      ,"攻击百分比");
+AttrNameMap.set(eAttrType.AttackFinalPercent ,"最终攻击百分比");
+AttrNameMap.set(eAttrType.Defense            ,"防御加成");
+AttrNameMap.set(eAttrType.DefensePercent     ,"防御百分比");
+AttrNameMap.set(eAttrType.DefenseFinalPercent,"最终防御百分比");
+AttrNameMap.set(eAttrType.Speed              ,"速度加成");
+AttrNameMap.set(eAttrType.SpeedPercent       ,"速度百分比");
+AttrNameMap.set(eAttrType.SpeedFinalPercent  ,"最终速度百分比");
+AttrNameMap.set(eAttrType.Life               ,"生命加成");
+AttrNameMap.set(eAttrType.LifePercent        ,"生命百分比");
+AttrNameMap.set(eAttrType.LifeFinalPercent   ,"最终生命百分比");
+AttrNameMap.set(eAttrType.SumAttack          ,"攻击力");
+AttrNameMap.set(eAttrType.SumDefense         ,"防御力");
+AttrNameMap.set(eAttrType.SumHPLimit         ,"生命值上限");
+AttrNameMap.set(eAttrType.SumSpeed           ,"速度");
+AttrNameMap.set(eAttrType.SumFinalHP         ,"生命值"); 
 
 
 //属性关联映射(意味着当某一个属性值发生变动时，玩家对应属性映射属性需要重新计算)

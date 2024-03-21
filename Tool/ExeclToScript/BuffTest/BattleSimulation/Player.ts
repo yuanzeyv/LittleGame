@@ -11,8 +11,8 @@ export class Player{
     public get Camp():Camp{ return this.AffiliationCamp; } 
     
     //获取到玩家的敌人信息
-    public get Enemy():Player{ return this.Camp.EnemyCamp.GetPlayerArray(); } 
+    public get Enemy():Player{ return this.Camp.EnemyCamp.MainPlayer; } 
     
-    //获取玩家名称
+    //获取玩家名称 
     public get Name():string{ return this.mName; }
 }

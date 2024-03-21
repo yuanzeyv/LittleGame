@@ -1,50 +1,53 @@
 import { IBuffStruct, BuffConfig } from "../../Work/OutputScript/Buff";
 import { AttrCell } from "../AttrControl/AttrCell";
 import { eCampType } from "../BattleSimulation/Define/BattleDefine";
-import { BattleSimulationFacade, RecordBase, RecordBuffInsert, eRecordType } from "./BattleSimulationFacade";
 import { BuffBase } from "./BuffBase/BuffBase";
 import { LevelBuff } from "./BuffBase/LevelBuff";
 import { NormalBuff } from "./BuffBase/NormalBuff";
 import { StackBuff } from "./BuffBase/StackBuff";
 import { TerritoryBuff } from "./BuffBase/TerritoryBuff";
-import { TBuffType, TBuffID, eTriggerType, eBuffType, IBuffObj } from "./Define/Define";
+import { TBuffType, TBuffID, eTriggerType, eBuffType } from "./Define/Define";
 import { battleSimulation } from "../Main";
-//Buff控制器,可能同时存在N场战斗
+import { RecordBuffInsert, eRecordType } from "../BattleSimulation/Define/RecordDefine";
 export class BuffControl{
-    private mCampType:eCampType;
     private mControlID:number = 0;//当前buff控制器的唯一ID
     private mBuffGenID:number = 0;//用以对新添加的Buff赋ID
-    //通过Buff的触发类型，快速定位到
-    //通过Buff唯一ID，快速索引到指定的角色Buff
-    private mBuffMap:Map<number,BuffBase> = new Map<number,BuffBase>();//当前所有存活的Buff 
-    //通过Buff类型来获取到对应的Buff组，方便快速索引
-    private mTypeBuffMap:Map<TBuffType,Map<TBuffID,Array<BuffBase>>> = new Map<TBuffType,Map<TBuffID,Array<BuffBase>>>();//领域类型的Buff
-    //通过Buff的触发类型来确定当前Buff的附加属性是否应该被执行 
-    private mTriggerBuffmap:Array<Set<BuffBase>> = new Array<Set<BuffBase>>(); 
-    //属性对象地址 Buff 与 玩家之间的桥梁
-    private mAttrObj:AttrCell;
-
+    private mCampType:eCampType;//需要一个类型，知道当前控制器的拥有者事谁
+    private mBuffMap:Map<number,BuffBase> = new Map<number,BuffBase>();//通过Buff唯一ID，快速索引到指定的角色Buff
+    private mTypeBuffMap:Map<TBuffType,Map<TBuffID,Array<BuffBase>>> = new Map<TBuffType,Map<TBuffID,Array<BuffBase>>>();
+    private mTriggerBuffmap:Array<Set<BuffBase>> = new Array<Set<BuffBase>>();//通过Buff的触发类型来确定当前Buff的附加属性是否应该被执行 
+    private mAttrObj:AttrCell;//用于Buff直接修改玩家属性。
     constructor(controlID:number,campType:eCampType,attrObj:AttrCell){
         this.mControlID = controlID;//当前的控制ID 
         this.mCampType = campType;
-        this.InitTriggerMap();
         this.mAttrObj = attrObj;
+        this.InitTriggerMap();
     }
+    //获取到当前的ID
+    public get ID():number{ return this.mControlID; }
+    //获取到属性对象
+    public get AttrObj():AttrCell{ return this.mAttrObj; } 
+    
+    //获取到玩家的阵营信息
+    public GetCampInfo():eCampType{ return this.mCampType; }
+
     private InitTriggerMap():void{
         for(let index = 0 ; index < eTriggerType.FINAL ; index++) 
             this.mTriggerBuffmap[index] = new Set<BuffBase>(); 
     }
 
-    public Trigger(triggerType:eTriggerType,param?:any,trrigerArr?:Array<IBuffObj>):void{
+    public Trigger(triggerType:eTriggerType,param?:any):void{
         if(this.mTriggerBuffmap[triggerType] == undefined)
             return;
         for(let buffBase of this.mTriggerBuffmap[triggerType])
-            buffBase.TriggerEvent(triggerType,param,trrigerArr);
+            buffBase.TriggerEvent(triggerType,param);
     }
 
     private GetBuffCountByKey(buffKey:number):number{
-        let buffConfig:IBuffStruct = BuffConfig.GetData(buffKey)!;//获取到当前是否存在对应BuffID的配置表
-        let typeMap:Map<number,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffConfig.BuffType);
+        let buffConfig:IBuffStruct|undefined = BuffConfig.GetData(buffKey);
+        if(buffConfig == undefined)//没有找到对应的Buff时
+            return 0;
+        let typeMap:Map<TBuffID,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffConfig.BuffType);
         if(typeMap == undefined)
             return 0;
         let buffArray:Array<BuffBase>|undefined = typeMap.get(buffConfig.BuffID);
@@ -54,7 +57,9 @@ export class BuffControl{
     }
     
     private GetBuffArrayByKey(buffKey:number):Array<BuffBase>|undefined{
-        let buffConfig:IBuffStruct = BuffConfig.GetData(buffKey)!;//获取到当前是否存在对应BuffID的配置表
+        let buffConfig:IBuffStruct|undefined = BuffConfig.GetData(buffKey);//获取到当前是否存在对应BuffID的配置表
+        if(buffConfig == undefined)//没有找到对应的Buff时
+            return undefined;
         let typeMap:Map<number,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffConfig.BuffType);
         if(typeMap == undefined)
             return undefined;
@@ -103,11 +108,10 @@ export class BuffControl{
         battleSimulation.PushBattleRecord<RecordBuffInsert>({RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key})
         buffBase.TriggerEvent(eTriggerType.BuffInsert,undefined);
     }
-    //获取到玩家的阵营信息
-    public GetCampInfo():eCampType{
-        return this.mCampType;
+    //删除当前的Buff控制器
+    public Destory():void{
     }
-    
+
     //删除一个Buff到对应的Type
     private DeleteBaseBuff(buffBase:BuffBase):void{
         let buffConfig:IBuffStruct = buffBase.Config;//获取到当前是否存在对应BuffID的配置表
@@ -133,8 +137,7 @@ export class BuffControl{
             buffArray == undefined;
         }
         //删除唯一ID索引
-        this.mBuffMap.delete(buffBase.ID);
-        
+        this.mBuffMap.delete(buffBase.ID); 
         //获取到Buff的触发类型，进行设置
         for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
             this.mTriggerBuffmap[type].delete(buffBase);
@@ -197,15 +200,5 @@ export class BuffControl{
             this.InsertBaseBuff(new StackBuff(this,buffKey));
         console.log(`当前的数据信息 ${nowStack}`);
         return true;
-    } 
-
-    //获取到当前的ID
-    public get ID():number{
-        return this.mControlID;
-    }
-    
-    //获取到属性对象
-    public get AttrObj():AttrCell{
-        return this.mAttrObj;
-    }
+    }  
 }

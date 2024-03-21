@@ -1,7 +1,7 @@
 import { MonsterConfig } from "../../Work/OutputScript/Monster";
 import { AttrCell } from "../AttrControl/AttrCell";
 import { eCampType } from "./Define/BattleDefine";  
-import { eTriggerType, IBuffObj } from "../Buff/Define/Define";
+import { eTriggerType } from "../Buff/Define/Define";
 import { eAttrType } from "../AttrControl/Define/AttrDefine";
 import { BattleSimulation } from "./BattleSimulation";
 import { RecordAttack, RecordBase, RecordEndBattle, RecordInitData, eRecordType } from "./Define/RecordDefine";
@@ -42,9 +42,9 @@ export class BattleSimulationFacade{
         playerCamp.AttrObj.InitAttr(this.mAttrInfo[campType].attrs);//进行属性的初始化
         let attrObj:AttrCell = playerCamp.AttrObj;//获取到玩家的属性对象
         this.PushBattleRecord<RecordInitData>({
+            RecordType: eRecordType.InitAttrs ,
             Camp: campType,
             Attrs: attrObj.GetAttrTable(),
-            RecordType: eRecordType.InitAttrs 
         }); 
     }
     /*
@@ -58,9 +58,8 @@ export class BattleSimulationFacade{
     /*
     *触发并设置玩家开局Buff
     */
-    TriggerBuff(campType:eCampType,triggerType:eTriggerType):void {
-        let trrigerArr:Array<IBuffObj> = new Array<IBuffObj>();
-        BuffProxy.Ins.TriggerEvent(this.mBattleSimulation.GetPlayerCampInfo(campType).BuffControlID,triggerType,undefined,trrigerArr);//对主动攻击的一方添加一个Buff
+    TriggerBuff(campType:eCampType,triggerType:eTriggerType):void { 
+        BuffProxy.Ins.TriggerEvent(this.mBattleSimulation.GetPlayerCampInfo(campType).BuffControlID,triggerType,undefined);//对主动攻击的一方添加一个Buff
     }  
 
     /*

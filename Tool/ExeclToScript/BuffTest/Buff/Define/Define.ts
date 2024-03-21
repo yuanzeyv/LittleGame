@@ -49,11 +49,3 @@ export enum eTriggerType{
     HPChangeAfter      = 7,//血量变动后
     FINAL                  ,//占位
 };
-
-
-export interface IBuffObj{
-    BuffID:number;//buff的唯一ID
-    BuffKey:number;
-    ExecIndex:number;//满足Index
-    Attrs:Array<{k:number,v:number}>//添加属性数组
-}

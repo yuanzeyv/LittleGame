@@ -1,7 +1,6 @@
 import { BuffBase } from "../BuffBase/BuffBase";
-import { BuffEffectBase } from "../BuffEffectBase/BuffEffectBase";
-import { IBuffObj, eTriggerType } from "../Define/Define";
-
+import { BuffEffectBase } from "./BuffEffectBase/BuffEffectBase";
+import { eTriggerType } from "../Define/Define"; 
 //每个基础的Buff拥有一个触发控制器，用以管理Buff触发时的各种状态
 export class TriggerControl{
     private mBuffBase:BuffBase;
@@ -11,23 +10,21 @@ export class TriggerControl{
         this.mBuffBase = buffBase;
         this.InitEffectCellArray();        
     }
-
+    //根据当前Buff的触发效果，初始化Buff特效数据信息配置
     private InitEffectCellArray():void{
         for(let index in this.mBuffBase.Config.Trigger)
-            this.mBuffEffectCellArray.push(new BuffEffectBase(this.mBuffBase,Number(index),this.mBuffBase.Config.Trigger[index]));
+            this.mBuffEffectCellArray.push(new BuffEffectBase(this.mBuffBase,Number(index)));
     }
     
-    public TriggerEvent(triggerType:eTriggerType,param?:any,trrigerArr?:Array<IBuffObj>):void{
-        //循环遍历当前角色身上的所有Buff,符合条件的话，立即执行对应的操作
+    public TriggerEvent(triggerType:eTriggerType,param?:any):void{
         for(let index in this.mBuffEffectCellArray){
             let cell:BuffEffectBase = this.mBuffEffectCellArray[index];
-            if(!cell.IsAppointTriggerType(triggerType))
-                continue;
-            cell.ExecuteTriggerEvent(triggerType,this.mBuffBase,trrigerArr,param);  
+            if(cell.IsAppointTriggerType(triggerType))
+                cell.ExecuteTriggerEvent(triggerType,this.mBuffBase,param);  
         }
     }
     
-    //获取到所有的触发信息
+    //获取到当前Buff监听的触发事件
     public GetTriggerTypeSet():Set<eTriggerType>{
         let ret:Set<eTriggerType> = new Set<eTriggerType>();
         for(let cell of this.mBuffEffectCellArray){
