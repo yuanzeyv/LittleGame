@@ -1,11 +1,17 @@
-import { AttrCell } from "./Battle/AttrCell";
-import { eCampType } from "./Battle/BattleDefine";
+import { AttrCell } from "../AttrControl/AttrCell";
+import { eCampType } from "../BattleSimulation/Define/BattleDefine";
 import { BuffControl } from "./BuffControl";
-import { IBuffObj, eTriggerType } from "./Define";
+import { IBuffObj, eTriggerType } from "./Define/Define";
 
 export class BuffProxy{
     private static sControlID:number = 0;
+    private static sInstance:BuffProxy|undefined = undefined;
     private mControlMap:Map<number,BuffControl> = new Map<number,BuffControl>();//当前所有存活的Buff
+    public static get Ins():BuffProxy{
+        if(BuffProxy.sInstance == undefined)    
+            BuffProxy.sInstance = new BuffProxy();
+        return BuffProxy.sInstance;
+    }
     //生成一个Buff控制单元
     public GenBuffControl(campType:eCampType,attrObj:AttrCell):number{
         let controlID:number = BuffProxy.sControlID++;

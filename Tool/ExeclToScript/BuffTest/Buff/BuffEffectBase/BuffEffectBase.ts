@@ -1,8 +1,8 @@
 import { eRecordType, RecordBuffTrigger } from "../BattleSimulationFacade";
-import { BuffBase } from "../BuffBase/BuffBase";
-import { eTriggerType, IBuffObj, TKV } from "../Define";
-import { battleSimulation } from "../Main";
-import { GetKV } from "../Util";
+import { BuffBase } from "../../BuffBase/BuffBase";
+import { eTriggerType, IBuffObj, TKV } from "../Define/Define";
+import { battleSimulation } from "../../Main";
+import { GetKV } from "../../Util";
 
 export class BuffEffectBase{
     private mBuffBase:BuffBase;

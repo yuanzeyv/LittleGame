@@ -6,12 +6,3 @@ export function GetKV(data:number):{k:number,v:number}{
     let value:number = (data - key) / 100;
     return {k:key,v:value};
 }
-
-//通过类型与等级获取到指定的表信息
-export function GetTableByTypeAndLevel(type:number,level:number):IBuffStruct|undefined{
-    for(let cell of BuffConfig.GetDatas()){
-        if(cell.BuffID == type && cell.Level == level)
-            return cell;
-    }
-    return undefined;
-}

@@ -1,7 +1,8 @@
-import { IBuffStruct, BuffConfig } from "../../Work/OutputScript/Buff";
+import { IBuffStruct, BuffConfig } from "../../../Work/OutputScript/Buff";
 import { BuffControl } from "../BuffControl";
-import { IBuffObj, eTriggerType } from "../Define";
+import { eTriggerType, IBuffObj } from "../Define/Define"; 
 import { TriggerControl } from "../TriggerControl/TriggerControl";
+
 export class BuffBase{
     private mID:number;//当前Buff的唯一ID 
     private mBuffControl:BuffControl;

@@ -1,14 +1,14 @@
-import { IBuffStruct, BuffConfig } from "../Work/OutputScript/Buff";
-import { AttrCell } from "./Battle/AttrCell";
-import { eCampType } from "./Battle/BattleDefine";
+import { IBuffStruct, BuffConfig } from "../../Work/OutputScript/Buff";
+import { AttrCell } from "../AttrControl/AttrCell";
+import { eCampType } from "../BattleSimulation/Define/BattleDefine";
 import { BattleSimulationFacade, RecordBase, RecordBuffInsert, eRecordType } from "./BattleSimulationFacade";
 import { BuffBase } from "./BuffBase/BuffBase";
 import { LevelBuff } from "./BuffBase/LevelBuff";
 import { NormalBuff } from "./BuffBase/NormalBuff";
 import { StackBuff } from "./BuffBase/StackBuff";
 import { TerritoryBuff } from "./BuffBase/TerritoryBuff";
-import { TBuffType, TBuffID, eTriggerType, eBuffType, IBuffObj } from "./Define";
-import { battleSimulation } from "./Main";
+import { TBuffType, TBuffID, eTriggerType, eBuffType, IBuffObj } from "./Define/Define";
+import { battleSimulation } from "../Main";
 //Buff控制器,可能同时存在N场战斗
 export class BuffControl{
     private mCampType:eCampType;

@@ -1,6 +1,6 @@
 import { BuffBase } from "../BuffBase/BuffBase";
 import { BuffEffectBase } from "../BuffEffectBase/BuffEffectBase";
-import { IBuffObj, eTriggerType } from "../Define";
+import { IBuffObj, eTriggerType } from "../Define/Define";
 
 //每个基础的Buff拥有一个触发控制器，用以管理Buff触发时的各种状态
 export class TriggerControl{
