@@ -10,7 +10,6 @@ export class RecordAttackType extends RecordTypeBase{
             let value:number = recordBase.Attrs[key];
             playerAttrStr += `   ${name}:${value}`;
         } 
-        console.log(`阵营:${recordBase.AttackCamp} 攻击 阵营${recordBase.BeAttackCamp} 造成了属性:${playerAttrStr}`) ;  
+        console.log(`阵营:${recordBase.AttackCamp} 攻击 阵营${recordBase.BeAttackCamp} 造成了属性:${playerAttrStr}  剩余血量:${recordBase.ResidueHP}`) ;  
     }    
 }
-

@@ -64,8 +64,12 @@ export class AttrCell{
         for(let cell of triggerArr){
             if(this.mAttrsCalcObj[cell] == undefined)
                 return;
+            let changeFront:number = this.GetAttr(cell);
             this.mAttrsCalcObj[cell]!.bind(this)();//运行计算方法
-            battleSimulation.PushBattleRecord<RecordAttrUpdate>({Camp: this.mCampType,AttrKey:cell,AttrValue:this.GetAttr(cell),RecordType: eRecordType.AttrUpdate,});
+            let changeAfter:number = this.GetAttr(cell);
+            //存在变动时
+            if(changeFront != changeAfter)
+                battleSimulation.PushBattleRecord<RecordAttrUpdate>({Camp: this.mCampType,AttrKey:cell,AttrValue:changeAfter,RecordType: eRecordType.AttrUpdate,AttrChangeValue:changeAfter - changeFront});
         }
     } 
     /*

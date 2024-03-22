@@ -7,9 +7,8 @@ import { BattleSimulationFacade } from "./BattleSimulation/BattleSimulationFacad
 export let battleSimulation:BattleSimulationFacade = new BattleSimulationFacade(new BattleSimulation())
 battleSimulation.SetBattleInfo(15,1,2);
 battleSimulation.StartSimulationBattle(); 
-BattleAnalysis.Ins.OutPutRecord(battleSimulation.mRecordArray)
+BattleAnalysis.Ins.OutPutRecord(battleSimulation.mRecordArray);
   
-let buf = fflate.strToU8(JSON.stringify(battleSimulation.mRecordArray))
+let buf = fflate.strToU8(JSON.stringify(battleSimulation.mRecordArray)) 
 const compressed = fflate.compressSync(buf, { level: 6, mem: 8 });
-fs.writeFileSync("./qqq",compressed);
- 
+fs.writeFileSync("./qqq",compressed); 

@@ -3,6 +3,7 @@ import { battleSimulation } from "../../../Main";
 import { GetKV } from "../../../Util";
 import { RecordBuffTrigger, eRecordType } from "../../../BattleSimulation/Define/RecordDefine";
 import { BuffBase } from "../../BuffBase/BuffBase";
+import { BuffConfig } from "../../../../Work/OutputScript/Buff";
 
 export class BuffEffectBase{
     private mBuffBase:BuffBase;//当前的Buff信息
@@ -48,7 +49,7 @@ export class BuffEffectBase{
             let kvObj:{k:number,v:number} = GetKV(info);
             changeAttrs[kvObj.k] = kvObj.v * (this.mIsActive ? 1 : -1);
         }  
-        battleSimulation.PushBattleRecord<RecordBuffTrigger>({RecordType: eRecordType.BuffTrigger,TriggerType: type,Camp: buffBase.Control.GetCampInfo(),BuffID: buffBase.ID,TriggerIndex: this.mIndex,Attrs:changeAttrs});
+        battleSimulation.PushBattleRecord<RecordBuffTrigger>({RecordType: eRecordType.BuffTrigger,BuffKey:buffBase.Config.Key,TriggerType: type,Camp: buffBase.Control.GetCampInfo(),BuffID: buffBase.ID,TriggerIndex: this.mIndex,Attrs:changeAttrs});
         for(let cell in changeAttrs){
             let key:number = Number(cell);
             let nowValue:number = buffBase.Control.AttrObj.GetAttr(key);//获取到当前的属性

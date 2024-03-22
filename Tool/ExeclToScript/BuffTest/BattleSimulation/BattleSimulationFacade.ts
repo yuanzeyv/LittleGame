@@ -65,12 +65,13 @@ export class BattleSimulationFacade{
     /*
     *玩家攻击消息通知
     */
-    AttackRecord(attackCamp:eCampType,beAttackCamp:eCampType,harm:number):void{
+    AttackRecord(attackCamp:eCampType,beAttackCamp:eCampType,harm:number,nowHP:number):void{
         this.PushBattleRecord<RecordAttack>({
             RecordType:eRecordType.Attack,//记录类型
             AttackCamp:attackCamp,//攻击者玩家阵营
             BeAttackCamp:beAttackCamp,//被攻击者玩家阵营
-            Attrs: {[eAttrType.SumFinalHP]:harm}//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
+            Attrs: {[eAttrType.SumFinalHP]:harm},//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
+            ResidueHP:nowHP
         });
     }
 
@@ -111,7 +112,7 @@ export class BattleSimulationFacade{
                 let harm:number = attackCamp.GetAttrByType(eAttrType.SumAttack) - beAttackCamp.GetAttrByType(eAttrType.SumDefense);  
                 this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeFront);  
                 beAttackCamp.SetAttrByType( eAttrType.SumFinalHP,beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) - (harm <= 0 ? 0 : harm));//修改玩家的血量 
-                this.AttackRecord(attackCamp.CampType,beAttackCamp.CampType,(harm <= 0 ? 0 : harm));
+                this.AttackRecord(attackCamp.CampType,beAttackCamp.CampType,(harm <= 0 ? 0 : harm),beAttackCamp.GetAttrByType(eAttrType.SumFinalHP));
                 this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeAfter); 
                 this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackAfter);    
                 if(beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) <= 0){
