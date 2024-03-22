@@ -1,15 +1,9 @@
 import { AttrNameMap } from "../../AttrControl/Define/AttrDefine";
-import { RecordBase, RecordInitData } from "../../BattleSimulation/Define/RecordDefine";
+import { RecordBase, RecordBuffInsert, RecordInitData } from "../../BattleSimulation/Define/RecordDefine";
 import { RecordTypeBase } from "./RecordTypeBase";
 
-export class RecordInitBuffsType extends RecordTypeBase{
-    public ToString(recordBase:RecordInitData){ 
-        let playerAttrStr:string = "";
-        for(let key in recordBase.Attrs){
-            let name:string = AttrNameMap.get(Number(key)) || "未知属性";
-            let value:number = recordBase.Attrs[key];
-            playerAttrStr += `   ${name}:${value}`;
-        } 
-        console.log(`数据初始化 阵营:${recordBase.Camp}  属性:${playerAttrStr}`) ;
+export class RecordBuffInsertType extends RecordTypeBase{
+    public ToString(recordBase:RecordBuffInsert){  
+        console.log(`阵营${recordBase.Camp} 插入了Buff:${recordBase.BuffKey}`) ;
     } 
-}
+} 

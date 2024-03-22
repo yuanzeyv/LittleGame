@@ -87,8 +87,7 @@ export class BattleSimulationFacade{
         this.InitCampAttr(eCampType.Passivity);  
         //随后初始化阵营属性的Buff，并返回属性变动的差值
         this.InitCampBuffs(eCampType.Initiative);
-        this.InitCampBuffs(eCampType.Passivity);
- 
+        this.InitCampBuffs(eCampType.Passivity); 
         //开始启用游戏的开局Buff
         this.TriggerBuff(eCampType.Initiative,eTriggerType.BattleStart);//触发战斗开始类型的
         this.TriggerBuff(eCampType.Passivity,eTriggerType.BattleStart);//触发战斗开始类型的
@@ -109,12 +108,12 @@ export class BattleSimulationFacade{
 
                 //准备攻击前，进行一次Buff的触发操作
                 this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackFront);
-                let harm:number = attackCamp.GetAttrByType(eAttrType.Attack) - beAttackCamp.GetAttrByType(eAttrType.Defense);  
+                let harm:number = attackCamp.GetAttrByType(eAttrType.SumAttack) - beAttackCamp.GetAttrByType(eAttrType.SumDefense);  
                 this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeFront);  
                 beAttackCamp.SetAttrByType( eAttrType.SumFinalHP,beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) - (harm <= 0 ? 0 : harm));//修改玩家的血量 
                 this.AttackRecord(attackCamp.CampType,beAttackCamp.CampType,(harm <= 0 ? 0 : harm));
                 this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.HPChangeAfter); 
-                this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackAfter);   
+                this.TriggerBuff(attackPlayer.Camp.CampType,eTriggerType.AttackAfter);    
                 if(beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) <= 0){
                     battleSimulationOver = beAttackCamp.CampType == eCampType.Initiative ? 1 : 2;
                     break;

@@ -41,13 +41,18 @@ export class BuffEffectBase{
         } 
         if(!((isCompare && !this.mIsActive) || (!isCompare && this.mIsActive)))//如果匹配并且未激活的话
             return;
-        this.mIsActive = isCompare && !this.mIsActive; 
+        this.mIsActive = isCompare && !this.mIsActive;
+        let changeAttrs:{[k:number]:number} = {};
         //开始添加对应的属性类型
         for(let info of buffTriggerCon.Do){
             let kvObj:{k:number,v:number} = GetKV(info);
-            let nowValue:number = buffBase.Control.AttrObj.GetAttr(kvObj.k);//获取到当前的属性
-            buffBase.Control.AttrObj.SetAttr(kvObj.k,nowValue + (this.mIsActive ? 1 : -1) * kvObj.v)//对属性进行改动
+            changeAttrs[kvObj.k] = kvObj.v * (this.mIsActive ? 1 : -1);
         }  
-        battleSimulation.PushBattleRecord<RecordBuffTrigger>({RecordType: eRecordType.BuffTrigger,TriggerType: type,Camp: buffBase.Control.GetCampInfo(),BuffID: buffBase.ID,TriggerIndex: this.mIndex});
+        battleSimulation.PushBattleRecord<RecordBuffTrigger>({RecordType: eRecordType.BuffTrigger,TriggerType: type,Camp: buffBase.Control.GetCampInfo(),BuffID: buffBase.ID,TriggerIndex: this.mIndex,Attrs:changeAttrs});
+        for(let cell in changeAttrs){
+            let key:number = Number(cell);
+            let nowValue:number = buffBase.Control.AttrObj.GetAttr(key);//获取到当前的属性
+            buffBase.Control.AttrObj.SetAttr(key,nowValue + changeAttrs[key])//对属性进行改动
+        }
     } 
 };  

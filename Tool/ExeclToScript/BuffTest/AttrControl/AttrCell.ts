@@ -28,7 +28,7 @@ export class AttrCell{
             this.mAttrArray[cell.k] = cell.v;  
         for(let key in this.mAttrsCalcObj)
             this.mAttrsCalcObj[key].bind(this)();  
-        this.mAttrsCalcObj[eAttrType.SumFinalHP] = this.mAttrsCalcObj[eAttrType.SumHPLimit];
+        this.mAttrArray[eAttrType.SumFinalHP] = this.mAttrArray[eAttrType.SumHPLimit];
     } 
     /*
     *获取到玩家的完整属性KV表
@@ -51,7 +51,6 @@ export class AttrCell{
 
     public SetAttr(attrType:eAttrType,value:number){
         this.mAttrArray[attrType] = value; 
-        battleSimulation.PushBattleRecord<RecordAttrUpdate>({Camp: this.mCampType,AttrKey: attrType,AttrValue:this.GetAttr(attrType),RecordType: eRecordType.AttrUpdate,});
         this.ReCalcAttrByType(attrType);
     }  
 
@@ -66,7 +65,7 @@ export class AttrCell{
             if(this.mAttrsCalcObj[cell] == undefined)
                 return;
             this.mAttrsCalcObj[cell]!.bind(this)();//运行计算方法
-            battleSimulation.PushBattleRecord<RecordAttrUpdate>({Camp: this.mCampType,AttrKey: attrType,AttrValue:this.GetAttr(cell),RecordType: eRecordType.AttrUpdate,});
+            battleSimulation.PushBattleRecord<RecordAttrUpdate>({Camp: this.mCampType,AttrKey:cell,AttrValue:this.GetAttr(cell),RecordType: eRecordType.AttrUpdate,});
         }
     } 
     /*
