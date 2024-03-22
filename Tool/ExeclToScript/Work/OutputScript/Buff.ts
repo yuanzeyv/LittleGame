@@ -51,7 +51,7 @@ export interface IBuffStruct{
       *:{Tri:[1,2,3,4],Con:[11111,11111,11112],do:[11112,11112,11113]}
       *:
    */
-   'Trigger': {Tri:number[];Con:number[];Do:number[];}[];
+   'Trigger': {Tri:number[];Con:number[];Do:{t:number;e:number;}[];}[];
    /*
    key名:EndCondition
    描述:结束条件，当条件不满足的时候，立即清除本Buff
@@ -71,7 +71,7 @@ class Buff{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"护身辟邪","Level":1,"Desc":"战斗开始时增加角色10%的基础生命值加成。每次触发闪避时，对攻击者造成相当于本次攻击20%攻击的伤害","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[0],"Con":[9],"Do":[1000001]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[{"Type":1,"Value":1000}]};
+       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"护身辟邪","Level":1,"Desc":"战斗开始时增加角色10%的基础生命值加成。每次触发闪避时，对攻击者造成相当于本次攻击20%攻击的伤害","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[0],"Con":[],"Do":[{"t":1,"e":1000001}]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[{"Type":1,"Value":1000}]};
        this.mConfigObject[2] = {"Key":2,"BuffID":2,"Name":"赐福增寿","Level":1,"Desc":"战斗开始时，增加角色100%的复活概率，且复活后回复12%总血量","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
        this.mConfigObject[3] = {"Key":3,"BuffID":3,"Name":"鬼影重重","Level":1,"Desc":"战斗开始时，基础攻击力提升10%，每次触发连击，将偷取敌方英雄10%的基础攻击力。","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
        this.mConfigObject[4] = {"Key":4,"BuffID":4,"Name":"鬼影重重-汲取","Level":0,"Desc":"触发鬼影重重判定用","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
@@ -86,6 +86,8 @@ class Buff{
        this.mConfigObject[14] = {"Key":14,"BuffID":6,"Name":"生命滋养-汲取","Level":3,"Desc":"汲取敌方英雄30%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
        this.mConfigObject[15] = {"Key":15,"BuffID":6,"Name":"生命滋养-汲取","Level":4,"Desc":"汲取敌方英雄40%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
        this.mConfigObject[16] = {"Key":16,"BuffID":6,"Name":"生命滋养-汲取","Level":5,"Desc":"汲取敌方英雄50%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
+       this.mConfigObject[17] = {"Key":17,"BuffID":7,"Name":"温水煮蛙","Level":1,"Desc":"每次攻击前,都会获取10%的基础攻击力加成","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[4],"Con":[],"Do":[{"t":1,"e":1000001}]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
+       this.mConfigObject[18] = {"Key":18,"BuffID":8,"Name":"强健体魄","Level":1,"Desc":"每次攻击前,都会获取10%的基础攻击力加成","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[4],"Con":[],"Do":[{"t":1,"e":1000001}]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
    }
    private InitArray(){
        for(let key in this.mConfigObject)

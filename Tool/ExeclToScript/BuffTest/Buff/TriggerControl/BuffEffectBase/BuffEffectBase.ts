@@ -35,7 +35,7 @@ export class BuffEffectBase{
     //准备执行对应的Buff
     public ExecuteTriggerEvent(type:eTriggerType,buffBase:BuffBase,param?:any){
         let isCompare:boolean = true;
-        let buffTriggerCon:{Tri: number[];Con: number[];Do: number[];} = this.mBuffBase.Config.Trigger[this.mIndex];
+        let buffTriggerCon:{Tri: number[];Con: number[];Do:{t:number;e:number;}[];} = this.mBuffBase.Config.Trigger[this.mIndex];
         if(buffTriggerCon.Do.length == 0)
             return;
         for(let triggerType of buffTriggerCon.Con){//匹配执行条件
@@ -44,9 +44,9 @@ export class BuffEffectBase{
             return;
         this.mIsActive = isCompare && !this.mIsActive;
         let changeAttrs:{[k:number]:number} = {};
-        //开始添加对应的属性类型
+        //开始添加对应的属性类型 
         for(let info of buffTriggerCon.Do){
-            let kvObj:{k:number,v:number} = GetKV(info);
+            let kvObj:{k:number,v:number} = GetKV(info.e);
             changeAttrs[kvObj.k] = kvObj.v * (this.mIsActive ? 1 : -1);
         }  
         battleSimulation.PushBattleRecord<RecordBuffTrigger>({RecordType: eRecordType.BuffTrigger,BuffKey:buffBase.Config.Key,TriggerType: type,Camp: buffBase.Control.GetCampInfo(),BuffID: buffBase.ID,TriggerIndex: this.mIndex,Attrs:changeAttrs});
