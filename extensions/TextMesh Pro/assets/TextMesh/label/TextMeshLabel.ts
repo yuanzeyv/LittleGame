@@ -17,8 +17,7 @@ import { ResManager } from "../utils/ResManger";
 import { click_char_event } from "./events";
 import { EDITOR } from "cc/env";
 import { StyleManager } from "./StyleManager";
-import { SlotConnector } from "./SlotConnector";
-import { Utils } from "../utils/Utils";
+import { SlotConnector } from "./SlotConnector"; 
 const { ccclass, property, executeInEditMode,executionOrder } = _decorator;
 
 type SlotHandlerType = (comp: TextMeshLabel, slotNode: Node, slot: Slot)=>void;
