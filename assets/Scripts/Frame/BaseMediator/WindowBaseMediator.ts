@@ -1,4 +1,4 @@
-import { Color,Node, Prefab,instantiate } from "cc";
+import { Asset, Color,Node, Prefab,instantiate } from "cc";
 import { WindowInterface } from "../../Compoment/WindowInterface";
 import { INotification } from "../PureMVC";
 import { eNotice } from "../../NotificationTable";
@@ -10,7 +10,7 @@ import { WindowProxy } from "../../Logic/Proxy/WindowProxy/WindowProxy";
 import { ParaseUrl } from "../../Util/Util"; 
 import { ePoolDefine } from "../../Logic/Proxy/PoolProxy/PoolDefine";  
 import { PoolProxy } from "../../Logic/Proxy/PoolProxy/PoolProxy";
-import { BundleProxy, ListenObj, LoadStruct } from "../../Logic/Proxy/BundleProxy/BundleProxy";
+import { BundleProxy, ListenObj, LoadStruct, ResouoceType, TAssetLoadType } from "../../Logic/Proxy/BundleProxy/BundleProxy";
 export type LayerComp = new ()=>BaseLayer; 
 export type WindowParam = {
                             windowBlock:boolean,//窗口底部是否拥有遮罩
@@ -35,8 +35,8 @@ export  abstract class WindowBaseMediator extends BaseMediator {
 
     //传入界面打开所需要的所有游戏资源
     protected InitResourcePathSet(resourceSet:Set<string>):void{}
-    public GetResourceArray():{bundleName:string,dirName:string}[]{
-        let ret:Array<{bundleName:string,dirName:string}> = new Array<{bundleName:string,dirName:string}>();
+    protected GetResourceArray(data?:any):TAssetLoadType[]{
+        let ret:Array<TAssetLoadType> = new Array<TAssetLoadType>();
         for(let cell of this.mResourcePathSet){
             let parse:{bundleName:string,url:string} = ParaseUrl(cell)
             ret.push({dirName:parse.url,bundleName:parse.bundleName});
@@ -79,7 +79,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
         } 
         if(this.mLoadResourceID == -1){//立即尝试加载所有的游戏资源
             this.mView.EnterLoadModel();//准备进行资源加载
-            this.mLoadResourceID = _Facade.FindProxy(BundleProxy).LoadDirs(this.GetResourceArray());//加载到资源组下的所有资源信息
+            this.mLoadResourceID = _Facade.FindProxy(BundleProxy).LoadDirs(this.GetResourceArray(data));//加载到资源组下的所有资源信息
             _Facade.FindProxy(BundleProxy).RegisterListen(new ListenObj(this.mLoadResourceID,(loadInfo:LoadStruct)=>this.ResourceLoadComplete(loadInfo,data),this.ResourceLoadProgress.bind(this)));//注册监听
         }else{//资源加载成功了
             this.mView.CreateWindow(this.GenWindowNode(),data);//创建游戏窗口

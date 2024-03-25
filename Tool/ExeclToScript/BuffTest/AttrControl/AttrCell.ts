@@ -1,16 +1,19 @@
 import { eCampType } from "../BattleSimulation/Define/BattleDefine";
-import { RecordAttrUpdate, RecordBase, eRecordType } from "../BattleSimulation/Define/RecordDefine";
-import { battleSimulation } from "../Main";
+import { RecordAttrUpdate, eRecordType } from "../BattleSimulation/Define/RecordDefine";
+import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
+import { eNotifyType } from "../Communicant/Define/Define";
 import { eAttrType, AttrMappingMap } from "./Define/AttrDefine";
 export class AttrCell{
-    //当前的阵营数据信息
+    private mBattleCommunicantID:number;//战斗通知模块
+    //当前的阵营数据信息 
     private mCampType:eCampType;
     //计算属性用数组
     private mAttrsCalcObj:{[key:number]:()=>void} = {}
     //玩家的所有属性计算信息
     private mAttrArray:Array<number> = new Array<number>();//玩家本身的基础属性
 
-    public constructor(campType:eCampType){
+    public constructor(campType:eCampType,commID:number){
+        this.mBattleCommunicantID = commID;
         this.mCampType = campType;
         this.InitAttrCalcArray();//初始化属性计算数组
         this.ResetAttrs();
@@ -68,8 +71,10 @@ export class AttrCell{
             this.mAttrsCalcObj[cell]!.bind(this)();//运行计算方法
             let changeAfter:number = this.GetAttr(cell);
             //存在变动时
-            if(changeFront != changeAfter)
-                battleSimulation.PushBattleRecord<RecordAttrUpdate>({Camp: this.mCampType,AttrKey:cell,AttrValue:changeAfter,RecordType: eRecordType.AttrUpdate,AttrChangeValue:changeAfter - changeFront});
+            if(changeFront != changeAfter){
+                let recordAttrUpdate:RecordAttrUpdate = {Camp: this.mCampType,AttrKey:cell,AttrValue:changeAfter,RecordType: eRecordType.AttrUpdate,AttrChangeValue:changeAfter - changeFront};
+                BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,recordAttrUpdate);
+            }
         }
     } 
     /*

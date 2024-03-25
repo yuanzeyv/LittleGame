@@ -1,9 +1,5 @@
-/*
-本文件用以定义，战斗模拟的所有所有战斗结果日志
-*/
-import { eCampType } from "./BattleDefine";
-import { eTriggerType } from "../../Buff/Define/Define";
-import { eAttrType } from "../../AttrControl/Define/AttrDefine";
+import { eAttrType, eCampType } from "../Camp";
+
 export enum eRecordType{
     InitAttrs,//初始化数据用 
     Attack,//玩家进行基础攻击用 
@@ -13,8 +9,20 @@ export enum eRecordType{
     EndBattle,//战斗记录，战斗结束
 };
 
+export enum eTriggerType{ 
+    BattleStart        = 0 ,//对局开始
+    RoundStart         = 1 ,//回合开始
+    RoundEnd           = 2 ,//回合结束
+    BuffInsert         = 3 ,//Buff被插入时
+    AttackFront        = 4 ,//进行攻击前    
+    AttackAfter        = 5 ,//进行攻击后    
+    BeAttackFront        = 4 ,//被攻击前 
+    BeAttackAfter        = 5 ,//被攻击后
+    HPChangeFront      = 6,//血量变动前
+    HPChangeAfter      = 7,//血量变动后
+    FINAL                  ,//占位
+};
 export interface RecordBase{ RecordType:eRecordType; }//记录类型
-
  
 //游戏内的各项数值主要被记录在玩家的属性中，所以此处会从玩家属性中拉取到战斗必要的数值内容
 export interface RecordInitData extends RecordBase{

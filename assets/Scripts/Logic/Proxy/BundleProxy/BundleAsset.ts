@@ -52,10 +52,10 @@ class DirManager{
             let subDirPaths:string[] = path.split("/");//对path进行解析   
             for(let i = 0 ; i < subDirPaths.length ;i++){
                 traverseDir = traverseDir.GetDir(subDirPaths[i]);
-                if(traverseDir == undefined)//立即返回
-                    break;
-            }
-        }
+                if(traverseDir == undefined)//立即返回 
+                    break; 
+            }   
+        } 
         let dirName:string = path == undefined ? "":`${path}/`;
         //添加目录下所有的文件
         traverseDir.mFileMap.forEach((file:File,fileName:string)=>{
@@ -109,13 +109,13 @@ export class BundleAssest{
     public Load(assetPathSet:Map<string,UUID>,type:ResouoceType<Asset>):void{
         let loadRess:Array<string> = new Array<string>()
         assetPathSet.forEach((uuid:UUID,path:string)=>{ 
-            let asset:Asset|undefined= this.mBundle.get(path);
+            let asset:{asset:Asset,loadCount:number,soltCell?:SoltCell}|undefined= this.mRemeberCountMap.get(path);
             if(asset != undefined){
-                this.mBundleProxy.AssetLoadFinish(this.mBundle.name,uuid,asset);//成功找到的话 
+                this.mBundleProxy.AssetLoadFinish(this.mBundle.name,uuid,asset.asset);//成功找到的话 
                 return;
             }
             loadRess.push(path);
-        });
+        }); 
         if(loadRess.length == 0)
             return;
         //必定是资源首次被加载

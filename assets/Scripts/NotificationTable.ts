@@ -162,4 +162,14 @@ export enum eNotice {
 
     OpenFightLayer = "OpenFightLayer",//打开战斗界面
     CloseFightLayer = "CloseFightLayer",//关闭战斗界面
+
+    /*
+    *战斗相关的逻辑
+    */
+   FightAttrInit = "FightAttrInit",//战斗属性初始化通知
+   FightStart = "FightStart",//战斗开始
+   FIghtRoundStart = "FIghtRoundStart",//战斗回合开始
+   FightRoundEnd = "FightRoundEnd",//战斗回合结束
+   FightAttrChange = "FightAttrChange",//玩家属性变动
+   FightEnd = "FightEnd",//战斗结束
 }

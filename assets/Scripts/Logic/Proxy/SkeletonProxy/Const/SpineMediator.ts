@@ -12,7 +12,7 @@ export class SpineMediator{
     }
     public SetAction(anim:string):void{
         this.mAnim = anim;
-        if(this.misLoadFinish == false)
+        if(this.misLoadFinish == false || this.mAnim == undefined)
             return;
         this.mSpine.setAnimation(0,this.mAnim,true);
     } 

@@ -53,7 +53,7 @@ export class BaseLayer extends Component{
 
     //按钮点击注册区域
     public ButtonClickHandle(eventTouch:EventTouch,args:any):void{
-        this.mButtonEvent.ExecuteClickHandle(eventTouch,args);
+        this.mButtonEvent.ExecuteClickHandle(eventTouch,args);  
         //_Facade.FindProxy(MusicProxy).Play(1);//准备播放一个音效
     }
     public RegisterButtonEvent(node:Node,func:(event:EventTouch,...args)=>void,target?:any,...param):void{

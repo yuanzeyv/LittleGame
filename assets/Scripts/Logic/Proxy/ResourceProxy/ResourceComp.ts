@@ -54,6 +54,7 @@ export class ResourceComp extends Component {//配合资源管理器，来动态
                 if(isSuccess){
                     compCell[key] = _Facade.FindProxy(ResouceProxy).AddResource(resUUID);
                     data.waitLoad = false;
+                    data.finishHandle && data.finishHandle(this);
                 } else    
                     this.UnLoadRes(resUUID,compCell,key);
             })

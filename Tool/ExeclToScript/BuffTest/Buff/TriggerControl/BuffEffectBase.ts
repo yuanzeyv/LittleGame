@@ -1,9 +1,10 @@
-import { eTriggerType, TKV } from "../../Define/Define";
-import { battleSimulation } from "../../../Main";
-import { GetKV } from "../../../Util";
-import { RecordBuffTrigger, eRecordType } from "../../../BattleSimulation/Define/RecordDefine";
-import { BuffBase } from "../../BuffBase/BuffBase";
-import { BuffConfig } from "../../../../Work/OutputScript/Buff";
+import { eTriggerType, TKV } from "../Define/Define";
+import { battleSimulation } from "../../Main";
+import { GetKV } from "../../Util";
+import { RecordBuffTrigger, eRecordType } from "../../BattleSimulation/Define/RecordDefine";
+import { BuffBase } from "../BuffBase/BuffBase";  
+import { BattleCommunicantProxy } from "../../Communicant/BattleCommunicant";
+import { eNotifyType } from "../../Communicant/Define/Define";
 
 export class BuffEffectBase{
     private mBuffBase:BuffBase;//当前的Buff信息
@@ -45,11 +46,12 @@ export class BuffEffectBase{
         this.mIsActive = isCompare && !this.mIsActive;
         let changeAttrs:{[k:number]:number} = {};
         //开始添加对应的属性类型 
-        for(let info of buffTriggerCon.Do){
+        for(let info of buffTriggerCon.Do){ 
             let kvObj:{k:number,v:number} = GetKV(info.e);
             changeAttrs[kvObj.k] = kvObj.v * (this.mIsActive ? 1 : -1);
         }  
-        battleSimulation.PushBattleRecord<RecordBuffTrigger>({RecordType: eRecordType.BuffTrigger,BuffKey:buffBase.Config.Key,TriggerType: type,Camp: buffBase.Control.GetCampInfo(),BuffID: buffBase.ID,TriggerIndex: this.mIndex,Attrs:changeAttrs});
+        let recordBuffTrigger:RecordBuffTrigger = {RecordType: eRecordType.BuffTrigger,BuffKey:buffBase.Config.Key,TriggerType: type,Camp: buffBase.Control.GetCampInfo(),BuffID: buffBase.ID,TriggerIndex: this.mIndex,Attrs:changeAttrs};
+        BattleCommunicantProxy.Ins.Notify(this.mBuffBase.Control.BattleCommunicantID,eNotifyType.BattleReport,recordBuffTrigger)
         for(let cell in changeAttrs){
             let key:number = Number(cell);
             let nowValue:number = buffBase.Control.AttrObj.GetAttr(key);//获取到当前的属性

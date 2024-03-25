@@ -49,7 +49,7 @@ export class BagMediator extends WindowBaseMediator{
         } 
         if(this.mLoadResourceID == -1){//立即尝试加载所有的游戏资源
             this.mView.EnterLoadModel();//准备进行资源加载
-            this.mLoadResourceID = _Facade.FindProxy(BundleProxy).LoadDirs(this.GetResourceArray());//加载到资源组下的所有资源信息
+            this.mLoadResourceID = _Facade.FindProxy(BundleProxy).LoadDirs(this.GetResourceArray(data));//加载到资源组下的所有资源信息
             _Facade.FindProxy(BundleProxy).RegisterListen(new ListenObj(this.mLoadResourceID,(loadInfo:LoadStruct)=>this.ResourceLoadComplete(loadInfo,windowID),this.ResourceLoadProgress.bind(this)));//注册监听
         }else{//资源加载成功了
             this.mView.CreateWindow(this.GenWindowNode(),windowID);//创建游戏窗口

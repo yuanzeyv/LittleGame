@@ -1,7 +1,7 @@
-import { Asset, assetManager, AssetManager } from "cc";
+import { Asset, assetManager, AssetManager, sp } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { BundleAssest } from "./BundleAsset"; 
-import { SyncMicroTask } from "../../../Util/Util";
+import { SyncMicroTask } from "../../../Util/Util"; 
 let GLoadID:number = 1;//可以通过注册监听 或者轮询查询 
 
 type BundleName = string;
@@ -9,6 +9,7 @@ export let QQQQ:number = 0;
 export type ResouoceType<T extends Asset> = new (...args: any[]) => T;
 export type LoadID = number;
 export type UUID = string;
+export type TAssetLoadType = {bundleName:string,dirName:string,isFile?:boolean,type?:ResouoceType<Asset>};
 export class LoadStruct{//加载结构体 
     private mAssetLoadStatusMap:Map<UUID,{bundleName:BundleName,path:string,ctor:ResouoceType<Asset>,asset?:Asset|undefined}> = new Map<UUID,{bundleName:BundleName,path:string,ctor:ResouoceType<Asset>,asset?:Asset|undefined}>();//使用者只需要知道加载完，或没加载完即可，不需要过分干涉内部实现
     private mSumCount:number = 0;//待加载的总数
@@ -236,15 +237,20 @@ export class BundleProxy extends BaseProxy{
         return this.LoadArr(loadArray);//加载本组内容
     } 
     //加载一组文件夹
-    public LoadDirs(dirs:{bundleName:string,dirName:string}[]):number{
+    //isFull的含义为，资源管理系统会将图片SpriteFrame归为一个文件夹,此时如果按照加载路径的方式加载一个Spine的资源，最终会找到SPriteFrame文件夹下的图片，而不会找到所需的Spine资源，所以这儿做了这么一个限制
+    public LoadDirs(dirs:TAssetLoadType[]):number{
         let loadArray:Array<{bundle:string,path:string,type:ResouoceType<Asset>}> = new Array<{bundle:string,path:string,type:ResouoceType<Asset>}>();
         for(let cell of dirs){
             let bundle:BundleAssest|undefined = this.mBundleAssetMap.get(cell.bundleName);
             if(bundle == undefined)//存在bundle
                 continue;
-            for(let data of  bundle.GetDirFiles(cell.dirName))//获取到目录下所有资源信息
-                loadArray.push({bundle:cell.bundleName,path:data.path,type:data.ctor});
-        }
+            if(cell.isFile){
+                loadArray.push({bundle:cell.bundleName,path:cell.dirName,type:cell.type});
+            } else {
+                for(let data of bundle.GetDirFiles(cell.dirName))//获取到目录下所有资源信息
+                    loadArray.push({bundle:cell.bundleName,path:data.path,type:data.ctor});
+            } 
+        } 
         return this.LoadArr(loadArray);//加载本组内容
     }
  
@@ -264,6 +270,9 @@ export class BundleProxy extends BaseProxy{
      
     //当一个资源被加载完毕时
     public AssetLoadFinish(bundleName:string,uuid:string,asset?:Asset){
+        if(uuid == "a495b109-08a4-4361-8843-b5813e68fc1c"){
+            console.log("进入了");
+        }
         let typeSet:Set<number>|undefined = uuid && this.mLoadAssetMap.get(uuid);//获取到所有监听本资源的数据对象
         if(typeSet == undefined){//程序不会进入此回调
             console.error(`资源:${uuid},没有被加入监听队列,请检查游戏逻辑`);

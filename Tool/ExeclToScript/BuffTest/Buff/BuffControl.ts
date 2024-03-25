@@ -9,22 +9,29 @@ import { TerritoryBuff } from "./BuffBase/TerritoryBuff";
 import { TBuffType, TBuffID, eTriggerType, eBuffType } from "./Define/Define";
 import { battleSimulation } from "../Main";
 import { RecordBuffInsert, eRecordType } from "../BattleSimulation/Define/RecordDefine";
+import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
+import { eNotifyType } from "../Communicant/Define/Define";
 export class BuffControl{
-    private mControlID:number = 0;//当前buff控制器的唯一ID
+    private mBattleCommunicantID:number;//战斗通知模块
     private mBuffGenID:number = 0;//用以对新添加的Buff赋ID
     private mCampType:eCampType;//需要一个类型，知道当前控制器的拥有者事谁
     private mBuffMap:Map<number,BuffBase> = new Map<number,BuffBase>();//通过Buff唯一ID，快速索引到指定的角色Buff
     private mTypeBuffMap:Map<TBuffType,Map<TBuffID,Array<BuffBase>>> = new Map<TBuffType,Map<TBuffID,Array<BuffBase>>>();
     private mTriggerBuffmap:Array<Set<BuffBase>> = new Array<Set<BuffBase>>();//通过Buff的触发类型来确定当前Buff的附加属性是否应该被执行 
     private mAttrObj:AttrCell;//用于Buff直接修改玩家属性。
-    constructor(controlID:number,campType:eCampType,attrObj:AttrCell){
-        this.mControlID = controlID;//当前的控制ID 
+    constructor(campType:eCampType,attrObj:AttrCell,battleCommunicantID:number){
+        this.mBattleCommunicantID = battleCommunicantID;
         this.mCampType = campType;
         this.mAttrObj = attrObj;
         this.InitTriggerMap();
+    } 
+
+    //获取到通知对象
+    public get BattleCommunicantID():number{
+        return this.mBattleCommunicantID;
     }
-    //获取到当前的ID
-    public get ID():number{ return this.mControlID; }
+
+
     //获取到属性对象
     public get AttrObj():AttrCell{ return this.mAttrObj; } 
     
@@ -104,9 +111,9 @@ export class BuffControl{
         //获取到Buff的触发类型，进行设置
         for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
             this.mTriggerBuffmap[type].add(buffBase);
-
-        battleSimulation.PushBattleRecord<RecordBuffInsert>({RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key})
-        buffBase.TriggerEvent(eTriggerType.BuffInsert,undefined);
+        let record:RecordBuffInsert = {RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key};
+        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,record);
+        buffBase.TriggerEvent(eTriggerType.BuffInsert);//发送一个Buff插入事件
     }
     //删除当前的Buff控制器
     public Destory():void{

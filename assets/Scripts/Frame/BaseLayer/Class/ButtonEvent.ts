@@ -56,8 +56,8 @@ export class ButtonEvent{
         if( undefined == funcMap )
             return;  
         if(param.target)
-            param.func.call(param.target,eventTouch,...param.args);
+            param.func.call(param.target,eventTouch,...(param.args[0]));
         else 
-            param.func.call(undefined,eventTouch,...param.args);
-    }  
-}
+            param.func.call(undefined,eventTouch,...(param.args[0]));
+    }   
+} 

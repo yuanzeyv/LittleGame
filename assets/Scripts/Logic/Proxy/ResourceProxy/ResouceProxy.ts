@@ -86,10 +86,9 @@ export class ResouceProxy extends BaseProxy{
                     cell.LoadingResFinish(resUUID,asset != undefined);
                 }
                 this.mLoadingResCompMap.delete(resUUID);
-                successHandle && successHandle(comp);
             }));
             return;
-        }
+        } 
         resComp.LoadRes(comp,key as string,resUUID);//设置资源加载
         if(successHandle) 
             successHandle(comp);
