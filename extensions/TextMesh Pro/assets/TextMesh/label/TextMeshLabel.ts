@@ -213,6 +213,9 @@ export class TextMeshLabel extends UIRenderer {
     private _uiTransform: UITransform;
     private _ready = false;
 
+    constructor(...args: any[]){
+        super(); 
+    }
     get ready() {
         return this._ready;
     }
@@ -1988,5 +1991,5 @@ export class TextMeshLabel extends UIRenderer {
         }
 
         return true;
-    }
+    } 
 }

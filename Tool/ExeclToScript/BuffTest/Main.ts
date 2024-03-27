@@ -12,3 +12,4 @@ BattleAnalysis.Ins.OutPutRecord(battleSimulation.mRecordArray);
 //let buf = fflate.strToU8(JSON.stringify(battleSimulation.mRecordArray)) 
 //const compressed = fflate.compressSync(buf, { level: 6, mem: 8 });
 //fs.writeFileSync("./qqq",compressed); 
+console.log(JSON.stringify(battleSimulation.mRecordArray));

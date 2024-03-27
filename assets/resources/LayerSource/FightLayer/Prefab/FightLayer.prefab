@@ -1059,7 +1059,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "MyName",
+    "_name": "NameLabel_0",
     "_objFlags": 0,
     "_parent": {
       "__id__": 40
@@ -1471,7 +1471,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "EnemyName",
+    "_name": "NameLabel_1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 40
@@ -2179,7 +2179,7 @@
     "propertyPath": [
       "_name"
     ],
-    "value": "SelfAttrListView"
+    "value": "AttrListView_0"
   },
   {
     "__type__": "cc.TargetInfo",
@@ -2198,7 +2198,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": -262.5,
-      "y": 98,
+      "y": 155,
       "z": 0
     }
   },
@@ -2352,7 +2352,7 @@
     "propertyPath": [
       "_name"
     ],
-    "value": "EnemyAttrListView"
+    "value": "AttrListView_1"
   },
   {
     "__type__": "cc.TargetInfo",
@@ -2371,7 +2371,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 262.5,
-      "y": 98,
+      "y": 155,
       "z": 0
     }
   },

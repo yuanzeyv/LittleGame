@@ -4,7 +4,7 @@ import { _Facade, _G } from '../../../Global';
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
 import { ScrollAdapter, Holder, IElement, View } from '../../../Util/adapter';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
-import { AttrNameMap, eAttrType } from './Define/AttrDefine';
+import { AttrNameMap, eAttrType } from '../../Proxy/FightProxy/Define/AttrDefine';
 const { ccclass } = _decorator;
 interface IFixedModel {attrType:eAttrType;} 
 @ccclass('FightAttrScrollView')
@@ -16,6 +16,10 @@ export class FightAttrScrollView extends ScrollAdapter<IFixedModel> {
     public getView(): View<IFixedModel, ScrollAdapter<IFixedModel>> { return new MyView(this); } 
     public getHolder(node: Node, code: string): Holder<IFixedModel, ScrollAdapter<IFixedModel>> { return new MyHolder(node, code, this) }
     public initElement(element: IElement, data: IFixedModel): void {}   
+
+    protected onLoad(): void {
+        this.SetTableViewData();
+    }
 
     public SetTableViewData():void{
         this.mAttrNodeMap.clear(); 
@@ -30,6 +34,10 @@ export class FightAttrScrollView extends ScrollAdapter<IFixedModel> {
             this.mAttrNodeMap.delete(type);
         else 
             this.mAttrNodeMap.set(type,node);
+    }
+
+    public RefreshScrollView(){
+        this.modelManager.update();
     }
 }
  

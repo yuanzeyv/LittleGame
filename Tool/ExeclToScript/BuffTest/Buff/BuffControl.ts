@@ -111,7 +111,7 @@ export class BuffControl{
         //获取到Buff的触发类型，进行设置
         for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
             this.mTriggerBuffmap[type].add(buffBase);
-        let record:RecordBuffInsert = {RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key};
+        let record:RecordBuffInsert = {RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key,Life:buffBase.LifeCount};
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,record);
         buffBase.TriggerEvent(eTriggerType.BuffInsert);//发送一个Buff插入事件
     }

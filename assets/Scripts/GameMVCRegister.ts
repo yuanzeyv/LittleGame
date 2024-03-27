@@ -35,13 +35,17 @@ import { BagProxy } from "./Logic/Proxy/BagProxy/BagProxy";
 import { PlayerAttrProxy } from "./Logic/Proxy/PlayerAttrProxy/PlayerAttrProxy";
 import { FightLayerMediator } from "./Logic/Mediator/FightLayerMediator/FightLayerMediator";
 import { SkeletonProxy } from "./Logic/Proxy/SkeletonProxy/SkeletonProxy";
+import { FightEventFinishCommand } from "./Logic/Control/FightEventFinishCommand";
+import { FightProxy } from "./Logic/Proxy/FightProxy/FightProxy";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
         commandMap
         .set(eNotice.NetAuthSuccess, AuthSuccessCommand)
         .set(eNotice.InitGameData, InitGameDataCommand)
-        .set(eNotice.EnterGame, EnterGameCommand); 
+        .set(eNotice.EnterGame, EnterGameCommand)
+        .set(eNotice.FightEventExecuteFinish, FightEventFinishCommand); 
+        
     }  
     protected AllocMediator(mediatorMap: Map<MediatorConstructor, string>): void {
         mediatorMap
@@ -81,6 +85,7 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(BagProxy) 
             .add(PlayerAttrProxy) 
             .add(SkeletonProxy) 
+            .add(FightProxy) //战斗代理
     }
 }  
  

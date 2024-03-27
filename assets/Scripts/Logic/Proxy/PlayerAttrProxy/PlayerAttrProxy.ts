@@ -6,6 +6,7 @@ import { eNotice } from "../../../NotificationTable";
 import { ItemBaseType, ItemCell } from "../BagProxy/ItemDefine/ItemDefine";
 import { NetWorkProxy } from "../NetWorkProxy/NetWorkProxy";
 import { AttrBase, PlayerAttrNetType } from "./AttrDefine/AttrDefine";
+//import { AttrBase, PlayerAttrNetType } from "./AttrDefine/AttrDefine";
 
 //游戏中的背包代理
 export class PlayerAttrProxy extends BaseProxy{ 
@@ -16,7 +17,7 @@ export class PlayerAttrProxy extends BaseProxy{
     } 
     private AttrInitHandle(data:{AttrArray:Array<PlayerAttrNetType>,err:number}):void{
         if(data.err != 0) {
-            console.error("属性初始化失败");
+            console.error("属性初始化失败"); 
             return; 
         }
         for(let cell of data.AttrArray)

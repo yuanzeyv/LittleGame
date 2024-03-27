@@ -76,7 +76,7 @@ export enum eAttrBaseType{
     STUN = 11,	//击晕
     FINAL_ATT = 12,	//最终伤害
     RESIST_SUCK = 13,	//抗吸血
-    RESIST_BACK_ATT = 14,	//抗反击
+    RESIST_BACK_ATT = 14,	//抗反击 
     RESIST_CONTI_ATT = 15,	//抗连击
     RESIST_DEADLY = 16,	//抗爆伤
     RESIST_MISS = 17,	//抗闪避

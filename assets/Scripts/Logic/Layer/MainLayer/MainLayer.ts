@@ -10,6 +10,7 @@ import { AttrCalcRelevanceConfig } from '../../../Config/Cfg_AttrCalcRelevance';
 import { PlayerAttrProxy } from '../../Proxy/PlayerAttrProxy/PlayerAttrProxy';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
 import { SkeletonProxy } from '../../Proxy/SkeletonProxy/SkeletonProxy';
+import { FightProxy } from '../../Proxy/FightProxy/FightProxy';
 const {ccclass, property, type} = _decorator; 
 @ccclass('MainLayer')
 export class MainLayer extends BaseLayer {  
@@ -49,7 +50,7 @@ export class MainLayer extends BaseLayer {
     }  
 
     private OpenFightLayer(touchEvent:EventTouch,type:number){  
-        _Facade.Send(eNotice.OpenFightLayer);
+        _Facade.FindProxy(FightProxy).StartBattle();
     }  
     
     private RefreshPlayerAttr(refreshArray:Array<eAttrBaseType>|undefined){

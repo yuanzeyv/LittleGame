@@ -12,6 +12,7 @@ export class FightLayerMediator extends WindowBaseMediator{
         notificationMap
         .set(eNotice.OpenFightLayer,this.OpenLayer.bind(this))
         .set(eNotice.CloseFightLayer,this.CloseLayer.bind(this)) 
+        .set(eNotice.FightAttrInit,this.LayerHandle.bind(this)) 
     } 
     
     protected InitResourcePathSet(resourceSet:Set<string>):void{  

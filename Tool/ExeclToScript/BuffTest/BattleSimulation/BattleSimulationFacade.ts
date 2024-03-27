@@ -3,7 +3,7 @@ import { AttrCell } from "../AttrControl/AttrCell";
 import { eCampType } from "./Define/BattleDefine";   
 import { eAttrType } from "../AttrControl/Define/AttrDefine";
 import { BattleSimulation } from "./BattleSimulation";
-import { RecordBase, eRecordType } from "./Define/RecordDefine";
+import { RecordBase, RecordRoundChange, eRecordType } from "./Define/RecordDefine";
 import { Player } from "./Player";
 import { Camp } from "./Camp"; 
 import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
@@ -24,6 +24,7 @@ export class BattleSimulationFacade{
     private InitEventNotify():void{  
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BattleInit   ,this,this.BattleInitHandle); 
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BattleReport ,this,this.BattleReportHandle);
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.RoundStart ,this,this.RoundStartHandle);
     }
 
     //战斗初始化函数
@@ -36,6 +37,12 @@ export class BattleSimulationFacade{
     //进行一次战报记录
     private BattleReportHandle(record:RecordBase):void{ 
         this.mRecordArray.push(record);
+    } 
+    
+    //记录一次回合数变动消息
+    private RoundStartHandle(round:number):void{ 
+        let roundRecord:RecordRoundChange = {RecordType:eRecordType.RoundChange,Round:round};
+        this.Notify(eNotifyType.BattleReport,roundRecord); 
     } 
     
     /*
@@ -79,7 +86,7 @@ export class BattleSimulationFacade{
         //准备开始游戏回合
         let winCamp:Camp|undefined;
         for(let round = 1 ; round <= this.mBattleSimulation.MaxRound &&  !winCamp ; round++){
-            this.Notify(eNotifyType.RoundStart); 
+            this.Notify(eNotifyType.RoundStart,round); 
             let playerArray:Array<Player> = this.mBattleSimulation.GetAllPlayer();
             while(playerArray.length != 0){ 
                 //对出手顺序进行排序
@@ -106,4 +113,4 @@ export class BattleSimulationFacade{
         //通知战斗结束，传入胜利阵营
         this.Notify(eNotifyType.BattleOver,winCamp); 
     }  
-} 
+}

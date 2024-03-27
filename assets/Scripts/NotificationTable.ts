@@ -166,10 +166,19 @@ export enum eNotice {
     /*
     *战斗相关的逻辑
     */
+   FightEventExecuteFinish = "FightEventExecuteFinish",//单个战斗事件处理完毕
    FightAttrInit = "FightAttrInit",//战斗属性初始化通知
+   InsertCampBuff = "InsertCampBuff",//插入了一个战斗Buff
+   BattleRoundChange = "BattleRoundChange",//战斗回合数发生变动
+   PlayerMoveTo = "PlayerMoveTo",//玩家移动通知
+   PlayerAttack = "PlayerAttack",//玩家攻击通知
+    
+
    FightStart = "FightStart",//战斗开始
    FIghtRoundStart = "FIghtRoundStart",//战斗回合开始
    FightRoundEnd = "FightRoundEnd",//战斗回合结束
    FightAttrChange = "FightAttrChange",//玩家属性变动
    FightEnd = "FightEnd",//战斗结束
+
+   UpdateCampAttrs = "UpdateCampAttrs",//更新阵营血量
 }

@@ -7,7 +7,7 @@ import { BuffControl } from "../Buff/BuffControl";
 import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
 import { eNotifyType } from "../Communicant/Define/Define";
 import { eTriggerType } from "../Buff/Define/Define";
-import { RecordAttack, RecordEndBattle, eRecordType } from "./Define/RecordDefine";
+import { RecordAttack, RecordAttackMoveTo, RecordEndBattle, eRecordType } from "./Define/RecordDefine";
 //玩家阵营
 export class Camp{ 
     private mBattleCommunicantID:number;//战斗通知模块
@@ -104,7 +104,9 @@ export class Camp{
     private AttackFrontHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
         if(this.mCampType != attackCamp.mCampType)//发起攻击者的话
             return;
-        this.BuffControl.Trigger(eTriggerType.AttackFront);//向自己的Buff控制器发送一个战斗开始消息
+        let attackMoveRecord:RecordAttackMoveTo = {RecordType:eRecordType.AttackMoveTo,Camp:this.CampType,PosX:350};
+        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackMoveRecord); //发送攻击前移动
+        this.BuffControl.Trigger(eTriggerType.AttackFront);//向自己的Buff控制器发送一个战斗开始消息 
     }
     
     //玩家进行攻击前的行为
@@ -123,11 +125,14 @@ export class Camp{
         beAttackCamp.SetAttrByType( eAttrType.SumFinalHP , beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) - (finalHarm <= 0 ? 0 : finalHarm));//进行玩家属性的变动
         let attackRecord:RecordAttack = {AttackCamp: attackCamp.CampType,BeAttackCamp:beAttackCamp.CampType,Attrs:{[eAttrType.SumFinalHP]:finalHarm},ResidueHP:beAttackCamp.GetAttrByType(eAttrType.SumFinalHP),RecordType:eRecordType.Attack};
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackRecord); 
+
+        let attackMoveRecord:RecordAttackMoveTo = {RecordType:eRecordType.AttackMoveTo,Camp:this.CampType,PosX:-350};
+        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackMoveRecord); //发送攻击前移动
     }
     
     //玩家进行攻击后的行为
     private BeAttackAfterHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
-        if(this.mCampType != beAttackCamp.mCampType)//仅处理被攻击前的情况
+        if(this.mCampType != beAttackCamp.mCampType)//仅处理被攻击前的情况 
             return;
         this.BuffControl.Trigger(eTriggerType.BeAttackAfter);//向自己的Buff控制器发送一个战斗开始消息
     }

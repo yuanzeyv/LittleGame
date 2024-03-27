@@ -1,137 +1,63 @@
-import { math, sys } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
-import { _Facade } from "../../../Global";
-import { eNotice } from "../../../NotificationTable";
-import { eAttrBaseType, eAttrType } from "../PlayerAttrProxy/AttrDefine/AttrDefine";
-import { Random } from 'random'
-import seedrandom from 'seedrandom'  
-import { BuffConfig, IBuffStruct } from "../../../Config/Cfg_Buff";
-
-//const rng = new Random()
-//const rng2 = new Random()
-//rng2.use(seedrandom('tinykittens'));
-//console.log(rng.(0, 100)) // 72  
-//console.log(rng2.(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72  
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//console.log(rng2.int(0, 100)) // 72 
-//一场战斗所需要的所有的数据信息
-//玩家的所有基础属性
-export class FightInfo{
-    public mFightAttrArr:Array<number> = new Array<number>();//计算用战斗属性
-    public mCalcAttrArr:Array<number> = new Array<number>();//所有的战斗属性
-};
-
-//玩家的所有基础属性
-export class FightRecorde{
-
-};
-//用于将战斗进行拆分
-export class FightObj{
-}
-
+import { _Facade } from "../../../Global"; 
+import { eNotice } from "../../../NotificationTable"; 
+import { Camp } from "./Camp";  
+import { eAttrType } from "./Define/AttrDefine";
+import { eCampType } from "./Define/CampDefine";
+import { RecordBase, eRecordType, RecordInitData, RecordBuffInsert, RecordRoundChange, RecordAttackMoveTo, RecordAttack } from "./Define/RecordDefine";
 export class FightProxy extends BaseProxy{
     static get ProxyName():string { return "FightProxy" };
+    private mRecordQueue:Array<RecordBase>|undefined;
+    private mCampMap:Map<eCampType,Camp> = new Map<eCampType,Camp>();
+    private mBattleLimitRound:number = 0;
+    private mBattleRound:number = 0;
+    private mRunIndex:number = 0;
     public onLoad(): void {
+    }  
+
+    public StartBattle(){
+        this.mRecordQueue = JSON.parse(`[{"RecordType":0,"Camp":0,"Attrs":{"0":800,"3":20,"6":300,"9":5000,"50":800,"51":20,"52":5000,"53":300,"54":5000}},{"RecordType":0,"Camp":1,"Attrs":{"0":600,"3":300,"6":300,"9":5000,"50":600,"51":300,"52":5000,"53":300,"54":5000}},{"RecordType":4,"Camp":0,"BuffID":0,"BuffKey":1,"Life":0},{"RecordType":4,"Camp":0,"BuffID":1,"BuffKey":17,"Life":0},{"RecordType":4,"Camp":1,"BuffID":0,"BuffKey":3,"Life":0},{"RecordType":5,"BuffKey":1,"TriggerType":0,"Camp":0,"BuffID":0,"TriggerIndex":0,"Attrs":{"1":10000}},{"Camp":0,"AttrKey":50,"AttrValue":1600,"RecordType":6,"AttrChangeValue":800},{"RecordType":3,"Round":1},{"RecordType":1,"Camp":1,"PosX":350},{"RecordType":5,"BuffKey":17,"TriggerType":4,"Camp":0,"BuffID":1,"TriggerIndex":0,"Attrs":{"1":10000}},{"Camp":0,"AttrKey":50,"AttrValue":2400,"RecordType":6,"AttrChangeValue":800},{"AttackCamp":1,"BeAttackCamp":0,"Attrs":{"54":580},"ResidueHP":4420,"RecordType":2},{"RecordType":1,"Camp":1,"PosX":-350},{"RecordType":1,"Camp":0,"PosX":350},{"AttackCamp":0,"BeAttackCamp":1,"Attrs":{"54":2100},"ResidueHP":2900,"RecordType":2},{"RecordType":1,"Camp":0,"PosX":-350},{"RecordType":3,"Round":2},{"RecordType":1,"Camp":1,"PosX":350},{"AttackCamp":1,"BeAttackCamp":0,"Attrs":{"54":580},"ResidueHP":3840,"RecordType":2},{"RecordType":1,"Camp":1,"PosX":-350},{"RecordType":1,"Camp":0,"PosX":350},{"AttackCamp":0,"BeAttackCamp":1,"Attrs":{"54":2100},"ResidueHP":800,"RecordType":2},{"RecordType":1,"Camp":0,"PosX":-350},{"RecordType":3,"Round":3},{"RecordType":1,"Camp":1,"PosX":350},{"AttackCamp":1,"BeAttackCamp":0,"Attrs":{"54":580},"ResidueHP":3260,"RecordType":2},{"RecordType":1,"Camp":1,"PosX":-350},{"RecordType":1,"Camp":0,"PosX":350},{"AttackCamp":0,"BeAttackCamp":1,"Attrs":{"54":2100},"ResidueHP":-1300,"RecordType":2},{"RecordType":1,"Camp":0,"PosX":-350},{"RecordType":7,"Camp":1,"Result":-1},{"RecordType":7,"Camp":0,"Result":1}]`);
+        _Facade.Send(eNotice.OpenFightLayer);//发送一个打开战斗界面的消息通知
+        //之后战斗界面会不停的取战报数据进行界面下的播报
+        //本系统也会对当前战斗的数据进行存储，并配合战斗界面进行界面的效果展示
+    }
+ 
+    public NoticeEventFinish(){
+        let recordBase:RecordBase = this.mRecordQueue[this.mRunIndex++];//获取到当前待执行的队列数据
+        if(recordBase.RecordType == eRecordType.InitAttrs){
+            let initAttrsRecordBase:RecordInitData = recordBase as RecordInitData;
+            this.mCampMap.set(initAttrsRecordBase.Camp,new Camp(initAttrsRecordBase.Camp,initAttrsRecordBase.Attrs));
+            //向外部发送阵营初始化成功的消息，此时，玩家可以获取到对应的阵营属性信息
+            _Facade.Send(eNotice.FightAttrInit,recordBase);
+        } else if( recordBase.RecordType == eRecordType.BuffInsert){
+            let buffInsertRecordBase:RecordBuffInsert = recordBase as RecordBuffInsert;
+            this.mCampMap.get(buffInsertRecordBase.Camp).InsertBuff(buffInsertRecordBase.BuffID,buffInsertRecordBase.BuffKey,buffInsertRecordBase.Life);
+            _Facade.Send(eNotice.InsertCampBuff,recordBase);//插入一个阵营Buff
+        } else if(recordBase.RecordType == eRecordType.RoundChange ){//通知玩家回合数变动
+            let recordRoundChange:RecordRoundChange = recordBase as RecordRoundChange;
+            this.mBattleRound = recordRoundChange.Round;
+            _Facade.Send(eNotice.BattleRoundChange);
+        } else if ( recordBase.RecordType == eRecordType.AttackMoveTo ) {//通知阵营玩家进行移动
+            let recordAttackMoveTo:RecordAttackMoveTo = recordBase as RecordAttackMoveTo;
+            _Facade.Send(eNotice.PlayerMoveTo,recordAttackMoveTo);
+        } else if ( recordBase.RecordType == eRecordType.Attack ){//通知玩家进行攻击
+            let recordAttack:RecordAttack = recordBase as RecordAttack;
+            _Facade.Send(eNotice.PlayerAttack,recordAttack);
+        }
+    }
+    //获取到战斗回合数
+    public GetFightRound():number{
+        return this.mBattleRound;
+    }
+    
+    //获取到战斗最大回合数
+    public GetFightLimitRound():number{
+        return this.mBattleLimitRound;
     }
 
-    //round回合数
-    public SimulateBattle(round:number,selfFightInfo:FightInfo,enemyFightInfo:FightInfo):void{
-        //闪避 抗闪避  攻击 防御  生命 暴击率 
-        //抗爆击率  最终增伤  最终减伤  爆伤加成  抵抗爆伤 
-        //击晕  抗击晕 连击 抗连击 吸血 抗吸血 
-
-        //速度 反击  抗反击
-        //战斗播报
-        let fightRecorder:FightRecorde = new FightRecorde();
-        let isWin:boolean = false;
-        for(let i = 0 ; i < round ; i++){
-            let harm:number = 0;
-            let missPercent:number = Math.max(0,selfFightInfo.mCalcAttrArr[eAttrBaseType.RESIST_MISS] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.MISS]);//当前是否被闪避
-            if( Math.ceil(Math.random() * 100) <= missPercent ){//命中时
-                //自己攻击
-                harm = Math.max(0,selfFightInfo.mCalcAttrArr[eAttrBaseType.ATT] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.DEF]);//获取到应当造成的伤害
-                let criticalPercent:number = Math.min(100,selfFightInfo.mCalcAttrArr[eAttrBaseType.CRITICAL] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.RESIST_CRITICAL]);//暴击概率
-                let isCritical:boolean = Math.ceil(Math.random() * 100) <= criticalPercent;
-                if(isCritical){
-                    let criticalHurmPercent:number = Math.max(0,selfFightInfo.mCalcAttrArr[eAttrBaseType.DEADLY_ADD] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.RESIST_DEADLY]);//爆伤加成
-                    harm = harm * (1 + (criticalHurmPercent / 100));
-                }
-                //判断是否进行击晕判定
-                let stunPercent:number = Math.max(0,selfFightInfo.mCalcAttrArr[eAttrBaseType.STUN] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.RESIST_STUN]);//当前是否被击晕
-                if( Math.ceil(Math.random() * 100) <= stunPercent ){
-                    //给地方添加一个击晕Buff，确保敌方在下一回合不会进行攻击
-                }
-            }
-            let finalIncreaseDamage:number = (selfFightInfo.mCalcAttrArr[eAttrBaseType.FINAL_ATT] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.FINAL_DEC_ATT]) / 100;//获取到当前的最终增伤 
-            harm = harm * ( 1 + finalIncreaseDamage); 
-            if( harm > enemyFightInfo.mCalcAttrArr[eAttrBaseType.HP])
-                harm = enemyFightInfo.mCalcAttrArr[eAttrBaseType.HP];
-            enemyFightInfo.mCalcAttrArr[eAttrBaseType.HP] -= harm;//进行伤害扣除
-            //进行吸血判定
-            let suckPercent:number = Math.max(0,(selfFightInfo.mCalcAttrArr[eAttrBaseType.SUCK] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.RESIST_SUCK]) / 100);//获取到当前的最终增伤 
-            if(suckPercent){
-                let suckValue:number = harm * suckPercent;
-                selfFightInfo.mCalcAttrArr[eAttrBaseType.HP] += suckValue; 
-                if( selfFightInfo.mCalcAttrArr[eAttrBaseType.HP] > selfFightInfo.mFightAttrArr[eAttrBaseType.HP]){
-                    suckValue = selfFightInfo.mFightAttrArr[eAttrBaseType.HP] - selfFightInfo.mCalcAttrArr[eAttrBaseType.HP];
-                    selfFightInfo.mCalcAttrArr[eAttrBaseType.HP] = selfFightInfo.mFightAttrArr [eAttrBaseType.HP]
-                }
-            }
-            if( enemyFightInfo.mCalcAttrArr[eAttrBaseType.HP] == 0)  { 
-                isWin = true;
-                break;//战斗结束
-            }
-            //敌人尝试进行反击（反击的攻击，无法使自己进入连击状态）
-            let backPercent:number = Math.max(0,selfFightInfo.mCalcAttrArr[eAttrBaseType.RESIST_BACK_ATT ] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.BACK_ATT]);//当前是否被击晕
-            if( Math.ceil(Math.random() * 100) <= backPercent ){
-                continue;//再次进行一次反击判定
-            }
-
-            //进行连击判定
-            let continuePercent:number = Math.max(0,selfFightInfo.mCalcAttrArr[eAttrBaseType.CONTI_ATT] - enemyFightInfo.mCalcAttrArr[eAttrBaseType.RESIST_CONTI_ATT]);//当前是否被击晕
-            if( Math.ceil(Math.random() * 100) <= continuePercent ){
-                continue;//再次进行一次攻击判定
-            }
-        }
-
-
-        //进行一回合的战斗
+    //将攻击分为3个阶段，开始攻击， 
+    public GetCampAttr(campType:eCampType,attrType:eAttrType):number{
+        let camp:Camp|undefined = this.mCampMap.get(campType);
+        return camp != undefined ?camp.GetAttr(attrType):0; 
     }
 }
-
-//buff的类型分为 
-//唯一Buff （同一时间内，只可以添加一次，且不会叠加，次数也不会进行增加）
-//唯一Buff （同一时间内，只可以添加一次，但是次数会在每次重新触发时进行刷新）
-//叠加Buff，不叠加回合数  (同一时间内，可以添加指定的次数，但是叠加次数不会改变，由最大叠加次数进行限制)
-//叠加Buff刷新次数        (同一时间内，可以添加指定次数的buff，且每次添加后，都会重置剩余时间)
-
-//模拟情形，有一个技能的功能为
-//战斗开始时，向敌方施加一次持续5回合的诅咒，之后每次受到暴击伤害时，敌方玩家的 防御力 攻击力 会降低 1000点，可叠加10次。 
-//诅咒消失后，叠加Debuff立即消失，
-
-
-//一个Buff有父子级关系 
-enum eBuffTriggerType{
-    EntryBattle = 0,//开局战斗Buff
-    BattleRoundStart = 1,//战斗回合开始的Buff
-    BattleRoundEnd = 2,//战斗回合结束时的Buff
-    AttackFront = 3,//攻击结束时的Buff
-    AttackAfter = 4,//攻击结束时的Buff
-};
-
-
-enum eBuffLiftType{
-    Round,//回合
-    Attack,//攻击
-    Defense,//防御
-    Miss,//闪避
-};

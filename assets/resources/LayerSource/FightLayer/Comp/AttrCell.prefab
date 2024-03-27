@@ -173,7 +173,7 @@
     "_string": "最大生命值:",
     "_rich": false,
     "_direction": 0,
-    "_horizontalAlign": 1,
+    "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_overflow": 2,
     "_multiline": false,
@@ -232,9 +232,9 @@
     },
     "_strokeColor": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 187,
+      "g": 94,
+      "b": 31,
       "a": 255
     },
     "_shadow": 0,
@@ -256,7 +256,7 @@
       "__id__": 7
     },
     "_dilate": 0.25,
-    "_stroke": 0,
+    "_stroke": 0.113,
     "_strokeBlur": 0.1,
     "_aspect": 1,
     "_charVisibleRatio": 1,
@@ -333,6 +333,8 @@
       "__id__": 0
     },
     "fileId": "d17r93bANNuaNj117IgTV3",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -505,9 +507,9 @@
     },
     "_strokeColor": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 187,
+      "g": 94,
+      "b": 31,
       "a": 255
     },
     "_shadow": 0,
@@ -529,7 +531,7 @@
       "__id__": 16
     },
     "_dilate": 0.25,
-    "_stroke": 0,
+    "_stroke": 0.113,
     "_strokeBlur": 0.1,
     "_aspect": 1,
     "_charVisibleRatio": 1,
@@ -606,6 +608,8 @@
       "__id__": 0
     },
     "fileId": "f58OZIFf1Fp4xUd1aRAUnr",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -644,6 +648,7 @@
       "__id__": 0
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
-    "instance": null
+    "instance": null,
+    "targetOverrides": null
   }
 ]

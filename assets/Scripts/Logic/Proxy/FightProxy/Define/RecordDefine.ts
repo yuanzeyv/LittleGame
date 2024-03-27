@@ -1,9 +1,10 @@
+import { eTriggerType } from "../../../../../../Tool/ExeclToScript/BuffTest/Buff/Define/Define";
+import { eAttrType } from "./AttrDefine";
+import { eCampType } from "./CampDefine";
+
 /*
 本文件用以定义，战斗模拟的所有所有战斗结果日志
 */
-import { eCampType } from "./BattleDefine";
-import { eTriggerType } from "../../Buff/Define/Define";
-import { eAttrType } from "../../AttrControl/Define/AttrDefine";
 export enum eRecordType{
     InitAttrs,//初始化数据用 
     AttackMoveTo,//攻击前移动用
@@ -23,7 +24,7 @@ export interface RecordInitData extends RecordBase{
     Camp:eCampType;//玩家阵营类型
     Attrs:{[key:number]:number};//需要获取到玩家的基础属性
 };
- 
+  
 //游戏内Buff被插入时的日志记录
 export interface RecordBuffInsert extends RecordBase{
     Camp:eCampType;//玩家阵营类型
