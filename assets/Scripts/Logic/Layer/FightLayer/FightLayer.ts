@@ -7,6 +7,7 @@ import { FightAttrScrollView } from './FightAttrScrollView';
 import { eCampType } from '../../Proxy/FightProxy/Define/CampDefine';
 import { BattleCamp } from './BattleCamp';
 import { RecordAttack, RecordAttackMoveTo, RecordBuffInsert, RecordInitData, RecordRoundChange } from '../../Proxy/FightProxy/Define/RecordDefine';
+import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
 export class FightLayer extends BaseLayer { 
     private mDynaicBG:Node;
     private mFightPanelNode:Node;//角色战斗层级节点
