@@ -7,10 +7,10 @@ import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
 import { ResouceProxy } from '../../Proxy/ResourceProxy/ResouceProxy';
 import { eAttrBaseType } from '../../Proxy/PlayerAttrProxy/AttrDefine/AttrDefine';
 import { AttrCalcRelevanceConfig } from '../../../Config/Cfg_AttrCalcRelevance';
-import { PlayerAttrProxy } from '../../Proxy/PlayerAttrProxy/PlayerAttrProxy';
-import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
+import { PlayerAttrProxy } from '../../Proxy/PlayerAttrProxy/PlayerAttrProxy'; 
 import { SkeletonProxy } from '../../Proxy/SkeletonProxy/SkeletonProxy';
 import { FightProxy } from '../../Proxy/FightProxy/FightProxy';
+import { GetTextMeshComp } from '../../../Util/Util';
 const {ccclass, property, type} = _decorator; 
 @ccclass('MainLayer')
 export class MainLayer extends BaseLayer {  
@@ -68,8 +68,8 @@ export class MainLayer extends BaseLayer {
             let name:string = AttrCalcRelevanceConfig.GetData(cell)!.name;//获取到当前的名称
             let value:number = _Facade.FindProxy(PlayerAttrProxy).GetAttrSumValue(cell);
             let isPercent:boolean = AttrCalcRelevanceConfig.GetData(cell)!.isPercent;
-            find("Name",node).getComponent(TextMeshLabel).string = name;
-            find("Value",node).getComponent(TextMeshLabel).string = `${isPercent?value/10000:value}${isPercent?"%":""}`;
+            GetTextMeshComp(find("Name",node)).string = name;
+            GetTextMeshComp(find("Value",node)).string = `${isPercent?value/10000:value}${isPercent?"%":""}`;
         }
     }
 

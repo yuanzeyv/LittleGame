@@ -1,7 +1,8 @@
 import { _decorator, Vec3, UITransform, Tween, tween,Node } from "cc"; 
 import { BaseLayer, LayerExecute } from "../../../Frame/BaseLayer/BaseLayer";
-import { eNotice } from "../../../NotificationTable";  
-import { TextMeshLabel } from "../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel";
+import { eNotice } from "../../../NotificationTable";   
+import { GetTextMeshComp } from "../../../Util/Util";
+import { TextMeshLabel } from "../../../../../extensions/TextMesh Pro/assets/TextMesh";
 
 const { ccclass, property,type} = _decorator;
 @ccclass('AnnouncementLayer')
@@ -32,7 +33,7 @@ export class AnnouncementLayer extends BaseLayer {
         if( this.m_IsPlayStatus == true || this.m_AnnouncementStringArray.length == 0 )//正在播放时，是无法再次进行播放的
             return;
         this.mMoveNode.setPosition(this.m_StartPosition); 
-        let richText:TextMeshLabel = this.mMoveNode.getComponent(TextMeshLabel);
+        let richText:TextMeshLabel = GetTextMeshComp(this.mMoveNode)
          richText.string = this.m_AnnouncementStringArray.pop();//准备弹出
         this.NodeMove();
     }

@@ -5,9 +5,9 @@ import { eNotice } from "../../../NotificationTable";
 import { _decorator, EventTouch, find,Node, Size, UITransform } from "cc";
 import { MultWindowProxy } from "../../Proxy/MultWindowProxy/MultWindowProxy";
 import { MultWindowPanel } from "../BagLayer/MultWindowPanel"; 
-import { TextMeshLabel } from "../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel"; 
 import { MultWindowParamMap } from "../../Proxy/MultWindowProxy/MultWindowTypeDefine";
 import { NetProxy } from "../../Proxy/NetProxy/NetProxy";
+import { GetTextMeshComp } from "../../../Util/Util";
 const {ccclass, property, type} = _decorator; 
 @ccclass('MultWindowLayer')
 export class MultWindowLayer extends BaseLayer {   
@@ -40,8 +40,8 @@ export class MultWindowLayer extends BaseLayer {
   
     //设置多面板的窗口标题
     public SetWindowTitle(title:string):void{
-        find("BackGround/AdaptiveLabelTitle",this.node).getComponent(TextMeshLabel).string = title; 
-        find("BackGround/AdaptiveLabelTitle/WindowTitle",this.node).getComponent(TextMeshLabel).string = title;
+        GetTextMeshComp(find("BackGround/AdaptiveLabelTitle",this.node)).string = title; 
+        GetTextMeshComp(find("BackGround/AdaptiveLabelTitle/WindowTitle",this.node)).string = title;
     }
 
     //添加节点到子节点上

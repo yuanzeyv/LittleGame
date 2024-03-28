@@ -1,4 +1,5 @@
 import { Label, UITransform, Widget ,Node,Button} from "cc";
+import { TextMeshLabel } from "../../../extensions/TextMesh Pro/assets/TextMesh";
 export function CopyWidget(srcWidget:Widget,destWidget:Widget){
     destWidget.target = srcWidget.target; 
     destWidget.isAlignTop = srcWidget.isAlignTop;  //是否对齐上边。
@@ -151,3 +152,7 @@ export function PutDebunchingRunTime(log:string):any{
 export function SyncMicroTask(handle:(...args:any)=>void,...args:any):void{
     new Promise((resolve)=> resolve(undefined)).then((onfulfilled: () =>unknown)=> handle(args));
 } 
+
+export function GetTextMeshComp(node:Node):TextMeshLabel{
+    return node.getComponent("TextMeshLabel") as unknown as TextMeshLabel;
+}

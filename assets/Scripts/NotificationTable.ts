@@ -172,6 +172,8 @@ export enum eNotice {
    BattleRoundChange = "BattleRoundChange",//战斗回合数发生变动
    PlayerMoveTo = "PlayerMoveTo",//玩家移动通知
    PlayerAttack = "PlayerAttack",//玩家攻击通知
+   PlayerBuffTrigger = "PlayerBuffTrigger",//玩家Buff触发通知
+   BattleAttrUpdate = "BattleAttrUpdate",//玩家属性更新
     
 
    FightStart = "FightStart",//战斗开始

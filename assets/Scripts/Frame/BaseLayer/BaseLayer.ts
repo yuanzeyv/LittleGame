@@ -5,7 +5,6 @@ import { _Facade } from '../../Global';
 import { ButtonEvent } from './Class/ButtonEvent';
 export type LayerExecute = (any)=>void;
 const { ccclass, property,type} = _decorator; 
-
 //窗口的基础
 /**
  * 其本身是一个Component组件 拥有一个与BaseMediator功能类似的监听Map,用于监听并执行由WindowMediator发送消息。 并且会有一些功能方法，统一Layer的编写规范。
@@ -45,7 +44,9 @@ export class BaseLayer extends Component{
     protected InitLayer() {}//初始化界面信息
     protected AfterLoad() {}//初始化结束以后
  
-    public CloseLayer(){//关闭界面后做的操作 
+    public CloseLayer(){//关闭界面后做的操作  
+        if(this.mButtonEvent == undefined)
+            console.log("QQQQQQQQQQQQQ");
         this.mButtonEvent.ClearButtonEvent();
         this.onClose();
     }
@@ -63,7 +64,5 @@ export class BaseLayer extends Component{
     //反注册一个按钮事件
     public UnregisterButtonClick(node:Node,func:(event:EventTouch,...args)=>void):void{ 
         this.mButtonEvent.UnregisterButtonClick(node,func);//反注册指定的回调 
-    }
-
-    
+    } 
 }

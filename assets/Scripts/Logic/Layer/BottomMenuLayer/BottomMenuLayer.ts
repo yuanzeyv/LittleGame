@@ -6,7 +6,7 @@ import { PoolProxy } from '../../Proxy/PoolProxy/PoolProxy';
 import { _decorator, Vec3, find, Camera, UITransform ,Node, Sprite, SpriteFrame, EventTouch} from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer';
 import { BottomListConfig, IBottomListStruct } from '../../../Config/Cfg_BottomList';
-import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
+import { GetTextMeshComp } from '../../../Util/Util';
 enum eBottomType{
     Bag = 5,
 }
@@ -35,12 +35,13 @@ export class BottomMenuLayer extends BaseLayer {
                 `LayerSource/BottomMenuLayer/Images/funcIcon/${cell.icon}/spriteFrame`,SpriteFrame);
             _Facade.FindProxy(ResouceProxy).Load(node.getComponent(Sprite),"spriteFrame","resources",
                 `LayerSource/BottomMenuLayer/Images/${cell.backGround}/spriteFrame`,SpriteFrame);
-            find("Name",node).getComponent(TextMeshLabel).string = cell.name;
-            find("FunctionDesc",node).getComponent(TextMeshLabel).string = cell.desc;
-            find("OwnerLabel",node).getComponent(TextMeshLabel).string = cell.rightDesc; 
+            GetTextMeshComp(find("Name",node)).string = cell.name;
+            
+            GetTextMeshComp(find("FunctionDesc",node)).string = cell.desc;
+            GetTextMeshComp(find("OwnerLabel",node)).string = cell.rightDesc; 
             find("OriginNode/CellLayout",this.node).addChild(node);    
   
-            this.RegisterButtonEvent(node,this.ClickHandle,this,cell.key);
+            this.RegisterButtonEvent(node,this.ClickHandle,this,cell.key); 
         }); 
         find("OriginNode",this.node).setWorldPosition(this.mTouchUIPos);    
     }           

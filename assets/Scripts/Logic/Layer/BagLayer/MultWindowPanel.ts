@@ -3,9 +3,9 @@ import { IMultPanleStruct, MultPanleConfig } from '../../../Config/Cfg_MultPanle
 import { _Facade, _G } from '../../../Global';
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
 import { MultWindowLayer } from '../MultWindowLayer/MultWindowLayer';
-import { ScrollAdapter, Holder, IElement, AlwaysScroll, View } from '../../../Util/adapter';
-import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
+import { ScrollAdapter, Holder, IElement, AlwaysScroll, View } from '../../../Util/adapter'; 
 import { MultWindowParamMap } from '../../Proxy/MultWindowProxy/MultWindowTypeDefine';
+import { GetTextMeshComp } from '../../../Util/Util';
 const { ccclass, property } = _decorator;
 export interface IFixedModel {index:number; panelID:number,} 
 @ccclass('MultWindowPanel')
@@ -85,7 +85,7 @@ class MyHolder extends Holder<IFixedModel>{
         this.mFixedComp.mLayer.RegisterButtonEvent(this.node,this.ClickHandle,this); 
  
         let config:IMultPanleStruct = MultPanleConfig.GetData(this.data.panelID)!; 
-        find("CellName",this.node).getComponent(TextMeshLabel).string = config.btnName;
+        GetTextMeshComp(find("CellName",this.node)).string = config.btnName;
         this.node.getComponent(Button).interactable = config.key != this.mFixedComp.mLayer.GetSelectWindowID(); 
         
         let size:Size = find("CellName",this.node).getComponent(UITransform).contentSize;

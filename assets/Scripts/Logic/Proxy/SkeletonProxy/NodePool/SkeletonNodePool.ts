@@ -1,6 +1,6 @@
 import { WindowInterface } from "../../../../Compoment/WindowInterface";
 import { NodeCellControl } from "../../PoolProxy/NodeCellControl";
-import {Node,sp} from "cc";
+import {Node,Vec3,sp} from "cc";
 export class SkeletonNodePool extends NodeCellControl{ 
     protected InitNode(node:Node):void{//获取到对象池中的一个对象
     } 
@@ -9,5 +9,6 @@ export class SkeletonNodePool extends NodeCellControl{
     }
     protected UnUse(node: Node): void {
         node.getComponent(sp.Skeleton).destroy();
+        node.setScale(new Vec3(1,1,1)); 
     }
-};  
+};   

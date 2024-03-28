@@ -1,9 +1,7 @@
 
 import {_Facade, _G} from '../../../Global';
 import { Button, Prefab, Size, UITransform, _decorator, find ,Node} from 'cc';
-import { ScrollAdapter, Holder, IElement, AlwaysScroll, View, WrapMode } from '../../../Util/adapter';
-import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh';
-import { IMultPanleStruct, MultPanleConfig } from '../../../Config/Cfg_MultPanle';
+import { ScrollAdapter, Holder, IElement, AlwaysScroll, View, WrapMode } from '../../../Util/adapter'; 
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
 import { MultWindowParamMap } from '../../Proxy/MultWindowProxy/MultWindowTypeDefine';
 import { MultWindowLayer } from '../MultWindowLayer/MultWindowLayer';

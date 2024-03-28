@@ -267,6 +267,14 @@ export class BundleProxy extends BaseProxy{
         }); 
         this.mLoadStructMap.delete(loadID);
     }
+
+    //一个指定的LoadID是否已经加载完了所有的资源
+    public ResourceLoadFinishByLoadID(loadID:number):boolean{
+        let loadStruct:LoadStruct|undefined = this.mLoadStructMap.get(loadID);
+        if(loadStruct == undefined)
+            return false;
+        return loadStruct.IsAllComplete();
+    }
      
     //当一个资源被加载完毕时
     public AssetLoadFinish(bundleName:string,uuid:string,asset?:Asset){

@@ -10,7 +10,6 @@ import { LoginMediator } from "./Logic/Mediator/LoginMediator/LoginMediator";
 import { MusicControlMediator } from "./Logic/Mediator/MusicControlMediator/MusicControlMediator";
 import { RewardedVideoAdvertisingMediator } from "./Logic/Mediator/RewardedVideoAdvertisingMediator/RewardedVideoAdvertisingMediator";
 import { TipsMediator } from "./Logic/Mediator/TipsMediator/TipsMediator"; 
-import { WindowMediator } from "./Logic/Mediator/WindowMediator/WindowMediator";
 import { BannerAdvertisingProxy } from "./Logic/Proxy/BannerAdvertisingProxy/BannerAdvertisingProxy"; 
 import { BundleProxy } from "./Logic/Proxy/BundleProxy/BundleProxy";
 import { InterstitialAdvertisingProxy } from "./Logic/Proxy/InterstitialAdvertisingProxy/InterstitialAdvertisingProxy";
@@ -48,8 +47,7 @@ export class GameMVCRegister extends BaseMVCRegister {
         
     }  
     protected AllocMediator(mediatorMap: Map<MediatorConstructor, string>): void {
-        mediatorMap
-            .set(WindowMediator,"WindowMediator")//主窗口的mediator
+        mediatorMap 
             .set(TipsMediator,"TipsMediator")//主窗口的mediator 
             .set(AnnouncementMediator,"AnnouncementMediator") //公告用  
             .set(BannerAdvertisingMediator,"BannerAdvertisingMediator") 

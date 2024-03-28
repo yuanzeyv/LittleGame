@@ -1,4 +1,4 @@
-import { Node, Vec2, Vec3, tween } from "cc";
+import { Node, Tween, Vec2, Vec3, sp, tween } from "cc";
 import { SpineMediator } from "../../Proxy/SkeletonProxy/Const/SpineMediator";
 import { _Facade } from "../../../Global";
 import { SkeletonProxy } from "../../Proxy/SkeletonProxy/SkeletonProxy";  
@@ -33,7 +33,16 @@ export class Player{
     }
 
     public get Node():Node{
-        return this.Node;
+        return this.mNode; 
+    }
+
+    public get SpineMediator():SpineMediator{
+        return this.mHeroSpineMediator;
+    }
+
+    public Desctory():void{
+        Tween.stopAllByTarget(this.mHeroSpineMediator.GetNode()); 
+        _Facade.FindProxy(SkeletonProxy).RecycleSpineEffect(this.mHeroSpineMediator);
     }
 }
 
@@ -57,13 +66,29 @@ export class BattleCamp{
         this.mPlayer.SetPosition( isTurn * 300 ,0);
         this.mPlayer.SetFilp(isTurn == 1);
     }
-
+ 
     //玩家的X轴移动
     public MovePlayer(posXOffset:number,handle:()=>void){
+        let isTurn:number =  this.mCampType == eCampType.Initiative ? -1 : 1; 
         tween(this.mPlayer.Node) 
-        .by(1,{position:new Vec3(posXOffset,0,0)})
-        .call(()=>{
+        .by(0.8,{position:new Vec3(posXOffset * isTurn,0,0)})
+        .call(()=>{ 
+            handle && handle() ; 
+        }) 
+        .start();//开始
+    }
+
+    //执行一次玩家的攻击
+    public PlayerAttack(handle:()=>void){ 
+        this.mPlayer.SpineMediator.SetAction("attack")
+        this.mPlayer.SpineMediator.GetSp().setCompleteListener(()=>{
             handle && handle();
-        }).start();//开始
+            this.mPlayer.SpineMediator.SetAction("stand");
+            this.mPlayer.SpineMediator.GetSp().setCompleteListener(undefined);
+        }); 
+    }
+
+    public Destory(){
+        this.mPlayer.Desctory();
     }
 } 

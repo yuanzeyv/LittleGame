@@ -47,8 +47,10 @@ export class WindowInterface extends Component {
     }
 
     CloseLayer(){
-        if(this.mLayerCompoment)
+        if(this.mLayerCompoment){
             this.mLayerCompoment.CloseLayer();
+            this.mLayerCompoment = undefined;
+        }
         this.mWindowNode.destroyAllChildren();//销毁 
         this.mWindowNode.removeAllChildren();//删除 
     }

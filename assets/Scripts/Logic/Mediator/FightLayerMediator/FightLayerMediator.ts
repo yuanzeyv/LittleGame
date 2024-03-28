@@ -6,6 +6,7 @@ import { eNotice } from "../../../NotificationTable";
 import { eLayerOrder } from "../../Proxy/WindowProxy/Class"; 
 import { FightLayer } from "../../Layer/FightLayer/FightLayer";
 import { ResouoceType, TAssetLoadType } from "../../Proxy/BundleProxy/BundleProxy";
+import { FightProxy } from "../../Proxy/FightProxy/FightProxy";
 
 export class FightLayerMediator extends WindowBaseMediator{  
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
@@ -13,7 +14,13 @@ export class FightLayerMediator extends WindowBaseMediator{
         .set(eNotice.OpenFightLayer,this.OpenLayer.bind(this))
         .set(eNotice.CloseFightLayer,this.CloseLayer.bind(this)) 
         .set(eNotice.FightAttrInit,this.LayerHandle.bind(this)) 
-    } 
+        .set(eNotice.BattleRoundChange,this.LayerHandle.bind(this)) 
+        .set(eNotice.InsertCampBuff,this.LayerHandle.bind(this)) 
+        .set(eNotice.PlayerMoveTo,this.LayerHandle.bind(this)) 
+        .set(eNotice.PlayerAttack,this.LayerHandle.bind(this))   
+        .set(eNotice.PlayerBuffTrigger,this.LayerHandle.bind(this))    
+        .set(eNotice.BattleAttrUpdate,this.LayerHandle.bind(this))    
+    }  
     
     protected InitResourcePathSet(resourceSet:Set<string>):void{  
         resourceSet.add("resources/LayerSource/FightLayer");    
@@ -37,4 +44,8 @@ export class FightLayerMediator extends WindowBaseMediator{
         ret.push({bundleName:"resources",dirName:"GameResource/Spine/spine_eff/1001",isFile:true,type:sp.SkeletonData})
         return ret;
     } 
+
+    protected CreateNodePool(): void {
+        _Facade.FindProxy(FightProxy).InitNodePool();//初始化对象池
+    }
 }    

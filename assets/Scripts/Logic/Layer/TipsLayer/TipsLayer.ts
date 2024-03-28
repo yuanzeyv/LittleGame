@@ -3,6 +3,7 @@ import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
+import { GetTextMeshComp } from '../../../Util/Util';
 
 const {ccclass, property, type} = _decorator;
  
@@ -68,7 +69,7 @@ export class TipsLayer extends BaseLayer {
         let node: Node = instantiate(this.m_MoveNode); //实例化一个tips的消息
         this.node.addChild(node);
         node.setPosition(this.m_StartPosition);
-        let richText: TextMeshLabel = node.getChildByPath("RichText").getComponent(TextMeshLabel);
+        let richText: TextMeshLabel = GetTextMeshComp(node.getChildByPath("RichText"));
         richText.string = this.m_TipsStringArray.pop();//准备弹出
         this.NodeMove(node);
         _Facade.Send(eNotice.PlayAudioEffect, "resources/Sound/shua");

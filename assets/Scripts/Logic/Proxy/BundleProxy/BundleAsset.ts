@@ -129,8 +129,10 @@ export class BundleAssest{
                 return;
             }  
             for(let asset of data){
-                this.mRemeberCountMap.set(asset.uuid,{asset:asset,loadCount:0,soltCell:undefined});
-                asset.addRef(); 
+                if(!this.mRemeberCountMap.has(asset.uuid)){//资源不存在的情况下
+                    this.mRemeberCountMap.set(asset.uuid,{asset:asset,loadCount:0,soltCell:undefined});
+                    asset.addRef(); 
+                }
                 this.mBundleProxy.AssetLoadFinish(this.mBundle.name,asset.uuid,asset); //添加引用
                 this.TimeOutRelease(asset.uuid);//加入超时释放 
             }
@@ -144,10 +146,10 @@ export class BundleAssest{
         if(refObj == undefined || refObj.loadCount != 0)
             return;
         refObj.soltCell?.Stop();//停止定时器 
-        refObj.soltCell =  _G.TimeWheel.Set(1 * 1000,()=>{
-            if(refObj.loadCount != 0)//不可能出现这种情况
+        refObj.soltCell =  _G.TimeWheel.Set(0.5 * 1000,()=>{
+            if(refObj.loadCount != 0)//不可能出现这种情况 
                return;
-            refObj.soltCell = undefined;//清空本次的定时器（无用逻辑）
+            refObj.soltCell = undefined;//清空本次的定时器（无用逻辑） 
             this.mRemeberCountMap.delete(uuid);//删除引用 
             refObj.asset.decRef();//删除引用
             console.log(`清理了游戏资源 ${uuid}`); 
@@ -165,11 +167,13 @@ export class BundleAssest{
         this.DecRefByUUID(fileUUID);
     }
     public DecRefByUUID(uuid:string):void{
-        let refObj:{asset:Asset,loadCount:number,soltCell?:SoltCell} = this.mRemeberCountMap.get(uuid);
-        if(refObj.loadCount == 0)//资源已经被释放过了
+        let refObj:{asset:Asset,loadCount:number,soltCell?:SoltCell} = this.mRemeberCountMap.get(uuid); 
+        if( refObj == undefined ) 
+            console.log("QQQQQQQQQQQQQQQQQ");
+        if( refObj.loadCount == 0)//资源已经被释放过了
             return;
         refObj.loadCount--;
-        this.TimeOutRelease(uuid);
+        this.TimeOutRelease(uuid); 
     }
     public RefByUUID(uuid:string):Asset |undefined{ 
         let refObj:{asset:Asset,loadCount:number,soltCell?:SoltCell}|undefined = this.mRemeberCountMap.get(uuid);
