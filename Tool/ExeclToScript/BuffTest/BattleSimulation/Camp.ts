@@ -7,7 +7,7 @@ import { BuffControl } from "../Buff/BuffControl";
 import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
 import { eAttackType, eNotifyType } from "../Communicant/Define/Define";
 import { eTriggerType } from "../Buff/Define/Define";
-import { RecordAttack, RecordAttackMoveTo, RecordEndBattle, eRecordType } from "./Define/RecordDefine";
+import { RecordAttack, RecordAttackMoveTo, RecordEndBattle, RecordSuckBlood, eRecordType } from "./Define/RecordDefine";
 //玩家阵营
 export class Camp{ 
     private mBattleCommunicantID:number;//战斗通知模块
@@ -98,6 +98,9 @@ export class Camp{
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackCircleFront ,this,this.BeAttackCircleFrontHandle); 
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackCircleAfter ,this,this.AttackCircleAfterHandle); 
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackCircleAfter ,this,this.BeAttackCircleAfterHandle);  
+        //吸血消息通知
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.SuckBloodFront ,this,this.SuckBloodFrontHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.SuckBloodAfter ,this,this.SuckBloodAfterHandle); 
 
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.RoundStart ,this,this.RoundStartHandle);  
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.RoundEnd ,this,this.RoundEndHandle);  
@@ -185,4 +188,32 @@ export class Camp{
         if(this.mCampType != beAttackCamp.mCampType)//仅处理被攻击前的情况 
             return;
     }
+    
+    /****************
+    *暴击消息区域
+    *****************/
+    private SuckBloodFrontHandle(attackCamp:Camp,beAttackCamp:Camp,suckBlood:number){
+        if(this.mCampType != attackCamp.mCampType)//发起攻击者的话
+            return;
+        //向Buff区域发送吸血前事件
+    }
+    
+    //玩家进行攻击前的行为
+    private SuckBloodAfterHandle(attackCamp:Camp,beAttackCamp:Camp,suckBlood:number){
+        if(this.mCampType != attackCamp.mCampType || suckBlood <= 0)//仅处理被攻击前的情况
+            return; 
+        let maxReply:number = beAttackCamp.GetAttrByType(eAttrType.SumHPLimit) - beAttackCamp.GetAttrByType(eAttrType.SumFinalHP);
+        suckBlood = Math.min(suckBlood,maxReply);
+        beAttackCamp.SetAttrByType( eAttrType.SumFinalHP ,beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) + suckBlood);
+        let suckBloodRecord:RecordSuckBlood = {
+            RecordType: eRecordType.SuckBlood,
+            AttackCamp: attackCamp.CampType,
+            AttackName: attackCamp.MainPlayer.Name,
+            Attrs: { [eAttrType.SumFinalHP]: suckBlood },
+            ResidueHP: beAttackCamp.GetAttrByType(eAttrType.SumFinalHP),
+        }; 
+        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,suckBloodRecord);  
+        //向Buff区域发送吸血后事件
+    } 
+    
 };

@@ -1,4 +1,4 @@
-import { MonsterConfig } from "../../Work/OutputScript/Monster";
+import { IMonsterStruct, MonsterConfig } from "../../Work/OutputScript/Monster";
 import { AttrCell } from "../AttrControl/AttrCell";
 import { eCampType } from "./Define/BattleDefine";   
 import { eAttrType } from "../AttrControl/Define/AttrDefine";
@@ -66,15 +66,22 @@ export class BattleSimulationFacade{
     }
     /*
     round:战斗最大回合数
-    initiativeConfig:主动攻击者的战斗数据信息
-    passivityConfig:被动攻击者的战斗数据信息
     */
-    public SetBattleInfo(round:number,initiativeConfig:number,passivityConfig:number):void{
-        this.mBattleSimulation.MaxRound = round;
-        this.mAttrInfo[eCampType.Initiative] = {attrs:MonsterConfig.GetData(initiativeConfig)?.Attrs!,buffs:MonsterConfig.GetData(initiativeConfig)?.Buffs!,}
-        this.mAttrInfo[eCampType.Passivity] = {attrs:MonsterConfig.GetData(passivityConfig)?.Attrs!,buffs:MonsterConfig.GetData(passivityConfig)?.Buffs!,}
-        this.mBattleSimulation.InitCampInfo(eCampType.Passivity,MonsterConfig.GetData(initiativeConfig)?.Name!);
-        this.mBattleSimulation.InitCampInfo(eCampType.Initiative,MonsterConfig.GetData(passivityConfig)?.Name!);
+    public SetMaxRound(round:number){
+        this.mBattleSimulation.MaxRound = round;//设置最大回合数
+    }
+    
+    public SetBattleInfoByConfig(camp:eCampType,configID:number):boolean{
+        let config:IMonsterStruct|undefined = MonsterConfig.GetData(configID);//获取到配置表
+        if(config == undefined)
+            return false;
+        this.SetBattleInfo(camp,config.Name,config.Attrs,config.Buffs);
+        return true;
+    }
+
+    public SetBattleInfo(camp:eCampType,name:string,attrs:{k:number;v:number;}[],buffs:number[]):void{
+        this.mAttrInfo[camp] = {attrs:attrs,buffs:buffs}
+        this.mBattleSimulation.InitCampInfo(camp,name);
     }   
      
  
@@ -99,12 +106,12 @@ export class BattleSimulationFacade{
     }
 
     private GetAttackBackAttrPrecent(attackCamp:Camp,beAttackCamp:Camp):number{
-        return Math.min(attackCamp.GetAttrByType(eAttrType.SumCircle) - beAttackCamp.GetAttrByType(eAttrType.SumResistancCircle),10000);
+        return Math.min(attackCamp.GetAttrByType(eAttrType.SumAttackBack) - beAttackCamp.GetAttrByType(eAttrType.SumResistanceAttackBack),10000);
     }
 
     private GetAttacContinueAttrPrecent(attackCamp:Camp,beAttackCamp:Camp):number{
         return Math.min(attackCamp.GetAttrByType(eAttrType.SumAttackContinue) - beAttackCamp.GetAttrByType(eAttrType.SumResistanceAttackContinue),10000);
-    }
+    } 
  
     private GetAttackHarm(attackCamp:Camp,beAttackCamp:Camp,isCircle:boolean):number{
         //暴击是两倍伤害
@@ -114,6 +121,11 @@ export class BattleSimulationFacade{
     
     private GetCircleHarmPercent(attackCamp:Camp,beAttackCamp:Camp):number{
         return attackCamp.GetAttrByType(eAttrType.SumCircleDamage) - beAttackCamp.GetAttrByType(eAttrType.SumResistanceCircleDamage);//总暴击伤害加成 - 总暴击抵抗加成
+    }
+    //获取到当前的吸血数值
+    private GetSuckBloodValue(attackCamp:Camp,beAttackCamp:Camp,hurm:number):number{
+        let suckBlood:number = Math.min(attackCamp.GetAttrByType(eAttrType.SumSuckBlood) - beAttackCamp.GetAttrByType(eAttrType.SumResistanceSuckBlood),0);
+        return hurm * suckBlood;
     }
  
     //真代表持续战斗中
@@ -135,26 +147,34 @@ export class BattleSimulationFacade{
             let attackMoveRecord:RecordAttackMoveTo = {RecordType:eRecordType.AttackMoveTo,Camp:attackCamp.CampType,PosX:350};
             BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackMoveRecord); //发送攻击前移动
         } 
-        //连击攻击
         this.Notify(attackFrontType,attackCamp,beAttackCamp,attackType,baseHarm,isCircle,isBeMiss);//玩家发起攻击前
         this.Notify(beAttackFrontType,attackCamp,beAttackCamp,attackType,baseHarm,isCircle,isBeMiss);//玩家被攻击前 
         let finalHarm = this.GetAttackHarm(attackCamp,beAttackCamp,isCircle);//对敌人造成最终的伤害
         this.Notify(attackAfterType,attackCamp,beAttackCamp,attackType,finalHarm,isCircle,isBeMiss);//玩家进行攻击后，进行的操作
-        this.Notify(beAttackAfterType,attackCamp,beAttackCamp,attackType,finalHarm,isCircle,isBeMiss);//玩家进行攻击后，进行的操作 
+        this.Notify(beAttackAfterType,attackCamp,beAttackCamp,attackType,finalHarm,isCircle,isBeMiss);//玩家进行攻击后，进行的操作  
+
+        //计算玩家吸血属性
+        if(!isBeMiss){
+            let baseSuckBlood:number = this.GetSuckBloodValue(attackCamp,beAttackCamp,finalHarm);//对敌人造成最终的伤害
+            this.Notify(eNotifyType.SuckBloodFront,attackCamp,beAttackCamp,baseSuckBlood);//玩家进行攻击后，进行的操作
+            let finalSuckBlood:number = this.GetSuckBloodValue(attackCamp,beAttackCamp,finalHarm);//对敌人造成最终的伤害
+            this.Notify(eNotifyType.SuckBloodAfter,attackCamp,beAttackCamp,finalSuckBlood);//玩家进行攻击后，进行的操作  
+        }
+        let ret:boolean = true;
+        //计算完毕之后，由于各个Buff 或者 技能的影响，可能会照成攻击者血量为0，所以这里进行一次判断逻辑，以免执行了多余逻辑
+        if( this.GetCampHP(attackCamp) <= 0 )//在此处判断当前玩家的血量是否见底
+            ret = false;
+        else if( this.Random() <= this.GetAttackBackAttrPrecent(beAttackCamp,attackCamp) )//玩家应该被反击 
+            ret = this.AttackPlayer(beAttackCamp,attackCamp,eAttackType.AttackBack); 
+        else if(this.Random() <= this.GetAttacContinueAttrPrecent(attackCamp,beAttackCamp))//计算玩家是否可以连击
+            ret = this.AttackPlayer(attackCamp ,beAttackCamp,eAttackType.ContinueAttack); 
+        else 
+            ret = this.GetCampHP(beAttackCamp) >= 0 ; 
         if(attackType == eAttackType.Normal){
             let attackMoveRecord:RecordAttackMoveTo = {RecordType:eRecordType.AttackMoveTo,Camp:attackCamp.CampType,PosX:-350};
             BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackMoveRecord); //发送攻击前移动
-        } 
-        //计算完毕之后，由于各个Buff 或者 技能的影响，可能会照成攻击者血量为0，所以这里进行一次判断逻辑，以免执行了多余逻辑
-        if( this.GetCampHP(attackCamp) <= 0 )//在此处判断当前玩家的血量是否见底
-            return false;
-        //计算玩家反击 
-        let isAttackBack:boolean = this.Random() <= this.GetAttackBackAttrPrecent(attackCamp,beAttackCamp);
-        if( isAttackBack )//玩家应该被反击 
-            return this.AttackPlayer(beAttackCamp,attackCamp,eAttackType.AttackBack); 
-        else if(this.Random() <= this.GetAttacContinueAttrPrecent(attackCamp,beAttackCamp))//计算玩家是否可以连击
-            return this.AttackPlayer(attackCamp ,beAttackCamp,eAttackType.ContinueAttack); 
-        return this.GetCampHP(beAttackCamp) >= 0 ; 
+        }
+        return ret;
     }
 
     public StartSimulationBattle(){   
@@ -168,7 +188,6 @@ export class BattleSimulationFacade{
             while(playerArray.length != 0){ 
                 //对出手顺序进行排序
                 playerArray.sort((playerA:Player,playerB:Player)=> playerA.Camp.GetAttrByType(eAttrType.Speed) - playerB.Camp.GetAttrByType(eAttrType.Speed));
-                //弹出速度最快的玩家
                 let attackPlayer:Player = playerArray.pop()!; 
                 let attackCamp:Camp = this.mBattleSimulation.GetPlayerCampInfo(attackPlayer.Camp.CampType);//获取到当前攻击者的阵营
                 let beAttackCamp:Camp = this.mBattleSimulation.GetPlayerCampInfo(attackPlayer.Enemy.Camp.CampType);//获取到当前敌对攻击者阵营

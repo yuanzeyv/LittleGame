@@ -95,6 +95,8 @@ export class AttrCell{
         this.mAttrsCalcObj[eAttrType.SumResistanceAttackBack  ] = this.ResistancAttackBackCalcHandle;//总抗暴击
         this.mAttrsCalcObj[eAttrType.SumCircleDamage  ] = this.CircleDamageHandle;//爆伤加成
         this.mAttrsCalcObj[eAttrType.SumResistanceCircleDamage  ] = this.ResistancCircleDamageHandle;//抗爆伤加成
+        this.mAttrsCalcObj[eAttrType.SumSuckBlood  ] = this.SuckBloodCalcHandle;//吸血
+        this.mAttrsCalcObj[eAttrType.SumResistanceSuckBlood  ] = this.ResistanceSuckBloodCalcHandle;//抗吸血加成
     }
 
     private AttackCalcHandle(){
@@ -171,4 +173,15 @@ export class AttrCell{
     private ResistancCircleDamageHandle(){ 
         this.mAttrArray[eAttrType.SumResistanceCircleDamage] = (this.GetAttr(eAttrType.ResistanceCircleDamage) *( 1 + this.GetAttr(eAttrType.ResistanceCircleDamagePercent,true))) * ( 1 + this.GetAttr(eAttrType.ResistanceCircleDamageFinalPercent,true));
     } 
-};   
+
+    /*******
+     * 吸血 抗吸血 区域
+    ********/
+    private SuckBloodCalcHandle(){ 
+        this.mAttrArray[eAttrType.SumSuckBlood] = (this.GetAttr(eAttrType.SuckBlood) *( 1 + this.GetAttr(eAttrType.SuckBloodPercent,true))) * ( 1 + this.GetAttr(eAttrType.SuckBloodFinalPercent,true));
+    } 
+
+    private ResistanceSuckBloodCalcHandle(){ 
+        this.mAttrArray[eAttrType.SumResistanceSuckBlood] = (this.GetAttr(eAttrType.ResistanceSuckBlood) *( 1 + this.GetAttr(eAttrType.ResistanceSuckBloodPercent,true))) * ( 1 + this.GetAttr(eAttrType.ResistanceSuckBloodFinalPercent,true));
+    } 
+};    

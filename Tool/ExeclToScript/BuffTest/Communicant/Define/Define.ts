@@ -48,6 +48,12 @@ export enum eNotifyType{
     AttackCircleAfter         ,//进行暴击后
     BeAttackCircleFront         ,//被暴击前  
     BeAttackCircleAfter         ,//被暴击后
+
+    /***********
+    *吸血消息区域
+    ***********/
+    SuckBloodFront         ,//进行吸血前
+    SuckBloodAfter         ,//进行吸血后
     
     PlayerDie         ,//玩家死亡时
     BattleReport,//进行一次战报记录

@@ -51,27 +51,35 @@ export enum eAttrType{//用于计算属性的基础信息
     //抵抗连击
     ResistanceAttackContinue            =   39,//抵抗连击
     ResistanceAttackContinuePercent     =   40,//抵抗连击百分比
-    ResistanceAttackContinueFinalPercent=   41,//抵抗连击百分比
+    ResistanceAttackContinueFinalPercent=   41,//抵抗连击百分比 
+    //攻击吸血
+    SuckBlood                           =   42,//攻击吸血
+    SuckBloodPercent                    =   43,//攻击吸血百分比
+    SuckBloodFinalPercent               =   44,//攻击吸血最终加成 
+    //抵抗攻击吸血      
+    ResistanceSuckBlood                 =   45,//抵抗攻击吸血
+    ResistanceSuckBloodPercent          =   46,//抵抗攻击吸血百分比
+    ResistanceSuckBloodFinalPercent     =   47,//抵抗攻击吸血百分比 
     
     
     //玩家的额外基础属性
-    SumAttack                         =   50,//总攻击力 
-    SumDefense                        =   51,//总防御力
-    SumHPLimit                        =   52,//最大生命值
-    SumSpeed                          =   53,//总速度
-    SumFinalHP                        =   54,//角色当前生命值
-    SumMiss                           =   56,//玩家的总闪避属性
-    SumResistanceMiss                 =   57,//玩家的总抗闪避属性
-    SumCircle                         =   58,//玩家的总暴击属性
-    SumResistancCircle                =   59,//玩家的总抗暴击属性
-    SumAttackBack                     =   60,//玩家的总反击属性
-    SumResistanceAttackBack           =   61,//玩家的总抗抗反击
-    SumCircleDamage                   =   62,//玩家的爆伤加成
-    SumResistanceCircleDamage         =   63,//玩家的总抗爆伤
-    SumAttackContinue                 =   64,//玩家的连击加成
-    SumResistanceAttackContinue       =   65,//玩家的抗连击
-
-    Final                             =   62,
+    SumAttack                         =   100,//总攻击力 
+    SumDefense                        =   101,//总防御力
+    SumHPLimit                        =   102,//最大生命值
+    SumSpeed                          =   103,//总速度
+    SumFinalHP                        =   104,//角色当前生命值
+    SumMiss                           =   106,//玩家的总闪避属性
+    SumResistanceMiss                 =   107,//玩家的总抗闪避属性
+    SumCircle                         =   108,//玩家的总暴击属性
+    SumResistancCircle                =   109,//玩家的总抗暴击属性
+    SumAttackBack                     =   110,//玩家的总反击属性
+    SumResistanceAttackBack           =   111,//玩家的总抗抗反击
+    SumCircleDamage                   =   112,//玩家的爆伤加成
+    SumResistanceCircleDamage         =   113,//玩家的总抗爆伤
+    SumAttackContinue                 =   114,//玩家的连击加成
+    SumResistanceAttackContinue       =   115,//玩家的抗连击
+    SumSuckBlood                      =   116,//玩家的攻击吸血加成
+    SumResistanceSuckBlood            =   117,//玩家的抵抗吸血 
 };
 
 export let AttrNameMap:Map<eAttrType,string> = new Map<eAttrType,string>();
@@ -156,3 +164,11 @@ AttrMappingMap.set(eAttrType.CircleFinalPercent,[eAttrType.SumCircle]);
 AttrMappingMap.set(eAttrType.ResistanceCircle            ,[eAttrType.SumResistancCircle]);
 AttrMappingMap.set(eAttrType.ResistanceCirclePercent     ,[eAttrType.SumResistancCircle]);
 AttrMappingMap.set(eAttrType.ResistanceCircleFinalPercent,[eAttrType.SumResistancCircle]);
+//吸血 
+AttrMappingMap.set(eAttrType.SuckBlood            ,[eAttrType.SumSuckBlood]);
+AttrMappingMap.set(eAttrType.SuckBloodPercent     ,[eAttrType.SumSuckBlood]);
+AttrMappingMap.set(eAttrType.SuckBloodFinalPercent,[eAttrType.SumSuckBlood]);
+//抵抗吸血
+AttrMappingMap.set(eAttrType.ResistanceSuckBlood            ,[eAttrType.SumResistanceSuckBlood]);
+AttrMappingMap.set(eAttrType.ResistanceSuckBloodPercent     ,[eAttrType.SumResistanceSuckBlood]);
+AttrMappingMap.set(eAttrType.ResistanceSuckBloodFinalPercent,[eAttrType.SumResistanceSuckBlood]);

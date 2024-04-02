@@ -3,9 +3,12 @@ import * as fflate from './fflate';
 import { BattleAnalysis } from "./BattleAnalysis/BattleAnalysis";
 import { BattleSimulation } from "./BattleSimulation/BattleSimulation";
 import { BattleSimulationFacade } from "./BattleSimulation/BattleSimulationFacade"; 
+import { eCampType } from "./BattleSimulation/Define/BattleDefine";
 //首先创建一个战斗模拟对象
 export let battleSimulation:BattleSimulationFacade = new BattleSimulationFacade(new BattleSimulation())
-battleSimulation.SetBattleInfo(15,1,2);
+battleSimulation.SetMaxRound(15);
+battleSimulation.SetBattleInfoByConfig(eCampType.Initiative,1);
+battleSimulation.SetBattleInfoByConfig(eCampType.Passivity, 2);
 battleSimulation.StartSimulationBattle(); 
 BattleAnalysis.Ins.OutPutRecord(battleSimulation.mRecordArray);
   

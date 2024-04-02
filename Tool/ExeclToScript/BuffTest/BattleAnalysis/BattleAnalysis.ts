@@ -7,6 +7,7 @@ import { RecordBuffTriggerType } from "./AnalysisType/RecordBuffTriggerType";
 import { RecordEndBattleType } from "./AnalysisType/RecordEndBattleType";
 import { RecordInitAttrsType } from "./AnalysisType/RecordInitAttrsType";
 import { RecordRoundChangeType } from "./AnalysisType/RecordRoundChangeType";
+import { RecordSuckBloodType } from "./AnalysisType/RecordSuckBloodType";
 import { RecordTypeBase } from "./AnalysisType/RecordTypeBase";
 
 //收到战斗日志记录后，本类用于对战斗日志就行解析
@@ -23,14 +24,15 @@ export class BattleAnalysis{
         this.mRecordAnalysisMap.set(eRecordType.InitAttrs,new RecordInitAttrsType()); 
         this.mRecordAnalysisMap.set(eRecordType.AttackMoveTo,new RecordAttackMoveToType()); 
         this.mRecordAnalysisMap.set(eRecordType.RoundChange,new RecordRoundChangeType()); 
-    }
+        this.mRecordAnalysisMap.set(eRecordType.SuckBlood,new RecordSuckBloodType()); 
+    } 
     
     public static get Ins():BattleAnalysis{
         if(BattleAnalysis.mIns == undefined)    
             BattleAnalysis.mIns = new BattleAnalysis();
         return BattleAnalysis.mIns; 
     }
-
+ 
     public OutPutRecord(recordArr:Array<RecordBase>){
         for(let cell of recordArr){
             this.mRecordAnalysisMap.get(cell.RecordType)?.ToString(cell);

@@ -14,6 +14,7 @@ export enum eRecordType{
     BuffTrigger,//触发一个Buff 
     AttrUpdate,//属性变动时，更新单项属性
     EndBattle,//战斗记录，战斗结束
+    SuckBlood,//吸血日志记录
 };
 
 export interface RecordBase{ RecordType:eRecordType; }//记录类型
@@ -80,3 +81,11 @@ export interface RecordAttrUpdate extends RecordBase{
 export interface RecordRoundChange extends RecordBase{
     Round:number;//玩家当前的回合数
 }     
+
+//玩家吸血时触发
+export interface RecordSuckBlood extends RecordBase{
+    AttackCamp:eCampType;//攻击者玩家阵营
+    AttackName:string;//攻击者名称
+    Attrs:{[key:number]:number};//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
+    ResidueHP:number;//剩余生命值
+} 
