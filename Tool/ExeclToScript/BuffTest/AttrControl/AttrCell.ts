@@ -85,6 +85,16 @@ export class AttrCell{
         this.mAttrsCalcObj[eAttrType.SumDefense] = this.DefenseCalcHandle;//总防御力
         this.mAttrsCalcObj[eAttrType.SumHPLimit] = this.MaxHPCalcHandle  ;//最大生命值
         this.mAttrsCalcObj[eAttrType.SumSpeed  ] = this.SpeedCalcHandle;//总速度  
+        this.mAttrsCalcObj[eAttrType.SumMiss  ] = this.MissCalcHandle;//总闪避  
+        this.mAttrsCalcObj[eAttrType.SumResistanceMiss  ] = this.ResistanceMissCalcHandle;//总抗闪避  
+        this.mAttrsCalcObj[eAttrType.SumAttackContinue  ] = this.AttackContinueCalcHandle;//总连击  
+        this.mAttrsCalcObj[eAttrType.SumResistanceAttackContinue  ] = this.ResistanceAttackContinueCalcHandle;//总抗连击
+        this.mAttrsCalcObj[eAttrType.SumCircle  ] = this.CirclePercentHandle;//总暴击  
+        this.mAttrsCalcObj[eAttrType.SumResistancCircle  ] = this.ResistancCirclePercentHandle;//总抗暴击
+        this.mAttrsCalcObj[eAttrType.SumAttackBack  ] = this.AttackBackCalcHandle;//总暴击  
+        this.mAttrsCalcObj[eAttrType.SumResistanceAttackBack  ] = this.ResistancAttackBackCalcHandle;//总抗暴击
+        this.mAttrsCalcObj[eAttrType.SumCircleDamage  ] = this.CircleDamageHandle;//爆伤加成
+        this.mAttrsCalcObj[eAttrType.SumResistanceCircleDamage  ] = this.ResistancCircleDamageHandle;//抗爆伤加成
     }
 
     private AttackCalcHandle(){
@@ -106,4 +116,59 @@ export class AttrCell{
         //真实速度的计算方法为  (基础速度 *(1 + 基础速度额外加成)) * （1 + (最终速度加成 ) ）
         this.mAttrArray[eAttrType.SumSpeed] = (this.GetAttr(eAttrType.Speed) *( 1 + this.GetAttr(eAttrType.SpeedPercent,true))) * ( 1 + this.GetAttr(eAttrType.SpeedFinalPercent,true));
     } 
-};  
+
+    private MissCalcHandle(){ 
+        //真实速度的计算方法为  (基础速度 *(1 + 基础速度额外加成)) * （1 + (最终速度加成 ) ）
+        this.mAttrArray[eAttrType.SumMiss] = (this.GetAttr(eAttrType.Miss) *( 1 + this.GetAttr(eAttrType.MissPercent,true))) * ( 1 + this.GetAttr(eAttrType.MissFinalPercent,true));
+    } 
+
+    private ResistanceMissCalcHandle(){ 
+        //真实速度的计算方法为  (基础速度 *(1 + 基础速度额外加成)) * （1 + (最终速度加成 ) ）
+        this.mAttrArray[eAttrType.SumSpeed] = (this.GetAttr(eAttrType.Speed) *( 1 + this.GetAttr(eAttrType.SpeedPercent,true))) * ( 1 + this.GetAttr(eAttrType.SpeedFinalPercent,true));
+    } 
+
+    /********
+     * 连击 抗连击 区域
+    ********/
+    private AttackContinueCalcHandle(){ 
+        this.mAttrArray[eAttrType.SumAttackContinue] = (this.GetAttr(eAttrType.AttackContinue) *( 1 + this.GetAttr(eAttrType.AttackContinuePercent,true))) * ( 1 + this.GetAttr(eAttrType.AttackContinueFinalPercent,true));
+    } 
+
+    private ResistanceAttackContinueCalcHandle(){ 
+        this.mAttrArray[eAttrType.SumResistanceAttackContinue] = (this.GetAttr(eAttrType.ResistanceAttackContinue) *( 1 + this.GetAttr(eAttrType.ResistanceAttackContinuePercent,true))) * ( 1 + this.GetAttr(eAttrType.ResistanceAttackContinueFinalPercent,true));
+    } 
+
+
+    /********
+     * 暴击 抗暴击 区域
+    ********/
+    private CirclePercentHandle(){ 
+        this.mAttrArray[eAttrType.SumCircle] = (this.GetAttr(eAttrType.Circle) *( 1 + this.GetAttr(eAttrType.CirclePercent,true))) * ( 1 + this.GetAttr(eAttrType.CircleFinalPercent,true));
+    } 
+
+    private ResistancCirclePercentHandle(){ 
+        this.mAttrArray[eAttrType.SumResistancCircle] = (this.GetAttr(eAttrType.ResistanceCircle) *( 1 + this.GetAttr(eAttrType.ResistanceCircleDamagePercent,true))) * ( 1 + this.GetAttr(eAttrType.ResistanceCircleDamageFinalPercent,true));
+    } 
+
+    /*******
+     * 反击 抗反击 区域
+    ********/
+    private AttackBackCalcHandle(){ 
+        this.mAttrArray[eAttrType.SumAttackBack] = (this.GetAttr(eAttrType.AttackBack) *( 1 + this.GetAttr(eAttrType.AttackBackPercent,true))) * ( 1 + this.GetAttr(eAttrType.AttackBackFinalPercent,true));
+    } 
+
+    private ResistancAttackBackCalcHandle(){ 
+        this.mAttrArray[eAttrType.SumResistanceAttackBack] = (this.GetAttr(eAttrType.ResistanceAttackBack) *( 1 + this.GetAttr(eAttrType.ResistanceAttackBackPercent,true))) * ( 1 + this.GetAttr(eAttrType.ResistanceAttackBackFinalPercent,true));
+    } 
+ 
+    /*******
+     * 暴伤 抗爆伤 区域
+    ********/
+    private CircleDamageHandle(){ 
+        this.mAttrArray[eAttrType.SumCircleDamage] = (this.GetAttr(eAttrType.CircleDamage) *( 1 + this.GetAttr(eAttrType.CircleDamagePercent,true))) * ( 1 + this.GetAttr(eAttrType.CircleDamageFinalPercent,true));
+    } 
+
+    private ResistancCircleDamageHandle(){ 
+        this.mAttrArray[eAttrType.SumResistanceCircleDamage] = (this.GetAttr(eAttrType.ResistanceCircleDamage) *( 1 + this.GetAttr(eAttrType.ResistanceCircleDamagePercent,true))) * ( 1 + this.GetAttr(eAttrType.ResistanceCircleDamageFinalPercent,true));
+    } 
+};   

@@ -10,6 +10,7 @@ import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/Tex
 import { GetTextMeshComp } from '../../../Util/Util';
 import { PoolProxy } from '../../Proxy/PoolProxy/PoolProxy';
 import { ePoolDefine } from '../../Proxy/PoolProxy/PoolDefine';
+import { eAttrType } from '../../Proxy/FightProxy/Define/AttrDefine';
 export class FightLayer extends BaseLayer { 
     private mDynaicBG:Node;
     private mFightPanelNode:Node;//角色战斗层级节点
@@ -101,9 +102,9 @@ export class FightLayer extends BaseLayer {
         });//设置阵营玩家进行移动，移动完成后将发起通知
     }
     private PlayerAttackHandle(recordBase:RecordAttack){
-        this.mBattleCampMap.get(recordBase.AttackCamp).PlayerAttack(()=>{
+        this.mBattleCampMap.get(recordBase.AttackCamp).PlayerAttack(recordBase.Attrs[eAttrType.SumFinalHP] || 0,this.mBattleCampMap.get(recordBase.BeAttackCamp),()=>{
             _Facade.Send(eNotice.FightEventExecuteFinish);//发送一个处理完毕消息
-        });
+        }); 
     }
 
     private PlayerBuffTriggerHandle(recordBase:RecordAttack){

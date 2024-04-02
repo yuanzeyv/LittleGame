@@ -10,6 +10,7 @@ export class RecordInitAttrsType extends RecordTypeBase{
             let value:number = recordBase.Attrs[key];
             playerAttrStr += `${name}:${value} `;
         }  
-        console.log(`数据初始化 阵营:${recordBase.Camp}  属性:${playerAttrStr} `  ) ;
+        console.log(`玩家:${recordBase.Name} 数据初始化 阵营:${recordBase.Camp}  属性:${playerAttrStr} `  ) ;
     }    
 }
+ 

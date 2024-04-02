@@ -9,6 +9,7 @@ import { eAttrType } from "./Define/AttrDefine";
 import { eCampType } from "./Define/CampDefine";
 import { RecordBase, eRecordType, RecordInitData, RecordBuffInsert, RecordRoundChange, RecordAttackMoveTo, RecordAttack, RecordBuffTrigger, RecordAttrUpdate } from "./Define/RecordDefine";
 import { BuffIconNodePool } from "./NodePool/BuffIconNodePool/BuffIconNodePool";
+import { FightNodeLabel } from "./NodePool/BuffIconNodePool/FightNodeLabel";
 export class FightProxy extends BaseProxy{
     static get ProxyName():string { return "FightProxy" };
     private mRecordQueue:Array<RecordBase>|undefined;
@@ -77,5 +78,13 @@ export class FightProxy extends BaseProxy{
      
     public InitNodePool():void{ 
         _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.BuffMiniCell,new BuffIconNodePool("LayerSource/FightLayer/Comp/BuffCell/BuffCell"));
+        //战斗Label
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.FightBlueLabel      ,new FightNodeLabel("LayerSource/Basics/Prefab/EffectFont/BlueLabel"));
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.FightGreenLabel     ,new FightNodeLabel("LayerSource/Basics/Prefab/EffectFont/BuffCell"));
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.FightGreenGrassLabel,new FightNodeLabel("LayerSource/Basics/Prefab/EffectFont/GreenGrassLabel"));
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.FightOrangeLabel    ,new FightNodeLabel("LayerSource/Basics/Prefab/EffectFont/OrangeLabel"));
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.FightRedLabel       ,new FightNodeLabel("LayerSource/Basics/Prefab/EffectFont/RedLabel"));
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.FightYellowLabel    ,new FightNodeLabel("LayerSource/Basics/Prefab/EffectFont/YellowLabel"));
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.FightWhiteLabel     ,new FightNodeLabel("LayerSource/Basics/Prefab/EffectFont/WhiteLabel"));
     } 
-}  
+}   

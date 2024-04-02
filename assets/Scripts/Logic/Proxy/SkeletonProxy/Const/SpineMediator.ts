@@ -1,13 +1,15 @@
-import { Node, Prefab, instantiate, sp } from "cc";
+import { Node, Prefab, find, instantiate, sp } from "cc";
 import { _Facade } from "../../../../Global";
 import { BundleProxy } from "../../BundleProxy/BundleProxy";
 export class SpineMediator{
     private mSocketMap:Map<string,sp.SpineSocket> = new Map<string,sp.SpineSocket>();
     private misLoadFinish:boolean = false;
+    private mNode:Node;
     private mSpine:sp.Skeleton;
     private mAnim:string;
     public constructor(node:Node,socketArray:Array<string>){
-        this.mSpine = node.getComponent(sp.Skeleton);
+        this.mNode = node;
+        this.mSpine = find("Skelete",node).getComponent(sp.Skeleton);
         this.InitSocketMap(socketArray); 
     }
     public SetAction(anim:string):void{
@@ -26,9 +28,9 @@ export class SpineMediator{
     }
 
     public GetNode():Node{
-        return this.mSpine.node;
-    }
-    public GetSp():sp.Skeleton{
+        return this.mNode;
+    } 
+    public GetSp():sp.Skeleton{ 
         return this.mSpine;
     }
     private InitSocketMap(socketArray:Array<string>){
@@ -54,8 +56,8 @@ export class SpineMediator{
     }
  
     public ClearSocketNode(){
-        this.GetNode().removeAllChildren();
-        this.GetNode().destroyAllChildren();
-        this.mSocketMap.clear();
+        find("Skelete",this.GetNode()).removeAllChildren();
+        find("Skelete",this.GetNode()).destroyAllChildren();
+        this.mSocketMap.clear(); 
     }
 }; 

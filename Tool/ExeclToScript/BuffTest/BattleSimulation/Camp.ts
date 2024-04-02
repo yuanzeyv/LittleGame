@@ -5,7 +5,7 @@ import { eCampType } from "./Define/BattleDefine";
 import { Player } from "./Player";
 import { BuffControl } from "../Buff/BuffControl";
 import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
-import { eNotifyType } from "../Communicant/Define/Define";
+import { eAttackType, eNotifyType } from "../Communicant/Define/Define";
 import { eTriggerType } from "../Buff/Define/Define";
 import { RecordAttack, RecordAttackMoveTo, RecordEndBattle, eRecordType } from "./Define/RecordDefine";
 //玩家阵营
@@ -78,12 +78,26 @@ export class Camp{
     private InitEventNotify():void{   
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BattleStart ,this,this.BattleStartHandle);  
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BattleOver ,this,this.BattleOverHandle);  
-
+        //普通攻击阶段
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackFront ,this,this.AttackFrontHandle); 
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackFront ,this,this.BeAttackFrontHandle); 
-
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackAfter ,this,this.AttackAfterHandle); 
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackAfter ,this,this.BeAttackAfterHandle);  
+        //连击攻击阶段
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackContinueFront ,this,this.AttackFrontHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackContinueFront ,this,this.BeAttackFrontHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackContinueAfter ,this,this.AttackAfterHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackContinueAfter ,this,this.BeAttackAfterHandle);  
+        //反击攻击阶段
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackBackFront ,this,this.AttackFrontHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackBackFront ,this,this.BeAttackFrontHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackBackAfter ,this,this.AttackAfterHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackBackAfter ,this,this.BeAttackAfterHandle);  
+        //暴击消息通知
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackCircleFront ,this,this.AttackCircleFrontHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackCircleFront ,this,this.BeAttackCircleFrontHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.AttackCircleAfter ,this,this.AttackCircleAfterHandle); 
+        BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.BeAttackCircleAfter ,this,this.BeAttackCircleAfterHandle);  
 
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.RoundStart ,this,this.RoundStartHandle);  
         BattleCommunicantProxy.Ins.RegisterNotify(this.mBattleCommunicantID,eNotifyType.RoundEnd ,this,this.RoundEndHandle);  
@@ -100,48 +114,75 @@ export class Camp{
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackRecord); 
     }
     
-    //玩家进行攻击前的行为
-    private AttackFrontHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
-        if(this.mCampType != attackCamp.mCampType)//发起攻击者的话
-            return;
-        let attackMoveRecord:RecordAttackMoveTo = {RecordType:eRecordType.AttackMoveTo,Camp:this.CampType,PosX:350};
-        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackMoveRecord); //发送攻击前移动
-        this.BuffControl.Trigger(eTriggerType.AttackFront);//向自己的Buff控制器发送一个战斗开始消息 
-    }
-    
-    //玩家进行攻击前的行为
-    private BeAttackFrontHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
-        if(this.mCampType != beAttackCamp.mCampType)//仅处理被攻击前的情况
-            return;
-        this.BuffControl.Trigger(eTriggerType.BeAttackFront);//向自己的Buff控制器发送一个战斗开始消息
-    }
-    
-    //玩家进行攻击后的行为
-    private AttackAfterHandle(attackCamp:Camp,beAttackCamp:Camp,finalHarm:number){
-        if(this.mCampType != attackCamp.mCampType)//发起攻击者的话
-            return;
-        this.BuffControl.Trigger(eTriggerType.AttackAfter);//向自己的Buff控制器发送一个战斗开始消息
-
-        beAttackCamp.SetAttrByType( eAttrType.SumFinalHP , beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) - (finalHarm <= 0 ? 0 : finalHarm));//进行玩家属性的变动
-        let attackRecord:RecordAttack = {AttackCamp: attackCamp.CampType,BeAttackCamp:beAttackCamp.CampType,Attrs:{[eAttrType.SumFinalHP]:finalHarm},ResidueHP:beAttackCamp.GetAttrByType(eAttrType.SumFinalHP),RecordType:eRecordType.Attack};
-        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackRecord); 
-
-        let attackMoveRecord:RecordAttackMoveTo = {RecordType:eRecordType.AttackMoveTo,Camp:this.CampType,PosX:-350};
-        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackMoveRecord); //发送攻击前移动
-    }
-    
-    //玩家进行攻击后的行为
-    private BeAttackAfterHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
-        if(this.mCampType != beAttackCamp.mCampType)//仅处理被攻击前的情况 
-            return;
-        this.BuffControl.Trigger(eTriggerType.BeAttackAfter);//向自己的Buff控制器发送一个战斗开始消息
-    }
-    
     //回合开始时的行为
     private RoundStartHandle(){
     }
     
     //回合开始后的行为
     private RoundEndHandle(){
+    }
+
+    /****************
+    *攻击消息区域
+    *****************/
+    private AttackFrontHandle(attackCamp:Camp,beAttackCamp:Camp,attackType:eAttackType, harm:number,isCircle:boolean,isMiss:boolean){
+        if(this.mCampType != attackCamp.mCampType)//阵营不相等的情况下  
+            return;
+        this.BuffControl.Trigger(eTriggerType.AttackFront,harm);//向自己的Buff控制器发送一个战斗开始消息 
+    }
+    
+    private BeAttackFrontHandle(attackCamp:Camp,beAttackCamp:Camp,attackType:eAttackType,harm:number,isCircle:boolean,isMiss:boolean){
+        if(this.mCampType != attackCamp.mCampType) return;//发起攻击者的话  
+        this.BuffControl.Trigger(eTriggerType.BeAttackFront,harm);//向自己的Buff控制器发送一个战斗开始消息
+    }
+    
+    private AttackAfterHandle(attackCamp:Camp,beAttackCamp:Camp,attackType:eAttackType,finalHarm:number,isCircle:boolean,isMiss:boolean){
+        if(this.mCampType != attackCamp.mCampType) return;//发起攻击者的话  
+        if(!isMiss)
+            beAttackCamp.SetAttrByType( eAttrType.SumFinalHP , beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) - (finalHarm <= 0 ? 0 : finalHarm));
+        let attackRecord:RecordAttack = {
+            AttackCamp: attackCamp.CampType,
+            AttackName:attackCamp.MainPlayer.Name,
+            BeAttackName:beAttackCamp.MainPlayer.Name,
+            IsCircle: isCircle,
+            IsMiss: isMiss,
+            BeAttackCamp: beAttackCamp.CampType,
+            Attrs: { [eAttrType.SumFinalHP]: isMiss?0:finalHarm },
+            ResidueHP: beAttackCamp.GetAttrByType(eAttrType.SumFinalHP),
+            RecordType: eRecordType.Attack,//
+            AttackType:attackType,//普通攻击
+        }; 
+        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackRecord);  
+        this.BuffControl.Trigger(eTriggerType.AttackAfter);//向自己的Buff控制器发送一个攻击后的消息通知
+    }
+    
+    private BeAttackAfterHandle(attackCamp:Camp,beAttackCamp:Camp,attackType:eAttackType,harm:number,isCircle:boolean,isMiss:boolean){
+        if(this.mCampType != beAttackCamp.mCampType)  return;//仅处理被攻击前的情况 
+        this.BuffControl.Trigger(eTriggerType.BeAttackAfter);//向自己的Buff控制器发送一个战斗开始消息
+    }
+    /****************
+    *暴击消息区域
+    *****************/
+    private AttackCircleFrontHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
+        if(this.mCampType != attackCamp.mCampType)//发起攻击者的话
+            return;
+    }
+    
+    //玩家进行攻击前的行为
+    private BeAttackCircleFrontHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
+        if(this.mCampType != beAttackCamp.mCampType)//仅处理被攻击前的情况
+            return;
+    }
+    
+    //玩家进行攻击后的行为
+    private AttackCircleAfterHandle(attackCamp:Camp,beAttackCamp:Camp,finalHarm:number){
+        if(this.mCampType != attackCamp.mCampType)//发起攻击者的话
+            return;
+    }
+    
+    //玩家进行攻击后的行为
+    private BeAttackCircleAfterHandle(attackCamp:Camp,beAttackCamp:Camp,harm:number){
+        if(this.mCampType != beAttackCamp.mCampType)//仅处理被攻击前的情况 
+            return;
     }
 };

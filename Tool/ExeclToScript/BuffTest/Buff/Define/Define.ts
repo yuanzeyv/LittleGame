@@ -41,11 +41,32 @@ export enum eTriggerType{
     RoundStart         = 1 ,//回合开始
     RoundEnd           = 2 ,//回合结束
     BuffInsert         = 3 ,//Buff被插入时
+    //攻击消息区域
     AttackFront        = 4 ,//进行攻击前    
     AttackAfter        = 5 ,//进行攻击后    
     BeAttackFront        = 4 ,//被攻击前 
     BeAttackAfter        = 5 ,//被攻击后
+
     HPChangeFront      = 6,//血量变动前
     HPChangeAfter      = 7,//血量变动后
+    
+    //暴击消息区域
+    CircleFront        = 8 ,//暴击前
+    CircleAfter        = 9 ,//暴击后
+    BeCircleFront      = 10,//被暴击前
+    BeCircleAfter      = 11,//被暴击后
+    
+    //连击触发区域
+    AttackContinueFront        = 8 ,//连击前
+    AttackContinueAfter        = 9 ,//连击后
+    BeAttackContinueFront      = 10,//被连击前
+    BeAttackContinueAfter      = 11,//被连击后
+
+    //反击触发区域
+    AttackBackFront        = 8 ,//反击前
+    AttackBackAfter        = 9 ,//反击后
+    BeAttackBackFront      = 10,//被反击前
+    BeCAttackBackfter      = 11,//被反击后
+
     FINAL                  ,//占位
 };

@@ -4,6 +4,7 @@
 import { eCampType } from "./BattleDefine";
 import { eTriggerType } from "../../Buff/Define/Define";
 import { eAttrType } from "../../AttrControl/Define/AttrDefine";
+import { eAttackType } from "../../Communicant/Define/Define";
 export enum eRecordType{
     InitAttrs,//初始化数据用 
     AttackMoveTo,//攻击前移动用
@@ -22,6 +23,7 @@ export interface RecordBase{ RecordType:eRecordType; }//记录类型
 export interface RecordInitData extends RecordBase{
     Camp:eCampType;//玩家阵营类型
     Attrs:{[key:number]:number};//需要获取到玩家的基础属性
+    Name:string;//阵营名称
 };
  
 //游戏内Buff被插入时的日志记录
@@ -50,7 +52,12 @@ export interface RecordAttackMoveTo extends RecordBase{
 //玩家攻击时，也会进行判定，但是因为攻击仅会影响到玩家的生命值
 export interface RecordAttack extends RecordBase{
     AttackCamp:eCampType;//攻击者玩家阵营
+    AttackName:string;//攻击者名称
+    BeAttackName:string;//攻击者名称
     BeAttackCamp:eCampType;//被攻击者玩家阵营
+    AttackType:eAttackType;//当前的攻击类型 
+    IsCircle:boolean;//是否暴击了
+    IsMiss:boolean;//是否闪避了
     Attrs:{[key:number]:number};//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
     ResidueHP:number;//剩余生命值
 } 

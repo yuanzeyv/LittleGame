@@ -1,4 +1,4 @@
-import { Node, sp } from "cc";
+import { Node, find, sp } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade, _G } from "../../../Global";
 import { ePoolDefine } from "../PoolProxy/PoolDefine";
@@ -18,8 +18,8 @@ export class SkeletonProxy extends BaseProxy{
     public CreateSpineEffect(parent:Node,path:string,socketArray:Array<string> = new Array<string>()):SpineMediator{
         let spineNode:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.SkeletonNode);
         let spineMediator:SpineMediator = new SpineMediator(spineNode,socketArray);
-        _Facade.FindProxy(ResouceProxy).Load(spineNode.getComponent(sp.Skeleton),"skeletonData","resources",`GameResource/Spine/${path}`,sp.SkeletonData,()=>{
-            spineMediator.LoadFinishHandle();
+        _Facade.FindProxy(ResouceProxy).Load(find("Skelete",spineNode).getComponent(sp.Skeleton),"skeletonData","resources",`GameResource/Spine/${path}`,sp.SkeletonData,()=>{
+            spineMediator.LoadFinishHandle(); 
         }); 
         parent.addChild(spineNode);
         return spineMediator;

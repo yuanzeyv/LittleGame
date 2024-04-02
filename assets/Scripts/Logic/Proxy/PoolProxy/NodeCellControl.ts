@@ -37,6 +37,7 @@ export class NodeCellControl{
 
     public Put(node:Node):void{//放回一个节点到对象池中
         this.UnUse(node);
+        node.removeFromParent();
         this.mNodePool.put(node);
         this.mUsingCount--;
     }

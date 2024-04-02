@@ -85,5 +85,6 @@ export class WindowProxy extends BaseProxy{
     //实例化一个窗口预制体
     public InitNodePool():void{
         _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.WindowInterface,new InterfaceWindowNode("LayerSource/Basics/Component/WindowInterface"));
+        _Facade.FindProxy(PoolProxy).CreateNodePool(ePoolDefine.WindowInterface,new InterfaceWindowNode("LayerSource/Basics/Component/WindowInterface"));
     } 
 }   
