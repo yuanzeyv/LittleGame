@@ -59,8 +59,7 @@ export interface RecordAttack extends RecordBase{
     AttackType:eAttackType;//当前的攻击类型 
     IsCircle:boolean;//是否暴击了
     IsMiss:boolean;//是否闪避了
-    Attrs:{[key:number]:number};//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
-    ResidueHP:number;//剩余生命值
+    Harm:number;//攻击造成了多少伤害 
 } 
 
 //玩家攻击时，也会进行判定，但是因为攻击仅会影响到玩家的生命值
@@ -73,8 +72,7 @@ export interface RecordEndBattle extends RecordBase{
 export interface RecordAttrUpdate extends RecordBase{
     Camp:eCampType;//玩家阵营类型
     AttrKey:eAttrType;//玩家属性变动
-    AttrValue:number;//玩家属性变动
-    AttrChangeValue:number;//变动值
+    AttrValue:number;//玩家属性变动 
 }     
  
 //记录玩家回合数发生变动

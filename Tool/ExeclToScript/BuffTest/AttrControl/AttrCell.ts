@@ -63,7 +63,7 @@ export class AttrCell{
     private ReCalcAttrByType(attrType:eAttrType):void{
         let triggerArr:eAttrType[] | undefined = AttrMappingMap.get(attrType);
         if(!triggerArr)
-            return; 
+            return;  
         for(let cell of triggerArr){
             if(this.mAttrsCalcObj[cell] == undefined)
                 return;
@@ -72,8 +72,8 @@ export class AttrCell{
             let changeAfter:number = this.GetAttr(cell);
             //存在变动时
             if(changeFront != changeAfter){
-                let recordAttrUpdate:RecordAttrUpdate = {Camp: this.mCampType,AttrKey:cell,AttrValue:changeAfter,RecordType: eRecordType.AttrUpdate,AttrChangeValue:changeAfter - changeFront};
-                BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,recordAttrUpdate);
+                let recordAttrUpdate:RecordAttrUpdate = {Camp: this.mCampType,AttrKey:cell,AttrValue:changeAfter,RecordType: eRecordType.AttrUpdate};
+                BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,recordAttrUpdate); 
             }
         }
     } 

@@ -20,7 +20,7 @@ export class NodeCellControl{
     protected UnUse(node:Node):void{//放回时也会做一个初始化
         //....do something
     } 
-
+ 
     public Get(...args):Node{//获取到对象池中的一个对象
         let node:Node|undefined = this.mNodePool.get();
         if(node == undefined){
@@ -29,15 +29,14 @@ export class NodeCellControl{
             this.mSumCount++;
         }
         this.mUsingCount++; 
-        this.Use(node,args);
+        this.Use(node,...args);
         return node;
     }
     protected InitNode(node:Node):void{
     }
 
     public Put(node:Node):void{//放回一个节点到对象池中
-        this.UnUse(node);
-        node.removeFromParent();
+        this.UnUse(node); 
         this.mNodePool.put(node);
         this.mUsingCount--;
     }

@@ -7,7 +7,7 @@ import { BuffControl } from "../Buff/BuffControl";
 import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
 import { eAttackType, eNotifyType } from "../Communicant/Define/Define";
 import { eTriggerType } from "../Buff/Define/Define";
-import { RecordAttack, RecordAttackMoveTo, RecordEndBattle, RecordSuckBlood, eRecordType } from "./Define/RecordDefine";
+import { RecordAttack, RecordAttrUpdate, RecordEndBattle, RecordSuckBlood, eRecordType } from "./Define/RecordDefine";
 //玩家阵营
 export class Camp{ 
     private mBattleCommunicantID:number;//战斗通知模块
@@ -54,6 +54,14 @@ export class Camp{
     public SetAttrByType(type:eAttrType,value:number){
         return this.mAttrCell.SetAttr(type,value);
     } 
+
+    public SetHPAttr(value:number){
+        this.mAttrCell.SetAttr(eAttrType.SumFinalHP,value);
+        let recordAttrUpdate:RecordAttrUpdate = {Camp: this.mCampType,AttrKey:eAttrType.SumFinalHP,AttrValue:value,RecordType: eRecordType.AttrUpdate};
+        BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,recordAttrUpdate);
+    } 
+
+    
     //获取到敌对阵营
     public get EnemyCamp():Camp{ 
         return this.mBattleSimulation.GetPlayerCampInfo(this.mCampType == eCampType.Initiative?eCampType.Passivity:eCampType.Initiative);
@@ -141,17 +149,16 @@ export class Camp{
     
     private AttackAfterHandle(attackCamp:Camp,beAttackCamp:Camp,attackType:eAttackType,finalHarm:number,isCircle:boolean,isMiss:boolean){
         if(this.mCampType != attackCamp.mCampType) return;//发起攻击者的话  
-        if(!isMiss)
-            beAttackCamp.SetAttrByType( eAttrType.SumFinalHP , beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) - (finalHarm <= 0 ? 0 : finalHarm));
+        if(!isMiss && finalHarm > 0)
+            beAttackCamp.SetHPAttr(beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) - finalHarm);
         let attackRecord:RecordAttack = {
             AttackCamp: attackCamp.CampType,
-            AttackName:attackCamp.MainPlayer.Name,
+            AttackName:attackCamp.MainPlayer.Name, 
             BeAttackName:beAttackCamp.MainPlayer.Name,
             IsCircle: isCircle,
             IsMiss: isMiss,
             BeAttackCamp: beAttackCamp.CampType,
-            Attrs: { [eAttrType.SumFinalHP]: isMiss?0:finalHarm },
-            ResidueHP: beAttackCamp.GetAttrByType(eAttrType.SumFinalHP),
+            Harm:isMiss?0:finalHarm, 
             RecordType: eRecordType.Attack,//
             AttackType:attackType,//普通攻击
         }; 
@@ -204,9 +211,9 @@ export class Camp{
             return; 
         let maxReply:number = beAttackCamp.GetAttrByType(eAttrType.SumHPLimit) - beAttackCamp.GetAttrByType(eAttrType.SumFinalHP);
         suckBlood = Math.min(suckBlood,maxReply);
-        beAttackCamp.SetAttrByType( eAttrType.SumFinalHP ,beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) + suckBlood);
+        beAttackCamp.SetHPAttr(beAttackCamp.GetAttrByType(eAttrType.SumFinalHP) + suckBlood);
         let suckBloodRecord:RecordSuckBlood = {
-            RecordType: eRecordType.SuckBlood,
+            RecordType: eRecordType.SuckBlood, 
             AttackCamp: attackCamp.CampType,
             AttackName: attackCamp.MainPlayer.Name,
             Attrs: { [eAttrType.SumFinalHP]: suckBlood },

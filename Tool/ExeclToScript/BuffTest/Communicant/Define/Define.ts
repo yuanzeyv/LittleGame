@@ -1,6 +1,5 @@
 export enum  eAttackType{
-    Normal,//正常
-    Circle,//暴击
+    Normal,//正常 
     Miss,//闪避
     ContinueAttack,//连击
     AttackBack,//反击

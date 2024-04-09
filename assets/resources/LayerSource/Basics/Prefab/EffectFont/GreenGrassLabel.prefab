@@ -202,7 +202,7 @@
     "_padding": {
       "__id__": 6
     },
-    "_dilate": 0.28,
+    "_dilate": 0.3,
     "_stroke": 0.662,
     "_strokeBlur": 0.179,
     "_aspect": 1,
