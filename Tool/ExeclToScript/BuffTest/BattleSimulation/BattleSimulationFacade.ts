@@ -170,6 +170,7 @@ export class BattleSimulationFacade{
             ret = this.AttackPlayer(attackCamp ,beAttackCamp,eAttackType.ContinueAttack); 
         else 
             ret = this.GetCampHP(beAttackCamp) >= 0 ; 
+        
         if(attackType == eAttackType.Normal){
             let attackMoveRecord:RecordAttackMoveTo = {RecordType:eRecordType.AttackMoveTo,Camp:attackCamp.CampType,PosX:-350};
             BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackMoveRecord); //发送攻击前移动

@@ -156,11 +156,16 @@ export class Camp{
             AttackType:attackType,//普通攻击
         }; 
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,attackRecord);  
+        if(!isMiss)//玩家进行了闪避时
+            this.BuffControl.Trigger(eTriggerType.HitTarget);//向自己的Buff控制器发送一个战斗开始消息
         this.BuffControl.Trigger(eTriggerType.AttackAfter);//向自己的Buff控制器发送一个攻击后的消息通知
     }
     
     private BeAttackAfterHandle(attackCamp:Camp,beAttackCamp:Camp,attackType:eAttackType,harm:number,isCircle:boolean,isMiss:boolean){
-        if(this.mCampType != beAttackCamp.mCampType)  return;//仅处理被攻击前的情况 
+        if(this.mCampType != beAttackCamp.mCampType)  
+            return;
+        if(isMiss == true)//玩家进行了闪避时
+            this.BuffControl.Trigger(eTriggerType.MissAttack);//向自己的Buff控制器发送一个战斗开始消息
         this.BuffControl.Trigger(eTriggerType.BeAttackAfter);//向自己的Buff控制器发送一个战斗开始消息
     }
     /****************
