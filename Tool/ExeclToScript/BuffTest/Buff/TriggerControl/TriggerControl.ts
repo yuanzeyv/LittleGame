@@ -11,7 +11,7 @@ export class TriggerControl{
     }
     //根据当前Buff的触发效果，初始化Buff特效数据信息配置
     private InitEffectCellArray():void{
-        this.mBuffEffectCell = (new BuffEffectBase(this.mBuffBase,this.mBuffBase.Config.Trigger));
+        this.mBuffEffectCell = new BuffEffectBase(this.mBuffBase,this.mBuffBase.Config.Trigger);
     }
     
     public TriggerEvent(triggerType:eTriggerType,param?:any):void{

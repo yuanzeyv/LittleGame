@@ -20,63 +20,46 @@ export class BuffControl{
     private mBuffGenID:number = 0;//用以对新添加的Buff赋ID
     private mCampType:eCampType;//玩家阵营类型
     private mBattleCommunicantID:number;//通知ID
+
     //Buff会监听事件类型，以此来触发Buff并进行执行
     private mTriggerBuffmap:Array<Set<BuffBase>> = new Array<Set<BuffBase>>();
     //根据挂载的BuffID找到唯一Buff
     private mBuffMap:Map<number,BuffBase> = new Map<number,BuffBase>();//通过Buff唯一ID，快速索引到指定的角色Buff
     //根据Buff所属类型，找到一组Buff
     private mTypeBuffMap:Map<TBuffType,Map<TBuffID,Array<BuffBase>>> = new Map<TBuffType,Map<TBuffID,Array<BuffBase>>>();
-
+    
     constructor(campType:eCampType,battleCommunicantID:number){
         this.mBattleCommunicantID = battleCommunicantID;
         this.mCampType = campType; 
         this.InitTriggerMap();
     } 
-    
-    //获取到关联的阵营信息
-    public get CampInfo():Camp{
-        return GetBattleSimulation().GetCamp(this.mCampType);
-    }
-    //获取到玩家的属性信息
-    public get AttrObj():AttrCell{
-        return GetBattleSimulation().GetCamp(this.mCampType).AttrObj;
-    } 
 
     private InitTriggerMap():void{
         for(let index = 0 ; index < eTriggerType.FINAL ; index++) 
             this.mTriggerBuffmap[index] = new Set<BuffBase>(); 
+    } 
+
+    //获取到关联的阵营信息
+    public get CampInfo():Camp{
+        return GetBattleSimulation().GetCamp(this.mCampType);
     }
+    
+    //获取到玩家的阵营信息
+    public GetCampType():eCampType{
+        return this.mCampType; 
+    }
+
+    //获取到玩家的属性信息
+    public get AttrObj():AttrCell{
+        return GetBattleSimulation().GetCamp(this.mCampType).AttrObj;
+    } 
 
     //获取到通知对象
     public get BattleCommunicantID():number{
         return this.mBattleCommunicantID;
     }
 
-    //获取到玩家的阵营信息
-    public GetCampType():eCampType{
-        return this.mCampType; 
-    }
-
-    public Trigger(triggerType:eTriggerType,param?:any):void{
-        if(this.mTriggerBuffmap[triggerType] == undefined)
-            return;
-        for(let buffBase of this.mTriggerBuffmap[triggerType])
-            buffBase.TriggerEvent(triggerType,param);
-    }
-
-    private GetBuffCountByKey(buffKey:number):number{
-        let buffConfig:IBuffStruct|undefined = BuffConfig.GetData(buffKey);
-        if(buffConfig == undefined)//没有找到对应的Buff时
-            return 0;
-        let typeMap:Map<TBuffID,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffConfig.BuffType);
-        if(typeMap == undefined)
-            return 0;
-        let buffArray:Array<BuffBase>|undefined = typeMap.get(buffConfig.BuffID);
-        if(buffArray == undefined)
-            return 0;
-        return buffArray.length;
-    }
-    
+    //获取到对应Bkey，所指向的Buff列表
     private GetBuffArrayByKey(buffKey:number):Array<BuffBase>|undefined{
         let buffConfig:IBuffStruct|undefined = BuffConfig.GetData(buffKey);//获取到当前是否存在对应BuffID的配置表
         if(buffConfig == undefined)//没有找到对应的Buff时
@@ -90,8 +73,17 @@ export class BuffControl{
         return buffArray;
     }
 
+    //获取到指定Buff存在的数量
+    private GetBuffCountByKey(buffKey:number):number{
+        let buffArray:Array<BuffBase>|undefined = this.GetBuffArrayByKey(buffKey);
+        if(buffArray == undefined)
+            return 0;
+        return buffArray.length;//获取到Buff的数量
+    }
+    
+    //根据BuffKey添加一个Buff
     public AddBuff(buffKey:number):boolean{ 
-        let buffConfig:IBuffStruct|undefined = BuffConfig.GetData(buffKey);//获取到当前是否存在对应BuffID的配置表
+        let buffConfig:IBuffStruct|undefined = BuffConfig.GetData(buffKey);
         if(buffConfig == undefined)
             return false;
         if( buffConfig.BuffType == eBuffType.Territory )//领域类型的Buff的话
@@ -104,48 +96,69 @@ export class BuffControl{
             return this.InsertStackBuff(buffKey);
         return false;
     }
-    //插入一个Buff到对应的Type
-    private InsertBaseBuff(buffBase:BuffBase):void{
-        let buffConfig:IBuffStruct = buffBase.Config;//获取到当前是否存在对应BuffID的配置表
-        let typeMap:Map<number,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffConfig.BuffType);
+    
+    //插入一个领域Buff
+    public InsertTerritoryBuff(buffKey:number):boolean{
+        let ownerCount:number = this.GetBuffCountByKey(buffKey);//当前是否已经添加过此Buff
+        if(ownerCount != 0)//是否已经添加过此Buff
+            return false;
+        let buffBase:BuffBase = new TerritoryBuff(this,buffKey);//插入一个领域Buff
+        this.InsertBaseBuff(buffBase);
+        return true;
+    }
+    
+    //插入可叠加Buff
+    public InsertStackBuff(buffKey:number):boolean{
+        let buffConfig:IBuffStruct = BuffConfig.GetData(buffKey)!;//获取到当前是否存在对应BuffID的配置表
+        if( buffConfig == undefined )
+            return false;
+        let maxStack:number = buffConfig.MaxStack;
+        let nowStack:number  = this.GetBuffCountByKey(buffKey);//判断当前是否没有次数
+        if(nowStack >= maxStack)
+            return false;
+        this.InsertBaseBuff(new StackBuff(this,buffKey)); 
+        return true;
+    }  
+
+    //插入一个Buff到类型数组中
+    private InsertBuffToTypeMap(buffBase:BuffBase):void{ 
+        let typeMap:Map<number,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffBase.Config.BuffType);//寻找对应类型数组
         if(typeMap == undefined){
             typeMap = new Map<number,Array<BuffBase>>();
-            this.mTypeBuffMap.set(buffConfig.BuffType,typeMap)
+            this.mTypeBuffMap.set(buffBase.Config.BuffType,typeMap)
         }  
-        let buffArray:Array<BuffBase>|undefined = typeMap.get(buffConfig.BuffID);
+        let buffArray:Array<BuffBase>|undefined = typeMap.get(buffBase.Config.BuffID);
         if(buffArray == undefined){
             buffArray = new Array<BuffBase>();
-            typeMap.set(buffConfig.BuffID,buffArray);
+            typeMap.set(buffBase.Config.BuffID,buffArray);
         }
-        buffBase.ID = this.mBuffGenID++
         buffArray.push(buffBase);
+    }
 
-        this.mBuffMap.set(buffBase.ID,buffBase);
+    //插入一个Buff到对应的Type
+    private InsertBaseBuff(buffBase:BuffBase):void{ 
+        buffBase.ID = this.mBuffGenID++;
 
+        this.InsertBuffToTypeMap(buffBase);
+        this.mBuffMap.set(buffBase.ID,buffBase);//快速索引
         //监视触发条件与结束条件
         for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())//设置Buff触发条件
             this.mTriggerBuffmap[type].add(buffBase); 
         for(let type of buffBase.BuffTriggerControl.GetEndTypeSet())//设置结束条件
             this.mTriggerBuffmap[type].add(buffBase);
-        let record:RecordBuffInsert = {RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key,Life:buffBase.LifeCount};
+        //插入一个Buff
+        let record:RecordBuffInsert = {RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffBase.Config.Key,Life:buffBase.LifeCount};
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,record);
+        //发送BufF插入消息
         buffBase.TriggerEvent(eTriggerType.BuffInsert);//发送一个Buff插入事件
     }
-
-    //删除当前的Buff控制器
-    public Destory():void{
-    }
-
+    
     //删除一个Buff到对应的Type
-    private DeleteBaseBuff(buffBase:BuffBase):void{
-        let buffConfig:IBuffStruct = buffBase.Config;//获取到当前是否存在对应BuffID的配置表
-        /*
-        *删除类型索引
-        */
-        let typeMap:Map<number,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffConfig.BuffType);
+    public DeleteBuff(buffBase:BuffBase):void{
+        let typeMap:Map<number,Array<BuffBase>> | undefined = this.mTypeBuffMap.get(buffBase.Config.BuffType);
         if(typeMap == undefined)
             return;
-        let buffArray:Array<BuffBase>|undefined = typeMap.get(buffConfig.BuffID);
+        let buffArray:Array<BuffBase>|undefined = typeMap.get(buffBase.Config.BuffID);
         if(buffArray == undefined)
             return;
         let findIndex:number = buffArray.findIndex((value: BuffBase, index: number, obj: BuffBase[])=> value.ID == buffBase.ID);
@@ -153,11 +166,11 @@ export class BuffControl{
             return;
         buffArray.splice(findIndex);
         if(buffArray.length == 0) {
-            typeMap.delete(buffConfig.BuffID);
+            typeMap.delete(buffBase.Config.BuffID);
             buffArray = undefined;//赋予空，虽然不会再被用到
         }
         if(typeMap.size == 0){
-            this.mTypeBuffMap.delete(buffConfig.BuffType);
+            this.mTypeBuffMap.delete(buffBase.Config.BuffType);
             buffArray == undefined;
         }
         //删除唯一ID索引
@@ -166,15 +179,20 @@ export class BuffControl{
         for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
             this.mTriggerBuffmap[type].delete(buffBase);
     }
-    //插入一个领域Buff
-    public InsertTerritoryBuff(buffKey:number):boolean{
-        let ownerCount:number = this.GetBuffCountByKey(buffKey);//判断当前是否没有次数
-        if(ownerCount != 0)
-            return false;
-        let buffBase:BuffBase = new TerritoryBuff(this,buffKey);
-        this.InsertBaseBuff(buffBase);
-        return true;
+
+    
+    //Buff被触发了
+    public Trigger(triggerType:eTriggerType,param?:any):void{
+        if(this.mTriggerBuffmap[triggerType] == undefined)
+            return;
+        for(let buffBase of this.mTriggerBuffmap[triggerType])
+            buffBase.TriggerEvent(triggerType,param);
     }
+    
+    //删除当前的Buff控制器
+    public Destory():void{
+    }
+
     
     //插入一个固定等级的Buff
     public InsertNormalBuff(buffKey:number):boolean{
@@ -188,7 +206,7 @@ export class BuffControl{
         typeArray = undefined;//之后请不要再使用，因为 typeArray 在下面有可能被释放
         let buffConfig:IBuffStruct = BuffConfig.GetData(buffKey)!;//获取到当前是否存在对应BuffID的配置表
         if( buffBase.Config.Level < buffConfig.Level ){  
-            this.DeleteBaseBuff(buffBase);//删除老的Buff
+            this.DeleteBuff(buffBase);//删除老的Buff
             buffBase = new NormalBuff(this,buffKey);
             this.InsertBaseBuff(buffBase); 
         }
@@ -211,18 +229,5 @@ export class BuffControl{
         (buffBase as LevelBuff).SetLevel(buffBase.Config.Level + 1);
         buffBase.ResetLifeCount();
         return true;
-    }
-
-    //插入可叠加Buff
-    public InsertStackBuff(buffKey:number):boolean{
-        let buffConfig:IBuffStruct = BuffConfig.GetData(buffKey)!;//获取到当前是否存在对应BuffID的配置表
-        if( buffConfig == undefined )
-            return false;
-        let maxStack:number = buffConfig.MaxStack;
-        let nowStack:number  = this.GetBuffCountByKey(buffKey);//判断当前是否没有次数
-        if(nowStack < maxStack)
-            this.InsertBaseBuff(new StackBuff(this,buffKey));
-        console.log(`当前的数据信息 ${nowStack}`);
-        return true;
-    }  
+    } 
 }

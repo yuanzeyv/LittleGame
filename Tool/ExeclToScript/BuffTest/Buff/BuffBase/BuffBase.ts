@@ -6,9 +6,11 @@ import { TriggerControl } from "../TriggerControl/TriggerControl";
 export class BuffBase{
     private mID:number;//当前Buff的唯一ID 
     private mBuffControl:BuffControl;//当前的Buff控制器
+
     protected mBuffCfg:IBuffStruct;//当前Buff的配置表
     protected mLifeCount:number;//生命次数 每次触发对应的扣除逻辑后，就会进行-1,当LifeCount为0时，删除本Buff 
     protected mBuffTriggerControl:TriggerControl;//触发控制器
+
     public constructor(buffControl:BuffControl,buffID:number){
         this.mBuffControl = buffControl;
         this.mBuffCfg = BuffConfig.GetData(buffID)!;
@@ -26,7 +28,7 @@ export class BuffBase{
     //当前Buff对应的生命剩余次数
     public get LifeCount():number{ return this.mLifeCount; }
     //获取到当前Buff的控制器
-    public get Control():BuffControl{ return this.mBuffControl;}
+    public get Control():BuffControl{ return this.mBuffControl; }
     //重置当前Buff的生命剩余次数
     public ResetLifeCount():void{
         this.mLifeCount = this.mBuffCfg.Continue;
@@ -35,4 +37,11 @@ export class BuffBase{
     public TriggerEvent(triggerType:eTriggerType,param?:any):void{
         this.mBuffTriggerControl.TriggerEvent(triggerType,param);
     } 
+    //对Buff生命周期进行-1
+    public DecBuffLife():void{
+        this.mLifeCount--;
+        if(this.mLifeCount > 0)
+            return;
+        this.mBuffControl.DeleteBuff(this);//我删除我自己
+    }
 }

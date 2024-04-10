@@ -41,7 +41,6 @@ export interface RecordBuffTrigger extends RecordBase{
     Camp:eCampType;//玩家阵营类型
     BuffID:number;//造成属性变动的BuffID
     BuffKey:number;//Buff的Key
-    TriggerIndex:number;//触发的Buff对应的增益索引 
     Attrs:{[key:number]:number};//需要获取到玩家的基础属性
 };
 //攻击前的移动操作

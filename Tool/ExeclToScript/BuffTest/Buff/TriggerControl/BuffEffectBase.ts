@@ -9,7 +9,7 @@ export class BuffEffectBase{
     private mEndTriggerSet:Set<number> = new Set<number>(); 
     private mTriggerInfo: {Tri:number[];Con:number[];Do:{t:number;e:number;}[];};//当前的Buff信息
     private mExecuteTypeArray:Array<ExecuteTypeBase> = new Array<ExecuteTypeBase>();//执行对象
-    //当前
+
     constructor(buffBase:BuffBase,triggerInfo: {Tri:number[];Con:number[];Do:{t:number;e:number;}[];}){
         this.mBuffBase = buffBase;
         this.mTriggerInfo = triggerInfo;
@@ -24,19 +24,21 @@ export class BuffEffectBase{
         for(let triggerType of this.mTriggerInfo.Tri)
             this.mTriggerSet.add(triggerType);
     }
+
     public InitEndTriggerSet():void{
         this.mEndTriggerSet.clear(); 
         for(let triggerType of this.mBuffBase.Config.EndCondition)
             this.mEndTriggerSet.add(triggerType);
     }
      
-    
+
     public InitExecuteType():void{ 
         this.mExecuteTypeArray = new Array<ExecuteTypeBase>();//执行对象
         for(let cell of this.mTriggerInfo.Do){
-            if(cell.t == eExecuteType.AttrChange){
+            if(cell.t == eExecuteType.AttrChange)//属性变动类型的话
                 this.mExecuteTypeArray.push(new ExecuteAttrChange(this.mBuffBase,cell.e));
-            }
+            else if(cell.t == eExecuteType.AddBuff)//属性变动类型的话
+                this.mExecuteTypeArray.push(new ExecuteAttrChange(this.mBuffBase,cell.e));
         }
     }
 
@@ -67,13 +69,13 @@ export class BuffEffectBase{
         }
         //开始添加对应的属性类型 
         for(let executeType of this.mExecuteTypeArray)
-            executeType.OnUpdate();//对Buff进行更新
+            executeType.OnEnter(type);//对Buff进行更新
     } 
     
     //准备执行对应的Buff
     public ExecuteEndEvent(type:eTriggerType,buffBase:BuffBase,param?:any){
         if(!this.mEndTriggerSet.has(type))
             return;
-        
+        this.mBuffBase.DecBuffLife();//更新一下自己的生命值
     } 
 };  
