@@ -26,6 +26,6 @@ export class TriggerControl{
 
     //获取到当前Buff结束所监听的事件
     public GetEndTypeSet():Set<eTriggerType>{
-        return this.mBuffEffectCell.GetTriggerSet();
+        return this.mBuffEffectCell.GetEndSet();
     }
 }

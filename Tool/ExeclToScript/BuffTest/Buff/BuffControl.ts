@@ -10,21 +10,38 @@ import { TBuffType, TBuffID, eTriggerType, eBuffType } from "./Define/Define";
 import { RecordBuffInsert, eRecordType } from "../BattleSimulation/Define/RecordDefine";
 import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
 import { eNotifyType } from "../Communicant/Define/Define";
+import { Camp } from "../BattleSimulation/Camp";
+import { GetBattleSimulation } from "../Global";
+/*
+*游戏一开始会对每个玩家身上创建一个BuffControl用于管理玩家身上的Buff
+*BuffControl会记录自己的阵营类型，以便更加容易的找到属性信息
+*/
 export class BuffControl{
-    private mBattleCommunicantID:number;//战斗通知模块
     private mBuffGenID:number = 0;//用以对新添加的Buff赋ID
-    private mCampType:eCampType;//需要一个类型，知道当前控制器的拥有者事谁
+    private mCampType:eCampType;//玩家阵营类型
+    private mBattleCommunicantID:number;//通知ID
+    //Buff会监听事件类型，以此来触发Buff并进行执行
+    private mTriggerBuffmap:Array<Set<BuffBase>> = new Array<Set<BuffBase>>();
+    //根据挂载的BuffID找到唯一Buff
     private mBuffMap:Map<number,BuffBase> = new Map<number,BuffBase>();//通过Buff唯一ID，快速索引到指定的角色Buff
+    //根据Buff所属类型，找到一组Buff
     private mTypeBuffMap:Map<TBuffType,Map<TBuffID,Array<BuffBase>>> = new Map<TBuffType,Map<TBuffID,Array<BuffBase>>>();
-    private mTriggerBuffmap:Array<Set<BuffBase>> = new Array<Set<BuffBase>>();//通过Buff的触发类型来确定当前Buff的附加属性是否应该被执行 
-    private mAttrObj:AttrCell;//用于Buff直接修改玩家属性。
-    constructor(campType:eCampType,attrObj:AttrCell,battleCommunicantID:number){
+
+    constructor(campType:eCampType,battleCommunicantID:number){
         this.mBattleCommunicantID = battleCommunicantID;
-        this.mCampType = campType;
-        this.mAttrObj = attrObj;
+        this.mCampType = campType; 
         this.InitTriggerMap();
     } 
     
+    //获取到关联的阵营信息
+    public get CampInfo():Camp{
+        return GetBattleSimulation().GetCamp(this.mCampType);
+    }
+    //获取到玩家的属性信息
+    public get AttrObj():AttrCell{
+        return GetBattleSimulation().GetCamp(this.mCampType).AttrObj;
+    } 
+
     private InitTriggerMap():void{
         for(let index = 0 ; index < eTriggerType.FINAL ; index++) 
             this.mTriggerBuffmap[index] = new Set<BuffBase>(); 
@@ -35,11 +52,6 @@ export class BuffControl{
         return this.mBattleCommunicantID;
     }
 
-    //获取到属性对象
-    public get AttrObj():AttrCell{ 
-        return this.mAttrObj; 
-    } 
-    
     //获取到玩家的阵营信息
     public GetCampType():eCampType{
         return this.mCampType; 
@@ -110,11 +122,10 @@ export class BuffControl{
 
         this.mBuffMap.set(buffBase.ID,buffBase);
 
-        //设置Buff触发条件
-        for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
-            this.mTriggerBuffmap[type].add(buffBase);
-        //设置结束条件
-        for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
+        //监视触发条件与结束条件
+        for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())//设置Buff触发条件
+            this.mTriggerBuffmap[type].add(buffBase); 
+        for(let type of buffBase.BuffTriggerControl.GetEndTypeSet())//设置结束条件
             this.mTriggerBuffmap[type].add(buffBase);
         let record:RecordBuffInsert = {RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffConfig.Key,Life:buffBase.LifeCount};
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,record);

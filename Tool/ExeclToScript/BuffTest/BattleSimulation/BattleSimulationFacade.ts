@@ -45,12 +45,16 @@ export class BattleSimulationFacade{
         let roundRecord:RecordRoundChange = {RecordType:eRecordType.RoundChange,Round:round};
         this.Notify(eNotifyType.BattleReport,roundRecord); 
     } 
+    /*获取到阵营*/
+    public GetCamp(campType:eCampType):Camp{
+        return this.mBattleSimulation.GetPlayerCampInfo(campType);
+    }
     
     /*
     *初始化指定阵营的属性信息，并返回属性记录
     */
     public InitCampAttr(campType:eCampType):void{
-        let playerCamp:Camp = this.mBattleSimulation.GetPlayerCampInfo(campType);//获取到指定阵营
+        let playerCamp:Camp = this.GetCamp(campType);//获取到指定阵营
         playerCamp.AttrObj.InitAttr(this.mAttrInfo[campType].attrs);//进行属性的初始化
         let attrObj:AttrCell = playerCamp.AttrObj;//获取到玩家的属性对象
         let sendInitType:RecordInitData = {RecordType:eRecordType.InitAttrs,Camp:campType,Attrs:attrObj.GetAttrTable(),Name:playerCamp.MainPlayer.Name};

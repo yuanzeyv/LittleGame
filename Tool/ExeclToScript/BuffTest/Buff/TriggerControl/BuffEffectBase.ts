@@ -1,15 +1,12 @@
-import { eTriggerType, TKV } from "../Define/Define"; 
-import { GetKV } from "../../Util";
-import { RecordBuffTrigger, eRecordType } from "../../BattleSimulation/Define/RecordDefine";
-import { BuffBase } from "../BuffBase/BuffBase";  
-import { BattleCommunicantProxy } from "../../Communicant/BattleCommunicant";
-import { eNotifyType } from "../../Communicant/Define/Define";
+import { eTriggerType } from "../Define/Define";  
+import { BuffBase } from "../BuffBase/BuffBase";   
 import { ExecuteTypeBase } from "./ExecuteTypeBase/ExecuteTypeBase";
 import { eExecuteType } from "./ExecuteTypeBase/ExecuteTypeDefine";
 import { ExecuteAttrChange } from "./ExecuteTypeBase/ExecuteAttrChange";
 export class BuffEffectBase{
     private mBuffBase:BuffBase;//当前的Buff信息
-    private mTriggerSet:Set<number> = new Set<number>();
+    private mTriggerSet:Set<number> = new Set<number>(); 
+    private mEndTriggerSet:Set<number> = new Set<number>(); 
     private mTriggerInfo: {Tri:number[];Con:number[];Do:{t:number;e:number;}[];};//当前的Buff信息
     private mExecuteTypeArray:Array<ExecuteTypeBase> = new Array<ExecuteTypeBase>();//执行对象
     //当前
@@ -17,6 +14,7 @@ export class BuffEffectBase{
         this.mBuffBase = buffBase;
         this.mTriggerInfo = triggerInfo;
         this.InitTriggerSet();
+        this.InitEndTriggerSet();
         this.InitExecuteType();
     }
     
@@ -26,6 +24,12 @@ export class BuffEffectBase{
         for(let triggerType of this.mTriggerInfo.Tri)
             this.mTriggerSet.add(triggerType);
     }
+    public InitEndTriggerSet():void{
+        this.mEndTriggerSet.clear(); 
+        for(let triggerType of this.mBuffBase.Config.EndCondition)
+            this.mEndTriggerSet.add(triggerType);
+    }
+     
     
     public InitExecuteType():void{ 
         this.mExecuteTypeArray = new Array<ExecuteTypeBase>();//执行对象
@@ -41,7 +45,7 @@ export class BuffEffectBase{
         return this.mTriggerSet.has(type);
     }
  
-    public GetTriggerSet():Set<eTriggerType>{
+    public GetTriggerSet():Readonly<Set<eTriggerType>>{
         let retSet:Set<eTriggerType> = new Set<eTriggerType>();
         for(let triggerType of this.mTriggerSet)
             retSet.add(triggerType);
@@ -50,7 +54,7 @@ export class BuffEffectBase{
  
     public GetEndSet():Set<eTriggerType>{
         let retSet:Set<eTriggerType> = new Set<eTriggerType>();
-        for(let triggerType of this.mTriggerSet)
+        for(let triggerType of this.mBuffBase.Config.EndCondition)
             retSet.add(triggerType);
         return retSet;
     }
@@ -64,5 +68,12 @@ export class BuffEffectBase{
         //开始添加对应的属性类型 
         for(let executeType of this.mExecuteTypeArray)
             executeType.OnUpdate();//对Buff进行更新
+    } 
+    
+    //准备执行对应的Buff
+    public ExecuteEndEvent(type:eTriggerType,buffBase:BuffBase,param?:any){
+        if(!this.mEndTriggerSet.has(type))
+            return;
+        
     } 
 };  
