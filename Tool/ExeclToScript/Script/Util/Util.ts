@@ -21,38 +21,54 @@ export function GetTypeByStr(str:string):(new () => BaseGridType) | undefined {
     return undefined; 
 } 
 
-export function RoughVirifyTable(tablePath:string):any[][]|undefined{
-    let qq:Array<{name: string,data:any[][] }> = xlsx.parse(tablePath);
-    let dataTable:any[][]|undefined = undefined;
-    for(let cell of qq){
-        if( cell.name == WORK_TABLE_NAME ){
-            dataTable = cell.data;
-            break;
-        }
+export function GetWorkSheet(tablePath:string):{name: string,data:any[][] }|undefined{
+    let tableInfo:Array<{name: string,data:any[][] }> = xlsx.parse(tablePath);
+    for( let cell of tableInfo){
+        if( cell.name == WORK_TABLE_NAME)
+            return cell;
     }
-    if(dataTable == undefined){
+    return undefined;
+}
+
+
+export function GetSimpleVirifyTable(basePath:string,tablePath:string):any[][]|undefined{
+    let workSheet:{name: string,data:any[][] }|undefined= GetWorkSheet(`${basePath}/${tablePath}`);
+    if( workSheet == undefined ){
         console.log(`${tablePath}:没有工作Sheet:${WORK_TABLE_NAME}`);
         return undefined;
     }
-    let col:number = dataTable[eRowType.Type].length;//用类型行，表示一行有几个元素
+    let tableData:any[][] = workSheet.data;
+    //eRowType.Type     类型行，将明确Table有多少列
+    let sumCol:number = tableData[eRowType.Type].length;
     let sumRow:number = eRowType.Final;//获取到当前的总行数
-    for(let index = eRowType.Final;index < dataTable.length ;index ++ ){
-        if(dataTable[index][0] != "T")
-            break; 
+    for(let index = eRowType.Final;index < tableData.length ;index ++ ){
+        if(tableData[index][0] != "T")//循环遍历拥有多少个T
+            break;  
         sumRow++;
     }
-    dataTable = dataTable.slice(0,sumRow);  
-    for(let index = 0;index < sumRow ;index ++ ){
-        dataTable[index] = dataTable[index].slice(0,col);
-        if(index < eRowType.Final)
-            continue;
-        //判断列不为空
-        for(let colIndex:number = 1;colIndex < col;colIndex ++ ){
-            if( dataTable[index][colIndex] == undefined){
-                console.log(`${tablePath}:简单校验失败 ${index}:${colIndex}为空`);
+    console.log(`${tablePath}表   总行数为:${sumRow}  总列数为:${sumCol}`);
+    tableData = tableData.slice(0,sumRow);  
+    for(let row = 0; row < sumRow ;row ++ ){
+        tableData[row] = tableData[row].slice(0,sumCol);//进行剔除多余列
+        if(row < eRowType.Final)
+            continue; 
+        for(let col:number = 1;col < sumCol;col ++ ){
+            let typeStr:string = tableData[eRowType.Type][col].replace(/\s/g,'');//对字符串进行匹配
+            let BaseGridType:(new () => BaseGridType) | undefined = GetTypeByStr(typeStr);
+            if(BaseGridType == undefined){
+                console.log(`${tablePath}表,${tableData[eRowType.Name][col]}类型描述错误,无法在基础类型中找到 ${typeStr}`);
+                return undefined;
+            } 
+            let gridType = new BaseGridType();  
+            if(!gridType.AnalysisType(typeStr.substring(gridType.TypeLenth()))){
+                console.log(`${tablePath}表,${tableData[eRowType.Name][col]}类型解析验证失败 ${typeStr}`);
+                return undefined;
+            }
+            if(gridType.Prase(tableData[row][col] || "") == undefined){
+                console.log(`${tablePath}表,在解析 ${row + 1}:${col + 1} 时，发现数据${tableData[row][col]} 无法被解析为${gridType.getTypeForTs()}`);
                 return undefined;
             }
         }
     }
-    return dataTable;
+    return tableData;
 }

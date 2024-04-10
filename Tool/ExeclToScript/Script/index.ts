@@ -1,15 +1,16 @@
-import { TBaseType, TArrayBaseType, eRowType, AllType } from "./Table/Define";
+import { eRowType, AllType } from "./Table/Define";
 import { BaseGridType } from "./Table/GridType/BaseGridType";
-import { readFolderSync, writeStringToFile } from "./Util/FileOperation";
-import { GetTypeByStr, RoughVirifyTable } from "./Util/Util";
+import { readFolderSync as ReadFolderSync, writeStringToFile } from "./Util/FileOperation";
+import { GetTypeByStr, GetSimpleVirifyTable } from "./Util/Util";
+import * as fflate from './fflate';
+import fs from "fs"
 class TableData{
     private mPath:string;
     private mTable:any[][];
-    private mDataTypeBase:Map<number,BaseGridType> = new Map<number,BaseGridType>();
-    private mData:Map<number,TBaseType|TArrayBaseType> = new Map<number,TBaseType|TArrayBaseType>();
+    private mDataTypeBase:Map<number,BaseGridType> = new Map<number,BaseGridType>(); 
     constructor(path:string,table:any[][]){
-        this.mTable = table;
         this.mPath = path;
+        this.mTable = table;
     }
 
     public GetPath():string{
@@ -57,11 +58,10 @@ class TableData{
                 return false;
             }
             let typeObj:BaseGridType = new BaseGridType();
-            let length:number = typeObj.TypeLenth();  
-            if(!typeObj.AnalysisType(typeStr.substring(length))){
+            if(!typeObj.AnalysisType(typeStr.substring(typeObj.TypeLenth()))){
                 console.log(`${typeStr.substring(length)} 解析失败`);
                 return false;
-            } 
+            }  
             this.mDataTypeBase.set(i,typeObj);
         }
         return true;
@@ -92,28 +92,29 @@ class TableData{
         return ret;
     }  
 } 
- 
+
+const BaseFolderPath = './Work/TransXlsxTable'; // 替换为要读取的文件夹的路径
 function main(){ 
-    const baseFolderPath = './Work/TransXlsxTable'; // 替换为要读取的文件夹的路径
-    let paths:Array<string> = readFolderSync(baseFolderPath);//获取文件夹下所有木文件信息
+    let outJson:{[key:string]:Array<any>} = {}; 
+    let paths:Array<string> = ReadFolderSync(BaseFolderPath);//获取文件夹下所有木文件信息
     for(let path of paths){
-        let name:string = path.split(".")[0];//获取到文件本名 
-        let table:any[][]|undefined = RoughVirifyTable(`${baseFolderPath}/${path}`);
+        let name:string = path.split(".")[0];//获取到文件本名  
+        let table:any[][]|undefined = GetSimpleVirifyTable(BaseFolderPath,path);
         if(table == undefined){
-            console.log(`${path}:读取文件时失败`);
-            return;
+            console.log(`${path}:进行简单校验时，发生错误，请检查配置`);
+            continue;
         }
-        let tableData:TableData = new TableData(name,table);
-        if( !tableData.InitType() ){
+        let tableData:TableData = new TableData(name,table);//新建一个Table
+        if( !tableData.InitType() ){//对表进行类型初始化
             console.log(`${tableData.GetPath()}:文件初始化类型时，失败`);
             return;
         } 
-        
         let allData:{[key:string]:AllType}[]|undefined = tableData.AnalysisTable();
         if( allData == undefined){
             console.log(`${tableData.GetPath()}:解析整表出现错误`);
             return;
-        } 
+        }
+        outJson[name] = allData;
         let text:string = "";
         text += `export interface I${name}Struct{\n`;
         for(let col = 1 ; col <= tableData.GetCols() ; col++ ){
@@ -160,5 +161,5 @@ function main(){
         text += `export let ${name}Config:${name} = new ${name}();` 
         writeStringToFile(`./Work/OutputScript/${name}.ts`, text);
     }   
-}    
-main();   
+}
+main();    
