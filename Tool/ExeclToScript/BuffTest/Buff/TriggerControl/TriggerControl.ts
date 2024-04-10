@@ -17,6 +17,8 @@ export class TriggerControl{
     public TriggerEvent(triggerType:eTriggerType,param?:any):void{
         if(this.mBuffEffectCell.IsAppointTriggerType(triggerType))
             this.mBuffEffectCell.ExecuteTriggerEvent(triggerType,this.mBuffBase,param);  
+        if(this.mBuffEffectCell.IsAppointEndTriggerType(triggerType))
+            this.mBuffEffectCell.ExecuteEndEvent(triggerType,this.mBuffBase,param);  
     }
     
     //获取到当前Buff监听的触发事件

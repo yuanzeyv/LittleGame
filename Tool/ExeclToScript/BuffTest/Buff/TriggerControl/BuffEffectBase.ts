@@ -46,6 +46,10 @@ export class BuffEffectBase{
     public IsAppointTriggerType(type:eTriggerType):boolean{
         return this.mTriggerSet.has(type);
     }
+    //判断结束监听
+    public IsAppointEndTriggerType(type:eTriggerType):boolean{
+        return this.mEndTriggerSet.has(type);
+    }
  
     public GetTriggerSet():Readonly<Set<eTriggerType>>{
         let retSet:Set<eTriggerType> = new Set<eTriggerType>();

@@ -178,8 +178,10 @@ export class BuffControl{
         //获取到Buff的触发类型，进行设置
         for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
             this.mTriggerBuffmap[type].delete(buffBase);
+        for(let type of buffBase.BuffTriggerControl.GetEndTypeSet())
+            this.mTriggerBuffmap[type].delete(buffBase);
     }
-
+ 
     
     //Buff被触发了
     public Trigger(triggerType:eTriggerType,param?:any):void{

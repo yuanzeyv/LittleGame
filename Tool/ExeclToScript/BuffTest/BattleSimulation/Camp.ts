@@ -24,9 +24,9 @@ export class Camp{
         this.mBattleSimulation = battleSimulation;
         this.mCampType = campType;
         this.mAttrCell = new AttrCell(this.mCampType,this.mBattleCommunicantID);
-        this.mBuffControl = new BuffControl(campType,this.mAttrCell,this.mBattleCommunicantID);
+        this.mBuffControl = new BuffControl(campType,this.mBattleCommunicantID);
         this.InsertPlayer(name); 
-        this.InitEventNotify();
+        this.InitEventNotify(); 
     }
 
     public get CampType():eCampType{

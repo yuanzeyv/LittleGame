@@ -66,7 +66,7 @@ class Buff{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"护身辟邪","Level":1,"Desc":"战斗开始时增加角色10%的基础生命值加成。每次触发闪避时，对攻击者造成相当于本次攻击20%攻击的伤害","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[0],"Con":[],"Do":[{"t":1,"e":1000001}]},"EndCondition":[5,4,3,2,1]};
+       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"护身辟邪","Level":1,"Desc":"战斗开始时增加角色10%的基础生命值加成。每次触发闪避时，对攻击者造成相当于本次攻击20%攻击的伤害","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[3,4],"Con":[],"Do":[{"t":1,"e":1000001}]},"EndCondition":[5]};
    }
    private InitArray(){
        for(let key in this.mConfigObject)
