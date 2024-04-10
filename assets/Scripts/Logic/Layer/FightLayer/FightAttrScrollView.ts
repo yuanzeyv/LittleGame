@@ -5,11 +5,14 @@ import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
 import { ScrollAdapter, Holder, IElement, View } from '../../../Util/adapter'; 
 import { AttrNameMap, eAttrType } from '../../Proxy/FightProxy/Define/AttrDefine';
 import { GetTextMeshComp } from '../../../Util/Util';
+import { eCampType } from '../../Proxy/FightProxy/Define/CampDefine';
+import { FightProxy } from '../../Proxy/FightProxy/FightProxy';
 const { ccclass } = _decorator;
 interface IFixedModel {attrType:eAttrType;} 
 @ccclass('FightAttrScrollView')
 export class FightAttrScrollView extends ScrollAdapter<IFixedModel> { 
-    private mAttrNodeMap:Map<eAttrType,Node> = new Map<eAttrType,Node>(); 
+    private mAttrNodeMap:Map<eAttrType,MyHolder> = new Map<eAttrType,MyHolder>(); 
+    private mCampType:eCampType;  
     public getPrefab(data: IFixedModel): Node | Prefab { 
         return _Facade.FindProxy(BundleProxy).UseAsset("resources","LayerSource/FightLayer/Comp/AttrCell/AttrCell",Prefab); 
     }
@@ -29,15 +32,28 @@ export class FightAttrScrollView extends ScrollAdapter<IFixedModel> {
         this.modelManager.insert(list);//可以打开面板了  
     }     
 
-    public SetAttrNode(type:eAttrType,node:Node|undefined = undefined):void{
-        if(node == undefined)
+    public SetAttrNode(type:eAttrType,holder:MyHolder|undefined = undefined):void{
+        if(holder == undefined)
             this.mAttrNodeMap.delete(type);
         else 
-            this.mAttrNodeMap.set(type,node);
+            this.mAttrNodeMap.set(type,holder);
+    }
+
+    public get CampType():eCampType{
+        return this.mCampType;
+    }
+
+    public set CampType(camp:eCampType){
+        this.mCampType = camp;
     }
 
     public RefreshScrollView(){
         this.modelManager.update();
+    }
+
+    public UpdateAttrByAttrType(type:eAttrType){
+        let holder:MyHolder|undefined =this.mAttrNodeMap.get(type);
+        holder?.UpdateAttrCell();
     }
 }
  
@@ -52,12 +68,18 @@ class MyHolder extends Holder<IFixedModel>{
         this.mFightAttrScrollView = this.adapter.getComponent(FightAttrScrollView);
     }
     protected onVisible(): void {    
-        this.mFightAttrScrollView.SetAttrNode(this.data.attrType,this.node);
-        let name:string = AttrNameMap.get(this.data.attrType)!; 
-        GetTextMeshComp(find("AttrName",this.node)).string = name; 
-        GetTextMeshComp(find("AttrValue",this.node)).string = "99999";
+        this.UpdateAttrCell();
     }    
-    protected onDisable(): void {  
+    
+    public UpdateAttrCell(){
+        this.mFightAttrScrollView.SetAttrNode(this.data.attrType,this);//设置自己
+        let name:string = AttrNameMap.get(this.data.attrType)!; 
+        let value:number = _Facade.FindProxy(FightProxy).GetCampAttr(this.mFightAttrScrollView.CampType,this.data.attrType);
+        GetTextMeshComp(find("AttrName",this.node)).string = name; 
+        GetTextMeshComp(find("AttrValue",this.node)).string = `${value}`; 
+    } 
+
+    protected onDisable(): void {   
         this.mFightAttrScrollView.SetAttrNode(this.data.attrType);
     }  
-}  
+}    

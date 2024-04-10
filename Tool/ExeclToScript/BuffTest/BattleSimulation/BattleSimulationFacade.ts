@@ -59,7 +59,7 @@ export class BattleSimulationFacade{
         let attrObj:AttrCell = playerCamp.AttrObj;//获取到玩家的属性对象
         let sendInitType:RecordInitData = {RecordType:eRecordType.InitAttrs,Camp:campType,Attrs:attrObj.GetAttrTable(),Name:playerCamp.MainPlayer.Name};
         this.Notify(eNotifyType.BattleReport,sendInitType); 
-    }
+     }
     /*
     *初始化阵营属性的Buff，并返回插入Buff的记录
     */
@@ -128,7 +128,7 @@ export class BattleSimulationFacade{
     }
     //获取到当前的吸血数值
     private GetSuckBloodValue(attackCamp:Camp,beAttackCamp:Camp,hurm:number):number{
-        let suckBlood:number = Math.min(attackCamp.GetAttrByType(eAttrType.SumSuckBlood) - beAttackCamp.GetAttrByType(eAttrType.SumResistanceSuckBlood),0);
+        let suckBlood:number = Math.max(attackCamp.GetAttrByType(eAttrType.SumSuckBlood) - beAttackCamp.GetAttrByType(eAttrType.SumResistanceSuckBlood),0);
         return hurm * suckBlood;
     }
  
@@ -136,7 +136,7 @@ export class BattleSimulationFacade{
     //假代表当前已经停止了战斗
     public AttackPlayer(attackCamp:Camp,beAttackCamp:Camp,attackType:eAttackType):boolean{
         //获取到受击阵营的血量是否满足战斗要求
-        if( this.GetCampHP(beAttackCamp) <= 0 )
+        if( this.GetCampHP(beAttackCamp) <= 0 ) 
             return false;
         //当前的攻击类型
         let attackFrontType:eNotifyType = (attackType == eAttackType.ContinueAttack) ? eNotifyType.AttackContinueFront : (attackType == eAttackType.AttackBack) ? eNotifyType.AttackBackFront :eNotifyType.AttackFront;

@@ -7,6 +7,9 @@ import { eCampType } from "../../Proxy/FightProxy/Define/CampDefine";
 import { PoolProxy } from "../../Proxy/PoolProxy/PoolProxy";
 import { ePoolDefine } from "../../Proxy/PoolProxy/PoolDefine";
 import { GetTextMeshComp } from "../../../Util/Util";
+import { TextMeshLabel } from "../../../../../extensions/TextMesh Pro/assets/TextMesh";
+import { eAttackType } from "../../Proxy/FightProxy/Define/RecordDefine";
+import { eAttrType } from "../../Proxy/FightProxy/Define/AttrDefine";
 
 export class Player{
     private mHeroSpineMediator:SpineMediator;
@@ -51,22 +54,27 @@ export class Player{
 
 export class BattleCamp{ 
     private mCampType:eCampType;//战斗拥有战斗类型
+    private mPlayer:Player;
     
     private mNode:Node;//战斗主面板 
+    private mNameLabel:TextMeshLabel;//名称节点
     private mAttrScrollView:FightAttrScrollView;//战斗属性列表信息
-    private mPlayer:Player;
-
-    public constructor(camp:eCampType,fightNode:Node,fightAttrScrollview:FightAttrScrollView){
-        this.mCampType = camp;
-        this.mNode = fightNode;
-        this.mAttrScrollView = fightAttrScrollview;
-        this.InsertPlayer("1001");
+    
+    public constructor(camp:eCampType){
+        this.mCampType = camp; 
     }
-
-    public GetPlayer():Player{
-        return this.mPlayer;
-    }
-     
+    //玩家在战斗的哪个层级
+    public SetFightNode(fightNode:Node):void{ this.mNode = fightNode; } 
+    //玩家的名字存放在哪个Label下
+    public SetNameLabel(nameLabel:TextMeshLabel):void{ this.mNameLabel = nameLabel; } 
+    public SetCampName(name:string):void{ this.mNameLabel.string = name; } //设置玩家名称
+    //玩家的战斗属性面板
+    public SetPlayerAttrView(fightAttrScrollview:FightAttrScrollView):void{ 
+        this.mAttrScrollView = fightAttrScrollview; 
+        this.mAttrScrollView.CampType = this.mCampType;
+    } 
+    
+    //插入一个玩家
     public InsertPlayer(path:string):void{ 
         this.mPlayer = new Player(this.mNode,`spine_eff/${path}`); 
         let isTurn:number =  this.mCampType == eCampType.Initiative ? 1 : -1; 
@@ -74,6 +82,11 @@ export class BattleCamp{
         this.mPlayer.SetFilp(isTurn == 1);
     }
  
+    //获取一个玩家
+    public GetPlayer():Player{
+        return this.mPlayer;
+    }
+     
     //玩家的X轴移动
     public MovePlayer(posXOffset:number,handle:()=>void){
         let isTurn:number =  this.mCampType == eCampType.Initiative ? -1 : 1; 
@@ -86,33 +99,75 @@ export class BattleCamp{
     }
 
     //执行一次玩家的攻击
-    public PlayerAttack(harm:number,enemyCamp:BattleCamp,handle:()=>void){ 
-        this.mPlayer.SpineMediator.SetAction("attack")
-        let durationTime:number = this.mPlayer.SpineMediator.GetSp().findAnimation("attack").duration;
-        _G.TimeWheel.Set(durationTime * 0.6 * 1000,()=>{
-            let node:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.FightOrangeLabel);
+    public PlayerAttack(type:eAttackType,isCircle:boolean,isMiss:boolean,harm:number,enemyCamp:BattleCamp,handle:()=>void){ 
+        this.mPlayer.SpineMediator.SetAction("attack")//首先设置玩家的攻击动作
+        let durationTime:number = this.mPlayer.SpineMediator.GetSp().findAnimation("attack").duration;//获取到玩家播放攻击动作所需要的时间
+        let poolInfo:{pool:ePoolDefine,str:string}|undefined = undefined;//默认使用普通攻击
+        //设置己方的飘字
+        if( type == eAttackType.Normal && isCircle)//暴击
+            poolInfo = {pool:ePoolDefine.FightRedLabel,str:"暴击"};
+        else if(type == eAttackType.ContinueAttack)//连击
+            poolInfo = {pool:ePoolDefine.FightGreenGrassLabel,str:"连击"};
+        else if(type == eAttackType.AttackBack)//反击 
+            poolInfo = {pool:ePoolDefine.FightYellowLabel,str:"反击"};  
+        if(poolInfo){ 
+            let node:Node = _Facade.FindProxy(PoolProxy).Get(poolInfo.pool,28,poolInfo.str);//在指定的池子进行获取对象
+            node.parent = this.GetPlayer().Node; 
+            node.setPosition(0,120,0); 
+            tween(node).by(0.5,{position:new Vec3(0,100,0),},{easing: "expoOut"}).start();
+            tween(GetTextMeshComp(node)) 
+            .to(0.5,{color:new Color(255,255,255,0)})
+            .delay(0.05)
+            .call(()=> _Facade.FindProxy(PoolProxy).Put(poolInfo.pool,node))
+            .start();
+        }    
+
+         
+        _G.TimeWheel.Set(durationTime * 0.6 * 1000,()=>{//在攻击动作播放到百分之六十的时候，进行伤害飘字
+            let poolInfo:{pool:ePoolDefine,str:string}|undefined = undefined;//默认使用普通攻击
+            //设置地方飘字  
+            poolInfo = isMiss?{pool:ePoolDefine.FightWhiteLabel,str:"闪避"}:{pool:ePoolDefine.FightOrangeLabel,str:`${harm}`};
+            let node:Node = _Facade.FindProxy(PoolProxy).Get(poolInfo.pool,24,poolInfo.str);
             node.parent = enemyCamp.GetPlayer().Node; 
-            node.setPosition(0,120,0);
-            GetTextMeshComp(node).fontSize = 30; 
-            GetTextMeshComp(node).string = `${harm}`;
-            tween(node)  
-            .by(0.3,{position:new Vec3(0,150,0),},{easing: "expoOut"}) 
-            .call(()=>{ 
-                _Facade.FindProxy(PoolProxy).Put(ePoolDefine.FightOrangeLabel,node);
-                handle && handle();
-            }).start(); 
+            node.setPosition(0,120,0); 
+            tween(node).by(0.5,{position:new Vec3(0,100,0),},{easing: "expoOut"}).start();
+            tween(GetTextMeshComp(node))
+            .to(0.5,{color:new Color(255,255,255,0)})   
+            .delay(0.05)
+            .call(()=>{    
+                _Facade.FindProxy(PoolProxy).Put(poolInfo.pool,node);
+                handle && handle(); 
+            }).start();
+        });  
             
-            tween(GetTextMeshComp(node))  
-            .to(0.2,{color:new Color(255,255,255,0)})
-            .start(); 
-        }); 
         this.mPlayer.SpineMediator.GetSp().setCompleteListener(()=>{
             this.mPlayer.SpineMediator.SetAction("stand");
             this.mPlayer.SpineMediator.GetSp().setCompleteListener(undefined); 
         }); 
     }
 
+    //执行一次玩家的攻击
+    public PlayerAttackSuckBlood(suckBlood:number,handle:()=>void){ 
+        this.mPlayer.SpineMediator.SetAction("xixue");
+        this.mPlayer.SpineMediator.GetSp().setCompleteListener(()=>{
+            this.mPlayer.SpineMediator.SetAction("stand"); 
+            this.mPlayer.SpineMediator.GetSp().setCompleteListener(undefined); 
+        }); 
+        
+        let node:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.FightGreenLabel,24,`吸血:${suckBlood}`);
+        node.parent =  this.mPlayer.Node; 
+        node.setPosition(0,120,0); 
+        tween(node).by(0.5,{position:new Vec3(0,100,0),},{easing: "expoOut"}) .call(()=>_Facade.FindProxy(PoolProxy).Put(ePoolDefine.FightGreenLabel,node)).start(); 
+        tween(node).delay(0.3) .call(()=>handle && handle()).start(); 
+        tween(GetTextMeshComp(node)).to(0.5,{color:new Color(255,255,255,125)}).start(); 
+    }    
+
     public Destory(){
-        this.mPlayer.Desctory();
+        this.mPlayer.Desctory(); 
+    }
+
+    //更新一个玩家的属性
+    public UpdateListViewAttr(type:eAttrType):void{
+        this.mAttrScrollView.UpdateAttrByAttrType(type);
     }
 } 

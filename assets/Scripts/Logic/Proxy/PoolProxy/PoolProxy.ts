@@ -23,9 +23,9 @@ export class PoolProxy extends BaseProxy{
     public Get(poolID:ePoolDefine,...args):Node|undefined{//获取到对象池中的一个对象
         let nodeControl:NodeCellControl|undefined = this.mNodePool.get(poolID);
         if(!nodeControl)
-            return undefined;
-        return nodeControl.Get(args);
-    }
+            return undefined; 
+        return nodeControl.Get(...args);
+    } 
 
     public Put(poolID:ePoolDefine,node:Node|undefined):void{//放回一个节点到对象池中
         let nodeControl:NodeCellControl|undefined = this.mNodePool.get(poolID);

@@ -2,9 +2,9 @@ import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global"; 
 import { eNetProtocol } from "../../../NetNotification";
 import { NetWorkProxy } from "../NetWorkProxy/NetWorkProxy";
-import { EquipBaseType, ItemBaseType, ItemCell } from "./ItemDefine/ItemDefine";
+import { ItemBaseType, ItemCell } from "./ItemDefine/ItemDefine";
 
-//游戏中的背包代理
+//游戏中的背包代理 
 export class BagProxy extends BaseProxy{ 
     static  get ProxyName():string { return "BagProxy" }; 
     private mBagCellMap:Map<number,ItemCell> = new Map<number,ItemCell>(); 

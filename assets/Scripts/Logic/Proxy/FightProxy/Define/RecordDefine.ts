@@ -1,10 +1,13 @@
-import { eTriggerType } from "../../../../../../Tool/ExeclToScript/BuffTest/Buff/Define/Define";
+import { eTriggerType } from "../../../../../../Tool/ExeclToScript/BuffTest/Buff/Define/Define"; 
 import { eAttrType } from "./AttrDefine";
 import { eCampType } from "./CampDefine";
+export enum  eAttackType{
+    Normal,//正常 
+    Miss,//闪避
+    ContinueAttack,//连击
+    AttackBack,//反击
+};
 
-/*
-本文件用以定义，战斗模拟的所有所有战斗结果日志
-*/
 export enum eRecordType{
     InitAttrs,//初始化数据用 
     AttackMoveTo,//攻击前移动用
@@ -14,6 +17,7 @@ export enum eRecordType{
     BuffTrigger,//触发一个Buff 
     AttrUpdate,//属性变动时，更新单项属性
     EndBattle,//战斗记录，战斗结束
+    SuckBlood,//吸血日志记录
 };
 
 export interface RecordBase{ RecordType:eRecordType; }//记录类型
@@ -23,8 +27,9 @@ export interface RecordBase{ RecordType:eRecordType; }//记录类型
 export interface RecordInitData extends RecordBase{
     Camp:eCampType;//玩家阵营类型
     Attrs:{[key:number]:number};//需要获取到玩家的基础属性
+    Name:string;//阵营名称
 };
-  
+ 
 //游戏内Buff被插入时的日志记录
 export interface RecordBuffInsert extends RecordBase{
     Camp:eCampType;//玩家阵营类型
@@ -49,11 +54,13 @@ export interface RecordAttackMoveTo extends RecordBase{
 }
 
 //玩家攻击时，也会进行判定，但是因为攻击仅会影响到玩家的生命值
-export interface RecordAttack extends RecordBase{
+export interface RecordAttack extends RecordBase{  
     AttackCamp:eCampType;//攻击者玩家阵营
     BeAttackCamp:eCampType;//被攻击者玩家阵营
-    Attrs:{[key:number]:number};//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
-    ResidueHP:number;//剩余生命值
+    AttackType:eAttackType;//当前的攻击类型 
+    IsCircle:boolean;//是否暴击了 
+    IsMiss:boolean;//是否闪避了
+    Harm:number;//造成了多少点伤害
 } 
 
 //玩家攻击时，也会进行判定，但是因为攻击仅会影响到玩家的生命值
@@ -74,3 +81,11 @@ export interface RecordAttrUpdate extends RecordBase{
 export interface RecordRoundChange extends RecordBase{
     Round:number;//玩家当前的回合数
 }     
+
+//玩家吸血时触发
+export interface RecordSuckBlood extends RecordBase{
+    AttackCamp:eCampType;//攻击者玩家阵营
+    AttackName:string;//攻击者名称
+    Attrs:{[key:number]:number};//需要获取到的最终属性值（攻击相当于削弱玩家的HP属性，所以也是直接改变了玩家的属性）
+    ResidueHP:number;//剩余生命值
+} 

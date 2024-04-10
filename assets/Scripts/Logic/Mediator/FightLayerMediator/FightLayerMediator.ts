@@ -20,6 +20,8 @@ export class FightLayerMediator extends WindowBaseMediator{
         .set(eNotice.PlayerAttack,this.LayerHandle.bind(this))   
         .set(eNotice.PlayerBuffTrigger,this.LayerHandle.bind(this))    
         .set(eNotice.BattleAttrUpdate,this.LayerHandle.bind(this))    
+        .set(eNotice.PlayerAttackSuckBlood,this.LayerHandle.bind(this))    
+        
     }  
     
     protected InitResourcePathSet(resourceSet:Set<string>):void{  

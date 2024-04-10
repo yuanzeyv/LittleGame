@@ -1,11 +1,11 @@
 import {_Facade, _G} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
-import { _decorator, EventTouch, find , Node, NodePool } from 'cc';
+import { _decorator, EventTouch, find , Node, NodePool, Widget } from 'cc';
 import { BaseLayer, LayerExecute } from '../../../Frame/BaseLayer/BaseLayer'; 
 import { FightAttrScrollView } from './FightAttrScrollView';
 import { eCampType } from '../../Proxy/FightProxy/Define/CampDefine';
 import { BattleCamp } from './BattleCamp';
-import { RecordAttack, RecordAttackMoveTo, RecordBuffInsert, RecordInitData, RecordRoundChange } from '../../Proxy/FightProxy/Define/RecordDefine';
+import { RecordAttack, RecordAttackMoveTo, RecordAttrUpdate, RecordBuffInsert, RecordInitData, RecordRoundChange, RecordSuckBlood } from '../../Proxy/FightProxy/Define/RecordDefine';
 import { TextMeshLabel } from '../../../../../extensions/TextMesh Pro/assets/TextMesh/label/TextMeshLabel';
 import { GetTextMeshComp } from '../../../Util/Util';
 import { PoolProxy } from '../../Proxy/PoolProxy/PoolProxy';
@@ -28,6 +28,7 @@ export class FightLayer extends BaseLayer {
         executeMap.set(eNotice.PlayerAttack,this.PlayerAttackHandle.bind(this));
         executeMap.set(eNotice.PlayerBuffTrigger,this.PlayerBuffTriggerHandle.bind(this));
         executeMap.set(eNotice.BattleAttrUpdate,this.BattleAttrUpdateHandle.bind(this));
+        executeMap.set(eNotice.PlayerAttackSuckBlood,this.PlayerAttackSuckBloodHandle.bind(this));
         
     } 
     
@@ -40,10 +41,7 @@ export class FightLayer extends BaseLayer {
     } 
     
     
-    InitData(data:any) {    
-        //this.mFightConfigArray.set(eCampType.Initiative,BuffConfig.GetData(1)); 
-        //this.mFightConfigArray.set(eCampType.Passivity,BuffConfig.GetData(2));
-
+    InitData(data:any) {     
         //获取到信息
         this.RegisterButtonEvent(this.mDynaicBG,this.CloseLayerHandle,this); 
         this.RegisterButtonEvent(this.mSelfAttrsCheckBtn,this.CheckAttrPanel,this,eCampType.Initiative); 
@@ -76,12 +74,19 @@ export class FightLayer extends BaseLayer {
 
     //属性初始化函数
     private FightAttrInitHandle(recordInitData:RecordInitData){
-        let camp:BattleCamp = new BattleCamp(
-            recordInitData.Camp,
-            this.mFightPanelNode,
-            this.GetCampAttrsScrollView(recordInitData.Camp)
-        )
+        //生成一个玩家阵营
+        let camp:BattleCamp = new BattleCamp( recordInitData.Camp );
         this.mBattleCampMap.set(recordInitData.Camp,camp);//设置阵营信息
+        //设置玩家阵营所需要的节点信息
+        camp.SetFightNode(this.mFightPanelNode); 
+        camp.SetPlayerAttrView(this.GetCampAttrsScrollView(recordInitData.Camp))
+        camp.SetNameLabel(GetTextMeshComp(find(`CenterNode/NameGroup/NameLabel_${recordInitData.Camp}`,this.node)));
+        //设置阵营的数据信息
+        camp.SetCampName(recordInitData.Name);
+
+        //插入玩家
+        camp.InsertPlayer("1001"); 
+        //事件执行完成消息通知 
         _Facade.Send(eNotice.FightEventExecuteFinish);//发送一个处理完毕消息
     }   
     
@@ -102,7 +107,7 @@ export class FightLayer extends BaseLayer {
         });//设置阵营玩家进行移动，移动完成后将发起通知
     }
     private PlayerAttackHandle(recordBase:RecordAttack){
-        this.mBattleCampMap.get(recordBase.AttackCamp).PlayerAttack(recordBase.Attrs[eAttrType.SumFinalHP] || 0,this.mBattleCampMap.get(recordBase.BeAttackCamp),()=>{
+        this.mBattleCampMap.get(recordBase.AttackCamp).PlayerAttack(recordBase.AttackType,recordBase.IsCircle,recordBase.IsMiss,recordBase.Harm,this.mBattleCampMap.get(recordBase.BeAttackCamp),()=>{
             _Facade.Send(eNotice.FightEventExecuteFinish);//发送一个处理完毕消息
         }); 
     }
@@ -111,7 +116,16 @@ export class FightLayer extends BaseLayer {
         _Facade.Send(eNotice.FightEventExecuteFinish);//发送一个处理完毕消息
     }
 
-    private BattleAttrUpdateHandle(recordBase:RecordAttack){
+    private BattleAttrUpdateHandle(recordBase:RecordAttrUpdate){
+        let camp:BattleCamp  = this.mBattleCampMap.get(recordBase.Camp);
+        camp.UpdateListViewAttr(recordBase.AttrKey);
         _Facade.Send(eNotice.FightEventExecuteFinish);//发送一个处理完毕消息 
+    } 
+
+    private PlayerAttackSuckBloodHandle(recordBase:RecordSuckBlood){
+        this.mBattleCampMap.get(recordBase.AttackCamp).PlayerAttackSuckBlood(recordBase.Attrs[eAttrType.SumFinalHP] || 0,()=>{
+            _Facade.Send(eNotice.FightEventExecuteFinish);//发送一个处理完毕消息 
+        });
     }
-}       
+
+}        
