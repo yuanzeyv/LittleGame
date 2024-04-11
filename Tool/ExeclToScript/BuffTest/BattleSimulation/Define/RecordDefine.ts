@@ -37,7 +37,6 @@ export interface RecordBuffInsert extends RecordBase{
 
 //当Buff被触发时，我希望Buff所关联的所有数据信息，能够一览无余
 export interface RecordBuffTrigger extends RecordBase{
-    TriggerType:eTriggerType;//Buff的触发类型
     Camp:eCampType;//玩家阵营类型
     BuffID:number;//造成属性变动的BuffID
     BuffKey:number;//Buff的Key

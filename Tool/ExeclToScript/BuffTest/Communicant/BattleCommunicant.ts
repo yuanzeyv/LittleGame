@@ -3,15 +3,15 @@ import { eNotifyType } from "./Define/Define";
 //用于通知战斗内的各个事件信息，充分将战斗模块进行解耦
 export class BattleCommunicant{
     private mID:number;
-    private mNotifyHandleMap:Map<eNotifyType,Map<(...param)=>void,Set<Object>>> = new Map<eNotifyType,Map<(...param)=>void,Set<Object>>>();
+    private mNotifyHandleMap:Map<eNotifyType,Map<(...param:any[])=>void,Set<Object>>> = new Map<eNotifyType,Map<(...param:any[])=>void,Set<Object>>>();
     public constructor(id:number){
         this.mID = id;
     }
     //注册通知
-    public RegisterNotify(event:eNotifyType,obj:Object,handle:(...param)=>void){
-        let handleMap:Map<(...param)=>void,Set<Object>>|undefined = this.mNotifyHandleMap.get(event);
+    public RegisterNotify(event:eNotifyType,obj:Object,handle:(...param:any[])=>void){
+        let handleMap:Map<(...param:any[])=>void,Set<Object>>|undefined = this.mNotifyHandleMap.get(event);
         if(!handleMap){
-            handleMap = new Map<(...param)=>void,Set<Object>>();
+            handleMap = new Map<(...param:any[])=>void,Set<Object>>();
             this.mNotifyHandleMap.set(event,handleMap);
         }
         let objMap:Set<Object>|undefined = handleMap.get(handle);
@@ -24,8 +24,8 @@ export class BattleCommunicant{
         objMap.add(obj);
     }
 
-    public UnRegisterNotify(event:eNotifyType,obj:Object,handle:(...param)=>void){
-        let handleMap:Map<(...param)=>void,Set<Object>>|undefined = this.mNotifyHandleMap.get(event);
+    public UnRegisterNotify(event:eNotifyType,obj:Object,handle:(...param:any[])=>void){
+        let handleMap:Map<(...param:any[])=>void,Set<Object>>|undefined = this.mNotifyHandleMap.get(event);
         if(!handleMap)//不存在此事件的注册
             return;
         let objMap:Set<Object>|undefined = handleMap.get(handle);
@@ -38,8 +38,8 @@ export class BattleCommunicant{
             this.mNotifyHandleMap.delete(event);
     }
 
-    public Notify(event:eNotifyType,...param){
-        let handleMap:Map<(...param)=>void,Set<Object>>|undefined = this.mNotifyHandleMap.get(event);
+    public Notify(event:eNotifyType,...param:any[]){
+        let handleMap:Map<(...param:any[])=>void,Set<Object>>|undefined = this.mNotifyHandleMap.get(event);
         if(handleMap == undefined)
             return;
         for(let cell of handleMap){
@@ -68,21 +68,21 @@ export class BattleCommunicantProxy{
         return id;
     }
     //注册通知
-    public RegisterNotify(id:number,event:eNotifyType,obj:Object,handle:(...param)=>void){
+    public RegisterNotify(id:number,event:eNotifyType,obj:Object,handle:(...param:any[])=>void){
         let battleCommunicant:BattleCommunicant|undefined = this.mBattleCommunicantMap.get(id);
         if( battleCommunicant == undefined)
             return;
         battleCommunicant.RegisterNotify(event,obj,handle); 
     }
 
-    public UnRegisterNotify(id:number,event:eNotifyType,obj:Object,handle:(...param)=>void){
+    public UnRegisterNotify(id:number,event:eNotifyType,obj:Object,handle:(...param:any[])=>void){
         let battleCommunicant:BattleCommunicant|undefined = this.mBattleCommunicantMap.get(id);
         if( battleCommunicant == undefined)
             return;
         battleCommunicant.UnRegisterNotify(event,obj,handle); 
     }
 
-    public Notify(id:number,event:eNotifyType,...param){
+    public Notify(id:number,event:eNotifyType,...param:any[]){
         let battleCommunicant:BattleCommunicant|undefined = this.mBattleCommunicantMap.get(id);
         if( battleCommunicant == undefined)
             return;

@@ -13,7 +13,7 @@ export class Camp{
     private mBattleCommunicantID:number;//战斗通知模块
     private mBattleSimulation:BattleSimulation;
     private mCampType:eCampType;
-    private mMainPlayer:Player;//阵营主角
+    private mMainPlayer:Player|undefined;//阵营主角
     private mPlayerArray:Array<Player> = new Array<Player>();//阵营玩家 
     private mBuffControl:BuffControl;//每个阵营维护一个Buff
 
@@ -40,7 +40,7 @@ export class Camp{
     
 
     public get MainPlayer():Player{
-        return this.mMainPlayer;
+        return this.mMainPlayer!;
     }
  
     public GetPlayerArray():Array<Player>{

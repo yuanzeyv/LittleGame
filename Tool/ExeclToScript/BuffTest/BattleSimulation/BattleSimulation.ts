@@ -5,7 +5,7 @@ import { eCampType } from "./Define/BattleDefine";
 import { Player } from "./Player";
 //一个战斗模拟对象
 export class BattleSimulation{ 
-    private mBattleCommunicantID:number;//战斗通知模块
+    private mBattleCommunicantID:number = 0;//战斗通知模块
     private mMaxRound:number = 0;//最大回合数
     private mPlayerCampArray:Array<Camp> = new Array<Camp>();//当前的所有玩家阵营 
     public get MaxRound():number{ return this.mMaxRound; } 

@@ -18,7 +18,7 @@ export class ExecuteAttrChange extends ExecuteTypeBase{
         this.mActiveAttrs = {};//清空处理
     }
 
-    public OnEnter(type:eTriggerType){ 
+    public OnEnter(){ 
         this.RemoveAttrs();//进行属移除
         //计算最新的加成
         let kvObj:{k:number,v:number} = GetKV(this.mDosomesing);
@@ -30,8 +30,7 @@ export class ExecuteAttrChange extends ExecuteTypeBase{
         } 
         let recordBuffTrigger:RecordBuffTrigger={
             RecordType: eRecordType.BuffTrigger,
-            BuffKey: this.mBuffBase.Config.Key,
-            TriggerType: type,
+            BuffKey: this.mBuffBase.Config.Key, 
             Camp: this.mBuffBase.Control.GetCampType(),
             BuffID: this.mBuffBase.ID,
             Attrs: this.mActiveAttrs

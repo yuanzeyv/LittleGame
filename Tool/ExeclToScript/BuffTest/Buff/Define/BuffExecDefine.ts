@@ -1,4 +1,4 @@
-export enum BuffeExecType{
-    AlterAttr = 0,//修改一项属性
-    InsertBuff = 1,//增加一个Buff
-}
+export enum eExecuteType{
+    AttrChange = 1,//属性变动类型
+    AddBuff = 2,//添加Buff类型
+};

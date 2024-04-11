@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "用以转表的小工具",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +12,7 @@
   "dependencies": {
     "fflate": "^0.8.2",
     "fs": "^0.0.1-security",
+    "node-ts": "^6.0.1",
     "node-xlsx": "^0.23.0",
     "pako": "^2.1.0",
     "tsx": "^4.7.1"

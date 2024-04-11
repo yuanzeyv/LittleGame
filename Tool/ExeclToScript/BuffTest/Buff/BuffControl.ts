@@ -12,15 +12,11 @@ import { BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
 import { eNotifyType } from "../Communicant/Define/Define";
 import { Camp } from "../BattleSimulation/Camp";
 import { GetBattleSimulation } from "../Global";
-/*
-*游戏一开始会对每个玩家身上创建一个BuffControl用于管理玩家身上的Buff
-*BuffControl会记录自己的阵营类型，以便更加容易的找到属性信息
-*/
 export class BuffControl{
     private mBuffGenID:number = 0;//用以对新添加的Buff赋ID
     private mCampType:eCampType;//玩家阵营类型
-    private mBattleCommunicantID:number;//通知ID
 
+    private mBattleCommunicantID:number;//通知ID
     //Buff会监听事件类型，以此来触发Buff并进行执行
     private mTriggerBuffmap:Array<Set<BuffBase>> = new Array<Set<BuffBase>>();
     //根据挂载的BuffID找到唯一Buff
@@ -142,10 +138,9 @@ export class BuffControl{
         this.InsertBuffToTypeMap(buffBase);
         this.mBuffMap.set(buffBase.ID,buffBase);//快速索引
         //监视触发条件与结束条件
-        for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())//设置Buff触发条件
-            this.mTriggerBuffmap[type].add(buffBase); 
-        for(let type of buffBase.BuffTriggerControl.GetEndTypeSet())//设置结束条件
-            this.mTriggerBuffmap[type].add(buffBase);
+        for(let typeSets of [buffBase.BuffTriggerControl.TriggerSet,buffBase.BuffTriggerControl.TriggerEndTypeSet])
+            for(let type of typeSets)
+                this.mTriggerBuffmap[type].add(buffBase);
         //插入一个Buff
         let record:RecordBuffInsert = {RecordType:eRecordType.BuffInsert,Camp:this.mCampType,BuffID:buffBase.ID,BuffKey:buffBase.Config.Key,Life:buffBase.LifeCount};
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,record);
@@ -174,12 +169,11 @@ export class BuffControl{
             buffArray == undefined;
         }
         //删除唯一ID索引
-        this.mBuffMap.delete(buffBase.ID); 
+        this.mBuffMap.delete(buffBase.ID);  
         //获取到Buff的触发类型，进行设置
-        for(let type of buffBase.BuffTriggerControl.GetTriggerTypeSet())
-            this.mTriggerBuffmap[type].delete(buffBase);
-        for(let type of buffBase.BuffTriggerControl.GetEndTypeSet())
-            this.mTriggerBuffmap[type].delete(buffBase);
+        for(let typeSets of [buffBase.BuffTriggerControl.TriggerSet,buffBase.BuffTriggerControl.TriggerEndTypeSet])
+            for(let type of typeSets)
+                this.mTriggerBuffmap[type].delete(buffBase);
     }
  
     

@@ -89,10 +89,10 @@ export class BattleSimulationFacade{
     }   
      
  
-    public Notify(event:eNotifyType,...param):void{
+    public Notify(event:eNotifyType,...param:any[]):void{
         BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,event,...param);
     }
-
+ 
     public Random():number{
         return Math.min(Math.floor(Math.random() * 10000),10000);
     }

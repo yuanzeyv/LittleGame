@@ -11,6 +11,6 @@ export class RecordBuffTriggerType extends RecordTypeBase{
             let value:number = recordBase.Attrs[key];
             playerAttrStr += `${name}:${value}`;
         } 
-        console.log(`阵营:${recordBase.Camp} 触发了Buff:${BuffConfig.GetData(recordBase.BuffKey)?.Name}  触发类型为:${recordBase.TriggerType} 属性:${playerAttrStr}`) ;
+        console.log(`阵营:${recordBase.Camp} 触发了Buff:${BuffConfig.GetData(recordBase.BuffKey)?.Name} 属性:${playerAttrStr}`) ;
     }  
-}
+} 
