@@ -4,7 +4,7 @@ import { BaseGridType } from "./BaseGridType";
 import { NumberGridType } from "./NumberGridType";
 import { ObjectGridType } from "./ObjectGridType";
 export class ArrayGridType extends BaseGridType{
-    private mBaseType:BaseGridType;//每个数组保存个基础的格子类型
+    private mBaseType:BaseGridType|undefined;//每个数组保存个基础的格子类型
     //解析文件类型
     //Array<Array<Array<Boolean>>>
     //<Array<Array<Boolean>>> 
@@ -87,14 +87,14 @@ export class ArrayGridType extends BaseGridType{
             if( dataArr.length == 1 && dataArr[0].length == 0 )
                 return true;
             for(let cell of dataArr){ 
-                let ret:AllType|undefined = this.mBaseType.Prase(cell);
+                let ret:AllType|undefined = this.mBaseType!.Prase(cell);
                 if( ret == undefined ) return false;
                 resultArr.push(ret); 
             } 
         }else{
             let dataArr:Array<string> = finalStr.split(",");
             for(let cell of dataArr){
-                let ret:AllType|undefined = this.mBaseType.Prase(cell);
+                let ret:AllType|undefined = this.mBaseType!.Prase(cell);
                 if( ret == undefined ) return false;
                 resultArr.push(ret); 
             } 
@@ -108,6 +108,6 @@ export class ArrayGridType extends BaseGridType{
     }
 
     public getTypeForTs():string{
-        return `${this.mBaseType.getTypeForTs()}[]`;
+        return `${this.mBaseType!.getTypeForTs()}[]`;
     }
 } 

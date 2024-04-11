@@ -66,8 +66,9 @@ class Buff{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"越战越勇","Level":1,"Desc":"战斗开始时增加10%基础生命。并获得 《越战越勇-横冲直撞》的Buff。","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[3,4],"Con":[],"Do":[{"t":1,"e":100009},{"t":2,"e":2}]},"EndCondition":[]};
-       this.mConfigObject[2] = {"Key":2,"BuffID":2,"Name":"越战越勇-横冲直撞","Level":1,"Desc":"每次攻击后，增加玩家10%基础攻击力","BuffType":4,"Continue":5,"MaxStack":10,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100001}]},"EndCondition":[2]};
+       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"越战越勇(领域)","Level":1,"Desc":"战斗开始时增加10%基础生命。并获得 《越战越勇-横冲直撞》的Buff。","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009},{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[2] = {"Key":2,"BuffID":2,"Name":"越战越勇-横冲直撞(领域)","Level":1,"Desc":"每次攻击后，为玩家添加一个《越战越勇-横冲直撞》的Buff","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[5],"Con":[],"Do":[{"t":2,"e":3}]},"EndCondition":[]};
+       this.mConfigObject[3] = {"Key":3,"BuffID":3,"Name":"越战越勇-横冲直撞","Level":1,"Desc":"每次攻击后，增加玩家10%基础攻击力","BuffType":4,"Continue":5,"MaxStack":5,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009}]},"EndCondition":[2]};
    }
    private InitArray(){
        for(let key in this.mConfigObject)

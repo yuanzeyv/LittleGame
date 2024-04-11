@@ -1,5 +1,4 @@
-import { BuffConfig } from "../../../Work/OutputScript/Buff";
-import { AttrNameMap } from "../../AttrControl/Define/AttrDefine";
+import { BuffConfig } from "../../../Work/OutputScript/Buff"; 
 import { RecordBase, RecordBuffInsert, RecordInitData } from "../../BattleSimulation/Define/RecordDefine";
 import { RecordTypeBase } from "./RecordTypeBase";
 

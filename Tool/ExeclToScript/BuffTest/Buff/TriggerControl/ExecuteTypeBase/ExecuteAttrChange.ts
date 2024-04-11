@@ -1,8 +1,7 @@
 import { RecordBuffTrigger, eRecordType } from "../../../BattleSimulation/Define/RecordDefine";
 import { BattleCommunicantProxy } from "../../../Communicant/BattleCommunicant";
 import { eNotifyType } from "../../../Communicant/Define/Define";
-import { ExecuteTypeBase } from "./ExecuteTypeBase"; 
-import { eTriggerType } from "../../Define/Define";
+import { ExecuteTypeBase } from "./ExecuteTypeBase";
 import { GetKV } from "../../../Util";
 
 //当一个Buff满足条件并可以正常执行时，
@@ -13,7 +12,7 @@ export class ExecuteAttrChange extends ExecuteTypeBase{
         for(let cell in this.mActiveAttrs){
             let attrKey:number = Number(cell); 
             let nowValue:number = this.mBuffBase.Control.AttrObj.GetAttr(attrKey);//获取到当前的属性
-            this.mBuffBase.Control.AttrObj.SetAttr(attrKey,nowValue + -this.mActiveAttrs[attrKey])//对属性进行改动
+            this.mBuffBase.Control.AttrObj.SetAttr(attrKey,nowValue + -this.mActiveAttrs[attrKey],false)//对属性进行改动
         }
         this.mActiveAttrs = {};//清空处理
     }
@@ -28,13 +27,8 @@ export class ExecuteAttrChange extends ExecuteTypeBase{
             let nowValue:number = this.mBuffBase.Control.AttrObj.GetAttr(attrKey);//获取到当前的属性
             this.mBuffBase.Control.AttrObj.SetAttr(attrKey,nowValue + this.mActiveAttrs[attrKey])//对属性进行改动
         } 
-        let recordBuffTrigger:RecordBuffTrigger={
-            RecordType: eRecordType.BuffTrigger,
-            BuffKey: this.mBuffBase.Config.Key, 
-            Camp: this.mBuffBase.Control.GetCampType(),
-            BuffID: this.mBuffBase.ID,
-            Attrs: this.mActiveAttrs
-        };
+        let recordBuffTrigger:RecordBuffTrigger=
+        {RecordType: eRecordType.BuffTrigger,BuffKey: this.mBuffBase.Config.Key,Camp: this.mBuffBase.Control.GetCampType(),BuffID: this.mBuffBase.ID,Attrs: this.mActiveAttrs};
         BattleCommunicantProxy.Ins.Notify(this.mBuffBase.Control.BattleCommunicantID,eNotifyType.BattleReport,recordBuffTrigger) 
     }
     
@@ -42,4 +36,4 @@ export class ExecuteAttrChange extends ExecuteTypeBase{
     public OnExit(){
         this.RemoveAttrs();//直接进行属性一处
     }
-} 
+}

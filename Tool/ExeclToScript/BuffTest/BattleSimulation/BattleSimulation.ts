@@ -1,5 +1,3 @@
-import { BattleCommunicant, BattleCommunicantProxy } from "../Communicant/BattleCommunicant";
-import { eNotifyType } from "../Communicant/Define/Define";
 import { Camp } from "./Camp";
 import { eCampType } from "./Define/BattleDefine";
 import { Player } from "./Player";
@@ -29,7 +27,6 @@ export class BattleSimulation{
         }
         return playerArray;
     } 
-    
     //设置通讯ID
     public set BattleCommunicantID(id:number){
         this.mBattleCommunicantID = id;
@@ -37,6 +34,4 @@ export class BattleSimulation{
     public get BattleCommunicantID():number{
         return this.mBattleCommunicantID;
     }
-    
-
 };

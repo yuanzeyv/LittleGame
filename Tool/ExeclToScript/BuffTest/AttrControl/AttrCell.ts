@@ -52,15 +52,15 @@ export class AttrCell{
         return this.mAttrArray[attrType] / (isPercent ? 10000: 1);
     } 
 
-    public SetAttr(attrType:eAttrType,value:number){
+    public SetAttr(attrType:eAttrType,value:number,isRecord:boolean = true){
         this.mAttrArray[attrType] = value; 
-        this.ReCalcAttrByType(attrType);
+        this.ReCalcAttrByType(attrType,isRecord);
     }  
 
     /*
     *重新计算当前对应类型的属性数据
     */
-    private ReCalcAttrByType(attrType:eAttrType):void{
+    private ReCalcAttrByType(attrType:eAttrType,isRecord:boolean = true):void{
         let triggerArr:eAttrType[] | undefined = AttrMappingMap.get(attrType);
         if(!triggerArr)
             return;  
@@ -71,7 +71,7 @@ export class AttrCell{
             this.mAttrsCalcObj[cell]!.bind(this)();//运行计算方法
             let changeAfter:number = this.GetAttr(cell);
             //存在变动时
-            if(changeFront != changeAfter){
+            if(changeFront != changeAfter && isRecord){
                 let recordAttrUpdate:RecordAttrUpdate = {Camp: this.mCampType,AttrKey:cell,AttrValue:changeAfter,RecordType: eRecordType.AttrUpdate};
                 BattleCommunicantProxy.Ins.Notify(this.mBattleCommunicantID,eNotifyType.BattleReport,recordAttrUpdate); 
             }

@@ -77,7 +77,7 @@ export class ObjectGridType extends BaseGridType{
                         break;
                 }
                 let retInfo:AllType|undefined= typeInfo.Prase(str.substring(0,nowIndex)); 
-                result[name] = retInfo;
+                (result as any)[name] = retInfo;
                 str = str.substring(nowIndex + 1);  
             }else {
                 let nameInfo:Array<string>|null = str.match(/^[^,]*,/);  
@@ -89,8 +89,8 @@ export class ObjectGridType extends BaseGridType{
                     ret = typeInfo.Prase(nameInfo[0].substring(0,nameInfo[0].length -1));
                 
                 if(ret == undefined )
-                    return false;
-                result[name] = ret; 
+                    return false; 
+                (result as any)[name] = ret; 
                 str = str.substring(nameInfo[0].length);
             }
         } 

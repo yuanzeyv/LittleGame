@@ -13,9 +13,7 @@ export class ExecuteTypeBase{
         this.mID = id;
         this.mBuffBase = buffBase;
         this.mDosomesing = doSome;
-        this.mExecuteType = eExecuteType.AddBuff;
-        this.OnInit(param);//初始化时
-        console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+        this.mExecuteType = eExecuteType.AddBuff; 
     }
     //当特效进行执行的时候，要做的事情
     public OnInit(...param:any[]):void{

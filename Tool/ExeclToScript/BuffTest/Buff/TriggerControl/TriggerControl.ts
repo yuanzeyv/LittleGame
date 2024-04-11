@@ -45,8 +45,8 @@ export class TriggerControl{
             if(executeBase == undefined)
                 continue;
             let insertExecute:ExecuteTypeBase =new executeBase(this.mBuffBase,cell.e,qqq++);
+            insertExecute.OnInit(); 
             this.mExecuteTypeArray.push(insertExecute);
-            insertExecute.OnEnter();
         }
     }
     

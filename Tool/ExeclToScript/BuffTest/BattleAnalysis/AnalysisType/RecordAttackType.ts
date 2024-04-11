@@ -1,4 +1,3 @@
-import { AttrNameMap } from "../../AttrControl/Define/AttrDefine";
 import { RecordAttack } from "../../BattleSimulation/Define/RecordDefine";
 import { eAttackType } from "../../Communicant/Define/Define";
 import { RecordTypeBase } from "./RecordTypeBase";

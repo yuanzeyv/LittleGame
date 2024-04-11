@@ -2,7 +2,6 @@
 本文件用以定义，战斗模拟的所有所有战斗结果日志
 */
 import { eCampType } from "./BattleDefine";
-import { eTriggerType } from "../../Buff/Define/Define";
 import { eAttrType } from "../../AttrControl/Define/AttrDefine";
 import { eAttackType } from "../../Communicant/Define/Define";
 export enum eRecordType{
@@ -18,8 +17,6 @@ export enum eRecordType{
 };
 
 export interface RecordBase{ RecordType:eRecordType; }//记录类型
-
- 
 //游戏内的各项数值主要被记录在玩家的属性中，所以此处会从玩家属性中拉取到战斗必要的数值内容
 export interface RecordInitData extends RecordBase{
     Camp:eCampType;//玩家阵营类型

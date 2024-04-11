@@ -1,5 +1,5 @@
 import fs from "fs"
-import * as fflate from './fflate';
+import * as fflate from 'fflate';
 import { BattleAnalysis } from "./BattleAnalysis/BattleAnalysis";
 import { BattleSimulation } from "./BattleSimulation/BattleSimulation";
 import { BattleSimulationFacade } from "./BattleSimulation/BattleSimulationFacade"; 

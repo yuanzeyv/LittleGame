@@ -42,7 +42,7 @@ export enum eAttrType{//用于计算属性的基础信息
     CircleDamageFinalPercent          =   32,//暴击增伤最终加成 
     //抵抗爆伤
     ResistanceCircleDamage            =   33,//抵抗爆伤
-    ResistanceCircleDamagePercent     =   34,//抵抗爆伤百分比vb x
+    ResistanceCircleDamagePercent     =   34,//抵抗爆伤百分比
     ResistanceCircleDamageFinalPercent=   35,//抵抗爆伤最终百分比
     //连击
     AttackContinue                      =   36,//连击
@@ -81,30 +81,6 @@ export enum eAttrType{//用于计算属性的基础信息
     SumSuckBlood                      =   116,//玩家的攻击吸血加成
     SumResistanceSuckBlood            =   117,//玩家的抵抗吸血 
 };
-
-export let AttrNameMap:Map<eAttrType,string> = new Map<eAttrType,string>();
-AttrNameMap.set(eAttrType.Attack             ,"攻击加成");
-AttrNameMap.set(eAttrType.AttackPercent      ,"攻击百分比");
-AttrNameMap.set(eAttrType.AttackFinalPercent ,"最终攻击百分比");
-AttrNameMap.set(eAttrType.Defense            ,"防御加成");
-AttrNameMap.set(eAttrType.DefensePercent     ,"防御百分比");
-AttrNameMap.set(eAttrType.DefenseFinalPercent,"最终防御百分比");
-AttrNameMap.set(eAttrType.Speed              ,"速度加成");
-AttrNameMap.set(eAttrType.SpeedPercent       ,"速度百分比");
-AttrNameMap.set(eAttrType.SpeedFinalPercent  ,"最终速度百分比");
-AttrNameMap.set(eAttrType.Life               ,"生命加成");
-AttrNameMap.set(eAttrType.LifePercent        ,"生命百分比");
-AttrNameMap.set(eAttrType.LifeFinalPercent   ,"最终生命百分比");
-AttrNameMap.set(eAttrType.Miss               ,"闪避加成");
-AttrNameMap.set(eAttrType.MissPercent        ,"闪避百分比"); 
-AttrNameMap.set(eAttrType.MissFinalPercent   ,"闪避生命百分比");
-
-AttrNameMap.set(eAttrType.SumAttack          ,"攻击力");
-AttrNameMap.set(eAttrType.SumDefense         ,"防御力");
-AttrNameMap.set(eAttrType.SumHPLimit         ,"生命值上限");
-AttrNameMap.set(eAttrType.SumSpeed           ,"速度");
-AttrNameMap.set(eAttrType.SumFinalHP         ,"生命值"); 
-
 
 //属性关联映射(意味着当某一个属性值发生变动时，玩家对应属性映射属性需要重新计算)
 export let AttrMappingMap:Map<eAttrType,Array<eAttrType>> = new Map<eAttrType,Array<eAttrType>>();
