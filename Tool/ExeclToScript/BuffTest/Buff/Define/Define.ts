@@ -42,7 +42,7 @@ export enum eTriggerType{
     RoundEnd           = 2 ,//回合结束
     BuffInsert         = 3 ,//Buff被插入时
     //攻击消息区域
-    AttackFront        = 4 ,//进行攻击前    
+    AttackFront        = 4 ,//进行攻击前
     AttackAfter        = 5 ,//进行攻击后    
     BeAttackFront        = 6 ,//被攻击前 
     BeAttackAfter        = 7 ,//被攻击后
@@ -52,5 +52,7 @@ export enum eTriggerType{
     
     HitTarget = 10,//命中时
     MissAttack = 11,//闪避时
+
     FINAL                  ,//占位
+
 };

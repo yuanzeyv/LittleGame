@@ -5,30 +5,31 @@ import { ExecuteTypeBase } from "./ExecuteTypeBase";
 import { GetKV } from "../../../Util";
 
 //当一个Buff满足条件并可以正常执行时，
-export class ExecuteAttrChange extends ExecuteTypeBase{ 
-    private mActiveAttrs:{[k:number]:number} = {};  
+export class ExecuteAttrChange extends ExecuteTypeBase{
+    private mAttrKey:number = -1;
+    private mAttrValue:number = 0;
     private RemoveAttrs():void{
-        //首先删除之前的属性加成
-        for(let cell in this.mActiveAttrs){
-            let attrKey:number = Number(cell); 
-            let nowValue:number = this.mBuffBase.Control.AttrObj.GetAttr(attrKey);//获取到当前的属性
-            this.mBuffBase.Control.AttrObj.SetAttr(attrKey,nowValue + -this.mActiveAttrs[attrKey],false)//对属性进行改动
-        }
-        this.mActiveAttrs = {};//清空处理
+        if(this.mAttrKey == -1)
+            return;
+        let nowValue:number = this.mBuffBase.Control.AttrObj.GetAttr(this.mAttrKey);//获取到当前的属性
+        this.mBuffBase.Control.AttrObj.SetAttr(this.mAttrKey,nowValue -this.mAttrValue,false)//对属性进行改动
+        this.mAttrKey = -1;
+        this.mAttrValue = 0;
     }
 
     public OnEnter(){ 
-        this.RemoveAttrs();//进行属移除
-        //计算最新的加成
         let kvObj:{k:number,v:number} = GetKV(this.mDosomesing);
-        this.mActiveAttrs[kvObj.k] = kvObj.v;
-        for(let cell in this.mActiveAttrs){
-            let attrKey:number = Number(cell); 
-            let nowValue:number = this.mBuffBase.Control.AttrObj.GetAttr(attrKey);//获取到当前的属性
-            this.mBuffBase.Control.AttrObj.SetAttr(attrKey,nowValue + this.mActiveAttrs[attrKey])//对属性进行改动
-        } 
+        if(kvObj.k == this.mAttrKey && kvObj.v == this.mAttrValue)//属性无变化的情况
+            return;
+        if(kvObj.k != -1)
+            this.RemoveAttrs();
+        this.mAttrKey = kvObj.k;
+        this.mAttrValue = kvObj.v;
+        let nowValue:number = this.mBuffBase.Control.AttrObj.GetAttr( this.mAttrKey );//获取到当前的属性
+        this.mBuffBase.Control.AttrObj.SetAttr( this.mAttrKey,nowValue + this.mAttrValue )//对属性进行改动
+ 
         let recordBuffTrigger:RecordBuffTrigger=
-        {RecordType: eRecordType.BuffTrigger,BuffKey: this.mBuffBase.Config.Key,Camp: this.mBuffBase.Control.GetCampType(),BuffID: this.mBuffBase.ID,Attrs: this.mActiveAttrs};
+        {RecordType: eRecordType.BuffTrigger,BuffKey: this.mBuffBase.Config.Key,Camp: this.mBuffBase.Control.GetCampType(),BuffID: this.mBuffBase.ID,Attrs:{[`${this.mAttrKey}`]:this.mAttrValue}};
         BattleCommunicantProxy.Ins.Notify(this.mBuffBase.Control.BattleCommunicantID,eNotifyType.BattleReport,recordBuffTrigger) 
     }
     
