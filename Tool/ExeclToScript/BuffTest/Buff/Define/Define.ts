@@ -37,7 +37,7 @@ export enum eDoSomeType {
 
 
 export enum eTriggerType{ 
-    BattleStart        = 0 ,//对局开始
+    BattleStart        = 0 ,//对局开始=
     RoundStart         = 1 ,//回合开始
     RoundEnd           = 2 ,//回合结束
     BuffInsert         = 3 ,//Buff被插入时
