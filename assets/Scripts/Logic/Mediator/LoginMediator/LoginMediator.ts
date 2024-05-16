@@ -12,7 +12,8 @@ export class LoginMediator extends WindowBaseMediator{
         notificationMap
         .set(eNotice.LongInOpen,this.OpenLayer.bind(this))
         .set(eNotice.LoginInClose,this.CloseLayer.bind(this)) 
-    }
+        .set(eNotice.RefreshSelectServer,this.LayerHandle.bind(this)) 
+    }  
     
     protected InitResourcePathSet(resourceSet:Set<string>):void{ 
         resourceSet.add("resources/LayerSource/LoginLayer");   

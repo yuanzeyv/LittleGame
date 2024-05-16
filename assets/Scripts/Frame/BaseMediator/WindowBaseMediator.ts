@@ -1,4 +1,4 @@
-import { Asset, Color,Node, Prefab,instantiate } from "cc";
+import { Color,Node, Prefab,instantiate } from "cc";
 import { WindowInterface } from "../../Compoment/WindowInterface";
 import { INotification } from "../PureMVC";
 import { eNotice } from "../../NotificationTable";
@@ -10,7 +10,7 @@ import { WindowProxy } from "../../Logic/Proxy/WindowProxy/WindowProxy";
 import { ParaseUrl } from "../../Util/Util"; 
 import { ePoolDefine } from "../../Logic/Proxy/PoolProxy/PoolDefine";  
 import { PoolProxy } from "../../Logic/Proxy/PoolProxy/PoolProxy";
-import { BundleProxy, ListenObj, LoadStruct, ResouoceType, TAssetLoadType } from "../../Logic/Proxy/BundleProxy/BundleProxy";
+import { BundleProxy, ListenObj, LoadStruct, TAssetLoadType } from "../../Logic/Proxy/BundleProxy/BundleProxy";
 export type LayerComp = new ()=>BaseLayer; 
 export type WindowParam = {
                            windowBlock:boolean,//窗口底部是否拥有遮罩
@@ -21,8 +21,8 @@ export type WindowParam = {
                            isChildWindow?:boolean,//当前界面是否属于子界面
                         };
 export  abstract class WindowBaseMediator extends BaseMediator {
-    protected mView:WindowInterface;//MVC视图组件
-    protected mResourcePathSet:Set<string> = new Set<string>();//获取到初始资源列表 
+    protected mView:WindowInterface;//MVC View视图组件
+    protected mResourcePathSet:Set<string> = new Set<string>();//打开界面所需要的所有的资源组件 
     protected mPrefabPathObj:{path:string,layerComp:LayerComp};//获取到预制体路径
     protected mLoadResourceID:number = -1;//资源加载ID   
     //节点池初始化  这个变量会在资源加载完成后，进行调用
@@ -85,6 +85,29 @@ export  abstract class WindowBaseMediator extends BaseMediator {
             _Facade.Send(eNotice.OpenLayer,this.getMediatorName());
         }
     } 
+    
+    
+    //打开一个界面
+    protected OpenMultLayer(windowID:number){
+        if(!!this.mView)//已经打开了本窗口的话，立即返回
+            return; 
+        let view:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.WindowInterface);//从对象池中取一个可用的窗口
+        this.mView = view.getComponent(WindowInterface);//取到组件的Interface
+        this.mView.SetWindowBaseData(this.GetWindowParam()); 
+        let canOpen:boolean = _Facade.FindProxy(WindowProxy).OpenMultWindow(this.getMediatorName(),this.mView,windowID);//判断组件是否被正常的添加
+        if(!canOpen){//没有被正常打开的话 
+            _Facade.FindProxy(PoolProxy).Put(ePoolDefine.WindowInterface,view);//对视图节点进行回收 
+            return;
+        } 
+        if(this.mLoadResourceID == -1){//立即尝试加载所有的游戏资源
+            this.mView.EnterLoadModel();//准备进行资源加载
+            this.mLoadResourceID = _Facade.FindProxy(BundleProxy).LoadDirs(this.GetResourceArray());//加载到资源组下的所有资源信息
+            _Facade.FindProxy(BundleProxy).RegisterListen(new ListenObj(this.mLoadResourceID,(loadInfo:LoadStruct)=>this.ResourceLoadComplete(loadInfo,windowID),this.ResourceLoadProgress.bind(this)));//注册监听
+        }else{//资源加载成功了
+            this.mView.CreateWindow(this.GenWindowNode(),windowID);//创建游戏窗口
+            _Facade.Send(eNotice.OpenLayer,this.getMediatorName()); 
+        }
+    } 
 
     //关闭本界面
     protected CloseLayer(data:any){
@@ -92,8 +115,7 @@ export  abstract class WindowBaseMediator extends BaseMediator {
             return;
         _Facade.FindProxy(WindowProxy).CloseWindow(this.getMediatorName());
         _Facade.FindProxy(PoolProxy).Put(ePoolDefine.WindowInterface,this.mView.node);//对视图节点进行回收
-        this.mView = undefined;
-
+        this.mView = undefined; 
         if( this.mLoadResourceID != -1 && _Facade.FindProxy(BundleProxy).ResourceLoadFinishByLoadID(this.mLoadResourceID)){
             let realPath:{bundleName:string,url:string}  = ParaseUrl(this.mPrefabPathObj.path);
             _Facade.FindProxy(BundleProxy).UnUseAsset(realPath.bundleName,realPath.url,Prefab);
@@ -104,21 +126,19 @@ export  abstract class WindowBaseMediator extends BaseMediator {
 
  
     //资源加载中
-    private ResourceLoadProgress(loadInfo:LoadStruct){ 
+    public ResourceLoadProgress(loadInfo:LoadStruct){ 
         if(!this.mView)//未打开窗口的情况
             return; 
         this.mView.UpdateLoadingLayer(loadInfo);
     } 
   
     //加载完成回调
-    private ResourceLoadComplete(loadInfo:LoadStruct,data:any){ 
+    public ResourceLoadComplete(loadInfo:LoadStruct,data:any){ 
         if(!this.mView)//未打开窗口的情况
             return; 
         this.mView.CompleteLoadingLayer(loadInfo,()=>{
             if(loadInfo.IsAllComplete() && this.mView != undefined){  
-                this.InitNodePool(); 
-                if(this.mView == undefined)
-                    console.log("QQQQQQQQQ");
+                this.InitNodePool();  
                 this.mView?.CreateWindow(this.GenWindowNode(),data);//创建游戏窗口
                 _Facade.Send(eNotice.OpenLayer,this.getMediatorName()); 
             }else{ 
@@ -130,12 +150,10 @@ export  abstract class WindowBaseMediator extends BaseMediator {
 
     //初始化节点池
     private InitNodePool():void{
-        if(this.mIsInitPool)
-            return;
-        this.CreateNodePool()
+        if(!this.mIsInitPool)
+            this.CreateNodePool();
         this.mIsInitPool = true;
     }
-    protected CreateNodePool():void{
-    }
+    protected CreateNodePool():void{}
 } 
 

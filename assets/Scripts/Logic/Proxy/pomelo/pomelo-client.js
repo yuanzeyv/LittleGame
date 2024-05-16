@@ -120,14 +120,14 @@
     var args = [].slice.call(arguments, 1)
       , callbacks = this._callbacks[event];
 
+    console.log(`收到网络消息:${event}`);
+    console.log(args); 
     if (callbacks) {
       callbacks = callbacks.slice(0);
       for (var i = 0, len = callbacks.length; i < len; ++i) {
         callbacks[i].apply(this, args);
       }
     }
-    console.log(`收到网络消息:${event}`);
-    console.log(args);
     return this; 
   };
 

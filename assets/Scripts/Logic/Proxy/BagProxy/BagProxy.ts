@@ -16,7 +16,8 @@ export class BagProxy extends BaseProxy{
             console.error("背包初始化失败");
             return;
         }
+        return ;
         for(let cell of data.itemArray)
-            this.mBagCellMap.set(cell.SingleID,new ItemCell(cell));
+            this.mBagCellMap.set(cell.GoodsID,new ItemCell(cell));
     }
 }   

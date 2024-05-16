@@ -38,8 +38,7 @@ export class BattleSimulationFacade{
     //进行一次战报记录
     private BattleReportHandle(record:RecordBase):void{ 
         this.mRecordArray.push(record);
-    } 
-    
+    }  
     //记录一次回合数变动消息
     private RoundStartHandle(round:number):void{ 
         let roundRecord:RecordRoundChange = {RecordType:eRecordType.RoundChange,Round:round};

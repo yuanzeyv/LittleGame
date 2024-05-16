@@ -19,7 +19,6 @@ export class MultWindowLayer extends BaseLayer {
     
     private mTwoTableView:MultWindowPanel = undefined;//当前界面的2级窗口TableView 
     RegisterExecuteHandle(executeMap: Map<eNotice, LayerExecute>) {
-        executeMap.set(eNotice.AddMultBagLayer,this.AddNodeToContent.bind(this));
         //用于设置多面板的窗口标题
     } 
     InitNode() {

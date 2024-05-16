@@ -8,6 +8,7 @@ import { GateLoadingNetStatus } from "./NetStatusMatchine/GateVirifyNetState";
 import { GateNetStatus } from "./NetStatusMatchine/GateNetStatus";
 import { NetStatusBase, eNetStatus } from "./NetStatusMatchine/NetStatusBase"; 
 import { NoneNetStatus } from "./NetStatusMatchine/NoneNetStatus";
+import { GameNetStatus } from "./NetStatusMatchine/GameNetStatus";
 //用于管理当前游戏中的所有窗口 以及 预制体缓存
 export class NetProxy extends BaseProxy{ 
     static get ProxyName():string { return "NetProxy" };
@@ -24,6 +25,7 @@ export class NetProxy extends BaseProxy{
         _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.ConnectorConnect,this.ServerConnectHandle.bind(this));
         _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.DisConnect,this.DisconnectHandle.bind(this));
         _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.GateInit,this.GateVirifyHandle.bind(this));
+        _Facade.FindProxy(NetWorkProxy).RegisterNetHandle(eNetProtocol.Kick,this.KickHandle.bind(this));
         this.ChangeStatus(eNetStatus.None);
     }
     //初始化网络状态机
@@ -33,8 +35,10 @@ export class NetProxy extends BaseProxy{
         this.mConnectorStatusMap.set(eNetStatus.Gate,new GateNetStatus("Gate"));
         this.mConnectorStatusMap.set(eNetStatus.ConnectorLoading,new ConnectorLoadingNetStatus("ConnectorLoading"));
         this.mConnectorStatusMap.set(eNetStatus.Connector,new ConnectorNetStatus("Connector"));
+        this.mConnectorStatusMap.set(eNetStatus.Game,new GameNetStatus("Game"));
     }
-    public ChangeStatus(status:eNetStatus):void{ 
+     
+    public ChangeStatus(status:eNetStatus):void{  
         if(this.mConnectStatus)
             this.mConnectStatus.OnExit(this);
         this.mConnectStatus = this.GetStatusMatchine(status);
@@ -42,11 +46,17 @@ export class NetProxy extends BaseProxy{
             this.mConnectStatus.OnEnter(this);
 
     }
+    
 
     public GetStatusMatchine(status:eNetStatus):NetStatusBase{ 
         return this.mConnectorStatusMap.get(status);
     }
-
+    
+    
+    //网络断线时的处理方案 
+    private KickHandle(data:any):void{ 
+        this.mConnectStatus.KickHandle(this,data);
+    }
     //网络断线时的处理方案
     private DisconnectHandle():void{ 
         this.mConnectStatus.DisconnectHandle(this);

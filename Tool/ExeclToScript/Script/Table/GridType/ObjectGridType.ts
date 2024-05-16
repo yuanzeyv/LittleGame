@@ -99,7 +99,6 @@ export class ObjectGridType extends BaseGridType{
 
     public Prase(str:string):AllType|undefined{   
         let result:{[key:string]:number} = {}; 
-        //{x:1,y:TRUE,z:qqqqqq123123,d:[1,2,3,45,6,7,8,9,0],q:[[1,2,5,3],[5,8,9,7,6],[5,5,5,5,5]],qqq:{x:1,y:FALSE,z:？？？？？？？？？},aaa:[{x:1,y:false,z:？？？？？111}，{x:123123,y:false,z:2222222}]}
         return this.ParseObject(str,result);
     }
  

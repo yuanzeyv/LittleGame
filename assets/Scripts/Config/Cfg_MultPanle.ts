@@ -19,19 +19,22 @@ class MultPanle{
 		this.mConfigObject[3] = {key:3,desc:"年龄面板",title:"适龄协议",btnName:"适龄协议",type:2,childWindow:[],};
 		this.mConfigObject[4] = {key:4,desc:"游戏公告面板",title:"游戏公告",btnName:"游戏公告",type:2,childWindow:[],}; 
 		this.mConfigObject[5] = {key:5,desc:"游戏协议面板",title:"游玩协议",btnName:"游玩协议",type:2,childWindow:[],}; 
-		this.mConfigObject[6] = {key:6,desc:"游戏公告",title:"游戏时报",btnName:"游戏时报",type:2,childWindow:[],};
+		this.mConfigObject[6] = {key:6,desc:"游戏公告",title:"游戏时报",btnName:"游戏时报",type:2,childWindow:[],}; 
 		this.mConfigObject[7] = {key:7,desc:"防沉迷公告",title:"防沉迷公告",btnName:"防沉迷公告",type:2,childWindow:[],};
 		this.mConfigObject[8] = {key:8,desc:"防沉迷公告",title:"防沉迷公告",btnName:"防沉迷公告",type:2,childWindow:[],};
 		this.mConfigObject[9] = {key:9,desc:"防沉迷公告",title:"防沉迷公告",btnName:"防沉迷公告",type:2,childWindow:[],};
+        
+		this.mConfigObject[10] = {key:10,desc:"选择服务器面板",title:"选择服务器",btnName:"",type:1,childWindow:[11],};
+		this.mConfigObject[11] = {key:11,desc:"选择服务器面板",title:"选择服务器",btnName:"列表",type:2,childWindow:[],};
     }
-    private InitArray(){ 
+    private InitArray(){  
         for(let key in this.mConfigObject){
             this.mConfigArray.push(this.mConfigObject[key]);
         }
     }
     public GetLen(){
         return this.mConfigArray.length;
-    }
+    } 
     public GetData(key:number): IMultPanleStruct | undefined{
         return this.mConfigObject[key];
     } 

@@ -6,7 +6,6 @@ export class NetWorkProxy extends BaseProxy{
     static get ProxyName():string { return "NetWorkProxy" }; 
     private mPomelo = (window as any).pomelo; 
     private mNetListenMap:Map<eNetProtocol,NetDisposeCallBack> = new Map<eNetProtocol,NetDisposeCallBack>();//网络信息回调
-    private mGateConfig:{} = {}; 
  
     public onLoad(): void {
         this.mPomelo.on("disconnect",this.CustomServerHandle.bind(this,eNetProtocol.DisConnect));
@@ -35,17 +34,14 @@ export class NetWorkProxy extends BaseProxy{
         this.mPomelo.off(netId);  
     }
 
-    private CustomServerHandle(netID:eNetProtocol){
+    private CustomServerHandle(netID:eNetProtocol,data:any){
         let handle:NetDisposeCallBack = this.mNetListenMap.get(netID);
         if(handle) 
-            handle(); 
-    } 
-    public SendMessage(netID:eNetProtocol.ConnectorConnect,msg:{}):void
-    public SendMessage(netID:eNetProtocol.GateConnect,msg:{}):void
-    public SendMessage(netID:eNetProtocol.QuaryServerList,msg:{}):void
-    public SendMessage(netID:eNetProtocol.GateInit,msg:{id:number}):void
-    public SendMessage(netID:eNetProtocol,msg:{id:number}):void
-    public SendMessage(netID:eNetProtocol,msg:any = {}):void{ 
+            handle(data);  
+    }  
+    
+    public SendMessage(netID:eNetProtocol,msg?:any):void
+    public SendMessage(netID:eNetProtocol,msg:any):void{ 
         this.mPomelo.notify(netID,msg);  
     }
 } 

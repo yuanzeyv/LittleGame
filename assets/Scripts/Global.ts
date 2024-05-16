@@ -17,4 +17,4 @@ class Global {
     }
 }
 export let _G: Global = new Global();//向外导出Gloabl对象
-export let _Facade: Facade = _G.Facade;//向外导出Gloabl对象 
+export let _Facade: Facade = _G.Facade;//向外导出Gloabl对象

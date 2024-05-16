@@ -1,13 +1,13 @@
 //这一部分是网络消息通知
 export type ItemBaseType = {
-    SingleID:number;//每个道具的唯一ID
+    GoodsID:number;//每个道具的唯一ID
     ItemID:number;//道具的ItemID
     Count:number;//拥有道具的数量
+    SID:string;//道具的拥有者UID
 
+    AwardSID:string;//道具的获得者UID
     AwardTime:number;//道具的生成时间
-    AwardUID:string;//道具的获得者UID
     AwardWay:number;//道具的获得者UID
-    OwnerUID:string;//道具的拥有者UID
 };
 
 export type EquipBaseType = {

@@ -41,13 +41,13 @@ class ItemCell{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"ItemID":1,"Name":"低级经验丹","Desc":"使用后，玩家立即获得100点经验值","Type":2,"PackID":[],"MaxCount":9999};
-       this.mConfigObject[2] = {"ItemID":2,"Name":"中级经验丹","Desc":"使用后，玩家立即获得300点经验值","Type":2,"PackID":[],"MaxCount":9999};
-       this.mConfigObject[3] = {"ItemID":3,"Name":"高级经验丹","Desc":"使用后，玩家立即获得500点经验值","Type":2,"PackID":[],"MaxCount":9999};
-       this.mConfigObject[4] = {"ItemID":4,"Name":"特技经验丹","Desc":"使用后，玩家立即获得1000点经验值","Type":2,"PackID":[],"MaxCount":9999};
-       this.mConfigObject[5] = {"ItemID":5,"Name":"仙币","Desc":"可以在仙币商店购买指定道具","Type":1,"PackID":[],"MaxCount":0};
-       this.mConfigObject[6] = {"ItemID":6,"Name":"仙韵元宝","Desc":"可以在元宝商店购买指定道具","Type":1,"PackID":[],"MaxCount":0};
-       this.mConfigObject[7] = {"ItemID":7,"Name":"仙路阅历","Desc":"修行者在需要仙途阅历累计到一定程度时，能够刷新自己的层次，开拓自己的眼界，掌握更多常人所不能掌握的能力!","Type":1,"PackID":[],"MaxCount":0};
+       this.mConfigObject[11] = {"ItemID":11,"Name":"低级经验丹","Desc":"使用后，玩家立即获得100点经验值","Type":2,"PackID":[],"MaxCount":9999};
+       this.mConfigObject[21] = {"ItemID":21,"Name":"中级经验丹","Desc":"使用后，玩家立即获得300点经验值","Type":2,"PackID":[],"MaxCount":9999};
+       this.mConfigObject[31] = {"ItemID":31,"Name":"高级经验丹","Desc":"使用后，玩家立即获得500点经验值","Type":2,"PackID":[],"MaxCount":9999};
+       this.mConfigObject[41] = {"ItemID":41,"Name":"特技经验丹","Desc":"使用后，玩家立即获得1000点经验值","Type":2,"PackID":[],"MaxCount":9999};
+       this.mConfigObject[51] = {"ItemID":51,"Name":"仙币","Desc":"可以在仙币商店购买指定道具","Type":1,"PackID":[],"MaxCount":0};
+       this.mConfigObject[61] = {"ItemID":61,"Name":"仙韵元宝","Desc":"可以在元宝商店购买指定道具","Type":1,"PackID":[],"MaxCount":0};
+       this.mConfigObject[71] = {"ItemID":71,"Name":"仙路阅历","Desc":"修行者在需要仙途阅历累计到一定程度时，能够刷新自己的层次，开拓自己的眼界，掌握更多常人所不能掌握的能力!","Type":1,"PackID":[],"MaxCount":0};
    }
    private InitArray(){
        for(let key in this.mConfigObject)

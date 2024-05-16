@@ -4,7 +4,7 @@ import { INotification } from '../Frame/PureMVC';
 import { _Facade } from '../Global';
 import { CopyWidget, SetFullWidget } from '../Util/Util'; 
 import { LoadStruct } from '../Logic/Proxy/BundleProxy/BundleProxy'; 
-import { WindowParam } from '../Frame/BaseMediator/WindowBaseMediator';
+import { LayerComp, WindowParam } from '../Frame/BaseMediator/WindowBaseMediator';
 const { ccclass} = _decorator;
 export class WindowInterface extends Component {   
     private mLayerCompoment:BaseLayer;//界面用组件 
@@ -24,6 +24,11 @@ export class WindowInterface extends Component {
     public SetWindowBaseData(data:WindowParam):void{
         this.mWindowData = data;
     }
+    //获取到界面组件
+    public get LayerComp():BaseLayer{
+        return this.mLayerCompoment;
+    }
+    
     //创建一个窗口
     CreateWindow(layer:Node,windowData:any):boolean{//创建一个窗口对象    
         this.mWindowNode.active = true;//关闭窗口的显示 

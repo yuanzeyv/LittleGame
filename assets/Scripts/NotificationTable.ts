@@ -32,9 +32,12 @@ export enum eNotice {
     //热更新界面用
     HotUpdateOpen = "HotUpdateOpen",
     HotUpdateClose = "HotUpdateClose",
+    //游戏的服务器选择界面
+    RefreshServerList = "RefreshServerList",
 
     //登录服务器界面
     SelectLoginServerLayerOpen = "SelectLoginServerLayerOpen",
+    RefreshSelectServer = "RefreshSelectServer",
 
     //关卡界面
     PassSelectOpen = "PassSelectOpen",
@@ -184,4 +187,14 @@ export enum eNotice {
    FightEnd = "FightEnd",//战斗结束
 
    UpdateCampAttrs = "UpdateCampAttrs",//更新阵营血量
+
+   /*
+   *打开服务器选择列表
+   */ 
+    OpenMultChooseServerLayer = "OpenMultChooseServerLayer",
+    ClosMultChooseServerLayer = "ClosMultChooseServerLayer",
+    AddMultMultChooseServerLayer = "AddMultMultChooseServerLayer",
+
+    OpenChooseServerLayer = "OpenChooseServerLayer",
+    ClosChooseServerLayer = "ClosChooseServerLayer",
 }

@@ -4,8 +4,7 @@ import { BundleAssest } from "./BundleAsset";
 import { SyncMicroTask } from "../../../Util/Util"; 
 let GLoadID:number = 1;//可以通过注册监听 或者轮询查询 
 
-type BundleName = string;
-export let QQQQ:number = 0;
+type BundleName = string; 
 export type ResouoceType<T extends Asset> = new (...args: any[]) => T;
 export type LoadID = number;
 export type UUID = string;

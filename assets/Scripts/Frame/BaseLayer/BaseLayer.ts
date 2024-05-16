@@ -41,19 +41,18 @@ export class BaseLayer extends Component{
         this.InitLayer();
         this.AfterLoad();
     }
+
     protected InitLayer() {}//初始化界面信息
     protected AfterLoad() {}//初始化结束以后
  
-    public CloseLayer(){//关闭界面后做的操作  
-        if(this.mButtonEvent == undefined)
-            console.log("QQQQQQQQQQQQQ");
+    public CloseLayer(){//关闭界面后做的操作   
         this.mButtonEvent.ClearButtonEvent();
         this.onClose();
     }
     protected onClose(){} 
 
     //按钮点击注册区域
-    public ButtonClickHandle(eventTouch:EventTouch,args:any):void{
+    protected ButtonClickHandle(eventTouch:EventTouch,args:any):void{
         this.mButtonEvent.ExecuteClickHandle(eventTouch,args);  
         //_Facade.FindProxy(MusicProxy).Play(1);//准备播放一个音效
     }
