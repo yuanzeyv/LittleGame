@@ -1,1 +1,12 @@
-{"ver":"1.0.1","importer":"ttf-font","imported":true,"uuid":"a5220ed7-462c-440f-b86a-556737a4ce74","files":[".json","YSHaoShenTi.ttf"],"subMetas":{},"userData":{}}
+{
+  "ver": "1.0.1",
+  "importer": "ttf-font",
+  "imported": true,
+  "uuid": "d984c716-a24c-4785-be15-074ee97ed979",
+  "files": [
+    ".json",
+    "YSHaoShenTi.ttf"
+  ],
+  "subMetas": {},
+  "userData": {}
+}
