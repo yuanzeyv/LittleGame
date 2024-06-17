@@ -146,12 +146,12 @@ export class HorizontalTypeSet extends BaseTypeSet {
         let trans = comp.uiTransform;
         comp.localOffsetX = 0;
         comp.localOffsetY = 0;
-        comp.globalOffsetX = -trans.width * trans.anchorX;
-        comp.globalOffsetY = trans.height * (1 - trans.anchorY);
+        comp.globalOffsetX = -trans.width * trans.anchorX || 0;
+        comp.globalOffsetY = trans.height * (1 - trans.anchorY) || 0;
     }
 
     private updateInClampMode(comp: TextMeshLabel): LayoutResult {
-        return this.updateInWarpMode(comp, 1, false);
+        return this.updateInWarpMode(comp, 1, comp.multiline);
     }
 
     private preProcessVertex(comp: TextMeshLabel, charInfo: CharInfo, scale: number) {
@@ -161,8 +161,9 @@ export class HorizontalTypeSet extends BaseTypeSet {
         }
 
         charInfo.cjk = isCJK(charInfo.char.code);
-        let ratio = charInfo.slot ? 1 : charInfo.style.realFontSize / comp.font.fontSize * scale;
-        let scaleX = charInfo.scale = ratio * comp.aspect;
+        let ratio = charInfo.slot ? 1 : charInfo.style.realFontSize / (comp.font.fontSize * charInfo.char.scale) * scale;
+        let realScale = ratio;// / charInfo.char.scale;
+        let scaleX = charInfo.scale = realScale * comp.aspect;
         
         let isBreak = charInfo.char.code == "\n";
         let isSpace = charInfo.char.code == " ";
@@ -210,13 +211,13 @@ export class HorizontalTypeSet extends BaseTypeSet {
         }
         charInfo.ascent = ascent * ratio;
         charInfo.descent = descent * ratio;        
-        charInfo.fixedY = (height - glyphHeight) * ratio;
+        charInfo.fixedOffsetY = comp.font.offsetY * realScale;
         
         // 计算真实宽高
         if(!charInfo.rotate) {
             charInfo.realWidth = width * scaleX;
-            charInfo.realHeight = height * ratio;
-            charInfo.offsetY = -descent * ratio;
+            charInfo.realHeight = height * realScale;
+            charInfo.offsetY = -descent * realScale;
 
             if(charInfo.slot) {
                 charInfo.w = charInfo.realWidth;
@@ -227,8 +228,8 @@ export class HorizontalTypeSet extends BaseTypeSet {
             } 
         }else{
             charInfo.realWidth = height * scaleX;
-            charInfo.realHeight = width * ratio;
-            charInfo.offsetY = -descent * ratio;
+            charInfo.realHeight = width * realScale;
+            charInfo.offsetY = -descent * realScale;
 
             if(charInfo.slot) {
                 charInfo.w = charInfo.realHeight;
@@ -279,7 +280,7 @@ export class HorizontalTypeSet extends BaseTypeSet {
             if(charInfo.visibleChar) {
                 let height = 0;
                 height = charInfo.h; 
-                this.breakLineInfo.lineHeight = Math.max(height, this.breakLineInfo.lineHeight);
+                this.breakLineInfo.lineHeight = comp.fixedLineHeight ? comp.lineHeight : Math.max(height, this.breakLineInfo.lineHeight);
                 this.breakLineInfo.maxDescent = Math.max(charInfo.descent, this.breakLineInfo.maxDescent);
                 this.breakLineInfo.maxAscent = Math.max(charInfo.ascent, this.breakLineInfo.maxAscent);
                 this.breakLineInfo.maxHeight = Math.max(this.breakLineInfo.maxHeight, charInfo.realHeight);
@@ -361,16 +362,22 @@ export class HorizontalTypeSet extends BaseTypeSet {
 
                 isBreak = nextChar2.char.code == "\n";
                 totalWidth += this.getWidthExt(charInfo, nextChar2);
+                let isNextLeading  = false;
+                let isNextBreaking = false;
 
                 // 如果最后一个字符遇到前置字符，提前换行
                 if(isBreak ||
                     autoBreak && 
                     (totalWidth + nextChar2.w + nextChar2.sw + nextChar2.glyphRight > maxWidth) && 
-                    LINELEADING.indexOf(nextChar2.char.code) >= 0) {
+                    (
+                        (isNextLeading = LINELEADING.indexOf(nextChar2.char.code) >= 0) || 
+                        (isNextBreaking = LINEBREAKING.indexOf(nextChar2.char.code) >= 0)
+                    )) 
+                {
                     let useOld = oldIndex >= 0;
                     // 下一行再显示
                     this.breakLineInfo.index = useOld ? oldIndex : vi;
-                    if(isBreak) {
+                    if(isBreak || isNextBreaking && comp.autoWarp) {
                         this.breakLineInfo.index++;
                     }
                     totalWidth = oldTotalWidth;
@@ -436,10 +443,12 @@ export class HorizontalTypeSet extends BaseTypeSet {
         let boundHeight = 0;
         let boundWidth = 0;
         let lastMaxDescent = 0;
+        let lastMaxAscent = 0;
         
         let linesHeight: number[] = [];
         let linesWidth: number[] = [];
 
+        let lineBaseY = 0;
         for(let i=0;i<chars.length;i++) {            
             let charInfo = chars[i];  
 
@@ -454,15 +463,9 @@ export class HorizontalTypeSet extends BaseTypeSet {
             // 需要在每行计算后下移
             if(newLine) {
                 newLine = false;
-
-                let offsetHeight = 0;
-                if(lines.length > 1) {
-                    offsetHeight = comp.lineSpace;
-                }                
-
-                let sy = ((maxHeight - lineHeight) + this.breakLineInfo.maxAscent);
                 startY = baseY;
-                baseY = baseY - sy - offsetHeight;
+                baseY = baseY - lineHeight;
+                lineBaseY = (maxHeight - lineHeight) * 0.5;
             }
 
             line[1] = i;
@@ -497,13 +500,24 @@ export class HorizontalTypeSet extends BaseTypeSet {
             // 向左偏移glyphLeft
             charInfo.x = totalX - charInfo.glyphLeft;
             charInfo.baseY = baseY;
-            charInfo.y = -charInfo.descent;
+            charInfo.y = -lineBaseY + charInfo.fixedOffsetY;
             charInfo.startY = startY;
+
+            if(newLine) {
+                // 行空间
+                let offsetHeight = 0;
+                if(lines.length > 0) {
+                    offsetHeight = comp.lineSpace;
+                }                
+                baseY = baseY - offsetHeight;
+            }
             
             // 上标
             if(charInfo.style.scriptType == EScriptType.SuperScript) {                
-                charInfo.y += (lineHeight - charInfo.h);
-            }            
+                charInfo.y += lineHeight - charInfo.h * 0.5;
+            }else if(charInfo.style.scriptType == EScriptType.SubScript) {
+                charInfo.y += charInfo.h * 0.5;
+            }
             
             for(let iu = 0;iu < this.beginUpdateHandlers.length;iu++) {
                 this.beginUpdateHandlers[iu].call(this, comp, i, newLine);
@@ -516,9 +530,9 @@ export class HorizontalTypeSet extends BaseTypeSet {
 
                 // 行宽度需要考虑倾斜宽度
                 linesWidth.push(lineWidth);
-                linesHeight.push(maxHeight);
+                linesHeight.push(lineHeight);
+                boundHeight += lineHeight;
 
-                boundHeight += maxHeight;
                 if(lines.length > 1) {
                     boundHeight += comp.lineSpace;
                 }
@@ -543,6 +557,7 @@ export class HorizontalTypeSet extends BaseTypeSet {
                 
                 lineHeight = 0;
                 lastMaxDescent = this.breakLineInfo.maxDescent;
+                lastMaxAscent = this.breakLineInfo.maxAscent;
 
                 this.breakLineInfo.index = -1;
                 this.breakLineInfo.lineHeight = 0;
@@ -566,7 +581,7 @@ export class HorizontalTypeSet extends BaseTypeSet {
         let result = this.updateInWarpMode(comp);
         const trans = comp.uiTransform!;
         let offsetY = (result.maxHeight - trans.height) * trans.anchorY;
-        trans.height = result.maxHeight;
+        trans.height = result.maxHeight || 0;
         comp.globalOffsetY += offsetY;
         return result;
     }
@@ -574,8 +589,8 @@ export class HorizontalTypeSet extends BaseTypeSet {
     private updateInResizeWidthMode(comp: TextMeshLabel): LayoutResult {
         let result = this.updateInWarpMode(comp, 1, false);
         const trans = comp.uiTransform!;
-        trans.width = result.maxWidth;
-        trans.height = comp.fixedLineHeight ? comp.lineHeight : result.maxHeight;
+        trans.width = result.maxWidth || 0;
+        trans.height = result.maxHeight;
         return result;
     }
 
@@ -636,12 +651,10 @@ export class HorizontalTypeSet extends BaseTypeSet {
 
         const trans = comp.uiTransform!;
         let align = 0;
-        if(comp.fixedLineHeight) {
-            if(comp.verticalAlign == ETextVerticalAlign.Middle) {
-                align = 0.5;
-            }else if(comp.verticalAlign == ETextVerticalAlign.Bottom) {
-                align = 1;
-            }
+        if(comp.verticalAlign == ETextVerticalAlign.Middle) {
+            align = 0.5;
+        }else if(comp.verticalAlign == ETextVerticalAlign.Bottom) {
+            align = 1;
         }
 
         let realMaxHeight = result.maxHeight + comp.padding.bottom;

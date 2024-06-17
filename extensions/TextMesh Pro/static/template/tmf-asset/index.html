@@ -6,7 +6,9 @@
         <ui-section class="config" header="i18n:text-mesh.font_info.base_info" expand>
             <div class="row withDragProp">               
                 <ui-label value="i18n:text-mesh.font_info.source_font" class="title"></ui-label>
-                <ui-asset readonly droppable="cc.TTFFont" ref="fontAsset" class="prop" @confirm="model.font = $event.target.value"></ui-asset> 
+                <!-- <ui-asset readonly droppable="cc.TTFFont" ref="fontAsset" class="prop" @confirm="model.font = $event.target.value" :hidden="model.usesystem_font"></ui-asset> -->
+                <ui-asset readonly droppable="cc.TTFFont" ref="fontAsset" class="prop" @confirm="model.font = $event.target.value"  v-if="!model.usesystem_font"></ui-asset> 
+                <ui-input :placeholder="model.fontFamily" class="prop-h" :value="model.fontFamily" v-else="model.usesystem_font"></ui-input>
             </div>
             <div class="row">    
                 <ui-label value="i18n:text-mesh.font_info.gen_font_size" class="title"></ui-label>    
@@ -35,6 +37,38 @@
             </div>
         </ui-section>      
         <ui-section class="config" header="i18n:text-mesh.settings.name" expand>
+            <div class="row">
+                <ui-label value="i18n:text-mesh.settings.enableAutoFree" class="title"></ui-label>
+                <ui-checkbox class="prop" v-model="model.enableAutoFree" @confirm="onEnableAutoFree($event.target.value)"></ui-checkbox>
+            </div>
+            <div class="row">               
+                <ui-label value="i18n:text-mesh.settings.offsetY" class="title"></ui-label>
+                <ui-input class="prop" v-model="model.offsetY"></ui-input>
+            </div>
+            <div class="row">               
+                <ui-label value="i18n:text-mesh.settings.normalWeight" class="title"></ui-label>
+                <ui-num-input class="prop" v-model="model.normalWeight"></ui-num-input>
+            </div>
+            <div class="row">               
+                <ui-label value="i18n:text-mesh.settings.boldWeightScale" class="title"></ui-label>
+                <ui-num-input class="prop" v-model="model.boldWeightScale"></ui-num-input>
+            </div>
+            <div class="row">               
+                <ui-label value="i18n:text-mesh.settings.strokeScale" class="title"></ui-label>
+                <ui-num-input class="prop" v-model="model.strokeScale"></ui-num-input>
+            </div>
+            <div class="row">               
+                <ui-label value="i18n:text-mesh.settings.strokeBlur" class="title"></ui-label>
+                <ui-num-input class="prop" v-model="model.strokeBlur"></ui-num-input>
+            </div>
+            <div class="row">               
+                <ui-label value="i18n:text-mesh.settings.shadowSize" class="title"></ui-label>
+                <ui-num-input class="prop" v-model="model.shadowSize"></ui-num-input>
+            </div>
+            <div class="row">               
+                <ui-label value="i18n:text-mesh.settings.shadowBlur" class="title"></ui-label>
+                <ui-num-input class="prop" v-model="model.shadowBlur"></ui-num-input>
+            </div>
             <div class="row">               
                 <ui-label value="i18n:text-mesh.settings.underLineOffset" class="title"></ui-label>
                 <ui-num-input class="prop" v-model="model.underLineOffset"></ui-num-input>

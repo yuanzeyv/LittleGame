@@ -24,5 +24,4 @@ export interface ITMFont {
     scriptThickness?: number;
     
     getCharInfo(code: string): Char;
-    removeDynamicChar(code: string): void;
 }

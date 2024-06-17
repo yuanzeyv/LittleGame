@@ -99,6 +99,14 @@ module.exports = Editor.Panel.define({
                             staticChannelCount: 3,
                             charset: "",
                             tmfFontFile: "",
+                            enableAutoFree: false,
+                            offsetY: 0,
+                            normalWeight: 0.14,
+                            boldWeightScale: 0.2,
+                            strokeScale: 2,
+                            strokeBlur: 0,
+                            shadowSize: 0.03,
+                            shadowBlur: 0,
                             underLineOffset: -0.1,
                             keepUnlderLineSpace: false,
                             underLineThickness: 0.15,
@@ -133,6 +141,14 @@ module.exports = Editor.Panel.define({
                 methods: {
                     onTMFValueChanged() {
                         Editor.Message.broadcast("textmesh:tmf-refresh", selectedAsset.uuid, JSON.stringify({
+                            enableAutoFree: this.model.enableAutoFree,
+                            offsetY: this.model.offsetY,
+                            normalWeight: this.model.normalWeight,
+                            boldWeightScale: this.model.boldWeightScale,
+                            strokeScale: this.model.strokeScale,
+                            strokeBlur: this.model.strokeBlur,
+                            shadowSize: this.model.shadowSize,
+                            shadowBlur: this.model.shadowBlur,
                             underLineOffset: this.model.underLineOffset,
                             keepUnlderLineSpace: this.model.keepUnlderLineSpace,
                             underLineThickness: this.model.underLineThickness,
@@ -311,6 +327,10 @@ module.exports = Editor.Panel.define({
                         await Editor.Message.request("text-mesh", "textmesh:open-create-font-panel", selectedAsset.uuid);
                         player_prefs_1.PlayerPrefs.set("selected-tmf-uuid", selectedAsset.uuid);
                     },
+                    round(value, precision) {
+                        let multiplier = Math.pow(10, precision || 0);
+                        return Math.round(value * multiplier) / multiplier;
+                    },
                     async saveTMF() {
                         let lines = [];
                         lines.push(settings_1.Settings.TMF_Prefix);
@@ -326,6 +346,14 @@ module.exports = Editor.Panel.define({
                         lines.push(`atlasHeight=${this.model.atlasHeight}`);
                         lines.push(`dynamic=${this.model.dynamic ? 1 : 0}`);
                         lines.push(`staticChannels=${this.model.staticChannelCount}`);
+                        lines.push(`enableAutoFree=${this.model.enableAutoFree ? 1 : 0}`);
+                        lines.push(`offsetY=${this.model.offsetY}`);
+                        lines.push(`normalWeight=${this.model.normalWeight}`);
+                        lines.push(`boldWeightScale=${this.model.boldWeightScale}`);
+                        lines.push(`strokeScale=${this.model.strokeScale}`);
+                        lines.push(`strokeBlur=${this.model.strokeBlur}`);
+                        lines.push(`shadowSize=${this.model.shadowSize}`);
+                        lines.push(`shadowBlur=${this.model.shadowBlur}`);
                         lines.push(`underLineOffset=${this.model.underLineOffset}`);
                         lines.push(`keepUnlderLineSpace=${this.model.keepUnlderLineSpace ? 1 : 0}`);
                         lines.push(`underLineThickness=${this.model.underLineThickness}`);
@@ -345,16 +373,18 @@ module.exports = Editor.Panel.define({
                                     char.width,
                                     char.height,
                                     char.size,
-                                    char.glyphWidth,
-                                    char.glyphHeight,
+                                    Math.round(char.glyphWidth),
+                                    Math.round(char.glyphHeight),
                                     Math.round(char.glyphAdvance),
-                                    char.glyphLeft,
-                                    char.glyphRight,
-                                    char.ascent,
-                                    char.descent,
+                                    Math.round(char.glyphLeft),
+                                    Math.round(char.glyphRight),
+                                    Math.round(char.ascent),
+                                    Math.round(char.descent),
+                                    this.round(char.scale, 3),
                                 ].join(","));
                         }
                         fs_1.default.writeFileSync(selectedAsset.file, lines.join("\n"));
+                        console.log("save tmf file success");
                     },
                     isNone(value) {
                         return value === null || value === undefined || Number.isNaN(value);
@@ -362,6 +392,9 @@ module.exports = Editor.Panel.define({
                     onKeepUpderlineSpace(val) {
                         this.model.keepUnlderLineSpace = val;
                     },
+                    onEnableAutoFree(val) {
+                        this.model.enableAutoFree = val;
+                    }
                 },
                 computed: {
                     auto_font_size() {
@@ -392,6 +425,14 @@ module.exports = Editor.Panel.define({
                             this.model.atlasHeight = fontData.atlasHeight;
                             this.model.dynamic = fontData.dynamic == 1;
                             this.model.staticChannelCount = this.isNone(fontData.staticChannels) ? 3 : fontData.staticChannels;
+                            this.model.enableAutoFree = this.isNone(fontData.enableAutoFree) ? false : fontData.enableAutoFree == 1;
+                            this.model.offsetY = this.isNone(fontData.offsetY) ? 0 : fontData.offsetY;
+                            this.model.normalWeight = this.isNone(fontData.normalWeight) ? 0.14 : fontData.normalWeight;
+                            this.model.boldWeightScale = this.isNone(fontData.boldWeightScale) ? 0.2 : fontData.boldWeightScale;
+                            this.model.strokeScale = this.isNone(fontData.strokeScale) ? 2 : fontData.strokeScale;
+                            this.model.strokeBlur = this.isNone(fontData.strokeBlur) ? 0.0 : fontData.strokeBlur;
+                            this.model.shadowSize = this.isNone(fontData.shadowSize) ? 0.03 : fontData.shadowSize;
+                            this.model.shadowBlur = this.isNone(fontData.shadowBlur) ? 0.0 : fontData.shadowBlur;
                             this.model.underLineOffset = this.isNone(fontData.underLineOffset) ? -6.9 : fontData.underLineOffset;
                             this.model.keepUnlderLineSpace = this.isNone(fontData.keepUnlderLineSpace) ? false : fontData.keepUnlderLineSpace == 1;
                             this.model.underLineThickness = this.isNone(fontData.underLineThickness) ? 0.15 : fontData.underLineThickness;

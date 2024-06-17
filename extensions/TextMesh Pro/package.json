@@ -1,6 +1,6 @@
 {
   "package_version": 2,
-  "version": "1.0.6",
+  "version": "2.0.1",
   "name": "text-mesh",
   "description": "i18n:text-mesh.description",
   "main": "./dist/main.js",
@@ -11,8 +11,8 @@
       "type": "dockable",
       "main": "dist/panels/default",
       "size": {
-        "min-width": 300,
-        "min-height": 400,
+        "min-width": 100,
+        "min-height": 200,
         "width": 1024,
         "height": 600
       }
@@ -22,9 +22,9 @@
       "type": "dockable",
       "main": "dist/panels/create-font",
       "size": {
-        "min-width": 300,
-        "min-height": 400,
-        "width": 400,
+        "min-width": 100,
+        "min-height": 200,
+        "width": 500,
         "height": 600
       }
     }
@@ -133,5 +133,5 @@
     "maxrects-packer": "^2.7.3",
     "vue": "^3.2.37"
   },
-  "_storeId": "4cf384337e71474b18e008a7d8539023"
+  "_storeId": "4fa2a7c74c4ceb73fb593563ed38f834"
 }

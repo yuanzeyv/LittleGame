@@ -9,7 +9,7 @@
                     <option key="2" value="2">{{I18N('text-mesh.font_info.system_font')}}</option>
                 </ui-select>
                 <ui-asset droppable="cc.TTFFont" ref="fontAsset" class="prop-h" @confirm="onTTFChanged($event.target.value)" v-if="!model.usesystem_font"></ui-asset> 
-                <ui-input :placeholder="model.fontFamily" class="prop-h" :value="model.fontFamily" v-else="model.usesystem_font"></ui-input>
+                <ui-input ref="fontFamily" :placeholder="model.fontFamily" class="prop-h" :value="model.fontFamily" v-else="model.usesystem_font"></ui-input>
             </div>
         </div>
         <div class="row">    
@@ -49,11 +49,11 @@
                 </option>
             </ui-select>
         </div>
-        <div class="row">               
+        <div class="row" v-show="!model.usesystem_font">               
             <ui-label value="i18n:text-mesh.font_info.enable_dynamic" class="title"></ui-label>
             <ui-checkbox :value="model.dynamic" @confirm="onDynamicChanged($event.target.value)"></ui-checkbox>
         </div>
-        <div class="row">               
+        <div class="row" v-show="!model.usesystem_font">               
             <ui-label value="i18n:text-mesh.font_info.static_channel_size" class="title"></ui-label>
             <ui-select class="prop" :value="model.staticChannelCount"  @confirm="model.staticChannelCount = parseInt($event.target.value)">
                 <option

@@ -1,4 +1,4 @@
-import { Asset, assetManager, BufferAsset, TextAsset, Texture2D, TTFFont, _decorator } from "cc";
+import { Asset, assetManager, BufferAsset, TextAsset, Texture2D, TTFFont, _decorator, Material, instantiate } from "cc";
 import { FontData } from "./FontData";
 import { Char } from "./Char";
 import { IFontData } from "../types/IFontData";
@@ -27,14 +27,33 @@ export class TMFont extends Asset implements ITMFont {
     private _dynamic: boolean = true;
     private _padTrim: boolean = false;
 
+    private _enableAutoFree = false;
+    private _offsetY = 0;
+
+    private _normalWeight = 0.14;
+    private _boldWeightScale = 1.2;
+    private _strokeScale = 0.1;
+    private _strokeBlur = 0;
+    private _shadowSize = 0.03;
+    private _shadowBlur = 0.0;
+
     private _underLineOffset = -6.9;
     private _keepUnlderLineSpace = false;
     private _underLineThickness = 0.15;
     private _strikeOffset = 0.4;
     private _strikeThickness = 0.1;
     private _scriptThickness = 0.3;
+    private _material: Material;
 
     private _chars:{[char:string]: Char} = {};
+
+    get version() {
+        return this._version;
+    }
+
+    get material() {
+        return this._material;
+    }
 
     get uid() {
         return this._uid;
@@ -74,6 +93,38 @@ export class TMFont extends Asset implements ITMFont {
 
     get fontData(): IFontData {
         return this._fontData;
+    }
+
+    get enableAutoFree() {
+        return this._enableAutoFree;
+    }
+
+    get offsetY() {
+        return this._offsetY;
+    }
+
+    get normalWeight() {
+        return this._normalWeight;
+    }
+
+    get boldWeightScale() {
+        return this._boldWeightScale;
+    }
+
+    get strokeScale() {
+        return this._strokeScale;
+    }
+
+    get strokeBlur() {
+        return this._strokeBlur;
+    }
+
+    get shadowSize() {
+        return this._shadowSize;
+    }
+
+    get shadowBlur() {
+        return this._shadowBlur;
     }
 
     get underLineOffset() {
@@ -119,11 +170,19 @@ export class TMFont extends Asset implements ITMFont {
     }
 
     getCharInfo(code: string): Char {
-        return this._fontData.getCharInfo(code, null);
+        let ret = this._fontData.getCharInfo(code, null);
+        ret.ref++;
+        return ret;
     }
 
-    removeDynamicChar(code: string) {
-        this._fontData.removeDynamicChar(code);
+    freeChar(char: Char) {
+        char.ref--;
+
+        if(this._enableAutoFree) {
+            if(char.ref <= 0) {
+                this._fontData.removeDynamicChar(char.code);
+            }
+        }
     }
 
     private async _loadFontInfo(fontInfo: TMFontInfo) {   
@@ -137,6 +196,16 @@ export class TMFont extends Asset implements ITMFont {
         this._dynamic = fontInfo.dynamic == 1 || this._staticChannels == 0;
         this._padTrim = fontInfo.padTrim == 1;
 
+        this._enableAutoFree = fontInfo.enableAutoFree == 1;
+        this._offsetY = fontInfo.offsetY || 0;
+
+        this._normalWeight = fontInfo.normalWeight;
+        this._boldWeightScale = fontInfo.boldWeightScale;
+        this._strokeScale = fontInfo.strokeScale;
+        this._strokeBlur = fontInfo.strokeBlur;
+        this._shadowSize = fontInfo.shadowSize;
+        this._shadowBlur = fontInfo.shadowBlur;
+
         this._underLineOffset = fontInfo.underLineOffset;
         this._keepUnlderLineSpace = fontInfo.keepUnlderLineSpace == 1;
         this._underLineThickness = fontInfo.underLineThickness;
@@ -145,7 +214,7 @@ export class TMFont extends Asset implements ITMFont {
         this._scriptThickness = fontInfo.scriptThickness;
 
         let ttf: TTFFont;
-        if(fontInfo.dynamic && fontInfo.staticChannels < 4) {
+        if(fontInfo.dynamic && fontInfo.staticChannels < 4 && fontInfo.font) {
             ttf = await ResManager.getByUUIDAsync(fontInfo.font, TTFFont) as TTFFont;
         }
 
@@ -160,7 +229,7 @@ export class TMFont extends Asset implements ITMFont {
         return value === null || value === undefined || Number.isNaN(value);
     }
 
-    static async deserializeAsync(data: string | TextAsset | ArrayBuffer | BufferAsset) {
+    static async deserializeAsync(data: string | TextAsset | ArrayBuffer | BufferAsset, material?: Material) {
         let text = "";
         let uuid = "";
         if(typeof data == "string") {
@@ -199,6 +268,23 @@ export class TMFont extends Asset implements ITMFont {
         let fontInfo = FontParser.parse(uuid, text);
         let tmf = new TMFont();
         tmf._uid = uuid;
+        if(!material) {
+            let next = false;
+            const matUUID = "456042ba-7dd1-452c-a76b-cf79a55fcd6c";
+            assetManager.loadAny({uuid: matUUID}, (err, asset) => {
+                if(err) {
+                    console.error(err);
+                    return;
+                }
+                tmf._material = new Material();
+                tmf._material.copy(asset);
+                next = true;
+            });
+            await Utils.until(()=>next);
+        }else{            
+            tmf._material = new Material();
+            tmf._material.copy(material);
+        }
 
         await tmf._loadFontInfo(fontInfo);
 

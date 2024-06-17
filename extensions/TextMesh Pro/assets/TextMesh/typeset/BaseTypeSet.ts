@@ -113,7 +113,11 @@ export class BaseTypeSet implements ITypeSet {
         if(line.startIndex >= 0) {
             line.lineLength += charInfo.w;
             if(charInfo.visibleChar) {
-                line.lineHeight = Math.max(line.lineHeight, charInfo.realHeight);
+                if(comp.fixedLineHeight) {
+                    line.lineHeight = comp.lineHeight;
+                }else{
+                    line.lineHeight = Math.max(line.lineHeight, charInfo.h);
+                }
             }
         }
     }

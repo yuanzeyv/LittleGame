@@ -17,10 +17,15 @@ import { ResManager } from "../utils/ResManger";
 import { click_char_event } from "./events";
 import { EDITOR } from "cc/env";
 import { StyleManager } from "./StyleManager";
-import { SlotConnector } from "./SlotConnector"; 
+import { SlotConnector } from "./SlotConnector";
+import { TextMeshSettings } from "../settings";
+import { FM } from "../font/FontManager";
 const { ccclass, property, executeInEditMode,executionOrder } = _decorator;
 
-type SlotHandlerType = (comp: TextMeshLabel, slotNode: Node, slot: Slot)=>void;
+export type SlotHandlerType = (comp: TextMeshLabel, slotNode: Node, slot: Slot)=>void;
+export type SlotSpriteFrameHandlerType = (name: string)=>SpriteFrame | Promise<SpriteFrame>;
+export type SlotPrefabHandlerType = (name: string)=>Prefab | Promise<Prefab>;
+
 const vec2_temp = v2();
 
 export enum EDirtyFlag {
@@ -29,7 +34,8 @@ export enum EDirtyFlag {
     Style = 1 << 2,
     Layout = 1 << 3,
     Property = 1 << 4,
-    All = Text | Style | Layout | Property,
+    Slot = 1 << 5,
+    All = Text | Style | Layout | Property | Slot,
 }
 
 const quat = new Quat();
@@ -41,12 +47,14 @@ export class TextMeshLabel extends UIRenderer {
     static CHAR_CLICK_EVENT = "CHAR_CLICK_EVENT";
 
     private _slotCreateHandlers: {[slotType: number]:SlotHandlerType} = {};
+    private _slotSpriteFrameCreateHandler: SlotSpriteFrameHandlerType = null;
+    private _slotPrefabCreateHandler: SlotPrefabHandlerType = null;
 
     @property({serializable: true})
     private _saveTag = 0;
 
-    @property({ type: BufferAsset, visible: false, serializable: true })
-    protected _fontData: BufferAsset = null;
+    @property({ visible: false, serializable: true })
+    protected _fontName: string = "Arial";
 
     @property({ visible: false, serializable: true })
     protected _string = 'text mesh';
@@ -145,13 +153,13 @@ export class TextMeshLabel extends UIRenderer {
     protected _handleTouchEvent = false;    
 
     @property({ visible: false, serializable: true})
-    protected _autoWarp = false;   
+    protected _autoWarp = true;   
 
     @property({ visible: false, serializable: true})
     protected _lineHeight = 40;
 
     @property({ visible: false, serializable: true})
-    protected _fixedLineHeight = true;
+    protected _fixedLineHeight = false;
 
     @property({type: Margin, visible: false, serializable: true})
     protected _padding: Margin = new Margin;
@@ -194,6 +202,12 @@ export class TextMeshLabel extends UIRenderer {
 
     @property({visible: false, serializable: true })
     protected _breakWestern = false;
+
+    @property({visible: false, serializable: true })
+    protected _enableBold: boolean = false;
+
+    @property({visible: false, serializable: true })
+    protected _useFontPreset: boolean = TextMeshSettings.defulatUseFontPreset;
   
     private _style: TextStyle = new TextStyle();
 
@@ -212,10 +226,19 @@ export class TextMeshLabel extends UIRenderer {
     private _dirtyFlag = EDirtyFlag.None;
     private _uiTransform: UITransform;
     private _ready = false;
+    private _slotCount = 0;
+    private _needUpdateAfterSlotLoaded = false;
 
-    constructor(...args: any[]){
-        super(); 
+    private _transformDirty: boolean = true;
+
+    get transformDirty() {
+        return this._transformDirty;
     }
+
+    set transformDirty(value: boolean) {
+        this._transformDirty = value;
+    }
+
     get ready() {
         return this._ready;
     }
@@ -242,6 +265,47 @@ export class TextMeshLabel extends UIRenderer {
         return this._font;
     }
 
+    /**
+     * @en
+     * Font name.
+     *
+     * @zh
+     * 字体名称。
+     */
+     @property({ displayOrder: 1, tooltip: '', group: "Normal"})
+     public get fontName() {
+         return this._fontName;
+     }
+
+     public set fontName(value: string) {
+        if (this._fontName === value)  { 
+            return; 
+        }
+
+        this._fontName = value;
+        if(value) {
+            this._loadFont();            
+        }else{
+            this._font = null;
+        }
+    }
+
+    private _loadFont() {
+        if(!this._fontName) {
+            this._onTMFLoaded(null);
+            return;
+        }
+
+        let fnt = FM.getFont(this._fontName);
+        if(fnt) {
+            this._onTMFLoaded(fnt);
+        }else{
+            FM.getFontAsync(this._fontName).then((font: TMFont) => {
+                this._onTMFLoaded(font);
+            });
+        }
+    }
+
     @property({ visible: false, serializable: true})
     private _fontSize = 24;
     
@@ -252,7 +316,7 @@ export class TextMeshLabel extends UIRenderer {
     * @zh
     * 字体大小。
     */
-    @property({ displayOrder: 1, tooltip: ''})
+    @property({ displayOrder: 1, tooltip: '', group: "Normal"})
     get fontSize() {
         return this._fontSize;
     }
@@ -285,6 +349,7 @@ export class TextMeshLabel extends UIRenderer {
     }
 
     private _charInfos: CharInfo[] = [];
+    private _tempCharInfos: CharInfo[] = [];
     get charInfos(): CharInfo[] {
         return this._charInfos;
     }
@@ -304,31 +369,6 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.All);
     }
 
-    /**
-     * @en
-     * Content string of label.
-     *
-     * @zh
-     * 标签显示的文本内容。
-     */
-     @property({ type: BufferAsset, displayOrder: 1, tooltip: ''})
-     private get fontData() {
-         return this._fontData;
-     }
-
-     private set fontData(value: BufferAsset) {
-        if (!EDITOR && this._fontData === value)  { 
-            return; 
-        }
-
-        this._fontData = value;
-        if(value != null) {
-            TMFont.deserializeAsync(value).then(this._onTMFLoaded.bind(this));
-        }else{
-            this._font = null;
-        }
-     }
-
      @property({type: Node, tooltip: 'i18n:text-mesh.label.slotsContainer'})
      public slotsContainer: Node = null;
 
@@ -339,7 +379,7 @@ export class TextMeshLabel extends UIRenderer {
      * @zh
      * 标签显示的文本内容。
      */
-    @property({ displayOrder: 1, tooltip: '', multiline: true })
+    @property({ displayOrder: 1, tooltip: '', multiline: true, group: "Normal" })
     get string() {
         return this._string;
     }
@@ -366,7 +406,7 @@ export class TextMeshLabel extends UIRenderer {
     * @zh
     * 是否富文本。
     */
-    @property({ displayOrder: 2})
+    @property({ displayOrder: 2, group: "Normal"})
     get rich() {
         return this._rich;
     }
@@ -382,7 +422,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Text | EDirtyFlag.Layout);
     }
 
-    @property({displayOrder: 2})
+    @property({displayOrder: 2, group: "Normal"})
     get multiline() {
         return this._multiline;
     }
@@ -395,7 +435,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }   
 
-    @property({displayOrder: 2, min: 0, max:1, step: 0.01, slide: true})
+    @property({visible: function(){return !this._useFontPreset;}, displayOrder: 2, min: 0, max:1, step: 0.01, slide: true, group: "Normal"})
     get dilate() {
         return this._dilate;
     }
@@ -405,15 +445,14 @@ export class TextMeshLabel extends UIRenderer {
             this._dilate = value;
             this.addDirtyFlag(EDirtyFlag.Style);
         }
-    } 
+    }
 
-    @property({type: Color, displayOrder: 3, override: true})
+    @property({type: Color, displayOrder: 3, override: true, group: "Normal"})
     get color() {
         return this._color;
     }
 
     set color(value: Color) {
-        value.a = math.clamp(value.a, 1, 255);
         if (this._color.equals(value)) {
             return;
         }
@@ -427,7 +466,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({displayOrder: 4})
+    @property({displayOrder: 4, group: "Style"})
     get enableColorRT() {
         return this._enableColorRT;
     }
@@ -438,7 +477,7 @@ export class TextMeshLabel extends UIRenderer {
         }   
     }
 
-    @property({visible: function(){return this._enableColorRT}, type: Color, displayOrder: 5})
+    @property({visible: function(){return this._enableColorRT}, type: Color, displayOrder: 5, group: "Style"})
     get colorRT() {
         return this._colorRT;
     }
@@ -451,7 +490,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }
 
-    @property({displayOrder: 6})
+    @property({displayOrder: 6, group: "Style"})
     get enableColorRB() {
         return this._enableColorRB;
     }
@@ -462,7 +501,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._enableColorRB}, type: Color, displayOrder: 7})
+    @property({visible: function(){return this._enableColorRB}, type: Color, displayOrder: 7, group: "Style"})
     get colorRB() {
         return this._colorRB;
     }
@@ -475,7 +514,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }
 
-    @property({ displayOrder: 8})
+    @property({ displayOrder: 8, group: "Style"})
     get enableColorLT() {
         return this._enableColorLT;
     }
@@ -486,7 +525,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._enableColorLT}, type: Color, displayOrder: 9})
+    @property({visible: function(){return this._enableColorLT}, type: Color, displayOrder: 9, group: "Style"})
     get colorLT() {
         return this._colorLT;
     }
@@ -499,7 +538,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }
 
-    @property({displayOrder: 10})
+    @property({displayOrder: 10, group: "Style"})
     get enableColorLB() {
         return this._enableColorLB;
     }
@@ -510,7 +549,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._enableColorLB}, type: Color, displayOrder: 11})
+    @property({visible: function(){return this._enableColorLB}, type: Color, displayOrder: 11, group: "Style"})
     get colorLB() {
         return this._colorLB;
     }
@@ -523,7 +562,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }  
 
-    @property({displayOrder: 12})
+    @property({displayOrder: 12, group: "Normal"})
     get enableItalic() {
         return this._enableItalic;
     }
@@ -536,7 +575,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }  
 
-    @property({displayOrder: 13})
+    @property({displayOrder: 13, group: "Normal"})
     get enableUnderline() {
         return this._enableUnderline;
     }
@@ -549,7 +588,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     } 
 
-    @property({displayOrder: 14})
+    @property({displayOrder: 14, group: "Normal"})
     get enableStrike() {
         return this._enableStrike;
     }
@@ -562,7 +601,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }  
 
-    @property({displayOrder: 15})
+    @property({displayOrder: 15, group: "Style"})
     get enableBackground() {
         return this._enableBackground;
     }
@@ -575,7 +614,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }  
 
-    @property({visible: function(){return this._enableBackground}, displayOrder: 16})
+    @property({visible: function(){return this._enableBackground}, displayOrder: 16, group: "Style"})
     get backgroundColor() {
         return this._backgroundColor;
     }
@@ -589,7 +628,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }
 
-    @property({displayOrder: 17})
+    @property({displayOrder: 17, group: "Style"})
     get enableMask() {
         return this._enableMask;
     }
@@ -602,7 +641,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     } 
 
-    @property({visible: function(){return this._enableMask}, displayOrder: 18})
+    @property({visible: function(){return this._enableMask}, displayOrder: 18, group: "Style"})
     get maskColor() {
         return this._maskColor;
     }
@@ -616,7 +655,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }
 
-    @property({displayOrder: 19})
+    @property({displayOrder: 19, group: "Layout"})
     get autoWarp() {
         return this._autoWarp;
     }
@@ -628,7 +667,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({displayOrder: 20})
+    @property({displayOrder: 20, group: "Layout"})
     get equalWidth() {
         return this._equalWidth;
     }
@@ -640,7 +679,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({displayOrder: 21})
+    @property({displayOrder: 21, group: "Layout"})
     get fixedLineHeight() {
         return this._fixedLineHeight;
     }
@@ -650,9 +689,9 @@ export class TextMeshLabel extends UIRenderer {
             this._fixedLineHeight = value;            
             this.addDirtyFlag(EDirtyFlag.Layout);
         }
-    }    
+    }
 
-    @property({visible: function(){return this._fixedLineHeight}, displayOrder: 22})
+    @property({visible: function(){return this._fixedLineHeight}, displayOrder: 22, group: "Layout"})
     get lineHeight() {
         return this._lineHeight;
     }
@@ -677,7 +716,7 @@ export class TextMeshLabel extends UIRenderer {
     //     }
     // }
 
-    @property({type:ETextHorizontalAlign, displayOrder: 24})
+    @property({type:ETextHorizontalAlign, displayOrder: 24, group: "Layout"})
     get horizontalAlign() {
         return this._horizontalAlign;
     }
@@ -690,7 +729,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({type:ETextVerticalAlign, displayOrder: 25})
+    @property({type:ETextVerticalAlign, displayOrder: 25, group: "Layout"})
     get verticalAlign() {
         return this._verticalAlign;
     }
@@ -714,7 +753,7 @@ export class TextMeshLabel extends UIRenderer {
     //     }
     // }
 
-    @property({type:ETextOverflow, displayOrder: 26})
+    @property({type:ETextOverflow, displayOrder: 26, group: "Layout"})
     get overflow() {
         return this._overflow;
     }
@@ -727,7 +766,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({displayOrder: 27})
+    @property({displayOrder: 27, group: "Layout"})
     get lineSpace() {
         return this._lineSpace;
     }
@@ -740,7 +779,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({displayOrder: 28})
+    @property({displayOrder: 28, group: "Layout"})
     get letterSpace() {
         return this._letterSpace;
     }
@@ -753,7 +792,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }   
 
-    @property({displayOrder: 29})
+    @property({displayOrder: 29, group: "Layout"})
     get padding() {
         return this._padding;
     }
@@ -765,7 +804,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }    
 
-    @property({displayOrder: 30, min: 0, max:1, step: 0.001, slide: true})
+    @property({displayOrder: 30, min: 0, max:1, step: 0.001, slide: true, group: "Stroke"})
     get stroke() {
         return this._stroke;
     }
@@ -777,7 +816,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._stroke > 0}, displayOrder: 31, min: 0, max:1, step: 0.001, slide: true})   
+    @property({visible: function(){return this._stroke > 0}, displayOrder: 31, min: 0, max:1, step: 0.001, slide: true, group: "Stroke"})   
     get strokeBlur() {
         return this._strokeBlur;
     }
@@ -789,7 +828,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._stroke > 0}, type: Color, displayOrder: 32})
+    @property({visible: function(){return this._stroke > 0}, type: Color, displayOrder: 32, group: "Stroke"})
     get strokeColor() {
         return this._strokeColor;
     }
@@ -802,7 +841,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }
 
-    @property({displayOrder: 33, min: 0, max:1, step: 0.001, slide: true})
+    @property({displayOrder: 33, min: 0, max:1, step: 0.001, slide: true, group: "Shadow"})
     get shadow() {
         return this._shadow;
     }
@@ -813,7 +852,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._shadow > 0}, displayOrder: 34, min: 0, max:1, step: 0.001, slide: true})   
+    @property({visible: function(){return this._shadow > 0}, displayOrder: 34, min: 0, max:1, step: 0.001, slide: true, group: "Shadow"})   
     get shadowBlur() {
         return this._shadowBlur;
     }
@@ -825,7 +864,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._shadow > 0}, displayOrder: 35, min: -100, max:100, step: 0.1, slide: true})
+    @property({visible: function(){return this._shadow > 0}, displayOrder: 35, min: -100, max:100, step: 0.1, slide: true, group: "Shadow"})
     get shadowOffsetX() {
         return this._shadowOffsetX;
     }
@@ -836,7 +875,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._shadow > 0}, displayOrder: 36, min: -100, max:100, step: 0.1, slide: true})
+    @property({visible: function(){return this._shadow > 0}, displayOrder: 36, min: -100, max:100, step: 0.1, slide: true, group: "Shadow"})
     get shadowOffsetY() {
         return this._shadowOffsetY;
     }
@@ -847,7 +886,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._shadow > 0}, type: Color, displayOrder: 37})
+    @property({visible: function(){return this._shadow > 0}, type: Color, displayOrder: 37, group: "Shadow"})
     get shadowColor() {
         return this._shadowColor;
     }
@@ -861,7 +900,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Style);
     }
 
-    @property({displayOrder: 38, min: 0, max:3, step: 0.01, slide: true})
+    @property({displayOrder: 38, min: 0, max:3, step: 0.01, slide: true, group: "Layout"})
     get aspect() {
         return this._aspect;
     }
@@ -873,7 +912,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({displayOrder: 39, min: 0, max:1, step: 0.01, slide: true})
+    @property({displayOrder: 39, min: 0, max:1, step: 0.01, slide: true, group: "Layout"})
     get charVisibleRatio() {
         return this._charVisibleRatio;
     }
@@ -893,7 +932,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({type: Texture2D, displayOrder: 40})
+    @property({type: Texture2D, displayOrder: 40, group: "Style"})
     get overlayTexture() {
         return this._overlayTexture;
     }
@@ -905,7 +944,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({displayOrder: 41})
+    @property({displayOrder: 41, group: "Style"})
     get enableGlow() {
         return this._enableGlow;
     }
@@ -917,7 +956,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }   
 
-    @property({visible: function(){return this._enableGlow}, displayOrder: 42})
+    @property({visible: function(){return this._enableGlow}, displayOrder: 42, group: "Style"})
     get glowColor() {
         return this._glowColor;
     }
@@ -931,7 +970,7 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Property);
     }
 
-    @property({visible: function(){return this._enableGlow}, displayOrder: 43, min: 0, max:1, step: 0.01, slide: true})
+    @property({visible: function(){return this._enableGlow}, displayOrder: 43, min: 0, max:1, step: 0.01, slide: true, group: "Style"})
     get glowInner() {
         return this._glowInner;
     }
@@ -943,7 +982,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._enableGlow}, displayOrder: 44, min: 0, max:1, step: 0.01, slide: true})
+    @property({visible: function(){return this._enableGlow}, displayOrder: 44, min: 0, max:1, step: 0.01, slide: true, group: "Style"})
     get glowOuter() {
         return this._glowOuter;
     }
@@ -955,7 +994,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: function(){return this._enableGlow}, displayOrder: 45, min: 0, max:10, step: 0.01, slide: true})
+    @property({visible: function(){return this._enableGlow}, displayOrder: 45, min: 0, max:10, step: 0.01, slide: true, group: "Style"})
     get glowPower() {
         return this._glowPower;
     }
@@ -967,7 +1006,7 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    @property({visible: true})
+    @property({visible: true, group: "Layout"})
     get breakWestern() {
         return this._breakWestern;
     }
@@ -975,6 +1014,30 @@ export class TextMeshLabel extends UIRenderer {
     set breakWestern(value: boolean) {
         if(value != this._breakWestern) {
             this._breakWestern = value;
+            this.addDirtyFlag(EDirtyFlag.Layout);
+        }
+    }
+
+    @property({visible: true, group: "Normal"})
+    get enableBold() {
+        return this._enableBold;
+    }
+
+    set enableBold(value: boolean) {
+        if(value != this._enableBold) {
+            this._enableBold = value;
+            this.addDirtyFlag(EDirtyFlag.Layout);
+        }
+    }
+
+    @property({visible: true})
+    get useFontPreset() {
+        return this._useFontPreset;
+    }
+
+    set useFontPreset(value: boolean) {
+        if(value != this._useFontPreset) {
+            this._useFontPreset = value;
             this.addDirtyFlag(EDirtyFlag.Layout);
         }
     }
@@ -1012,19 +1075,23 @@ export class TextMeshLabel extends UIRenderer {
         this.node.on(Node.EventType.LAYER_CHANGED, this._applyLayer, this);
         this.node.on(Node.EventType.ANCHOR_CHANGED, this._onAnchorChanged, this);
         this.node.on(Node.EventType.SIZE_CHANGED, this._onSizeChanged, this);
+        this.node.on(Node.EventType.TRANSFORM_CHANGED, this._onTransformChanged, this);
         game.on(StyleManager.TMF_STYLE_CHANGED, this._onTMFStyleChanged, this);     
 
         this._style.preset();
         this._typeSet = TypeSetFactory.get("horizontal");
-        if(this._fontData) {
-            TMFont.deserializeAsync(this._fontData).then(this._onTMFLoaded.bind(this));
-        }
 
         this._padding.onChanged = (()=>{
             this.addDirtyFlag(EDirtyFlag.Layout);
         }).bind(this);
 
         this.clearEditorSlots();
+
+        this._loadFont();
+    }
+
+    public onFocusInEditor() {
+        this._loadFont();
     }
 
     private clearEditorSlots() {
@@ -1053,18 +1120,31 @@ export class TextMeshLabel extends UIRenderer {
     private _onTMFLoaded(font: TMFont) {
         this._font = font;
         this._style.font = font;
+        if(font) {
+            this.customMaterial = font.material;
+        }
+
         this.addDirtyFlag(EDirtyFlag.All);
     }
 
     private _updateStyle(style: TextStyle) {
+        const font = this._font;
+
         style.setFontSize(this._fontSize);
         style.setFillColor(this._color);
-        style.setDilate(this._dilate);        
-        style.setStroke(this._stroke);
+        style.setStroke(this._stroke * this.font.strokeScale);
         style.setStrokeBlur(this._strokeBlur);
         style.setStrokeColor(this._strokeColor);
+
+        if(this._useFontPreset) {
+            style.setDilate( this._enableBold ? font.normalWeight * this._font.boldWeightScale : font.normalWeight);
+            style.setShadowBlur(font.shadowBlur);
+        }else{
+            style.setDilate( this._enableBold ? this._dilate * this._font.boldWeightScale : this._dilate);
+            style.setShadowBlur(this._shadowBlur);
+        }
+        
         style.setShadow(this._shadow);
-        style.setShadowBlur(this._shadowBlur);
         style.setShadowColor(this._shadowColor);
         style.setShadowOffsetX(this._shadowOffsetX);
         style.setShadowOffsetY(this._shadowOffsetY);
@@ -1254,6 +1334,10 @@ export class TextMeshLabel extends UIRenderer {
         this.addDirtyFlag(EDirtyFlag.Layout);
     }
 
+    protected _onTransformChanged() {
+        this._transformDirty = true;
+    }
+
     private _onTMFStyleChanged() {
         this.addDirtyFlag(EDirtyFlag.Layout);
     }
@@ -1355,6 +1439,14 @@ export class TextMeshLabel extends UIRenderer {
         this._slotCreateHandlers[type] = handler;
     }
 
+    setSlotSpriteFrameCreateHandler(handler: SlotSpriteFrameHandlerType) {
+        this._slotSpriteFrameCreateHandler = handler;
+    }
+
+    setSlotPrefabCreateHandler(handler: SlotPrefabHandlerType) {
+        this._slotPrefabCreateHandler = handler;
+    }
+
     makeDirty(dirtyFlag: EDirtyFlag) {
         this.dirtyFlag |= dirtyFlag;
     }
@@ -1452,6 +1544,10 @@ export class TextMeshLabel extends UIRenderer {
         this._layoutResult = layout;
     }
 
+    public forceUpdate() {
+        this.lateUpdate(0);
+    }
+
     private _updateText() {   
         if(this._font == null) {
             console.warn("font is null");
@@ -1459,13 +1555,20 @@ export class TextMeshLabel extends UIRenderer {
         }
 
         this._clearSlots();   
-        this._freeCharInfos();
+        this._preFreeCharInfos();
 
         if(this._rich) {
             this._parseRich(this._string);
         }else{
             this._parse(this._string);
         }
+
+        this._freeCharInfos();
+    }
+
+    private _resetTex() {
+        this._resetAllCharInfos();
+        this._resetAdditions();
     }
 
     _clearAdditions() {
@@ -1490,16 +1593,47 @@ export class TextMeshLabel extends UIRenderer {
         this._maskInfos.length = 0;
     }
 
-    private _freeCharInfos() {
-        for(let i=0;i<this._charInfos.length;i++) {
-            putCharInfoToPool(this._charInfos[i]);
+    private _resetAdditions() {
+        for(let i=0;i<this._underLineInfos.length;i++) {
+            this._underLineInfos[i].reset();
         }
+
+        for(let i=0;i<this._strikeInfos.length;i++) {
+            this._strikeInfos[i].reset();
+        }
+
+        for(let i=0;i<this._backgroundInfos.length;i++) {
+            this._backgroundInfos[i].reset();
+        }
+
+        for(let i=0;i<this._maskInfos.length;i++) {
+            this._maskInfos[i].reset();
+        }
+    }
+
+    private _preFreeCharInfos() {
+        this._tempCharInfos = this._charInfos.concat();
         this._charInfos.length = 0;
         
         this._clearAdditions();
     }
 
+    private _freeCharInfos() {
+        for(let i=0;i<this._tempCharInfos.length;i++) {
+            putCharInfoToPool(this._tempCharInfos[i]);
+        }
+        this._tempCharInfos.length = 0;
+    }
+
+    private _resetAllCharInfos() {
+        for(let i=0;i<this._charInfos.length;i++) {
+            this._charInfos[i].reset();
+        }
+    }
+
     private _clearSlots() {
+        this._slotCount = 0;
+        this._needUpdateAfterSlotLoaded = false;
         for(let i=0;i<this._slots.length;i++) {
             let slot = this._slots[i];
             if(slot.node) {
@@ -1549,6 +1683,7 @@ export class TextMeshLabel extends UIRenderer {
 
     /**
      * slot 格式：[包名|resources目录无需包名][://资源路径|资源路径]
+     * 2.+ 修改格式为：db://[包名|resources目录无需包名]/资源路径
      * @param slot 
      * @param fontSize 
      * @returns 
@@ -1576,8 +1711,12 @@ export class TextMeshLabel extends UIRenderer {
 
         let hasW = slot.width != null;
         let hasH = slot.height != null;
+        let hasSize = slot.width != null && slot.height != null;
         slot.width = hasW ? slot.width : fontSize;
         slot.height = hasH ? slot.height : fontSize;
+        if(slot.sizeType == ESlotSizeType.None && hasSize) {
+            slot.sizeType = ESlotSizeType.FontSize;
+        }
 
         if(EDITOR) {
             if(slot.sizeType == ESlotSizeType.None) {
@@ -1600,22 +1739,36 @@ export class TextMeshLabel extends UIRenderer {
         }
         
         if(slot.src){
-            let strs = slot.src.split(':');
-            let abName = null;
-            let path = "";
-            if(strs.length == 1) {
-                path = strs[0];
-            }else{
-                abName = strs[0];
-                path = strs[1];
-            }
+            // let strs = slot.src.split(':');
+            // let abName = null;
+            // let path = "";
+            // if(strs.length == 1) {
+            //     path = strs[0];
+            // }else{
+            //     abName = strs[0];
+            //     path = strs[1];
+            // }
 
             if(slot.type == ESlotType.Image) {
                 if(this._slotCreateHandlers[ESlotType.Image]) {
                     this._slotCreateHandlers[ESlotType.Image](this, node, slot);
                 }else{
                     if(!EDITOR) {
-                        let sp = await ResManager.getAsync(abName, path + "/spriteFrame", SpriteFrame);
+                        let sp: SpriteFrame = null;
+                        if(this._slotSpriteFrameCreateHandler) {
+                            //@ts-ignore
+                            sp = this._slotSpriteFrameCreateHandler(slot.src);
+                            if(sp instanceof Promise) {
+                                sp = await sp;
+                            }
+                        }else {
+                            let src = slot.src.substring(5);
+                            let index = src.indexOf('/');
+                            let abName = src.substring(0, index);
+                            let path = src.substring(index + 1);
+
+                            sp = await ResManager.getAsync(abName, path + "/spriteFrame", SpriteFrame);
+                        }
                         if(sp && isValid(node)) {
                             let spNode = new Node();
                             spNode.name = "sprite";
@@ -1636,7 +1789,17 @@ export class TextMeshLabel extends UIRenderer {
                             }else if(slot.sizeType == ESlotSizeType.HeightFirst) {
                                 var scale = slot.height / spUrt.height;
                                 spNode.setScale(scale, scale);
-                            }                        
+                            }else if(slot.sizeType == ESlotSizeType.FontSize){
+                                spUrt.width = slot.width;
+                                spUrt.height = slot.height;
+                            }else{
+                                slot.width = spUrt.width;
+                                slot.height = spUrt.height;
+                                slot.fixed = true;
+                                // 重置，需要重新计算
+                                this._charInfos[slot.index].cjk = null;
+                                this._needUpdateAfterSlotLoaded = true;
+                            }                 
                         }
                     }
                 }
@@ -1644,8 +1807,23 @@ export class TextMeshLabel extends UIRenderer {
                 if(this._slotCreateHandlers[ESlotType.Prefab]) {
                     this._slotCreateHandlers[ESlotType.Prefab](this, node, slot);
                 }else{
-                    if(!EDITOR) {
-                        let prefab = await ResManager.getAsync(abName, path, Prefab);
+                    if(!EDITOR) {    
+                        let prefab: Prefab = null;        
+                        if(this._slotPrefabCreateHandler) {
+                            //@ts-ignore
+                            prefab = this._slotPrefabCreateHandler(slot.src);
+                            if(prefab instanceof Promise) {
+                                prefab = await prefab;
+                            }
+                        }else{
+                            let src = slot.src.substring(5);
+                            let index = src.indexOf('/');
+                            let abName = src.substring(0, index);
+                            let path = src.substring(index + 1);
+
+                            prefab = await ResManager.getAsync(abName, path, Prefab);
+                        }
+
                         // 防止还未创建就被删除的情况
                         if(prefab && isValid(node)) {
                             let inst = instantiate(prefab) as Node;
@@ -1655,19 +1833,29 @@ export class TextMeshLabel extends UIRenderer {
                                 pTR = inst.addComponent(UITransform);
                             }
 
-                            pTR.setAnchorPoint(0, 0);    
+                            pTR.setAnchorPoint(0, 0);  
+                              
                             if(slot.sizeType == ESlotSizeType.WidthFirst) {
                                 var scale = slot.width / pTR.width;
                                 inst.setScale(scale, scale);
                             }else if(slot.sizeType == ESlotSizeType.HeightFirst) {
                                 var scale = slot.height / pTR.height;
                                 inst.setScale(scale, scale);
-                            } 
+                            }else if(slot.sizeType == ESlotSizeType.FontSize){
+                                pTR.width = slot.width;
+                                pTR.height = slot.height;
+                            }else{                                
+                                pTR.width = slot.width;
+                                pTR.height = slot.height;
+                                slot.fixed = true;
+                                // 重置，需要重新计算
+                                this._charInfos[slot.index].cjk = null;
+                                this._needUpdateAfterSlotLoaded = true;
+                            }
 
-                            let rt = inst.getComponent(UITransform);
-                            if(rt) {
-                                rt.width = pTR.width;
-                                rt.height = pTR.height;
+                            if(pTR) {
+                                pTR.width = pTR.width;
+                                pTR.height = pTR.height;
                             }
                         }
                     }
@@ -1678,6 +1866,11 @@ export class TextMeshLabel extends UIRenderer {
                 }
             }
         }   
+
+        this._slotCount++;
+        if(this.isValid && this._slotCount == this._slots.length && this._needUpdateAfterSlotLoaded) {
+            this.dirtyFlag |= EDirtyFlag.Slot;
+        }
     }
 
     private _parseClick(node: TagNode) {
@@ -1842,6 +2035,13 @@ export class TextMeshLabel extends UIRenderer {
             } else if(this.dirtyFlag == EDirtyFlag.Property) {
                 this.updateMaterial();
                 // console.log("update material");
+            }else if(this.dirtyFlag == EDirtyFlag.Slot) {
+                this._resetAllCharInfos();
+                this._updateLayout();
+                this.destroyRenderData();
+                this.updateRenderData();
+                
+                this.markForUpdateRenderData(true);
             } else{                
                 this._updateText();
                 this._updateLayout();
@@ -1849,11 +2049,12 @@ export class TextMeshLabel extends UIRenderer {
                 this.updateRenderData();
                 // console.log("update text", this.charInfos.length);
                 
-                this.markForUpdateRenderData();
+                this.markForUpdateRenderData(true);
             }
 
             this.dirtyFlag = EDirtyFlag.None;
             this._ready = true;
+            this._transformDirty = true;
         }
     }
 
@@ -1863,6 +2064,7 @@ export class TextMeshLabel extends UIRenderer {
 
     set dirtyFlag(value: EDirtyFlag) {
         if(this.dirtyFlag != value) {
+            this._transformDirty = true;
             this._dirtyFlag = value;
         }
     }
@@ -1957,6 +2159,8 @@ export class TextMeshLabel extends UIRenderer {
             vs[j].rx = pos.x + dx;
             vs[j].ry = pos.y + dy;
         }
+
+        charInfo.dirty = true;
     }
 
     setCustomMaterialByUUID(uuid: string) {
@@ -1972,24 +2176,11 @@ export class TextMeshLabel extends UIRenderer {
         }
     }
 
-    setFontByUUID(uuid: string) {
-        if(uuid) {
-            assetManager.loadAny({uuid: uuid}, (err, asset) => {
-                if(err) {
-                    console.error(err);
-                    return;
-                }
-
-                this.fontData = asset;
-            });
-        }
-    }
-
     protected _canRender () {
         if (!super._canRender() || !this._string || !this._font) {
             return false;
         }
 
         return true;
-    } 
+    }
 }

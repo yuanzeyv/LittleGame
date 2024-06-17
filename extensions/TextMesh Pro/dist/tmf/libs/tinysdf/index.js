@@ -68,7 +68,7 @@ class TinySDF {
     afterDraw() {
     }
     draw(char, fontFamily, measureText, onDraw, trimBuffer) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         this.fontFamily = fontFamily || this.fontFamily;
         if (!this.cacheCanvas) {
             this.beforeDraw();
@@ -76,7 +76,7 @@ class TinySDF {
         else {
             this.ctx.font = `${this.fontStyle} ${this.fontWeight} ${this.fontSize}px ${this.fontFamily}`;
         }
-        const metric = this.ctx.measureText(measureText || char) || {};
+        const metric = this.ctx.measureText(char || measureText) || {};
         if (SUPPORT_FULL_METRICS == null) {
             SUPPORT_FULL_METRICS = metric.actualBoundingBoxAscent != null;
         }
@@ -85,10 +85,18 @@ class TinySDF {
         let actualBoundingBoxDescent = (_b = metric.fontBoundingBoxDescent) !== null && _b !== void 0 ? _b : this.buffer;
         let actualBoundingBoxLeft = (_c = metric.actualBoundingBoxLeft) !== null && _c !== void 0 ? _c : 0;
         let actualBoundingBoxRight = (_d = metric.actualBoundingBoxRight) !== null && _d !== void 0 ? _d : glyphAdvance;
+        const scale = onDraw ? 1 : Math.min(1.0, this.fontSize / (actualBoundingBoxDescent + actualBoundingBoxAscent), this.fontSize / glyphAdvance);
         if (char.length == 1) {
-            const scale = this.fontSize / (actualBoundingBoxDescent + actualBoundingBoxAscent);
-            actualBoundingBoxAscent = Math.ceil(actualBoundingBoxAscent * scale);
-            actualBoundingBoxDescent = Math.ceil(actualBoundingBoxDescent * scale);
+            // 需要缩放字体
+            if (scale < 1) {
+                this.ctx.font = `${this.fontStyle} ${this.fontWeight} ${this.fontSize * scale}px ${this.fontFamily}`;
+                const metric = this.ctx.measureText(char) || {};
+                glyphAdvance = metric.width || 0;
+                actualBoundingBoxAscent = (_e = metric.fontBoundingBoxAscent) !== null && _e !== void 0 ? _e : this.fontSize;
+                actualBoundingBoxDescent = (_f = metric.fontBoundingBoxDescent) !== null && _f !== void 0 ? _f : this.buffer;
+                actualBoundingBoxLeft = (_g = metric.actualBoundingBoxLeft) !== null && _g !== void 0 ? _g : 0;
+                actualBoundingBoxRight = (_h = metric.actualBoundingBoxRight) !== null && _h !== void 0 ? _h : glyphAdvance;
+            }
         }
         // The integer/pixel part of the top alignment is encoded in metrics.glyphTop
         // The remainder is implicitly encoded in the rasterization
@@ -107,7 +115,7 @@ class TinySDF {
         const len = Math.max(width * height, 0);
         const data = new Uint8ClampedArray(len);
         const size = this.size;
-        const glyph = { data, width, height, glyphWidth, glyphHeight, size, glyphLeft, glyphRight, glyphAdvance, ascent: glyphTop, descent: actualBoundingBoxDescent };
+        const glyph = { data, width, height, glyphWidth, glyphHeight, size, glyphLeft, glyphRight, glyphAdvance, ascent: glyphTop, descent: actualBoundingBoxDescent, scale };
         if (char == "") {
             glyph.ascent = 0;
             glyph.descent = 0;

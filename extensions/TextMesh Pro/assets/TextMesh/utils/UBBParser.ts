@@ -18,6 +18,8 @@ export class TagNode {
 }
 
 const booleanRegex = /^(true|false)$/i;
+const CHAR_POUND = '#';
+const CHAR_HEX = '0x';
 
 export class UBBParser {
     private _text: string;
@@ -118,18 +120,19 @@ export class UBBParser {
         let tagValue: ValueType = null;
         let pos: number = startPos;
         let len = this._text.length;
+        
         while(pos < len) {
             if(this._text[pos] == '=') {
                 tagName = this._text.substring(startPos, pos);
-                tagValue = this.getTagValue(pos, tag_e);
+                tagValue = this.getTagValue(tagName, pos, tag_e);
                 break;
             }else{
                 let tagEnd1 = this.isValidChar(tag_e, pos);
                 // 自闭合标签<br/>
                 let tagEnd2 = this.isValidChar("/" + tag_e, pos);
                 if(this._text[pos] == ' ' || tagEnd1 || tagEnd2) {
-                    tagName = this._text.substring(startPos, pos);  
-                    this._tagInfo.pos = pos;  
+                    tagName = this._text.substring(startPos, pos);
+                    this._tagInfo.pos = pos;
                     pos++;
                     if(tagEnd2) {
                         pos++;
@@ -148,7 +151,7 @@ export class UBBParser {
         return this._tagInfo;
     }
 
-    private getTagValue(startPos:number, tag_e:string) {
+    private getTagValue(tagName:string, startPos:number, tag_e:string) {
         let tagValue: ValueType = null;
         let pos: number = startPos;
         let len = this._text.length;
@@ -211,6 +214,8 @@ export class UBBParser {
                             if(Number.isNaN(tagValue)) {
                                 console.error("tag value error," + this._text.substring(startPos, pos));
                             }
+                        }else if(tagName == "color" || tagValue[0] == CHAR_POUND || tagValue.substring(0, 2) == CHAR_HEX) {
+                            // do nothing
                         }else{
                             tagValue = parseInt(tagValue);
     
@@ -270,7 +275,9 @@ export class UBBParser {
                     break;
                 } else if(this.isValidChar("/" + tag_e, pos)) {
                     checkBoolTag();
+                    // 自闭合标签
                     pos+=2;
+                    this._tagInfo.ended = true;
                     break;
                 }
 
@@ -472,12 +479,15 @@ export class UBBParser {
 
                 // 获取属性
                 pos = this.getAttribute(pos, tag_e);
-                                
-                // 获取文本
-                pos = this.getText(pos, tag_s, tag_e);
+                           
+                if(!this._tagInfo.ended) {
+                    // 获取文本
+                    pos = this.getText(pos, tag_s, tag_e);
 
-                // 获取尾部
-                pos = this.getTail(pos, tag_s, tag_e);   
+                    // 获取尾部
+                    pos = this.getTail(pos, tag_s, tag_e);
+                }
+                   
                 if(this._tagInfo.ended) {
                     this.closeNode(this._tagInfo.name);
                     this._tagInfo.name = null;

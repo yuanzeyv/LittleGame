@@ -12,10 +12,11 @@ type GlyphInfo = {
     glyphAdvance: number;
     ascent: number;
     descent: number;
+    scale: number;
 }
 
 type SpaceInfo = {
-    code: string;
+    index: number;
     cid: number;
     row: number;
     col: number;

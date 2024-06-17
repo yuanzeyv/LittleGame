@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "408542a8-c392-45b7-a807-67b6e6a28bf0",
+  "uuid": "9e01c8d4-36b1-4b3a-9c50-564b3cde6cbf",
   "files": [
     ".json",
     ".png"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "408542a8-c392-45b7-a807-67b6e6a28bf0@6c48a",
-      "displayName": "sample-font.tmf",
+      "uuid": "9e01c8d4-36b1-4b3a-9c50-564b3cde6cbf@6c48a",
+      "displayName": "Arial.tmf",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "408542a8-c392-45b7-a807-67b6e6a28bf0",
+        "imageUuidOrDatabaseUri": "9e01c8d4-36b1-4b3a-9c50-564b3cde6cbf",
         "visible": true
       },
       "ver": "1.0.22",
@@ -34,9 +34,9 @@
     }
   },
   "userData": {
+    "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "408542a8-c392-45b7-a807-67b6e6a28bf0@6c48a",
-    "fixAlphaTransparencyArtifacts": false
+    "redirect": "9e01c8d4-36b1-4b3a-9c50-564b3cde6cbf@6c48a"
   }
 }

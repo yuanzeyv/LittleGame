@@ -1,4 +1,4 @@
-import {  Rect, Texture2D, __private } from "cc";
+import {  Pool, Rect, Texture2D, __private } from "cc";
 import { ITMFont } from "../types/ITMFont";
 import { Char, CharSet } from "./Char";
 import { IFontData } from "../types/IFontData";
@@ -9,6 +9,9 @@ import { Utils } from "../utils/Utils";
 import { CharConst } from "./const";
 import { GlyphInfo, SpaceInfo } from "../types/types";
 import { TMFontInfo } from "./FontParser";
+import { PREVIEW } from "cc/env";
+
+const CHAR_POOL = new Pool(() => new Char(), 100);
 
 export class FontData implements IFontData {
     private _tmFont: ITMFont;
@@ -53,11 +56,19 @@ export class FontData implements IFontData {
                 width: tmFont.textureWidth,
                 height: tmFont.textureHeight,
             });
+
+            if(PREVIEW) {
+                this._buffer = new Uint8Array(tmFont.textureWidth * tmFont.textureHeight * 4);
+                for(let i=0;i<this._buffer.length;i++) {
+                    this._buffer[i] = 255;
+                }
+                Utils.uploadData(this._texture, this._buffer, new Rect(0, 0, tmFont.textureWidth, tmFont.textureHeight));
+            }
         }else{
             this._texture = texture;
         }
 
-        this._actualSize = TinySDF.calcuteFontSize(tmFont.fontSize, tmFont.padding) + this._safePadding;
+        this._actualSize = TinySDF.calcuteFontSize(tmFont.fontSize, tmFont.padding);
         this._fontRect.set(0, 0, this.spaceSize, this.spaceSize);
 
         if(tmfInfo) {
@@ -82,7 +93,12 @@ export class FontData implements IFontData {
         }
 
         let lru: any = null;
-        for(let i=this._tmFont.staticChannels;i<4;i++) {
+        for(let i=0;i<4;i++) {
+            if(i < this._tmFont.staticChannels) {
+                this._dynamicChannels.push(null);
+                continue;
+            }
+
             let channel = new TextureChannel(this._tmFont, i, true, lru);
             lru = channel.lru;
             this._dynamicChannels.push(channel);
@@ -92,6 +108,13 @@ export class FontData implements IFontData {
     removeDynamicChar(code: string) {
         let char = this._letters[code];
         if(char && !char.static) {
+            let channel = this._dynamicChannels[char.cid];
+            if(!channel) {
+                return;
+            }
+
+            channel.removeChar(char.index);
+            CHAR_POOL.free(char);
             delete this._letters[code];
         }
     }
@@ -142,28 +165,40 @@ export class FontData implements IFontData {
         // 获取一个动态通道
         let space: SpaceInfo = null;
         let channel: TextureChannel = null;
-        for(let i=0;i<this._dynamicChannels.length;i++) {
+        let totalChannel = this._dynamicChannels.length;
+        for(let i=0;i<totalChannel;i++) {
             channel = this._dynamicChannels[i];
+            if(!channel) {
+                continue;
+            }
+
             if(!channel.isFull()) {
-                if(channel.count == 0) {
+                if(!channel.initialized) {
+                    channel.initial();
                     this.clearChannel(channel.index);
                 }
                 break;
+            }else{
+                channel = null;
             }
         }
 
         if(!channel) {
-            space = this._dynamicChannels[0].spanEmptySpace(code);
-            channel = this._dynamicChannels.find(c => space.cid == c.index);
-        }else{
-            space = channel.spanEmptySpace(code);
+            console.warn(`font ${this.tmFont.fontFamily} dynamic channels is full, can not get char ${code}`);
+            return this.getNoneChar();
+        }
+        space = channel.spanEmptySpace();
+        if(!space) {
+            console.warn(`font ${this.tmFont.fontFamily} dynamic channels is full, can not get char ${code}`);
+            return this.getNoneChar();
         }
         delete this._letters[code];
 
         let glyph = charRender ? charRender.call(thisRender, code, this._tmFont) : FontHelper.createSDFChar(code, this._tmFont);        
         
-        char = new Char();
+        char = CHAR_POOL.alloc();
         char.code = code;
+        char.index = space.index;
         char.glyphWidth = glyph.glyphWidth;
         char.glyphHeight = glyph.glyphHeight;
         char.glyphAdvance = glyph.glyphAdvance;
@@ -174,6 +209,7 @@ export class FontData implements IFontData {
         char.size = glyph.size;
         char.ascent = glyph.ascent;
         char.descent = glyph.descent;
+        char.scale = glyph.scale;
         let u0 = (space.x+this._safePadding) / this.tmFont.textureWidth;
         let v0 = (space.y+this._safePadding) / this.tmFont.textureHeight;
         let v1 = v0 + glyph.height / this.tmFont.textureHeight;
@@ -189,6 +225,10 @@ export class FontData implements IFontData {
         return char;
     }
 
+    /**
+     * 隐患：微信开放域开启后，不能读取纹理数据
+     * @param cid 
+     */
     private clearChannel(cid: number) {
         let width = this._texture.width;
         let height = this._texture.height;

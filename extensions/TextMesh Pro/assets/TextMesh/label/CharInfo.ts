@@ -14,6 +14,11 @@ export class CharVertex {
     rx: number = 0;
     // real y
     ry: number = 0;
+
+    worldX: number = 0;
+    worldY: number = 0;
+    worldZ: number = 0;
+
     scale: number = 1;
     rot: number = 0;
 
@@ -35,6 +40,7 @@ export class CharInfo {
     blendMode: number;
     char: Char;
     visible: boolean = true;
+    dirty: boolean = true;
 
     style: TextStyle;
 
@@ -47,7 +53,9 @@ export class CharInfo {
 
     x: number;
     y: number;
+    // 底部Y位置
     baseY: number;
+    // 顶部Y开始位置
     startY: number;
 
     rotate?: boolean;
@@ -60,7 +68,7 @@ export class CharInfo {
 
     offsetX: number = 0;
     offsetY: number = 0;
-    fixedY:number = 0;
+    fixedOffsetY:number = 0;
 
     w: number = 0;
     h: number = 0;
@@ -95,6 +103,7 @@ export class CharInfo {
 
     copyFrom(charInfo: CharInfo) {
         this.index = charInfo.index;
+        this.dirty = true;
         this.font = charInfo.font;
         this.blendMode = charInfo.blendMode;
         this.char = charInfo.char;
@@ -126,10 +135,10 @@ export class CharInfo {
         this.line = charInfo.line;
         this.inline = charInfo.inline;
         this.visibleChar = charInfo.visibleChar;
-        this.fixedY = charInfo.fixedY;
+        this.fixedOffsetY = charInfo.fixedOffsetY;
     }
 
-    reset() {
+    clear() {
       if(this.style.shadow > 0 && !this.shadowChar) {
         this.shadowChar = CharInfoPool.alloc();
         this.shadowChar.copyFrom(this);
@@ -138,15 +147,21 @@ export class CharInfo {
         this.shadowChar = null;
       }
     }
+
+    reset() {
+      resetCharInfo(this, false);
+    }
   }
 
   var CharInfoPool = new Pool(()=>new CharInfo(), 128);
   export function putCharInfoToPool(charInfo: CharInfo) {
+    charInfo.font?.freeChar(charInfo.char);
+    
     for(let i=0;i<charInfo.vertexData.length;i++) {
       _charVertexPool.free(charInfo.vertexData[i]);
     }
     charInfo.vertexData.length = 0;
-    CharInfoPool.free(charInfo);
+    CharInfoPool.free(charInfo);   
 
     if(charInfo.shadowChar) {
       putCharInfoToPool(charInfo.shadowChar);
@@ -156,11 +171,24 @@ export class CharInfo {
 
   export function getCharInfoFromPool() {
     let charInfo = CharInfoPool.alloc();
+    resetCharInfo(charInfo);
+    return charInfo;
+  }
+
+  export function resetCharInfo(charInfo: CharInfo, clearAll = true) {    
+    if(!clearAll) {
+      charInfo.vertexData.length = 0;      
+      charInfo.cjk = null; 
+      return;     
+    }
+    
+    charInfo.char = null;
+    charInfo.style = null;
+    charInfo.slot = null;
+    charInfo.click = null;
     charInfo.index = 0;
     charInfo.font = null;
     charInfo.blendMode = 0;
-    charInfo.char = null;
-    charInfo.style = null;
     charInfo.alpha = 1;
     charInfo.x = 0;
     charInfo.y = 0;
@@ -177,20 +205,16 @@ export class CharInfo {
     charInfo.glyphRight = 0;
     charInfo.sw = 0;
     charInfo.sw1 = 0;
-    charInfo.cjk = null;
     charInfo.scale = 1;
-    charInfo.slot = null;
-    charInfo.click = null;
     charInfo.line = 0;
     charInfo.inline = 0;
     charInfo.vertexData.length = 0;
     charInfo.visibleChar = true;
     charInfo.shadowChar = null;
-    charInfo.fixedY = 0;
+    charInfo.fixedOffsetY = 0;
     charInfo.visible = true;
     charInfo.startY = 0;
     charInfo.ascent = 0;
     charInfo.descent = 0;
-
-    return charInfo;
-  }
+    charInfo.cjk = null;
+}

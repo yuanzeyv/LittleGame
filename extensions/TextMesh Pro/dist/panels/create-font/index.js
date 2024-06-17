@@ -96,6 +96,14 @@ module.exports = Editor.Panel.define({
                             staticChannelCount: 3,
                             charset: "",
                             tmfFontFile: "",
+                            enableAutoFree: false,
+                            offsetY: 0,
+                            normalWeight: 0.14,
+                            boldWeightScale: 1.2,
+                            strokeScale: 2,
+                            strokeBlur: 0,
+                            shadowSize: 0.03,
+                            shadowBlur: 0,
                             underLineOffset: -0.2,
                             keepUnlderLineSpace: false,
                             underLineThickness: 0.15,
@@ -182,18 +190,33 @@ module.exports = Editor.Panel.define({
                             this.model.atlasHeight = fontData.atlasHeight;
                             this.model.dynamic = fontData.dynamic == 1;
                             this.model.staticChannelCount = this.isNone(fontData.staticChannels) ? 3 : fontData.staticChannels;
+                            this.model.enableAutoFree = this.isNone(fontData.enableAutoFree) ? true : fontData.enableAutoFree == 1;
+                            this.model.offsetY = this.isNone(fontData.offsetY) ? 0 : fontData.offsetY;
+                            this.model.normalWeight = this.isNone(fontData.normalWeight) ? 0.14 : fontData.normalWeight;
+                            this.model.boldWeightScale = this.isNone(fontData.boldWeightScale) ? 1.2 : fontData.boldWeightScale;
+                            this.model.strokeScale = this.isNone(fontData.strokeScale) ? 2 : fontData.strokeScale;
+                            this.model.strokeBlur = this.isNone(fontData.strokeBlur) ? 0.0 : fontData.strokeBlur;
+                            this.model.shadowSize = this.isNone(fontData.shadowSize) ? 0.03 : fontData.shadowSize;
+                            this.model.shadowBlur = this.isNone(fontData.shadowBlur) ? 0.0 : fontData.shadowBlur;
                             this.model.underLineOffset = this.isNone(fontData.underLineOffset) ? -6.9 : fontData.underLineOffset;
                             this.model.keepUnlderLineSpace = this.isNone(fontData.keepUnlderLineSpace) ? false : fontData.keepUnlderLineSpace == 1;
                             this.model.underLineThickness = this.isNone(fontData.underLineThickness) ? 0.15 : fontData.underLineThickness;
                             this.model.strikeOffset = this.isNone(fontData.strikeOffset) ? 0.4 : fontData.strikeOffset;
                             this.model.strikeThickness = this.isNone(fontData.strikeThickness) ? 0.1 : fontData.strikeThickness;
                             this.model.scriptThickness = this.isNone(fontData.scriptThickness) ? 0.3 : fontData.scriptThickness;
+                            this.model.usesystem_font = !this.model.fontFamily;
                         }
                     },
                     isNone(value) {
                         return value === null || value === undefined || Number.isNaN(value);
                     },
                     async checkInputs() {
+                        if (this.model.usesystem_font) {
+                            this.model.staticChannelCount = 0;
+                            this.model.dynamic = true;
+                            this.model.font = "";
+                            this.model.fontFamily = this.$refs.fontFamily.value;
+                        }
                         if (!this.model.usesystem_font && !this.model.font) {
                             console.error(this.I18N("text-mesh.messages.need_font"));
                             return false;
@@ -392,6 +415,10 @@ module.exports = Editor.Panel.define({
                         }
                         return allChars;
                     },
+                    round(value, precision) {
+                        var multiplier = Math.pow(10, precision || 0);
+                        return Math.round(value * multiplier) / multiplier;
+                    },
                     async writeTMF(writedRects, atlasUuid) {
                         let lines = [];
                         lines.push(settings_1.Settings.TMF_Prefix);
@@ -407,6 +434,14 @@ module.exports = Editor.Panel.define({
                         lines.push(`atlasHeight=${this.model.atlasHeight}`);
                         lines.push(`dynamic=${this.model.dynamic ? 1 : 0}`);
                         lines.push(`staticChannels=${this.model.staticChannelCount}`);
+                        lines.push(`enableAutoFree=${this.model.enableAutoFree ? 1 : 0}`);
+                        lines.push(`offsetY=${this.model.offsetY}`);
+                        lines.push(`normalWeight=${this.model.normalWeight}`);
+                        lines.push(`boldWeightScale=${this.model.boldWeightScale}`);
+                        lines.push(`strokeScale=${this.model.strokeScale}`);
+                        lines.push(`strokeBlur=${this.model.strokeBlur}`);
+                        lines.push(`shadowSize=${this.model.shadowSize}`);
+                        lines.push(`shadowBlur=${this.model.shadowBlur}`);
                         lines.push(`underLineOffset=${this.model.underLineOffset}`);
                         lines.push(`keepUnlderLineSpace=${this.model.keepUnlderLineSpace ? 1 : 0}`);
                         lines.push(`underLineThickness=${this.model.underLineThickness}`);
@@ -425,13 +460,14 @@ module.exports = Editor.Panel.define({
                                     rect.width,
                                     rect.height,
                                     char.size,
-                                    char.glyphWidth,
-                                    char.glyphHeight,
+                                    Math.round(char.glyphWidth),
+                                    Math.round(char.glyphHeight),
                                     Math.round(char.glyphAdvance),
-                                    char.glyphLeft,
-                                    char.glyphRight,
-                                    char.ascent,
-                                    char.descent,
+                                    Math.round(char.glyphLeft),
+                                    Math.round(char.glyphRight),
+                                    Math.round(char.ascent),
+                                    Math.round(char.descent),
+                                    this.round(char.scale, 3),
                                 ].join(","));
                         }
                         let tmf = await Editor.Message.request("asset-db", "query-path", this.model.tmfFontFile);
@@ -455,7 +491,14 @@ module.exports = Editor.Panel.define({
                                     staticChannelCount: parseInt(this.model.staticChannelCount),
                                 };
                                 this.getCanvas();
-                                let charsetFile = await Editor.Message.request("asset-db", "query-path", this.model.charset);
+                                let charsetFile = "";
+                                if (this.model.charset) {
+                                    charsetFile = await Editor.Message.request("asset-db", "query-path", this.model.charset);
+                                }
+                                else {
+                                    console.error(this.I18N("text-mesh.messages.need_charset"));
+                                    return;
+                                }
                                 let charset = fs_extra_1.default.readFileSync(charsetFile, 'utf-8');
                                 let allChars = this._parseCharset(charset);
                                 this.inGenerating = true;
@@ -553,11 +596,17 @@ module.exports = Editor.Panel.define({
                                             this.writeTMF([], null);
                                         }
                                     }
-                                    console.warn("Need More Space, Unencode chars:", unRecodeChars);
+                                    if (unRecodeChars.length > 0) {
+                                        console.warn("Need More Space, Unencode chars:", unRecodeChars);
+                                    }
+                                    else {
+                                        console.log("Generate Success");
+                                    }
                                 }
                             }
                             else {
                                 this.writeTMF([], null);
+                                console.log("Generate Success");
                             }
                             this.inGenerating = false;
                         }

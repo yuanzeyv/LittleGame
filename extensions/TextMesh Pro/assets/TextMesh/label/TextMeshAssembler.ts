@@ -45,6 +45,7 @@ export class TextMeshAssembler implements IAssembler {
             vertexOffset = this._fillElementBuffers(comp, renderer, true);
         }
         this._fillElementBuffers(comp, renderer, false, vertexOffset);
+        comp.transformDirty = false;
     }
 
     private static _fillElementBuffers(comp: TextMeshLabel, renderer: __private._cocos_2d_renderer_i_batcher__IBatcher, shadow: boolean = false, vertexOffset: number = 0) {        
@@ -69,19 +70,24 @@ export class TextMeshAssembler implements IAssembler {
             if(shadow) {
                 charInfo = charInfo.shadowChar;
                 if(!charInfo) {
-                    continue;
+                    return vIndex;
                 }
             }
             
             for(let vi = 0; vi < charInfo.vertexData.length; vi++) {
                 const v = charInfo.vertexData[vi];
-                vec3_temp.set(v.rx, v.ry, 0);
-                Vec3.transformMat4(vec3_temp, vec3_temp, _worldMatrix);
+                if(true || comp.transformDirty || charInfo.dirty) {
+                    vec3_temp.set(v.rx, v.ry, 0);
+                    Vec3.transformMat4(vec3_temp, vec3_temp, _worldMatrix);
+                    v.worldX = vec3_temp.x;
+                    v.worldY = vec3_temp.y;
+                    v.worldZ = vec3_temp.z;
+                }
 
                 let idx = floatStride * vIndex;
-                vData[idx] = vec3_temp.x;
-                vData[idx + 1] = vec3_temp.y;
-                vData[idx + 2] = vec3_temp.z;
+                vData[idx] = v.worldX;
+                vData[idx + 1] = v.worldY;
+                vData[idx + 2] = v.worldZ;
 
                 if(vIndex % 4 == 0) {
                     let vOffset = vIndex + vid;
@@ -97,6 +103,7 @@ export class TextMeshAssembler implements IAssembler {
 
                 vIndex++;
             } 
+            charInfo.dirty = false;
         }
         meshBuffer.setDirty();
         return vIndex;
@@ -141,7 +148,7 @@ export class TextMeshAssembler implements IAssembler {
             if(shadow) {
                 charInfo = charInfo.shadowChar;
                 if(!charInfo) {
-                    continue;
+                    return vIndex;
                 }
             }
 
@@ -234,7 +241,7 @@ export class TextMeshAssembler implements IAssembler {
             if(shadow) {
                 charInfo = charInfo.shadowChar;
                 if(!charInfo) {
-                    continue;
+                    return vIndex;
                 }
             }
 
@@ -290,7 +297,7 @@ export class TextMeshAssembler implements IAssembler {
             if(shadow) {
                 charInfo = charInfo.shadowChar;
                 if(!charInfo) {
-                    continue;
+                    return vIndex;
                 }
             }
 
@@ -310,6 +317,11 @@ export class TextMeshAssembler implements IAssembler {
                 // strokeColor
                 let color: Color = null;
                 if(shadow) {
+                    vData[idx + 12] -= style.shadowBlur;
+                    if(vData[idx + 12] < 0) {
+                        vData[idx + 12] = 0.0001;
+                    }
+
                     color = style.shadowRGBA;
                     vData[idx + 13] = style.shadow;
                     vData[idx + 14] = style.shadowBlur;
@@ -397,7 +409,7 @@ export class TextMeshAssembler implements IAssembler {
                 shadowCharInfo = charInfo.shadowChar = getCharInfoFromPool();
                 shadowCharInfo.copyFrom(charInfo);
             }
-            this.appendQuad(comp, width, height, offsetX + fontSize * style.shadowOffsetX * 0.01 * TextMeshSettings.shadowScale, offsetY - fontSize * style.shadowOffsetY * 0.01 * TextMeshSettings.shadowScale, skewFactor, shadowCharInfo, uvs || charInfo.char.uvs, ETMQuadType.Shadow);
+            this.appendQuad(comp, width, height, offsetX + style.shadowOffsetX * TextMeshSettings.shadowScale, offsetY - style.shadowOffsetY * TextMeshSettings.shadowScale, skewFactor, shadowCharInfo, uvs || charInfo.char.uvs, ETMQuadType.Shadow);
         }
     }
 
@@ -621,15 +633,14 @@ export class TextMeshAssembler implements IAssembler {
         let startChar = comp.charInfos[underlineInfo.startIndex];
         let width = underlineInfo.length;
         let height = Math.max(4, startChar.style.fontSize * font.underLineThickness);
-        let offsetX = startChar.x + startChar.offsetX;
+        let offsetX = startChar.x;
         // 不能添加offsetY,否则位置为出现跳动
-        let baseY = startChar.baseY;// + underlineInfo.minY;
-        let offsetY = baseY - height * 0.5 + font.underLineOffset + startChar.style.fontSize * comp.font.underLineOffset;
+        let offsetY = startChar.baseY + startChar.y - comp.font.underLineOffset + height * 0.5;
         let skewFactor = 0;
 
-        if(startChar.style.scriptType == EScriptType.SuperScript) {
-            offsetY -= (startChar.style.fontSize - startChar.style.realFontSize);
-        }
+        // if(startChar.style.scriptType == EScriptType.SuperScript) {
+        //     offsetY -= (startChar.style.fontSize - startChar.style.realFontSize);
+        // }
     
         let uvs = underlineInfo.charInfo.char.uvs;
         // if(underlineInfo.endIndex - underlineInfo.startIndex > 0) {
@@ -674,8 +685,8 @@ export class TextMeshAssembler implements IAssembler {
         let width = strikeInfo.length;
         let height = Math.max(4, startChar.style.fontSize * font.strikeThickness);
         let offsetX = startChar.x + startChar.offsetX;
-        let baseY = startChar.baseY + (height * 0.5);
-        let offsetY = baseY + startChar.style.fontSize * comp.font.strikeOffset;
+        let baseY = startChar.baseY + startChar.y + strikeInfo.height * 0.5;
+        let offsetY = baseY - comp.font.strikeOffset;
         let skewFactor = 0;
     
         let uvs = strikeInfo.charInfo.char.uvs;

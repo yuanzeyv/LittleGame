@@ -18,7 +18,7 @@
         "./assets",
     ],
     "references": [
-        { "path": "./assets" }
+        
     ]
     
 }

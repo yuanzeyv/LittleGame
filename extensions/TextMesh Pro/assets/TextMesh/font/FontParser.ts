@@ -14,7 +14,17 @@ export type TMFontInfo = {
     atlasWidth?: number;
     atlasHeight?: number;
     dynamic?: number;
-    staticChannels?: number;
+    staticChannels?: number;  
+    
+    enableAutoFree?: number;
+    offsetY?: number;
+
+    normalWeight?: number;
+    boldWeightScale?: number;
+    strokeScale?: number;
+    strokeBlur?: number;
+    shadowSize?: number;
+    shadowBlur?: number;
 
     underLineOffset?: number;
     keepUnlderLineSpace?: number;
@@ -42,6 +52,7 @@ export type TMFCharInfo = {
     glyphRight?: number;
     ascent?: number;
     descent?: number;
+    scale?: number;
 }
 
 export class FontParser {
@@ -87,6 +98,7 @@ export class FontParser {
                         glyphRight: parseFloat(parms[11]),                      
                         ascent: parseFloat(parms[12]),                   
                         descent: parseFloat(parms[13]),
+                        scale: parseFloat(parms[14]),
                     };
                 }
             }

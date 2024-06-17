@@ -137,9 +137,11 @@ export default class TinySDF {
         this.fontFamily = fontFamily || this.fontFamily;
         if(!this.cacheCanvas) {
             this.beforeDraw();
+        }else{
+            this.ctx.font = `${this.fontStyle} ${this.fontWeight} ${this.fontSize}px ${this.fontFamily}`;
         }
 
-        const metric = this.ctx.measureText(measureText || char) as any || {};
+        const metric = this.ctx.measureText(char || measureText) as any || {};
         if(SUPPORT_FULL_METRICS == null) {
             SUPPORT_FULL_METRICS = metric.actualBoundingBoxAscent != null;
         }
@@ -150,10 +152,18 @@ export default class TinySDF {
         let actualBoundingBoxLeft = metric.actualBoundingBoxLeft ?? 0;
         let actualBoundingBoxRight = metric.actualBoundingBoxRight ?? glyphAdvance;
 
+        let scale = Math.min(1.0, this.fontSize / (actualBoundingBoxDescent + actualBoundingBoxAscent), this.fontSize / glyphAdvance);
         if(char.length == 1) {
-            const scale = this.fontSize / (actualBoundingBoxDescent + actualBoundingBoxAscent);
-            actualBoundingBoxAscent = Math.ceil(actualBoundingBoxAscent * scale);
-            actualBoundingBoxDescent = Math.ceil(actualBoundingBoxDescent * scale);
+            // 需要缩放字体
+            if(scale < 1) {
+                this.ctx.font = `${this.fontStyle} ${this.fontWeight} ${this.fontSize * scale}px ${this.fontFamily}`;
+                const metric = this.ctx.measureText(char) as any || {};
+                glyphAdvance = metric.width || 0;
+                actualBoundingBoxAscent = metric.fontBoundingBoxAscent ?? this.fontSize;
+                actualBoundingBoxDescent = metric.fontBoundingBoxDescent ?? this.buffer;
+                actualBoundingBoxLeft = metric.actualBoundingBoxLeft ?? 0;
+                actualBoundingBoxRight = metric.actualBoundingBoxRight ?? glyphAdvance;
+            }
         }
 
         // const {
@@ -192,7 +202,7 @@ export default class TinySDF {
         const len = Math.max(width * height, 0);
         const data = new Uint8ClampedArray(len);
         const size = this.size;
-        const glyph = {data, width, height, glyphWidth, glyphHeight, size, glyphLeft, glyphRight, glyphAdvance, ascent: glyphTop, descent: actualBoundingBoxDescent};
+        const glyph = {data, width, height, glyphWidth, glyphHeight, size, glyphLeft, glyphRight, glyphAdvance, ascent: glyphTop, descent: actualBoundingBoxDescent, scale};
         if(char == "") {
             glyph.ascent = 0;
             glyph.descent = 0;

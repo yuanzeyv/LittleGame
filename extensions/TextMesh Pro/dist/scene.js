@@ -48,7 +48,7 @@ exports.methods = {
             });
         }
     },
-    async addLabel(parent, materialId, fontId, text, fontSize = 20) {
+    async addLabel(parent, text, fontSize = 20) {
         let node = new cc_1.Node;
         node.name = "TextMeshLabel";
         node.layer = parent.layer;
@@ -71,8 +71,7 @@ exports.methods = {
             }
         });
         if (textMeshLabel) {
-            textMeshLabel.setCustomMaterialByUUID(materialId);
-            textMeshLabel.setFontByUUID(fontId);
+            textMeshLabel.fontName = "Arial";
             textMeshLabel.string = text;
             textMeshLabel.fontSize = fontSize;
         }
@@ -80,7 +79,7 @@ exports.methods = {
     },
     async createLabel() {
         if (selectedNode) {
-            await this.addLabel(selectedNode, "456042ba-7dd1-452c-a76b-cf79a55fcd6c", "6eda666d-638c-4b13-819b-40249f5b7658", "Text Mesh");
+            await this.addLabel(selectedNode, "Text Mesh");
         }
     },
     async createButton() {
@@ -100,11 +99,11 @@ exports.methods = {
                 uuid: button.uuid,
                 component: "cc.Button",
             });
-            await this.addLabel(button, "456042ba-7dd1-452c-a76b-cf79a55fcd6c", "6eda666d-638c-4b13-819b-40249f5b7658", "Text Mesh", 20);
+            await this.addLabel(button, "Text Mesh", 20);
         }
     },
     checkComponetInParent(node, name) {
-        let result = false; 
+        let result = false;
         node.components.forEach((component) => {
             if (component.name.indexOf(name) >= 0) {
                 result = true;
@@ -117,7 +116,7 @@ exports.methods = {
     },
     async createLabel3D() {
         if (selectedNode) {
-            let node = await this.addLabel(selectedNode, "7a2413e6-efc8-42d1-997e-81ca48495258", "6eda666d-638c-4b13-819b-40249f5b7658", "Text Mesh");
+            let node = await this.addLabel(selectedNode, "Text Mesh");
             node.setScale(0.01, 0.01, 0.01);
             if (!this.checkComponetInParent(node, "RenderRoot2D")) {
                 await Editor.Message.request("scene", "create-component", {

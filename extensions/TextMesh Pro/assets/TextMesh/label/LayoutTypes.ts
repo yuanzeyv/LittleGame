@@ -29,6 +29,7 @@ export function isSlotType(type: string) {
 
 export enum ESlotSizeType {
     None,
+    FontSize,
     HeightFirst,
     WidthFirst,
 }

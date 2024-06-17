@@ -216,6 +216,52 @@ export class TextStyle {
     }
 
     preset() {
+        if(this._$color && typeof this._$color === 'string') {
+            let colors = this._$color.split(',');
+            this._$color = colors[0];
+            
+            if(colors.length == 4) {
+                if(this._$colorLT == null) {
+                    this._$colorLT = colors[0];
+                }
+                if(this._$colorLB == null) {
+                    this._$colorLB = colors[1];
+                }
+                if(this._$colorRT == null) {
+                    this._$colorRT = colors[2];
+                }
+                if(this._$colorRB == null) {
+                    this._$colorRB = colors[3];
+                }
+            }else if(colors.length == 3) {
+                if(this._$colorLT == null) {
+                    this._$colorLT = colors[0];
+                }
+                if(this._$colorRT == null) {
+                    this._$colorRT = colors[1];
+                }
+                if(this._$colorRB == null) {
+                    this._$colorRB = colors[2];
+                }
+                if(this._$colorLB == null) {
+                    this._$colorLB = colors[1];
+                }
+            }else if(colors.length == 2) {
+                if(this._$colorLT == null) {
+                    this._$colorLT = colors[0];
+                }
+                if(this._$colorRB == null) {
+                    this._$colorRB = colors[1];
+                }
+                if(this._$colorRT == null) {
+                    this._$colorRT = colors[0];
+                }
+                if(this._$colorLB == null) {
+                    this._$colorLB = colors[1];
+                }
+            }
+        }
+
         this._fillRGBA = this.getColor(this._$color, this._fillRGBA);
         this._strokeRGBA = this.getColor(this._$strokeColor, this._strokeRGBA);
         this._shadowRGBA = this.getColor(this._$shadowColor, this._shadowRGBA);

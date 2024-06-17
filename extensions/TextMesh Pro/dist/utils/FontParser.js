@@ -16,7 +16,7 @@ class FontParser {
                         result[field] = parseFloat(arr[1]);
                     }
                     else {
-                        result[field] = arr[1];
+                        result[field] = arr[1].replace(/[\r\n]/gi, "");
                     }
                 }
                 else {
@@ -35,6 +35,7 @@ class FontParser {
                         glyphRight: parseFloat(parms[11]),
                         ascent: parseFloat(parms[12]),
                         descent: parseFloat(parms[13]),
+                        scale: parseFloat(parms[14]),
                     };
                 }
             }

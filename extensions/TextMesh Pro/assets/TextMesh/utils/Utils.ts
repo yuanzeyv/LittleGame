@@ -105,6 +105,22 @@ export class Utils {
         });
     }
 
+    public static async wait(time: number) {
+        return new Promise<void>((resolve, reject) => {
+            setTimeout(() => {
+                resolve();
+            }, time);
+        });
+    }
+
+    public static async waitframe() {
+        return new Promise<void>((resolve, reject) => {
+            director.once(Director.EVENT_BEGIN_FRAME, () => {
+                resolve();
+            });
+        });
+    }
+
     static arrayBufferToString(buffer: ArrayBuffer, begin = 0) {
         var buf = new Uint8Array(buffer);
         var i = 0;

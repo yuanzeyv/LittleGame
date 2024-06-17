@@ -39,6 +39,23 @@ export class ResManager {
         return ab;
     }
 
+    static getBundleAsync(abName: string) {
+        return new Promise((resolve, reject) => {
+            let ab = this.getBundle(abName);
+            if(ab) {
+                resolve(ab);
+            }else{
+                assetManager.loadBundle(abName, (p) => {}, (err: any, res: any) => {
+                    if(err) {
+                        reject(err);
+                    }else{
+                        resolve(res);
+                    }
+                });
+            }
+        })
+    }
+
     static async getByUUIDAsync<T = Asset>(uuid: string, type: typeof Asset): Promise<T> {
         let next = false;
         let res: T = null;

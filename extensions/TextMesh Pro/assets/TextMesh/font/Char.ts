@@ -5,6 +5,9 @@ export class Char implements IChar{
     static: boolean = false;
     
     code: string = "";
+    ref: number = 0;
+    index: number = 0;
+    
     /**
      * 左下，右下，左上，右上
      */
@@ -19,6 +22,7 @@ export class Char implements IChar{
     size: number = 0;
     ascent: number = 0;
     descent: number = 0;
+    scale: number = 0;
     /**
      * channel id[0,3]
      */
@@ -42,6 +46,7 @@ export class Char implements IChar{
         char.size = charInfo.size;
         char.ascent = charInfo.ascent;
         char.descent = charInfo.descent;
+        char.scale = charInfo.scale;
         char.cid = charInfo.channelID;
         return char;
     }

@@ -7,5 +7,8 @@
   },
   "dependencies": {
     "lru-cache": "^7.10.1"
+  },
+  "scripts": {
+    "build": "tsc"
   }
 }

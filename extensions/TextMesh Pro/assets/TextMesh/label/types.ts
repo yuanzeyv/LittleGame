@@ -52,7 +52,7 @@ ccenum(ETextVerticalAlign);
      *
      * @zh 在 RESIZE_HEIGHT 模式下，只能更改文本的宽度，高度是自动改变的。
      */
-    ResizeHeight = 4,
+    ResizeHeight = 3,
 }
 
 ccenum(ETextOverflow);
