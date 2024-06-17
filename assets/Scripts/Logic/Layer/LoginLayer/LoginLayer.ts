@@ -14,6 +14,7 @@ export class LoginLayer extends BaseLayer {
     private mLoginButton:Node; 
     private mCheckVector:Node; 
     private mAgeButton:Node;  
+    private mPhysicsButton:Node;  
     private mSelectMeshLabel:TextMeshLabel; 
     private mWorld:Physics.World;
     RegisterExecuteHandle(executeMap: Map<eNotice, LayerExecute>) { 
@@ -24,6 +25,7 @@ export class LoginLayer extends BaseLayer {
         this.mLoginButton = find("StartButton",this.node);
         this.mCheckVector = find("ServerVector",this.node); 
         this.mAgeButton = find("ageMin",this.node);
+        this.mPhysicsButton = find("PhysicsButton",this.node);
         this.mSelectMeshLabel = GetTextMeshComp(find("ServerVector/ServerNameLabel",this.node))
         
         Physics.init().then(()=>{
@@ -41,33 +43,13 @@ export class LoginLayer extends BaseLayer {
             let collider = this.mWorld.createCollider(colliderDesc, rigidBody);
         });     
     }  
-  
-    protected update(dt: number): void {  
-        if( this.mWorld == undefined) 
-            return ;
-        this.mWorld.step();
-         
-        let data = this.mWorld.debugRender();
-        const g = find("Graphics",this.node).getComponent(Graphics);
-        g.clear();    
-        for(let i = 0; i < data.vertices.length ; i+=4){
-            g.fillColor = new Color(data.colors[i],data.colors[i + 1],data.colors[ i + 2 ],data.colors[i + 3]); 
-            g.moveTo(data.vertices[i] ,data.vertices[i+1] * 50);
-            g.lineTo(data.vertices[i + 2],data.vertices[i+31] * 50);
-        }
-        g.stroke();     
-
-        this.mWorld.forEachRigidBody((rigidBody:RAPIER.RigidBody)=>{
-            let vector:RAPIER.Vector = rigidBody.translation();
-            console.log(`${rigidBody.userData}刚体的坐标:${vector.x}  ${vector.y}`);
-            find("Box",this.node).setPosition(vector.x,vector.y * 10 );
-        });      
-    }
-    
+        
     InitData() {   
         this.RegisterButtonEvent(this.mLoginButton,this.LoginButtonHandle,this);  
         this.RegisterButtonEvent(this.mCheckVector,this.CheckServerListHandle,this);  
         this.RegisterButtonEvent(this.mAgeButton,this.AgeHandle,this,1,2,3,4,5);    
+        this.RegisterButtonEvent(this.mPhysicsButton,this.PhysicsLayerOpenHandle,this,1,2,3,4,5);    
+
     } 
 
 
@@ -82,15 +64,19 @@ export class LoginLayer extends BaseLayer {
     private AgeHandle(eventTouch:EventTouch,a,b,c,d){    
         _Facade.Send(eNotice.TipsShow,`准备登入服务器 ${a} ${b} ${c}`);
         _Facade.Send(eNotice.MultPanleOpen,2);
+    }    
+    private PhysicsLayerOpenHandle(eventTouch:EventTouch,a,b,c,d){    
+        _Facade.Send(eNotice.PhysicsLayerOpen,2);
     }     
-    
+      
     private LoginButtonHandle(eventTouch:EventTouch){ 
-        let selectServer:IServerInfoItem = _Facade.FindProxy(LoginProxy).GetSelectServer();
-        if(selectServer == undefined){
-            _Facade.Send(eNotice.TipsShow,`未选择登陆服务器`);
-            return;
-        } 
-        _Facade.FindProxy(LoginProxy).CS_GateVirifyLogin("123456","123456",selectServer.serverName);
+        _Facade.Send(eNotice.CheatPokerLayerOpen);
+        //let selectServer:IServerInfoItem = _Facade.FindProxy(LoginProxy).GetSelectServer();
+        //if(selectServer == undefined){
+        //    _Facade.Send(eNotice.TipsShow,`未选择登陆服务器`);
+        //    return;
+        //} 
+        //_Facade.FindProxy(LoginProxy).CS_GateVirifyLogin("123456","123456",selectServer.serverName);
         //_Facade.FindProxy(NetProxy).Connect();//准备连接  
     }  
 

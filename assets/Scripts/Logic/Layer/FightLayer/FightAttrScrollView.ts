@@ -1,5 +1,4 @@
 import { _decorator, Node, Prefab, find, UITransform, Size } from 'cc';  
-import { IMultPanleStruct, MultPanleConfig } from '../../../Config/Cfg_MultPanle';  
 import { _Facade, _G } from '../../../Global';
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
 import { ScrollAdapter, Holder, IElement, View } from '../../../Util/adapter'; 

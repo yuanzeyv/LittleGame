@@ -1,4 +1,5 @@
-import { AttrCalcRelevanceConfig, IAttrCalcRelevanceStruct } from "../../../Config/Cfg_AttrCalcRelevance";
+//import { AttrCalcRelevanceConfig, IAttrCalcRelevanceStruct } from "../../../Config/Cfg_AttrCalcRelevance";
+import { Cfg_AttrCalcRelevance, IAttrCalcRelevanceStruct } from "../../../Config/Cfg_AttrCalcRelevance";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global"; 
 import { eNetProtocol } from "../../../NetNotification"; 
@@ -33,10 +34,10 @@ export class PlayerAttrProxy extends BaseProxy{
     }
 
     public GetAttrSumValue(attrType:number):number{
-        let relevanceInfo:IAttrCalcRelevanceStruct = AttrCalcRelevanceConfig.GetData(attrType);//读表
+        let relevanceInfo:IAttrCalcRelevanceStruct = Cfg_AttrCalcRelevance.GetData(attrType);//读表
         let fixedValue:number = this.GetAttrValue(relevanceInfo.fixed);
         let fixedPercentValue:number = this.GetAttrValue(relevanceInfo.fixedPercent) / 100;
         let sumPercentValue:number = this.GetAttrValue(relevanceInfo.sumPercent) / 100;
         return (fixedValue * (1 + fixedPercentValue))*( 1 + sumPercentValue ) ;
     }
-}   
+}    

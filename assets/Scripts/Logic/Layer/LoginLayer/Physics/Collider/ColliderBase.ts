@@ -60,7 +60,7 @@ export class ColliderBase{
     //设置摩檫力规则
     public SetFrictionRole(rule: Physics.CoefficientCombineRule){
         this.mCollider.setFrictionCombineRule(rule);
-        RAPIER.ActiveHooks.FILTER_CONTACT_PAIRS
+        Physics.ActiveHooks.FILTER_CONTACT_PAIRS
     }
 
     //设置弹性系数
@@ -69,6 +69,8 @@ export class ColliderBase{
     }
     //获取弹性系数
     public GetRestitution():number{
+        
+        //this.mCollider.onCollisionEnter
         return this.mCollider.friction();
     }
 
@@ -77,3 +79,5 @@ export class ColliderBase{
         this.mCollider.setFrictionCombineRule(rule);
     }
 };
+
+ 

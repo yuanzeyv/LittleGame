@@ -5,41 +5,43 @@ import { AudioSource } from 'cc';
 import { AudioClip } from 'cc';
 import { eNotice } from '../../../NotificationTable';
 import { BundleProxy, ResouoceType } from '../../Proxy/BundleProxy/BundleProxy';
+import { MaxSourceAudioCompNum } from '../../Proxy/MusicProxy/MusicProxy';
 const { ccclass, property,type} = _decorator;
-//最大容纳50个音频节点
-const MaxSourceAudioCompNum: number = 20;
-//针对某些需要管理生命周期的音效单独抛出的接口
 export abstract class AudioControl {
-    protected mAudioResource: AudioSource;//游戏资源
     protected mControlID: number;//控制ID
-    
-    protected mAudioClip:AudioClip|undefined;//当前播放的音频资源
+    protected mAudioResource: AudioSource;//游戏音频组件
+
+    /*动态资源信息*/
+    protected mBundleName:string;//资源加载路径
     protected mResourcePath:string;//资源加载路径
+    protected mAudioClip:AudioClip|undefined;//游戏的音频资源
     protected mResourceType:ResouoceType<AudioClip>;//资源加载路径
+    
     public constructor(source: AudioSource) {
         this.mAudioResource = source;
         this.mAudioResource.node.on("started", this.musicStartHandle.bind(this));//监听开始
         this.mAudioResource.node.on("ended", this.musicEndHandle.bind(this));//监听结束
-    } 
-    //是否正在播放音乐
-    public IsPlaying():boolean{
-        return this.mAudioResource.playing;
-    }
+    }  
+
     //播放音乐
-    public Play(controlID:number,path:string,type:ResouoceType<AudioClip>):void{    
+    public Play(controlID:number,bundleName:string,path:string,type:ResouoceType<AudioClip>):void{    
         this.mControlID = controlID;//当前音频的控制ID
         this.mResourcePath = path;
         this.mResourceType = type;
-        this.mAudioClip = _Facade.FindProxy(BundleProxy).UseAsset(path,type);
+        this.mBundleName = bundleName;
+        this.mAudioClip = _Facade.FindProxy(BundleProxy).UseAsset(bundleName,path,type);//使用指定资源
     }
+
     //停止播放音乐
     public Stop(): void{
         if(this.mAudioClip != undefined)
-            _Facade.FindProxy(BundleProxy).UnUseAsset(this.mResourcePath,this.mResourceType);
+            _Facade.FindProxy(BundleProxy).UnUseAsset(this.mBundleName,this.mResourcePath,this.mResourceType);
         this.mAudioClip = undefined;
     }
+
     //暂停播放音乐
     public abstract Pause(): void;   
+
     //设置音乐的音量
     public SetMusicVolume(value: number) {
         this.mAudioResource.volume = value; 
@@ -54,37 +56,41 @@ export abstract class AudioControl {
 };
 export class MusicControl extends AudioControl {
     //播放音乐
-    public Play(controlID:number,path:string,type:ResouoceType<AudioClip>):void{
-        if(this.mAudioClip != undefined)//音乐类型
-            this.Stop();//停止上一个音乐
-        super.Play(controlID,path,type);//重置音乐数据
+    public Play(controlID:number,bundleName:string,path:string,type:ResouoceType<AudioClip>):void{
+        if(this.mAudioClip != undefined)//优先停止当前音乐的播放
+            this.Stop();
+        super.Play(controlID,bundleName,path,type);//重置音乐数据
         this.mAudioResource.clip = this.mAudioClip;
         this.mAudioResource.loop = true;
         this.mAudioResource.play();//直接播放
     }
     //停止播放音乐
-    public Stop(): void{
+    public Stop(): void{ 
         super.Stop();
         this.mAudioResource.stop();
         this.mAudioResource.clip = undefined;
     }
-    //暂停播放音乐
+    //音乐可以暂停
     public Pause(): void{
         this.mAudioResource.pause();
     } 
 };
+
 export class EffectControl extends AudioControl{
     //播放音乐
-    public Play(controlID:number,path:string,type:ResouoceType<AudioClip>):void{
-        super.Play(controlID,path,type);
+    public Play(controlID:number,bundleName:string,path:string,type:ResouoceType<AudioClip>):void{
+        super.Play(controlID,bundleName,path,type);
         this.mAudioResource.clip = this.mAudioClip;
         this.mAudioResource.loop = false;
         this.mAudioResource.play();//直接播放
     }
     //暂停播放音乐(特效没有暂停函数)
-    public Pause(): void{}   
+    public Pause(): void{
+        console.warn("尝试暂停一个音效");
+    } 
+
     //停止播放音乐
-    public Stop(): void{
+    public Stop(): void{ 
         super.Stop();
         this.mAudioResource.stop();
         this.mAudioResource.clip = undefined;
@@ -93,6 +99,7 @@ export class EffectControl extends AudioControl{
         _Facade.Send(eNotice.EffectPlayFinish,this.mControlID);//停止播放此音乐
     } 
 };
+
 export class MusicControlLayer extends BaseLayer {
     private mMusicSource:AudioControl;
     private mIdleAudioSourceMap:Array<AudioControl> = new Array<AudioControl>();//空闲的音频文件
@@ -103,36 +110,33 @@ export class MusicControlLayer extends BaseLayer {
         executeMap.set(eNotice.StopMusic,this.Stop.bind(this))
         
     }
-    private Play(clipData:{controlID:number,path:string,type:ResouoceType<AudioClip>}){
-        if(clipData.controlID == 0)
-            this.PlayMusic(clipData.path,clipData.type);
-        else    
-            this.PlayEffect(clipData.controlID,clipData.path,clipData.type);
+    private Play(clipData:{bundleName:string,controlID:number,path:string,type:ResouoceType<AudioClip>}){
+        if(clipData.controlID == 0)//控制ID为0的情况，标识资源以音乐的形式播放
+            this.PlayMusic(clipData.bundleName,clipData.path,clipData.type);
+        else//否则以音效的形式播放
+            this.PlayEffect(clipData.controlID,clipData.bundleName,clipData.path,clipData.type);
     }
-    private Stop(controlID:number){
-        if(controlID == 0)
-            this.StopMusic();
-        else    
-            this.StopEffect(controlID);
-    } 
+    
+    //创建一个音频节点
     public CreateAudioSourceNode():AudioSource{
         let node:Node = new Node();
-        let audioSource:AudioSource = node.addComponent(AudioSource);
-        return audioSource; 
+        return node.addComponent(AudioSource); 
     }
+
+    //初始化界面节点
     public InitNode(): void { 
-        this.mMusicSource = new MusicControl(this.CreateAudioSourceNode());//暂时先创建
-        
-        this.mMusicSource.GetAudioSource().node.parent = this.node;
+        this.mMusicSource = new MusicControl(this.CreateAudioSourceNode());//暂时先创建 
+        this.node.addChild(this.mMusicSource.GetAudioSource().node)
         for(let i = 1; i <= MaxSourceAudioCompNum;i++){
             let effectControl:EffectControl = new EffectControl(this.CreateAudioSourceNode());
-            this.mIdleAudioSourceMap.push(effectControl);
-            effectControl.GetAudioSource().node.parent = this.node;
+            this.node.addChild(effectControl.GetAudioSource().node); 
+            this.mIdleAudioSourceMap.push(effectControl);//一上来，全部插入空闲队列中
         } 
-    }      
+    }  
+
     //播放音乐
-    public PlayMusic(path:string,type:ResouoceType<AudioClip>):void{
-        this.mMusicSource.Play(0,path,type);
+    public PlayMusic(bundleName:string,path:string,type:ResouoceType<AudioClip>):void{
+        this.mMusicSource.Play(0,bundleName,path,type);
     }  
     //停止音乐
     public StopMusic(){
@@ -140,10 +144,10 @@ export class MusicControlLayer extends BaseLayer {
     }
 
     //播放音效 
-    public PlayEffect(controlID:number,path:string,type:ResouoceType<AudioClip>){
+    public PlayEffect(controlID:number,bundleName:string,path:string,type:ResouoceType<AudioClip>){
         let audioControl:AudioControl|undefined = this.mIdleAudioSourceMap.pop();//首先寻找一个空闲的音频
         if(audioControl == undefined) return;
-        audioControl.Play(controlID,path,type);
+        audioControl.Play(controlID,bundleName,path,type);
         this.mBusAudioSourceMap.set(controlID,audioControl); 
     } 
      
@@ -156,6 +160,7 @@ export class MusicControlLayer extends BaseLayer {
         this.mBusAudioSourceMap.delete(controlId);
         this.mIdleAudioSourceMap.push(audioControl);
     }
+
     //停止音效
     public StopAllEffect(){
         this.mBusAudioSourceMap.forEach((audioControl:AudioControl,controlID:number)=>{
@@ -166,4 +171,11 @@ export class MusicControlLayer extends BaseLayer {
     private EffectPlayFinishHandle(controlID:number){
         this.StopEffect(controlID);
     }
+
+    private Stop(controlID:number){
+        if(controlID == 0)
+            this.StopMusic();
+        else    
+            this.StopEffect(controlID);
+    } 
 }   

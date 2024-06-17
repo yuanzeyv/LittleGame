@@ -3,6 +3,7 @@ import {_Facade, _G} from "./Global";
 import { BundleProxy } from "./Logic/Proxy/BundleProxy/BundleProxy";
 import { GameMVCRegister } from "./GameMVCRegister";
 import { eNotice } from "./NotificationTable";
+import Decimal from "decimal.js"
 const { ccclass, property } = _decorator;
  
 //脚本的职责 就是将初始资源进行全部的分配
@@ -12,6 +13,7 @@ class MainGameControl extends Component{
     _G.GameMVCRegister = new GameMVCRegister();//游戏mvc控制对象
         _G.GameMVCRegister.Register(); //注册所有的登录MVC 
         _Facade.FindProxy(BundleProxy).LoadBundle("resources",this.BundleLoadResult.bind(this)); //加载游戏必要的基础资源信息
+        
     }
     
     protected update(tick:number){ 

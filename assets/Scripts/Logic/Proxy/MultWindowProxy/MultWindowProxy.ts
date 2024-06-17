@@ -1,6 +1,6 @@
+import { Cfg_MultPanle, IMultPanleStruct } from "../../../Config/Cfg_MultPanle";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade, _G } from "../../../Global";
-import { IMultPanleStruct, MultPanleConfig } from "../../../Config/Cfg_MultPanle";
 export enum eWindowLevel{
     One    = 1,//一级窗口
     Second = 2,//二级窗口
@@ -17,9 +17,9 @@ export class MultWindowProxy extends BaseProxy{
     }    
         
     //初始化多面板表
-    private InitMultWindowTable():void{
+    private InitMultWindowTable():void{ 
         //循环遍历所有的表
-        for(let cell of MultPanleConfig.GetDatas()){
+        for(let cell of Cfg_MultPanle.GetDatas()){
             if(cell.type >= eWindowLevel.Final){
                 console.warn(`请检查窗口ID:${cell.key}的窗口类口类型是否正常`);
                 continue;
@@ -35,7 +35,7 @@ export class MultWindowProxy extends BaseProxy{
                     if(childConfig == undefined){
                         console.warn(`请检查窗口ID:${childID}是否存在`);
                         continue;
-                    }
+                    } 
                     if(childConfig.type != eWindowLevel.Second){
                         console.warn(`请检查窗口ID:${childID},其为一级窗口:${cell[0]}的二级界面，却不是二级界面`);
                         continue;

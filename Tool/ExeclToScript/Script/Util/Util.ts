@@ -69,6 +69,6 @@ export function GetSimpleVirifyTable(basePath:string,tablePath:string):any[][]|u
                 return undefined;
             }
         }
-    }
+    } 
     return tableData;
 }

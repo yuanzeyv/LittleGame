@@ -158,8 +158,8 @@ function main(){
         text += `       return this.mConfigArray;\n`
         text += `   }\n`;
         text += `}\n`;
-        text += `export let ${name}Config:${name} = new ${name}();` 
-        writeStringToFile(`./Work/OutputScript/${name}.ts`, text);
+        text += `export let Cfg_${name}:${name} = new ${name}();` 
+        writeStringToFile(`../../assets/Scripts/Config/Cfg_${name}.ts`, text);
     }   
 }
 main();    

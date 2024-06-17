@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, Prefab, director, Label, find, Button, Vec3, math, UITransform, Widget, Size } from 'cc'; 
-import { IMultPanleStruct, MultPanleConfig } from '../../../Config/Cfg_MultPanle'; 
+import { IMultPanleStruct, Cfg_MultPanle } from '../../../Config/Cfg_MultPanle'; 
 import { _Facade, _G } from '../../../Global';
 import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
 import { MultWindowLayer } from '../MultWindowLayer/MultWindowLayer';
@@ -42,7 +42,7 @@ export class MultWindowPanel extends ScrollAdapter<IFixedModel> {
             return;
         if(MultWindowParamMap[selectWindowID])
             _Facade.Send(MultWindowParamMap[selectWindowID].closeNotice);
-        let config:IMultPanleStruct = MultPanleConfig.GetData(windowID)!;
+        let config:IMultPanleStruct = Cfg_MultPanle.GetData(windowID)!;
         this.scrollManager.scrollToGroupIndex(0,index + 1);  
         this.mLayer.SetWindowTitle(config.btnName); 
         this.SetBtnSelectStatus(windowID);
@@ -84,7 +84,7 @@ class MyHolder extends Holder<IFixedModel>{
     protected onVisible(): void {    
         this.mFixedComp.mLayer.RegisterButtonEvent(this.node,this.ClickHandle,this); 
  
-        let config:IMultPanleStruct = MultPanleConfig.GetData(this.data.panelID)!; 
+        let config:IMultPanleStruct = Cfg_MultPanle.GetData(this.data.panelID)!; 
         GetTextMeshComp(find("CellName",this.node)).string = config.btnName;
         this.node.getComponent(Button).interactable = config.key != this.mFixedComp.mLayer.GetSelectWindowID(); 
         
@@ -97,7 +97,7 @@ class MyHolder extends Holder<IFixedModel>{
     }  
  
     private ClickHandle(){
-        let config:IMultPanleStruct = MultPanleConfig.GetData( this.data.panelID)!;//
+        let config:IMultPanleStruct = Cfg_MultPanle.GetData( this.data.panelID)!;//
         if( this.mFixedComp.mLayer.GetSelectWindowID() == config.key)//已经被选中了
             return; 
         this.mFixedComp.mLayer.SetWindowTitle(config.title);//设置当前的窗口名称

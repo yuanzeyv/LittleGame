@@ -61,7 +61,7 @@ export enum eNotice {
     FightLayerOpen = "FightLayerOpen", 
 
     //播放音效用
-    MusicControlLayerOpem = "MusicControlLayerOpem",
+    MusicControlLayerOpen = "MusicControlLayerOpen",
     
     PlayAudioEffect = "PlayAudioEffect",
     PlayMusic = "PlayMusic",
@@ -197,4 +197,15 @@ export enum eNotice {
 
     OpenChooseServerLayer = "OpenChooseServerLayer",
     ClosChooseServerLayer = "ClosChooseServerLayer",
+
+    //登录界面
+    PhysicsLayerOpen = "PhysicsLayerOpen",
+    PhysicsLayerClose = "PhysicsLayerClose",
+
+    //作弊器界面
+    CheatPokerLayerOpen = "CheatPokerLayerOpen" ,
+    CheatPokerLayerClose = "CheatPokerLayerClose"  ,
+
+    //标记一个玩家死亡
+    PlayerDie = "PlayerDie",
 }

@@ -27,7 +27,7 @@ export interface IBuffStruct{
    /*
    key名:BuffType
    描述:Buff的具体类型
-      *:1:获得后无法再次获得，叠加。效果触发后，也不会再被触发
+      *:1:获得后无法再次获得 与 叠加。
       *:2:携带了Buff等级字段,获得Buff后会刷新Buff持续回合数，如果新获得的Buff等级大于当前Buff等级，Buff将会变更等级。
       *:3:携带了Buff等级字段，调用Buff只能通过不停的堆叠 0 级Buff来增加Buff等级。Buff等级不会超过表中可找到的最大Buff等级。
       *:4:堆叠Buff，可以重复获得但不可被叠加。同类型最大堆叠MaxStack次
@@ -51,17 +51,12 @@ export interface IBuffStruct{
       *:{Tri:[1,2,3,4],Con:[11111,11111,11112],do:[11112,11112,11113]}
       *:
    */
-   'Trigger': {Tri:number[];Con:number[];Do:{t:number;e:number;}[];}[];
+   'Trigger': {Tri:number[];Con:number[];Do:{t:number;e:number;}[];};
    /*
    key名:EndCondition
    描述:结束条件，当条件不满足的时候，立即清除本Buff
    */
-   'EndCondition': {Con:number[];Trigger:number;}[];
-   /*
-   key名:Attr
-   描述:213
-   */
-   'Attr': {Type:number;Value:number;}[];
+   'EndCondition': number[];
 };
 class Buff{
    private mConfigObject:{[key:number]:IBuffStruct}  = {};
@@ -71,23 +66,31 @@ class Buff{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"护身辟邪","Level":1,"Desc":"战斗开始时增加角色10%的基础生命值加成。每次触发闪避时，对攻击者造成相当于本次攻击20%攻击的伤害","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[0],"Con":[],"Do":[{"t":1,"e":1000001}]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[{"Type":1,"Value":1000}]};
-       this.mConfigObject[2] = {"Key":2,"BuffID":2,"Name":"赐福增寿","Level":1,"Desc":"战斗开始时，增加角色100%的复活概率，且复活后回复12%总血量","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[3] = {"Key":3,"BuffID":3,"Name":"鬼影重重","Level":1,"Desc":"战斗开始时，基础攻击力提升10%，每次触发连击，将偷取敌方英雄10%的基础攻击力。","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[4] = {"Key":4,"BuffID":4,"Name":"鬼影重重-汲取","Level":0,"Desc":"触发鬼影重重判定用","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[5] = {"Key":5,"BuffID":4,"Name":"鬼影重重-汲取","Level":1,"Desc":"汲取敌方英雄10%基础攻击力","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[6] = {"Key":6,"BuffID":4,"Name":"鬼影重重-汲取","Level":2,"Desc":"汲取敌方英雄20%基础攻击力","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[7] = {"Key":7,"BuffID":4,"Name":"鬼影重重-汲取","Level":3,"Desc":"汲取敌方英雄30%基础攻击力","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[8] = {"Key":8,"BuffID":4,"Name":"鬼影重重-汲取","Level":4,"Desc":"汲取敌方英雄40%基础攻击力","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[9] = {"Key":9,"BuffID":4,"Name":"鬼影重重-汲取","Level":5,"Desc":"汲取敌方英雄50%基础攻击力","BuffType":3,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[10] = {"Key":10,"BuffID":5,"Name":"摄魂夺魄","Level":1,"Desc":"每次发起攻击时，都将增加自己%10的敌方英雄基础吸血","BuffType":4,"Continue":0,"MaxStack":5,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[12] = {"Key":12,"BuffID":6,"Name":"生命滋养-汲取","Level":1,"Desc":"汲取敌方英雄10%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[13] = {"Key":13,"BuffID":6,"Name":"生命滋养-汲取","Level":2,"Desc":"汲取敌方英雄20%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[14] = {"Key":14,"BuffID":6,"Name":"生命滋养-汲取","Level":3,"Desc":"汲取敌方英雄30%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[15] = {"Key":15,"BuffID":6,"Name":"生命滋养-汲取","Level":4,"Desc":"汲取敌方英雄40%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[16] = {"Key":16,"BuffID":6,"Name":"生命滋养-汲取","Level":5,"Desc":"汲取敌方英雄50%基础攻击力","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[],"Con":[],"Do":[]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[17] = {"Key":17,"BuffID":7,"Name":"温水煮蛙","Level":1,"Desc":"每次攻击前,都会获取10%的基础攻击力加成","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[4],"Con":[],"Do":[{"t":1,"e":1000001}]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
-       this.mConfigObject[18] = {"Key":18,"BuffID":8,"Name":"强健体魄","Level":1,"Desc":"每次攻击前,都会获取10%的基础攻击力加成","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":[{"Tri":[4],"Con":[],"Do":[{"t":1,"e":1000001}]}],"EndCondition":[{"Con":[1,2,3,4,5],"Trigger":5}],"Attr":[]};
+       this.mConfigObject[1] = {"Key":1,"BuffID":1,"Name":"越战越勇(领域)","Level":1,"Desc":"战斗开始时增加10%基础生命。并获得 《越战越勇-横冲直撞》的Buff。","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009},{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[2] = {"Key":2,"BuffID":2,"Name":"越战越勇-横冲直撞(领域)","Level":1,"Desc":"每次攻击后，为玩家添加一个《越战越勇-横冲直撞》的Buff","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[5],"Con":[],"Do":[{"t":2,"e":3}]},"EndCondition":[]};
+       this.mConfigObject[3] = {"Key":3,"BuffID":3,"Name":"越战越勇-横冲直撞","Level":1,"Desc":"每次攻击后，增加玩家10%基础攻击力","BuffType":4,"Continue":5,"MaxStack":5,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009}]},"EndCondition":[2]};
+       this.mConfigObject[4] = {"Key":4,"BuffID":4,"Name":"命中疲劳(领域)","Level":1,"Desc":"单回合内每次命中敌人时，攻击者将会掉以轻心，闪避概率将会降低10%","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[10],"Con":[],"Do":[{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[5] = {"Key":5,"BuffID":5,"Name":"命中疲劳-狂妄自大","Level":1,"Desc":"总闪避概率将会降低10%。我知道这是不对的，但是我没办法改变","BuffType":4,"Continue":1,"MaxStack":5,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009}]},"EndCondition":[2]};
+       this.mConfigObject[6] = {"Key":6,"BuffID":6,"Name":"闪避疲劳(领域)","Level":1,"Desc":"当己方闪避了敌方的攻击时，己方闪避率降低10%","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[10],"Con":[],"Do":[{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[7] = {"Key":7,"BuffID":7,"Name":"闪避疲劳-行动僵直","Level":1,"Desc":"虽然进行了灵活的闪避，但是颇为费力，本回合闪避概率降低10%","BuffType":4,"Continue":1,"MaxStack":5,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009}]},"EndCondition":[2]};
+       this.mConfigObject[8] = {"Key":8,"BuffID":8,"Name":"连击疲劳(领域)","Level":1,"Desc":"触发连击时，消耗了大量气力，获得可叠加《连击疲劳-酸软发力》","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[10],"Con":[],"Do":[{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[9] = {"Key":9,"BuffID":9,"Name":"连击疲劳-酸软发力","Level":1,"Desc":"消耗了大量气力，降低10%连击概率","BuffType":4,"Continue":0,"MaxStack":10,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009}]},"EndCondition":[2]};
+       this.mConfigObject[10] = {"Key":10,"BuffID":10,"Name":"抗连击疲劳(领域)","Level":1,"Desc":"在抵抗连击时，消耗了心神，获得可叠加《抗连及疲劳-无力招架》","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[10],"Con":[],"Do":[{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[11] = {"Key":11,"BuffID":11,"Name":"抗连击疲劳-无力招架","Level":1,"Desc":"消耗了大量心神，降低10%抗连击概率","BuffType":4,"Continue":1,"MaxStack":5,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009}]},"EndCondition":[2]};
+       this.mConfigObject[12] = {"Key":12,"BuffID":12,"Name":" 反击疲劳(领域)","Level":1,"Desc":"玩家成功反击了敌方攻击，消耗大量的体力，获得可叠加 ","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[10],"Con":[],"Do":[{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[13] = {"Key":13,"BuffID":13,"Name":"反击疲劳-渐渐力竭","Level":1,"Desc":"玩家由于连续的反击，已经筋疲力尽了，获得10%的反击衰减","BuffType":4,"Continue":1,"MaxStack":10,"Trigger":{"Tri":[3],"Con":[],"Do":[{"t":1,"e":100009}]},"EndCondition":[2]};
+       this.mConfigObject[14] = {"Key":14,"BuffID":14,"Name":"抗反击疲劳(领域)","Level":1,"Desc":"玩家成功反击了敌方攻击，消耗大量的体力，获得可叠加 ","BuffType":1,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[10],"Con":[],"Do":[{"t":2,"e":2}]},"EndCondition":[]};
+       this.mConfigObject[15] = {"Key":15,"BuffID":15,"Name":"抗反击疲劳-虎口震咧","Level":1,"Desc":"未能阻止敌方的反击，获得10%的抗反击衰减","BuffType":4,"Continue":1,"MaxStack":10,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":4001}]},"EndCondition":[]};
+       this.mConfigObject[16] = {"Key":16,"BuffID":16,"Name":"回马荡刀","Level":1,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成40%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":4501}]},"EndCondition":[]};
+       this.mConfigObject[17] = {"Key":17,"BuffID":16,"Name":"回马荡刀","Level":2,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成45%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":5001}]},"EndCondition":[]};
+       this.mConfigObject[18] = {"Key":18,"BuffID":16,"Name":"回马荡刀","Level":3,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成50%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":6001}]},"EndCondition":[]};
+       this.mConfigObject[19] = {"Key":19,"BuffID":16,"Name":"回马荡刀","Level":4,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成60%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":6501}]},"EndCondition":[]};
+       this.mConfigObject[20] = {"Key":20,"BuffID":16,"Name":"回马荡刀","Level":5,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成65%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":7001}]},"EndCondition":[]};
+       this.mConfigObject[21] = {"Key":21,"BuffID":16,"Name":"回马荡刀","Level":6,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成70%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":8001}]},"EndCondition":[]};
+       this.mConfigObject[22] = {"Key":22,"BuffID":16,"Name":"回马荡刀","Level":7,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成80%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":9001}]},"EndCondition":[]};
+       this.mConfigObject[23] = {"Key":23,"BuffID":16,"Name":"回马荡刀","Level":8,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成90%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":10001}]},"EndCondition":[]};
+       this.mConfigObject[24] = {"Key":24,"BuffID":16,"Name":"回马荡刀","Level":9,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成100%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":10001}]},"EndCondition":[]};
+       this.mConfigObject[25] = {"Key":25,"BuffID":16,"Name":"回马荡刀","Level":10,"Desc":"使用刀进行抵抗闪避，并荡开敌方的攻击，对敌方造成110%攻击力的伤害","BuffType":2,"Continue":0,"MaxStack":0,"Trigger":{"Tri":[11],"Con":[],"Do":[{"t":3,"e":11001}]},"EndCondition":[]};
    }
    private InitArray(){
        for(let key in this.mConfigObject)
@@ -103,4 +106,4 @@ class Buff{
        return this.mConfigArray;
    }
 }
-export let BuffConfig:Buff = new Buff();
+export let Cfg_Buff:Buff = new Buff();

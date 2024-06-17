@@ -35,13 +35,13 @@ export class ItemCell{
         return this.mItemInfo.AwardTime;
     }
     public get AwardUID():string{//道具的获得者UID
-        return this.mItemInfo.AwardUID;
+        return this.mItemInfo.AwardSID;
     }
     public get AwardWay():number{//道具的获得者UID
         return this.mItemInfo.AwardWay;
     }
     public get OwnerUID():string{//道具的拥有者UID
-        return this.mItemInfo.OwnerUID;
+        return this.mItemInfo.AwardSID;
     }
 };
 

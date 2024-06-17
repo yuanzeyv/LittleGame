@@ -39,6 +39,8 @@ import { FightProxy } from "./Logic/Proxy/FightProxy/FightProxy";
 import { SelectServerMediator } from "./Logic/Mediator/SelectServerMediator/SelectServerMediator";
 import { SelectServerMultMediator } from "./Logic/Mediator/SelectServerMediator/SelectServerMultMediator";
 import { UserBaseProxy } from "./Logic/Proxy/UserBaseProxy/UserBaseProxy";
+import { PhysicsMediator } from "./Logic/Mediator/PhysicsMediator/PhysicsMediator";
+import { PhysicsProxy } from "./Logic/Proxy/PhysicsProxy/PhysicsProxy"; 
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
@@ -68,11 +70,12 @@ export class GameMVCRegister extends BaseMVCRegister {
             .set(FightLayerMediator,"FightLayerMediator")  //背包界面Mediator  
             .set(SelectServerMediator,"SelectServerMediator")  //服务器选择Mediator
             .set(SelectServerMultMediator,"SelectServerMultMediator")//服务器选择多面板  
+            .set(PhysicsMediator,"PhysicsMediator")//服务器选择多面板  
     }  
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void { 
         proxyMap
-            .add(NetProxy) 
+            .add(NetProxy)  
             .add(NetDispatchProxy) 
             .add(PoolProxy) 
             .add(WindowProxy) 
@@ -90,6 +93,6 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(SkeletonProxy) 
             .add(FightProxy) //战斗代理
             .add(UserBaseProxy) //角色基础信息代理
+            .add(PhysicsProxy) //角色基础信息代理
     }
 }  
- 
