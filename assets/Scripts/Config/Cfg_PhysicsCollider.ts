@@ -50,8 +50,8 @@ class PhysicsCollider{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"Key":1,"Name":"墙体.碰撞器","Type":0,"Desc":"墙体会使用本ID","Shape":0,"Redius":0,"Size":{"Width":2.5,"Height":0.02}};
-       this.mConfigObject[2] = {"Key":2,"Name":"城墙.碰撞器","Type":1,"Desc":"老旧破落的城墙，却守护者城内百姓的安宁","Shape":0,"Redius":0,"Size":{"Width":0.02,"Height":5}};
+       this.mConfigObject[1] = {"Key":1,"Name":"墙体.碰撞器","Type":0,"Desc":"墙体会使用本ID","Shape":0,"Redius":0,"Size":{"Width":2.5,"Height":0.05}};
+       this.mConfigObject[2] = {"Key":2,"Name":"城墙.碰撞器","Type":1,"Desc":"老旧破落的城墙，却守护者城内百姓的安宁","Shape":0,"Redius":0,"Size":{"Width":0.05,"Height":5}};
        this.mConfigObject[3] = {"Key":3,"Name":"勇士.碰撞器","Type":2,"Desc":"只会一些基本功，但是却已经有着守护一方宁静的普通人","Shape":1,"Redius":0.2,"Size":{"Width":5,"Height":0.02}};
        this.mConfigObject[4] = {"Key":4,"Name":"小杂兵.碰撞器","Type":3,"Desc":"爱做小破坏的一帮坏小子，很是令人讨厌","Shape":1,"Redius":0.1,"Size":{"Width":0.2,"Height":0.2}};
        this.mConfigObject[5] = {"Key":5,"Name":"叠罗汉_8.碰撞器","Type":3,"Desc":"怕见人的捣蛋鬼，他们将自己隐藏在床单下，露出个眼睛把坏事干","Shape":1,"Redius":0.2,"Size":{"Width":0.2,"Height":0.2}};

@@ -2,9 +2,8 @@ import  Physics, { ColliderDesc, RigidBodyDesc } from '@dimforge/rapier2d-compat
 import { Vec2, math } from 'cc';
 import { ColliderBase } from './ColliderBase';
 export enum eRigidType{
-    Static,
-    Dynamic,
-    Kinematic
+    Dynamic = 0,
+    Static = 1,
 };
 export class RigidBodies{
     protected mWorld:Physics.World;

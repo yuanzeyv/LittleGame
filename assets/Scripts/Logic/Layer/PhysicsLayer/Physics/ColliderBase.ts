@@ -1,9 +1,27 @@
 import  Physics from '@dimforge/rapier2d-compat';
 import { Vec2 } from 'cc';
+export interface IRelevanceOBJ{
+    OnStartConcatCollider(colliderObj:ColliderBase):void;
+    OnLeaveConcatCollider(colliderObj:ColliderBase):void;
+};
 export class ColliderBase{
     protected mCollider:Physics.Collider|undefined;
+    protected mRelevanceObj:IRelevanceOBJ;
     public constructor(collider:Physics.Collider){
         this.mCollider = collider;
+    }
+
+    //当前碰撞器的唯一ID
+    public get ID():number{
+        return this.mCollider.handle;
+    }
+
+    public get RelevanceObj():IRelevanceOBJ{
+        return this.mRelevanceObj;
+    }
+
+    public set RelevanceObj(relevanceObj:IRelevanceOBJ){
+        this.mRelevanceObj = relevanceObj;
     }
 
     //获取碰撞器的位置
@@ -13,8 +31,8 @@ export class ColliderBase{
     }
 
     //设置碰撞器的位置
-    public SetPosition(pos:Vec2){
-        this.mCollider.setTranslation({x:pos.x,y:pos.y});
+    public SetPosition(x:number,y:number){
+        this.mCollider.setTranslation({x:x,y:y});
     }
 
     //获取碰撞器的旋转角度
@@ -76,12 +94,45 @@ export class ColliderBase{
         this.mCollider.setFrictionCombineRule(rule);
     }
 
+    //设置碰撞器的半径
+    public SetContent(x:number,y:number = 0){
+        switch(this.mCollider.shape.type){
+            case Physics.ShapeType.Ball:
+                this.mCollider.setRadius(x);
+            case Physics.ShapeType.Cuboid: 
+                this.mCollider.setHalfExtents({x:x,y:y});
+        } 
+    }
+
+    public get ContentSize():{x:number,y:number}{   
+        return this.mCollider.halfExtents();
+    }
+
+    public get Radius():number{   
+        return this.mCollider.radius();
+    }
+
+    public SetColliderActiveEvent(openCollision:boolean,openConcat:boolean):void{ 
+        this.mCollider.setActiveEvents( (openCollision?Physics.ActiveEvents.COLLISION_EVENTS:Physics.ActiveEvents.NONE) |  (openConcat?Physics.ActiveEvents.CONTACT_FORCE_EVENTS:Physics.ActiveEvents.NONE));
+    }
+ 
+    public SetCollidersGroup(bits:number):void{  
+        this.mCollider.setCollisionGroups(bits);
+    }  
+    public SetSolverGroups(bits:number):void{   
+        this.mCollider.setSolverGroups(bits);
+    }  
     //开始碰撞回调
     public OnStartConcatCollider(colliderObj:ColliderBase):void{
+        this.mRelevanceObj?.OnStartConcatCollider(colliderObj);
     }
 
     public OnLeaveConcatCollider(colliderObj:ColliderBase):void{
+       this.mRelevanceObj?.OnLeaveConcatCollider(colliderObj);
     }
 
-};
-
+    //获取到当前的碰撞器的形状
+    public get Shape(){
+        return this.mCollider.shape.type;
+    }
+};  

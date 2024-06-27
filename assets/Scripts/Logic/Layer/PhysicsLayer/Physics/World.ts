@@ -1,6 +1,6 @@
 import  Physics from '@dimforge/rapier2d-compat';
 import Decimal from "decimal.js";
-import { Vec2, find } from 'cc';
+import { Vec2, find, physics } from 'cc';
 import { RigidBodies, eRigidType } from './RigidBodies';
 import { ColliderBase } from './ColliderBase';
 export class PhysicsWrold {
@@ -14,27 +14,28 @@ export class PhysicsWrold {
     private mSumRunningTime:number = 0;//总运行时长
     private mStepTime:number = 0;//帧率计算时长
 
-    constructor(gravity:Vec2 = new Vec2(0,0),stepTime:number = 1/ 60){
+    constructor(gravity:Vec2 = new Vec2(0,-1),stepTime:number = 1/ 60){
         this.mPhysicsWorld = new Physics.World({x:gravity.x,y:gravity.y});
         this.TimeStep = stepTime; 
     }
  
     //设置时间步长
-    public get TimeStep():number{
+    public get TimeStep():number{ 
         return this.mPhysicsWorld.timestep;
     }
 
     public set TimeStep(timeStep:number){
         this.mPhysicsWorld.timestep = timeStep;
+    } 
+
+    public get World():Physics.World{
+        return this,this.mPhysicsWorld;
     }
-    
     //创建一个刚体
     public CreateRigidBody(type:eRigidType):RigidBodies{
         let rigidBodyDesc:Physics.RigidBodyDesc = undefined;
-        if(type ==  eRigidType.Dynamic)
-            rigidBodyDesc = Physics.RigidBodyDesc.dynamic(); 
-        else if( eRigidType.Kinematic == type)
-            rigidBodyDesc = Physics.RigidBodyDesc.kinematicVelocityBased(); 
+        if(  eRigidType.Dynamic == type )
+            rigidBodyDesc = Physics.RigidBodyDesc.dynamic();   
         else if( eRigidType.Static == type)
             rigidBodyDesc = Physics.RigidBodyDesc.fixed(); 
         let rigidBody:Physics.RigidBody = this.mPhysicsWorld.createRigidBody(rigidBodyDesc);
@@ -56,6 +57,8 @@ export class PhysicsWrold {
             return;
         }
         let rigidBodies:RigidBodies = this.mRigidBodyMap.get(handleID);
+        //对自己的各个组件发布死亡消息
+        //检测各个组件与自己的碰撞关系，依次对所有的角色发送死亡消息
         this.mPhysicsWorld.removeRigidBody(rigidBodies.RigidBody);
     }
     //执行所有待三处的事件
@@ -68,15 +71,15 @@ export class PhysicsWrold {
     public Update(dt:number):void{  
         this.mSumRunningTime += dt;//获取到物理世界总运行时长
         this.mStepTime += dt;
-        while(this.mStepTime >= this.mPhysicsWorld.timestep){
+        while(this.mStepTime >= this.mPhysicsWorld.timestep){ 
             this.mStepTime -= this.mPhysicsWorld.timestep;
             this.mPhysicsWorld.step(this.mEventQueue);//执行一个时间步 
-            this.mEventQueue.drainCollisionEvents((collider1:number,collider2:number,started:boolean)=>{
-                let phyRigidBodyA:Physics.RigidBody = this.mPhysicsWorld.getCollider(collider1).parent();
-                let phyRigidBodyB:Physics.RigidBody = this.mPhysicsWorld.getCollider(collider1).parent();
+            this.mEventQueue.drainCollisionEvents((collider1:number,collider2:number,started:boolean)=>{ 
+                let phyRigidBodyA:Physics.RigidBody = this.mPhysicsWorld.getCollider(collider1).parent();  
+                let phyRigidBodyB:Physics.RigidBody = this.mPhysicsWorld.getCollider(collider2).parent();
                 let rigidBodieA:RigidBodies = (phyRigidBodyA.userData as RigidBodies);
                 let rigidBodieB:RigidBodies = (phyRigidBodyB.userData as RigidBodies);  
-                let colliderA:ColliderBase = rigidBodieA.GetCollider(collider1);
+                let colliderA:ColliderBase = rigidBodieA.GetCollider(collider1); 
                 let colliderB:ColliderBase = rigidBodieB.GetCollider(collider2);
                 if(started){
                     colliderA.OnStartConcatCollider(colliderB);
@@ -84,7 +87,7 @@ export class PhysicsWrold {
                 } else {
                     colliderA.OnLeaveConcatCollider(colliderB);
                     colliderB.OnLeaveConcatCollider(colliderA);
-                } 
+                }  
             });  
             this.mIsCalc = true;//计算锁
             this.ExecuteEvent();//执行上一帧未处理完成的事件
@@ -94,6 +97,7 @@ export class PhysicsWrold {
         }  
     }
 
+    //
     //是否绘制物理世界的线条
     //private RenderDebufLine():void{
     //    let graphics = find("Graphics",this.node).getComponent(Graphics);

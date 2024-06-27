@@ -1,4 +1,4 @@
-import { Asset, Component } from "cc";
+import { Asset, AssetManager, Component, DebugMode, SpriteFrame, assetManager, debug, director, setDisplayStats } from "cc";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade, _G } from "../../../Global";
 import { BundleProxy, ListenObj, LoadID, LoadStruct } from "../BundleProxy/BundleProxy";
