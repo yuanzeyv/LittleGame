@@ -1,78 +1,138 @@
-import {_decorator,Node, find, v2, EventTouch, Event, SystemEventType, SystemEvent, Camera, Vec3, Vec2, Collider} from 'cc';
-import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
-import {_Facade, _G} from '../../../Global'; 
-import { PlayerBase } from './Player/PlayerBase'; 
-import { Cfg_PhysicsPlayer, IPhysicsPlayerStruct } from '../../../Config/Cfg_PhysicsPlayer';
-import { eNotice } from '../../../NotificationTable';
-import { PhysicsWrold } from './Physics/World';
-import { PhysicsProxy } from '../../Proxy/PhysicsProxy/PhysicsProxy';
-import { GPhysicsScalingFactor } from '../../Proxy/PhysicsProxy/Define/Physics';
-import  Physics, { Shape } from '@dimforge/rapier2d-compat';
-import { RigidBodies } from './Physics/RigidBodies';
-const {ccclass,} = _decorator;
-@ccclass('PhysicsLayer') 
-export class PhysicsLayer extends BaseLayer {  
-    private mActorMap:Map<number,PlayerBase> = new Map<number,PlayerBase>();//物理世界中的玩家对象
-    private mWorld:PhysicsWrold;//这是一个物理游戏世界
-    private mStartButton:Node;//开始游戏按钮
-    InitNode() { 
-        this.mStartButton = find("StartButton",this.node);
-    } 
+// import {_decorator,Node, find, Vec2, Prefab, instantiate, Label, UITransform, Vec3, EventTouch} from 'cc';
+// import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
+// import {_Facade, _G} from '../../../Global';    
+// import { eNotice } from '../../../NotificationTable'; 
+// import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
+// import { PlayerBase } from '../../Proxy/PhysicsProxy/PhysicsRigidBody/PlayerBase';
+// import { IJoystick, Joystick } from './Joystick';
+// import { PhysicsProxy } from '../../Proxy/PhysicsProxy/PhysicsProxy'; 
+// import { ShapeCompBase } from '../../Proxy/PhysicsProxy/PhysicsColliderComp/ShapeCompBase';
+// import { PlayerBaseInfo } from './PlayerBaseInfo';
+// import { eColliderCompType, eColliderDetectionBody, ePhysicsGoodsType, GPhysicsScalingFactor } from '../../Proxy/PhysicsProxy/Define/Physics';
+// import Pathfinding from 'pathfinding';
+// import { GetGridPosByPos, GetPosByGridPos } from '../../Proxy/PhysicsProxy/Tool/Util';
+// import { NightmarePlayerBase } from '../../Proxy/PhysicsProxy/PhysicsRigidBody/NightmarePlayerBase';
+// import { SkillInfo } from '../../Proxy/PhysicsProxy/Skill/SkillInfo';
+// import { DetectionBodyCompBase } from '../../Proxy/PhysicsProxy/PhysicsColliderComp/DetectionBodyComp/DetectionBodyCompBase';
+// const {ccclass,} = _decorator;   
+// @ccclass('PhysicsLayer')  
+// export class PhysicsLayer extends BaseLayer implements IJoystick{
+//     private mJoystick:Joystick;//游戏的遥感组件   
+//     public mPlayerBaseMap:Map<number,PlayerBaseInfo> = new Map<number,PlayerBaseInfo>();//获取到物理世界所对应的全部节点
+//     //界面监听回调
+//     protected RegisterExecuteHandle(executeMap:Map<eNotice ,LayerExecute> ){
+//         //刷新属性更新
+//         executeMap.set(eNotice.PlayerBaseAttrChange,this.PlayerBaseAttrChangeHandle.bind(this));   
+//         //刷新单角色货币数据信息
+//         executeMap.set(eNotice.RefreshCurrencyInfo,this.RefreshCurrencyInfoHandle.bind(this));    
+//         //刚体角色被添加时
+//         executeMap.set(eNotice.AddPhysicsRigidBody,this.AddPhysicsRigidBodyHandle.bind(this));
+//         executeMap.set(eNotice.DelPhysicsRigidBody,this.DelPhysicsRigidBodyHandle.bind(this));
+//         //添加物理刚体
+//         executeMap.set(eNotice.AddPhysicsCollider,this.AddPhysicsColliderHandle.bind(this));
+//         executeMap.set(eNotice.DelPhysicsCollider,this.DelPhysicsColliderHandle.bind(this));
+//     }
 
-    public InitData():void{   
-        this.node.on(SystemEvent.EventType.TOUCH_START,(eventTouch:EventTouch)=>{
-            let touchiWorldPos:Vec3 = find("Canvas/Camera").getComponent(Camera).screenToWorld(new Vec3(eventTouch.getLocation().x,eventTouch.getLocation().y));//获取到点击的世界坐标
-            let nowPos:Vec3 = this.node.worldPosition;//获取到当前节点的世界坐标
-            let residuePos:Vec3 =  touchiWorldPos.subtract(nowPos).divide3f(GPhysicsScalingFactor,GPhysicsScalingFactor,GPhysicsScalingFactor);
-            let ray:Physics.Ray = new Physics.Ray({x:residuePos.x,y:residuePos.y},{x:0,y:1})
-            let aaa= this.mWorld.World.castRay(ray,3,true,);  
-            if(aaa != undefined){ 
-                let qqq = aaa.collider.radius();
-                let shape:Shape = new Physics.Ball(qqq * (1 + 0.01));
-                //判断当前碰撞了谁
-                this.mWorld.World.intersectionsWithShape(aaa.collider.parent().translation(),0,shape,(collider:Physics.Collider)=>{
-                    let actor:PlayerBase = this.mActorMap.get(collider.parent().handle);
-                    let ackerActor:PlayerBase = this.mActorMap.get(aaa.collider.parent().handle);
-                    console.log(`${ackerActor.Name}碰撞${actor.Name}`);    
-                    ackerActor.DestorySelf();
-                    return true;   
-                },undefined,0x0001FFFF,aaa.collider,undefined);
-            } 
-        } ,this.node);     
-        this.RegisterButtonEvent(this.mStartButton,this.StartButtonHandle,this);//节点信息初始 化
-        this.mWorld = new PhysicsWrold(v2(0,-10),0.01666666);  
-    }  
-    
-    public InitLayer() {       
-        this.InitActorMap(); 
-    }         
+//     protected InitLayer():void{
+//         _Facade.FindProxy(PhysicsProxy).StartGame();//界面准备完毕后，开始游戏逻辑
+//         this.Init();
+//         this.mJoystick = new Joystick(this,find("TouchListen",this.node),find("MainJoystick",this.node),find("MainJoystick/Joystick",this.node),35);
+//     }      
  
-    //初始化所有角色信息内容 
-    public InitActorMap(){ 
-        for(let cell of _Facade.FindProxy(PhysicsProxy).GetPassConfig().MonsterArray){
-            let config:IPhysicsPlayerStruct = Cfg_PhysicsPlayer.GetData(cell.ID);//获取到玩家的配置信息
-            let retPlayerBase:PlayerBase = new PlayerBase(config,this.mWorld);//创建一个玩家
-            retPlayerBase.SetPosition(cell.Pos.X,cell.Pos.Y);//设置刚体的初始位置
-            this.node.addChild(retPlayerBase.Node);//添加当前节点到根结点 
-            this.mActorMap.set(retPlayerBase.ID,retPlayerBase);//设置玩家信息监听 
-        }
-        this.StartButtonHandle();
-    }
-   
-    protected update(dt: number): void { 
-        this.mWorld.Update(dt);//更新物理世界每帧信息
-        for(let cell of this.mActorMap.values())//更新所有节点的坐标信息
-            cell.UpdateNode(); 
-    }
+//     protected Init(){ 
+//         let data:Pathfinding.Grid = _Facade.FindProxy(PhysicsProxy).PFGrid; 
+//         for(let x = 0; x < data.width;x++){
+//             for(let y = 0; y < data.height ;y++){
+//                 let position = GetPosByGridPos(x,y,data.width,data.height); 
+//                 let node:Node = instantiate(_Facade.FindProxy(BundleProxy).UseAsset("resources","LayerSource/PhysicsLayer/Comp/BarrierShapeComp",Prefab));
+//                 node.getComponent(UITransform).setContentSize(GPhysicsScalingFactor,GPhysicsScalingFactor);
+//                 node.active = !data.isWalkableAt(x,y);;
+//                 node.position = new Vec3(position.x * GPhysicsScalingFactor ,position.y * GPhysicsScalingFactor);//new Vec3( (x + 0.5) *GPhysicsScalingFactor - data.width / 2 * GPhysicsScalingFactor , (y + 0.5 )* GPhysicsScalingFactor - data.height / 2 * GPhysicsScalingFactor);
+//                 find("Barrier",this.node).addChild(node);   
+//             } 
+//         }   
+//     } 
     
-    public CloseLayer(): void {    
-    }   
-
-    private StartButtonHandle():void{
-        //for(let cell of this.mActorMap){
-        //    let playerBase:PlayerBase = cell[1];
-        //    playerBase.SetFinalAttr(eFinalAttrType.HP,playerBase.GetFinalAttr(eFinalAttrType.MaxHP));
-        //    console.log(`${playerBase.Name} 的血量为 ${playerBase.GetFinalAttr(eFinalAttrType.HP)}`);
-        //}
-    }  
-} 
+//     protected UpdateBarrier(){
+//         let data:Pathfinding.Grid = _Facade.FindProxy(PhysicsProxy).PFGrid; 
+//         for(let x = 0; x < data.width;x++){
+//             for(let y = 0; y < data.height ;y++)
+//                 find("Barrier",this.node).children[x * data.width+ y].active = !data.isWalkableAt(x,y);
+//         }   
+//     }
+ 
+//     //遥感被拉动时，会得到反馈
+//     public JoystickSpeed(moveDir: Vec2, touchPercent: number): void {
+//         _Facade.FindProxy(PhysicsProxy).OperationPlayer().MoveVelCollider.SetMoveDirection(moveDir.multiplyScalar(touchPercent));  
+//     }   
+       
+//     private RefreshCurrencyInfoHandle(currencyObj:{rigidID:number,goalCount:number,tomatoCount:number}){ 
+//     }   0
+//     //当收到了物理世界更新消息后
+//     private AddPhysicsColliderHandle(shapeCompBase:ShapeCompBase){
+//         let playerBaseInfo:PlayerBaseInfo|undefined  = this.mPlayerBaseMap.get(shapeCompBase.Player.ID);//首先尝试找到数据管理信息
+//         if(playerBaseInfo == undefined){
+//             console.warn("尝试在一个不存在的PlayerBase上插入一个碰撞器？？？？？");
+//             return;
+//         }
+//         playerBaseInfo.InsertCollider(shapeCompBase); 
+//     } 
+ 
+//     //当收到了物理世界更新消息后
+//     private DelPhysicsColliderHandle(ShapeCompBase:ShapeCompBase){
+//         let playerBaseInfo:PlayerBaseInfo|undefined  = this.mPlayerBaseMap.get(ShapeCompBase.Player.ID);//首先尝试找到数据管理信息
+//         if(playerBaseInfo == undefined){
+//             console.warn("尝试在一个不存在的PlayerBase上插入一个碰撞器？？？？？");
+//             return;
+//         }
+//         playerBaseInfo.DelCollider(ShapeCompBase); 
+//     }  
+//     private UseSkillHandle(event: EventTouch,skillInfo:SkillInfo){
+//         let detection:DetectionBodyCompBase = (skillInfo.PlayerBase as NightmarePlayerBase).GetColliderByType(eColliderCompType.Detection,eColliderDetectionBody.HeroDetection);
+//         let playerBase:PlayerBase = detection.GetNearPlayerBase();
+//         if(playerBase == undefined){
+//             _Facade.Send(eNotice.TipsShow,"当前范围内没有敌人，无法发起攻击");
+//             return;
+//         }
+//         skillInfo.UseSkill(playerBase);
+//     }
+//     //梦魇进入游戏时     
+//     private NightmareEnterGame(nightmarePlayer:NightmarePlayerBase){
+//         //let operationPrefab:Node = instantiate(_Facade.FindProxy(BundleProxy).UseAsset("resources","LayerSource/PhysicsLayer/Comp/HeroHead",Prefab));
+//         //find("EnemyList",this.node).addChild(operationPrefab); 
+//         //let OperationLayoutNode:Node = find("OperationLayout",operationPrefab); //刷新一下操作Layout
+//         //for(let cell of nightmarePlayer.SkillInfos){
+//         //    let operationPrefab:Node = instantiate(_Facade.FindProxy(BundleProxy).UseAsset("resources","LayerSource/PhysicsLayer/Comp/OperationCell",Prefab));
+//         //    find("Label",operationPrefab).getComponent(Label).string = cell.SkillConfig.Name;
+//         //    this.RegisterButtonEvent( operationPrefab,this.UseSkillHandle,this,cell);
+//         //    OperationLayoutNode.addChild(operationPrefab);
+//         //} 
+//         ////this.mNightmareInfoMap.set(playerBase.ID,operationPrefab);  
+//         //find("EnemyList",this.node).addChild(OperationLayoutNode);
+//     } 
+//     //当收到了物理世界更新消息后
+//     private AddPhysicsRigidBodyHandle(playerBase:PlayerBase){    
+//         this.mPlayerBaseMap.set(playerBase.ID,new PlayerBaseInfo(playerBase,find("BackGround",this.node),find("HpLayer",this.node))); 
+//         //if(playerBase.Config.Type == ePhysicsGoodsType.Nightmare)
+//         //    this.NightmareEnterGame(playerBase as NightmarePlayerBase);//一个梦魇进入了游戏
+//     }
+     
+//     //当收到了物理世界更新消息后
+//     private DelPhysicsRigidBodyHandle(playerBase:PlayerBase){
+//         let playerBaseInfo:PlayerBaseInfo|undefined = this.mPlayerBaseMap.get(playerBase.ID);
+//         if( playerBaseInfo == undefined){
+//             console.log("是否正在试图多次的删除一个角色？？？"); 
+//             return;
+//         }
+//         playerBaseInfo.Clear();
+//         this.mPlayerBaseMap.delete(playerBase.ID);//直接对节点进行删除  
+//     }
+ 
+//     //每帧更新游戏状态时间戳
+//     protected update(dt:number):void{  
+//         _Facade.FindProxy(PhysicsProxy).Update(dt);  
+//         for(let cell of this.mPlayerBaseMap)
+//             cell[1].UpdateNodeInfo();
+//        this.UpdateBarrier();
+//     } 
+// }    

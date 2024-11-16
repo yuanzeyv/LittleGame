@@ -129,9 +129,9 @@ export function PutRunTime(log:string,func:()=>void):any{
     let startTime:number = new Date().getTime();
     let ret = func();
     let endTime:number = new Date().getTime();
-    console.error(`RunTimeTest ${log}:${(endTime - startTime) / 1000}` );
+    console.warn(`RunTimeTest ${log}:${(endTime - startTime) / 1000}` );
     return ret;
-} 
+}  
 
 export let DebunchingTime:number = 0;
 export function ResetDebunchingTime(){
@@ -155,4 +155,4 @@ export function SyncMicroTask(handle:(...args:any)=>void,...args:any):void{
 
 export function GetTextMeshComp(node:Node):TextMeshLabel{
     return node.getComponent("TextMeshLabel") as unknown as TextMeshLabel;
-}
+} 

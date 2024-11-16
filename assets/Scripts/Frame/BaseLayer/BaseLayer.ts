@@ -3,6 +3,7 @@ import { INotification } from "../PureMVC";
 import { eNotice as eNotice } from "../../NotificationTable";
 import { _Facade } from '../../Global';  
 import { ButtonEvent } from './Class/ButtonEvent';
+import { WindowInterface } from '../../Compoment/WindowInterface';
 export type LayerExecute = (any)=>void;
 const { ccclass, property,type} = _decorator; 
 //窗口的基础
@@ -11,6 +12,7 @@ const { ccclass, property,type} = _decorator;
  */
 @ccclass('BaseLayer') 
 export class BaseLayer extends Component{ 
+    private mWindowInterface:WindowInterface;//执行界面接口对象
     //按钮事件
     private mButtonEvent:ButtonEvent;
     //消息队列,不用map 数组效率更高
@@ -25,6 +27,10 @@ export class BaseLayer extends Component{
         }catch(errro){
             console.error(errro);
         }
+    }
+    
+    public InitWindowInterface(windowInterface:WindowInterface):void{
+        this.mWindowInterface = windowInterface;
     }
 
     //界面预制体被生成完成后，优先调用的
@@ -42,9 +48,18 @@ export class BaseLayer extends Component{
         this.AfterLoad();
     }
 
+    protected onEnable(){ 
+        this.OpenLayer(); 
+    }
+
     protected InitLayer() {}//初始化界面信息
     protected AfterLoad() {}//初始化结束以后
+    protected OpenLayer() {}//打开一个界面
  
+    public CloseWindow():void{
+        this.mWindowInterface.ToCloseWindow();
+    }
+
     public CloseLayer(){//关闭界面后做的操作   
         this.mButtonEvent.ClearButtonEvent();
         this.onClose();
@@ -64,4 +79,12 @@ export class BaseLayer extends Component{
     public UnregisterButtonClick(node:Node,func:(event:EventTouch,...args)=>void):void{ 
         this.mButtonEvent.UnregisterButtonClick(node,func);//反注册指定的回调 
     } 
+
+    //游戏的更新函数，我不喜欢小写字母开头的函数，所以这里进行了修改
+    protected update(dt: number): void {
+        this.Update(dt);
+    }
+
+    protected Update(dt:number){
+    }
 }

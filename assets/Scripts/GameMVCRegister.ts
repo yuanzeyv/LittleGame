@@ -40,7 +40,11 @@ import { SelectServerMediator } from "./Logic/Mediator/SelectServerMediator/Sele
 import { SelectServerMultMediator } from "./Logic/Mediator/SelectServerMediator/SelectServerMultMediator";
 import { UserBaseProxy } from "./Logic/Proxy/UserBaseProxy/UserBaseProxy";
 import { PhysicsMediator } from "./Logic/Mediator/PhysicsMediator/PhysicsMediator";
-import { PhysicsProxy } from "./Logic/Proxy/PhysicsProxy/PhysicsProxy"; 
+import { BuildingChooseMediator } from "./Logic/Mediator/BuildingChooseLayerMediator/BuildingChooseMediator";
+import { BuildingChooseMultMediator } from "./Logic/Mediator/BuildingChooseLayerMediator/BuildingChooseMultMediator";
+import { PhysicsBuildingInfoMediator } from "./Logic/Mediator/PhysicsBuildingInfoMediator/PhysicsBuildingInfoMediator";
+import { OnlyTheBraveMediator } from "./Logic/Mediator/OnlyTheBraveMediator/OnlyTheBraveMediator";
+import { OnlyTheBraveProxy } from "./Logic/Proxy/OnlyTheBraveProxy/OnlyTheBraveProxy";
 
 export class GameMVCRegister extends BaseMVCRegister {
     protected AllocCommand(commandMap: Map<eNotice, CommandConstructor>): void {
@@ -71,13 +75,19 @@ export class GameMVCRegister extends BaseMVCRegister {
             .set(SelectServerMediator,"SelectServerMediator")  //服务器选择Mediator
             .set(SelectServerMultMediator,"SelectServerMultMediator")//服务器选择多面板  
             .set(PhysicsMediator,"PhysicsMediator")//服务器选择多面板  
+            .set(OnlyTheBraveMediator,"OnlyTheBraveMediator")//服务器选择多面板  
+
+            //建筑选择多面板
+            .set(BuildingChooseMediator,"BuildingChooseMediator")//服务器选择多面板  
+            .set(BuildingChooseMultMediator,"BuildingChooseMultMediator")//服务器选择多面板  
+            .set(PhysicsBuildingInfoMediator,"PhysicsBuildingInfoMediator")//服务器选择多面板  
     }  
     
     protected AllocProxy(proxyMap: Set<ProxyConstructor>): void { 
         proxyMap
             .add(NetProxy)  
             .add(NetDispatchProxy) 
-            .add(PoolProxy) 
+            .add(PoolProxy)  
             .add(WindowProxy) 
             .add(BundleProxy) 
             .add(BannerAdvertisingProxy)
@@ -93,6 +103,7 @@ export class GameMVCRegister extends BaseMVCRegister {
             .add(SkeletonProxy) 
             .add(FightProxy) //战斗代理
             .add(UserBaseProxy) //角色基础信息代理
-            .add(PhysicsProxy) //角色基础信息代理
+            .add(OnlyTheBraveProxy) //角色基础信息代理
+            // .add(PhysicsProxy) //角色基础信息代理
     }
-}  
+}   

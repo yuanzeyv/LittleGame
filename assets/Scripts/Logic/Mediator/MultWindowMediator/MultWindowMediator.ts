@@ -11,10 +11,10 @@ export class MultWindowMediator extends BaseMediator{
     } 
       
     //打开一个界面
-    protected OpenLayer(windowID:number){
-        let mainID:number = _Facade.FindProxy(MultWindowProxy).GetOneLevelWindowID(windowID);//主窗口ID赋值
+    protected OpenLayer(windowInfo:{MultID:number,ViewData:number}){
+        let mainID:number = _Facade.FindProxy(MultWindowProxy).GetOneLevelWindowID(windowInfo.MultID);//主窗口ID赋值
         if(mainID == 0){//没有找到这个窗口ID的话，直接会返回
-            _Facade.Send(eNotice.TipsShow,`窗口${windowID} 没有找到一级窗口 ${mainID}`);
+            _Facade.Send(eNotice.TipsShow,`窗口${windowInfo.MultID} 没有找到一级窗口 ${mainID}`);
             return;
         }
         let multConfig:MultWindowParam|undefined = MultWindowParamMap[mainID];
@@ -22,7 +22,7 @@ export class MultWindowMediator extends BaseMediator{
             _Facade.Send(eNotice.TipsShow,`未配置一级窗口的多面板信息`)
             return;
         }
-        _Facade.Send(multConfig.openNotice,{mainID:mainID,selectID:windowID});//尝试打开一级窗口
+        _Facade.Send(multConfig.openNotice,{mainID:mainID,selectID:windowInfo.MultID,ViewData:windowInfo.ViewData});//尝试打开一级窗口
     } 
 
 

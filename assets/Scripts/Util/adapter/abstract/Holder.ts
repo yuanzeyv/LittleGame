@@ -7,18 +7,19 @@ import { View } from './View';
 const { ccclass, property } = _decorator;
 @ccclass('Holder')
 export abstract class Holder<T = any, A extends ScrollAdapter<T> = ScrollAdapter<T>> {
-    protected abstract onCreated(): void
-    protected abstract onVisible(): void
-    protected abstract onDisable(): void
-    private readonly _node: Node
-    public get node() { return this._node }
+    protected abstract onCreated(): void;
+    protected abstract onVisible(): void;
+    protected abstract onDisable(): void; 
+    protected abstract onDestory(): void; 
+    private readonly _node: Node 
+    public get node() { return this._node } 
     private readonly _transform: UITransform
     public get transform() { return this._transform }
     private readonly _code: string
     public get code() { return this._code }
     private readonly _adapter: A
     public get adapter() { return this._adapter }
-    private _model: IModel<T>
+    private _model: IModel<T> 
     public get model() { return this._model }
     private _view: View<T, A>
     public get view() { return this._view }
@@ -83,7 +84,14 @@ export abstract class Holder<T = any, A extends ScrollAdapter<T> = ScrollAdapter
     }
 
     /** @deprecated 内部方法，调用会爆炸💥 */
-    public internal_disable() {
+    public internal_destory() { 
+        this.onDestory();
+        this.node.removeFromParent();
+        this.node.destroy();
+    } 
+
+    /** @deprecated 内部方法，调用会爆炸💥 */
+    public internal_disable() { 
         this.adapter.scrollManager.internal_disableTouchTarget(this.node)
         this.onDisable()
         this._unregister()
@@ -94,7 +102,7 @@ export abstract class Holder<T = any, A extends ScrollAdapter<T> = ScrollAdapter
         this._fixedIndex = -1
         this._isLayout = false
         this._oldData = null
-        this.node.active = false
+        this.node.active = false; 
     }
     /** @deprecated 内部方法，调用会爆炸💥 */
     public internal_layout() {

@@ -1793,7 +1793,8 @@ export class Facade implements IFacade {
      * @param type
      *        The type of the notification to send.
      */
-    Send(name: eNotice, body: any = null): void {
+    
+    Send(name: eNotice, body: any = undefined): void {
         this.notifyObservers(new Notification(name, body));
     }
 

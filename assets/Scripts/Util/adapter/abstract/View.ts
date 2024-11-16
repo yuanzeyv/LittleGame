@@ -122,7 +122,7 @@ export abstract class View<T = any, A extends ScrollAdapter<T> = ScrollAdapter<T
             this._innerSize += model.size[crossAxis]
         }
     }
-
+ 
     /** @deprecated 内部方法，调用会爆炸💥 */
     public internal_recycleHolders(done: (holder: Holder) => void) {
         for (let i = 0; i < this._holderList.length; i++) {
@@ -151,8 +151,8 @@ export abstract class View<T = any, A extends ScrollAdapter<T> = ScrollAdapter<T
     }
     /** @deprecated 内部方法，调用会爆炸💥 */
     public internal_disable() {
-        this.adapter.layoutManager.unLayout(this.index)
-        this.unregister()
+        this.adapter.layoutManager.unLayout(this.index);
+        this.unregister();
         this.onDisable()
         this.internal_reset()
     }

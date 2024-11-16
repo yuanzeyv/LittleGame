@@ -21,7 +21,7 @@ export class LevelBuff extends BuffBase{
         let levelBuffConfig:IBuffStruct | undefined =  this.GetTableByTypeAndLevel(this.mBuffCfg.BuffID,level);
         if( levelBuffConfig == undefined)//提示设置失败 
             return false; 
-        this.mBuffCfg = levelBuffConfig
+        this.mBuffCfg = levelBuffConfig;
         return true;
     }
 };

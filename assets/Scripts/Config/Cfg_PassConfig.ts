@@ -28,7 +28,7 @@ class PassConfig{
        this.InitArray();
    }
    private InitConfig():void{
-       this.mConfigObject[1] = {"PassID":1,"Name":"第一关","Desc":"无压力","MonsterArray":[{"ID":1,"Pos":{"X":0,"Y":-5}},{"ID":1,"Pos":{"X":0,"Y":5}},{"ID":2,"Pos":{"X":-2.5,"Y":0}},{"ID":2,"Pos":{"X":2.5,"Y":0}},{"ID":5,"Pos":{"X":1,"Y":0}}]};
+       this.mConfigObject[1] = {"PassID":1,"Name":"第一关","Desc":"无压力","MonsterArray":[{"ID":1,"Pos":{"X":0,"Y":-50.5}},{"ID":1,"Pos":{"X":0,"Y":50.5}},{"ID":4,"Pos":{"X":0,"Y":0}},{"ID":2,"Pos":{"X":-50.5,"Y":0}},{"ID":2,"Pos":{"X":50.5,"Y":0}},{"ID":5,"Pos":{"X":1,"Y":0}}]};
        this.mConfigObject[2] = {"PassID":2,"Name":"第二关","Desc":"无压力","MonsterArray":[{"ID":1,"Pos":{"X":0,"Y":0}},{"ID":2,"Pos":{"X":0,"Y":0}},{"ID":1,"Pos":{"X":0,"Y":0}},{"ID":2,"Pos":{"X":0,"Y":0}}]};
    }
    private InitArray(){

@@ -16,10 +16,14 @@ export class WindowInterface extends Component {
     } 
     
     public OnCloseHandle(button:Button){
+        this.ToCloseWindow();
+    } 
+
+    public ToCloseWindow():void{
         if(this.mWindowData.closeNotice == undefined) //触摸是否关闭
             return; 
         _Facade.Send(this.mWindowData.closeNotice);
-    } 
+    }
 
     public SetWindowBaseData(data:WindowParam):void{
         this.mWindowData = data;
@@ -27,7 +31,7 @@ export class WindowInterface extends Component {
     //获取到界面组件
     public get LayerComp():BaseLayer{
         return this.mLayerCompoment;
-    }
+    } 
     
     //创建一个窗口
     CreateWindow(layer:Node,windowData:any):boolean{//创建一个窗口对象    
@@ -42,6 +46,7 @@ export class WindowInterface extends Component {
         }
         try{
             this.mLayerCompoment = layer.getComponent(BaseLayer);//加入组件
+            this.mLayerCompoment.InitWindowInterface(this);
             this.mLayerCompoment.InitBaseLayer(windowData);//初始化组件数据信息
             this.mWindowNode.addChild(layer);
         }catch(error){
@@ -95,7 +100,7 @@ export class WindowInterface extends Component {
     public CompleteLoadingLayer(loadInfo:LoadStruct,overCall:()=>void):void{   
         if(loadInfo.IsAllComplete()){ //如果加载全部成功的话 
             tween(find("LoadProgress/SuccessMask/SumNode",this.node))
-            .to(0.1,{position:new Vec3(find("LoadProgress/SuccessMask/SumNode",this.node).position.x,-114)})
+            .to(0,{position:new Vec3(find("LoadProgress/SuccessMask/SumNode",this.node).position.x,-114)})
             .call(()=>{ find("LoadProgress/LoadSuccessImage",this.node).active = true;  }) 
             .call(()=> {
                 this.StopWaterRoll();//停止水流滚动  

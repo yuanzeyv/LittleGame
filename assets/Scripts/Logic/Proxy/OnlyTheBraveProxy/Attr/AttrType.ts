@@ -1,0 +1,80 @@
+//B=Base   P=Percent F=FinalPercent
+export enum eBaseAttrType{
+    B_PhysicalAttack            = 0,//物理攻击力加成
+    P_PhysicalAttack            = 1,
+    F_PhysicalAttack            = 2,
+    B_MagicAttack               = 3,//魔法攻击加成
+    P_MagicAttack               = 4,
+    F_MagicAttack               = 5,
+    B_PhysicalDefence           = 6, //物理防御力
+    P_PhysicalDefence           = 7,
+    F_PhysicalDefence           = 8,
+    B_MagicDefence              = 9,//魔法防御力
+    P_MagicDefence              =10,
+    F_MagicDefence              =11,
+    B_DefencePenetrate          =12,//护甲穿透
+    P_DefencePenetrate          =13,
+    F_DefencePenetrate          =14,
+    B_MagicDefencePenetrate     =15,//魔抗穿透
+    P_MagicDefencePenetrate     =16,
+    F_MagicDefencePenetrate     =17,
+    B_DamageReduction           =18,//减伤属性
+    P_DamageReduction           =19,
+    F_DamageReduction           =20,
+    B_DamageBoost               =21,//增伤属性
+    P_DamageBoost               =22,
+    F_DamageBoost               =23,
+    B_CriticalResistDamage      =24,//爆伤加成
+    P_CriticalResistDamage      =25,
+    F_CriticalResistDamage      =26,
+    B_CriticalAddtionDamage     =27,//爆伤抵抗
+    P_CriticalAddtionDamage     =28,
+    F_CriticalAddtionDamage     =29, 
+    B_MoveSpeed                 =30,//玩家的移动速度
+    P_MoveSpeed                 =31,
+    F_MoveSpeed                 =32,
+    B_AttackSpeed               =33,//玩家的攻击速度
+    P_AttackSpeed               =34,
+    F_AttackSpeed               =35,
+    B_CriticalRate              =36, //玩家的暴击几率
+    P_CriticalRate              =37,
+    F_CriticalRate              =38,
+    B_ResistCirticalRate        =39,//玩家的抗暴击几率
+    P_ResistCirticalRate        =40,
+    F_ResistCirticalRate        =41,
+    B_HitRate                   =42,//玩家的命中几率
+    P_HitRate                   =43,
+    F_HitRate                   =44,
+    B_MissRate                  =45,//玩家的闪避几率
+    P_MissRate                  =46,
+    F_MissRate                  =47,
+    B_MaxHP                     =48,//玩家的最大血量
+    P_MaxHP                     =49,
+    F_MaxHP                     =50, 
+    B_BulletMoveSpeed           =51,//玩家子弹移动速度
+    P_BulletMoveSpeed           =52,
+    F_BulletMoveSpeed           =53, 
+};
+ 
+//游戏中的最终属性
+export enum eFinalAttrType{
+    PhysicalAttack       = 0,//玩家的物理攻击力
+    MagicAttack          = 1,//玩家的魔法攻击力 
+    PhysicalDefence      = 2,//玩家的物理防御力
+    MagicDefence         = 3,//玩家的魔法防御力
+    DefencePenetrate     = 4,//护甲穿透（无用）
+    MagicDefencePenetrate= 5,//魔抗穿透（无用）
+    DamageReduction      = 6,//减伤属性
+    DamageBoost          = 7,//增伤属性
+    CriticalAddtionDamage= 8,//爆伤加成
+    CriticalResistDamage = 9,//爆伤抵抗 
+    MoveSpeed            =10,//玩家的移动速度
+    AttackSpeed          =11,//玩家的射击速度
+    CriticalRate         =12,//玩家的暴击几率
+    ResistCirticalRate   =13,//玩家的抗暴击几率
+    HitRate              =14,//玩家的命中几率
+    MissRate             =15,//玩家的闪避几率
+    MaxHP                =16,//玩家的最大血量
+    BulletSpeed          =17,//玩家的飞行类技能移速 
+    HP                   =18,//玩家的血量              
+}; 

@@ -24,7 +24,7 @@ export class MultWindowPanel extends ScrollAdapter<IFixedModel> {
         this.mLayer = windowLayer;
     }
 
-    public SetTableViewData(viewData:Array<number>,defaultID:number = -1):void{
+    public SetTableViewData(viewData:Array<number>,defaultID:number = -1,windowInfo:any = undefined):void{
         this.mPanelBtnMap.clear(); 
         let list:IFixedModel[] = []; 
         for(let index = 0;index < viewData.length;index++){
@@ -32,10 +32,11 @@ export class MultWindowPanel extends ScrollAdapter<IFixedModel> {
             list.push({index:index,panelID:viewData[index]});  
         }
         this.modelManager.insert(list);//可以打开面板了 
-        this.SetSelectWindow(defaultID == -1 ? viewData[0] : defaultID); 
+        let openWindow:number = defaultID == -1 ? viewData[0] : defaultID
+        this.SetSelectWindow(openWindow, defaultID == -1 || defaultID != openWindow ?undefined : windowInfo); 
     }    
-
-    public SetSelectWindow(windowID:number){
+ 
+    public SetSelectWindow(windowID:number,windowInfo:any = undefined){
         let selectWindowID:number = this.mLayer.GetSelectWindowID();
         let index:number|undefined = this.mPanelBtnMap.get(windowID);
         if(index == undefined)//如果没有设置的话，将会直接返回
@@ -48,13 +49,13 @@ export class MultWindowPanel extends ScrollAdapter<IFixedModel> {
         this.SetBtnSelectStatus(windowID);
         this.mLayer.SetSelectWindowID(windowID);
         if(MultWindowParamMap[windowID])
-            _Facade.Send(MultWindowParamMap[windowID].openNotice,windowID);
+            _Facade.Send(MultWindowParamMap[windowID].openNotice,{windowID:windowID,windowInfo:windowInfo});
     } 
 
     public SetBtnSelectStatus(windowID:number):boolean{
         let selectWindowID:number = this.mLayer.GetSelectWindowID();
         let nowWindowIndex:number|undefined = this.mPanelBtnMap.get(selectWindowID);
-        let windowIndex:number|undefined = this.mPanelBtnMap.get(windowID);
+        let windowIndex:number|undefined = this.mPanelBtnMap.get(windowID); 
         if(windowIndex == undefined)
             return false;  
         let nowVisibleIndex:number = this.viewManager.getVisibleIndexByGroupIndex(nowWindowIndex);

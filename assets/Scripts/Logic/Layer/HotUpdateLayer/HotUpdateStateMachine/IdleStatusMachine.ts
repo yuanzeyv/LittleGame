@@ -16,12 +16,15 @@ export class IdleStatusMachine extends HotUpdateStateMachine{
     public CheckHotUpdate(hotProxy:HotUpdateLayer,nativeUrl:string){ 
         if(!NATIVE){
             console.log("热更=>当前非Native平台，无法检查热更版本"); 
+            //发送一个热更完成的请求，代表当前跳过了热更
+            return;
         } 
-        console.log(`热更=>找到了热更资源 Native路径为:${nativeUrl}`);  
+        console.log(`热更=>找到了热更资源 Native路径为:${nativeUrl}`);//获取到本地热更文件路径信息
         if (hotProxy.AssetManager.getState() === native.AssetsManager.State.UNINITED){
             console.log(`热更=>当前处于 UNINITED 状态`);
-            hotProxy.AssetManager.loadLocalManifest(nativeUrl); 
+            hotProxy.AssetManager.loadLocalManifest(nativeUrl);
         }  
+        //没有取得Manifest文件 或者 文件未被加载成功的话
         if (!hotProxy.AssetManager.getLocalManifest() || !hotProxy.AssetManager.getLocalManifest().isLoaded()) {
             console.log(`热更=>加载本地 Manifest 资源失败`);
             return;

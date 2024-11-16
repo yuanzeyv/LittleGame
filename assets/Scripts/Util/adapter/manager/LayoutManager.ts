@@ -99,7 +99,8 @@ export class LayoutManager extends Manager {
     @(property as any)({
         group: { id: "0", name: "controlScale" },
         tooltip: "是否使用 y 缩放计算高度"
-    }) get controlScaleHeight() { return this._controlScaleHeight }
+    })
+    get controlScaleHeight() { return this._controlScaleHeight }
     public set controlScaleHeight(value: boolean) {
         if (value == this._controlScaleHeight) return
         this._controlScaleHeight = value

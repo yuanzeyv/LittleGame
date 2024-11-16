@@ -48,12 +48,27 @@ export abstract class ScrollAdapter<T = any> extends Component {
      * 负责数据的增删改查，对用户数据进行二次封装
      */
     public modelManager: ModelManager<T> = new ModelManager()
-    /**
-     * 获取预制体
-     * @param data 用户自定义数据
-     * @return 返回一个预制体
-     */
-    public abstract getPrefab(data: T): Node | Prefab
+
+    /*
+    *获取View对象的匿名函数
+    */
+    private mViewGenHandle:(adapter:ScrollAdapter)=>View|undefined;
+    public get ViewGenHandle():(adapter:ScrollAdapter)=>View { return this.mViewGenHandle;}
+    public set ViewGenHandle(handle:(adapter:ScrollAdapter)=>View) { this.mViewGenHandle = handle; }
+    /*
+    *获取Handle对象的匿名函数
+    */
+    private mHolderGenCons:(node: Node, code: string,adapter:ScrollAdapter)=>Holder;
+    public SetHolderGenHandle(handle:(node: Node, code: string,adapter:ScrollAdapter)=>Holder){
+        this.mHolderGenCons = handle;
+    } 
+    /* 
+    *获取Prefab对象的匿名函数
+    */
+    public mPrefabGenHandle:(data:any)=>Prefab;
+    public get PrefabGenHandle():(data:any)=>Prefab { return this.mPrefabGenHandle;}
+    public set PrefabGenHandle(handle:(data:any)=>Prefab) { this.mPrefabGenHandle = handle; }
+
     /** 
      * 初始化元素布局属性，子类可重写，默认为单列 
      * 例如你想实现表格布局，你可以通过设置 element.wrapAfterMode、element.wrapBeforeMode来控制
@@ -64,14 +79,29 @@ export abstract class ScrollAdapter<T = any> extends Component {
      * 子类可重写
      */
     public getView(): View<T> {
+        if( this.mViewGenHandle != undefined )
+            return this.mViewGenHandle(this);
         return new DefaultView(this)
-    }
+    } 
     /** 
      * 返回一个Holder实例
      * 子类可重写
      */
     public getHolder(node: Node, code: string): Holder<T> {
+        if( this.mHolderGenCons != undefined)
+                return this.mHolderGenCons(node,code,this);
         return new DefaultHolder(node, code, this)
+    }
+    
+    /**
+     * 获取预制体
+     * @param data 用户自定义数据
+     * @return 返回一个预制体
+     */
+    public getPrefab(data: T): Node | Prefab{
+        if( this.mPrefabGenHandle != undefined )
+            return this.mPrefabGenHandle(data);
+        return undefined;
     }
     /** 是否垂直滚动 */
     public get isVertical() {

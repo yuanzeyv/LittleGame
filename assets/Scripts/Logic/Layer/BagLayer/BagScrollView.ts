@@ -2,8 +2,7 @@
 import {_Facade, _G} from '../../../Global';
 import { Button, Prefab, Size, UITransform, _decorator, find ,Node} from 'cc';
 import { ScrollAdapter, Holder, IElement, AlwaysScroll, View, WrapMode } from '../../../Util/adapter'; 
-import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy';
-import { MultWindowParamMap } from '../../Proxy/MultWindowProxy/MultWindowTypeDefine';
+import { BundleProxy } from '../../Proxy/BundleProxy/BundleProxy'; 
 import { MultWindowLayer } from '../MultWindowLayer/MultWindowLayer';
 const { ccclass, property,type} = _decorator;
 interface IFixedModel {index:number;} 

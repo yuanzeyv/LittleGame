@@ -1,4 +1,5 @@
-import { _decorator, Component, Node, UITransform } from 'cc';
+import { _decorator, Component, Node, UITransform, game } from 'cc';
+import { Group } from '../abstract/Group';
 import { Manager } from '../abstract/Manager';
 import { Layer, WrapMode } from '../define/enum';
 import { IModel } from '../define/interface';
@@ -118,9 +119,14 @@ export class ModelManager<T = any> extends Manager {
         this.emit(Event.ON_UPDATE)
     }
     public clear() {
-        this._modelList.length = 0
-        this._length = 0
+        this._modelList.length = 0;//设置modellist为空
+        this._length = 0;//重置当前的擦汗高难度
         this.emit(Event.ON_CLEAR)
+    }
+    public releaseAll() {
+        this._modelList.length = 0;
+        this._length = 0;
+        this.emit(Event.ON_CLEAR,true);
     }
     public has(index: number): boolean {
         return !!this._modelList[index]

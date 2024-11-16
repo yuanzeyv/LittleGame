@@ -1,6 +1,12 @@
 export type TKV = {k:number,v:number};
 export type TBuffType = number;
 export type TBuffID = number; 
+/*
+*Buff有3种
+*标准Buff:此Buff有且仅有一个
+*叠加等级Buff:此Buff可以通过不停的获取，来叠加到最大等级
+*叠加数量Buff:此Buff可以重复获得，直到达到最大的数量
+*/
 
 export enum eBuffType{
     Territory = 1,//领域Buff，

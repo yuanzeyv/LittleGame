@@ -22,7 +22,7 @@ export enum eNotice {
 
     //登录界面
     LongInOpen = "LongInOpen",
-    LoginInClose = "LoginInClose",
+    LoginInClose = "LoginInClose", 
     //游戏主界面
     MainLayerOpen = "MainLayerOpen",
     MainLayerClose = "MainLayerClose",
@@ -201,11 +201,55 @@ export enum eNotice {
     //登录界面
     PhysicsLayerOpen = "PhysicsLayerOpen",
     PhysicsLayerClose = "PhysicsLayerClose",
-
+ 
     //作弊器界面
     CheatPokerLayerOpen = "CheatPokerLayerOpen" ,
     CheatPokerLayerClose = "CheatPokerLayerClose"  ,
 
-    //标记一个玩家死亡
-    PlayerDie = "PlayerDie",
+    //物理小游戏用
+    RefreshOperationInfo = "RefreshOperationInfo",//刷新角色的操作信息
+    RefreshCurrencyInfo = "RefreshCurrencyInfo",//刷新角色货币信息
+    RoomEnterWorld = "RoomEnterWorld",//添加一个房间信息 
+    ActorEnterWorld = "ActorEnterWorld",//添加一个角色信息
+    NightmareEnterWorld = "NightmareEnterWorld",//添加一个梦魇进场信息
+    PlayerBaseBeAttack = "PlayerBaseBeAttack",//对一个角色造成了伤害时
+    
+    AddOperationInfo = "AddOperationInfo",//添加了一个操作变动的功能
+    DelOperationInfo = "DelOperationInfo",//删除了一个操作变动的功能
+
+    AddPhysicsCollider = "AddPhysicsCollider",//添加一个物理世界碰撞器
+    DelPhysicsCollider = "DelPhysicsCollider",//添加一个物理世界碰撞器
+
+    AddPhysicsRigidBody = "AddPhysicsRigidBody",//添加了一个物理世界刚体
+    DelPhysicsRigidBody = "DelPhysicsRigidBody",//删除了一个物理世界刚体
+    
+    PlayerBaseAttrChange = "PlayerBaseAttrChange",//玩家属性变动  
+   /* 
+   *打开建筑选择列表  
+   */ 
+   OpenMultBuildingChooseLayer = "OpenMultBuildingChooseLayer",
+   CloseMultBuildingChooseLayer = "CloseMultBuildingChooseLayer",
+   AddMultBuildingChooseLayer = "AddMultBuildingChooseLayer",
+
+   OpenBuildingChooseLayer = "OpenBuildingChooseLayer",
+   CloseBuildingChooseLayer = "CloseBuildingChooseLayer",
+   
+   OpenBuildingInfoLayer = "OpenBuildingInfoLayer",
+   CloseBuildingInfoLayer = "CloseBuildingInfoLayer",
+
+   /*小游戏选择界面*/
+    MiniGameMenuLayerOpen = "MiniGameMenuLayerOpen",
+    MiniGameMenuLayerClose = "MiniGameMenuLayerClose0",
+
+
+    /*
+    *勇往直前小游戏消息通知
+    */
+    OnlyTheBraveOpen = "OnlyTheBraveOpen",//界面打开用
+    OnlyTheBraveClose = "OnlyTheBraveClose",//界面关闭用
+
+    OnlyTheBravePhysicsRigidBodyEnterView = "OnlyTheBravePhysicsRigidBodyEnterView",//一个物理对象 进入了游戏视野时
+    OnlyTheBravePhysicsRigidBodyLeaveView = "OnlyTheBravePhysicsRigidBodyLeaveView",//一个物理对象 离开了游戏视野时
+
+    JoystickTouchChange = "JoystickTouchChange",//手柄触摸进度改变
 }

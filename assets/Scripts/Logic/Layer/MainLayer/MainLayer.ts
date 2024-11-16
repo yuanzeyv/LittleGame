@@ -2,14 +2,14 @@ import {_decorator,Component,Node,BlockInputEvents,Color,Sprite,Button,instantia
 import {BaseLayer, LayerExecute} from '../../../Frame/BaseLayer/BaseLayer';
 import {_Facade, _G} from '../../../Global';
 import {eNotice} from '../../../NotificationTable';
-import { eAttrBaseType } from '../../Proxy/PlayerAttrProxy/AttrDefine/AttrDefine';
-import { AttrCalcRelevanceConfig } from '../../../Config/Cfg_AttrCalcRelevance';
+import { eAttrBaseType } from '../../Proxy/PlayerAttrProxy/AttrDefine/AttrDefine'; 
 import { PlayerAttrProxy } from '../../Proxy/PlayerAttrProxy/PlayerAttrProxy'; 
 import { SkeletonProxy } from '../../Proxy/SkeletonProxy/SkeletonProxy';
 import { GetTextMeshComp } from '../../../Util/Util';
 import { NetProxy } from '../../Proxy/NetProxy/NetProxy';
 import { eNetProtocol } from '../../../NetNotification';  
-import RAPIER from '@dimforge/rapier2d-compat';
+import Physics from '@dimforge/rapier2d-compat';
+import { Cfg_AttrCalcRelevance } from '../../../Config/Cfg_AttrCalcRelevance';
 const {ccclass, property, type} = _decorator;    
 @ccclass('MainLayer')
 export class MainLayer extends BaseLayer {  
@@ -17,7 +17,7 @@ export class MainLayer extends BaseLayer {
     private mSpineBGSpine:sp.Skeleton;//Spine背景节点  
     private mBottomFunctionButtonArray:Array<Node> = new Array<Node>();
     private mNodeRelevanceAttr:Map<eAttrBaseType,Node> = new Map<eAttrBaseType,Node>();
-    private mWorld:RAPIER.World;
+    private mWorld:Physics.World;
     RegisterExecuteHandle(executeMap: Map<eNotice, LayerExecute>) { 
         executeMap.set(eNotice.RefreshAttr,this.RefreshPlayerAttr.bind(this));
     } 
@@ -39,20 +39,20 @@ export class MainLayer extends BaseLayer {
        
         //let b2World = new b2.b2World({x:0,y:0});
         //b2World.CreateBody()
-        RAPIER.init().then(()=>{
-            this.mWorld = new RAPIER.World({x:0,y:-9.81});  
+        Physics.init().then(()=>{
+            this.mWorld = new Physics.World({x:0,y:-9.81});  
 
             // Create the ground
-            let groundColliderDesc = RAPIER.ColliderDesc.cuboid(10.0, 0.1);
+            let groundColliderDesc = Physics.ColliderDesc.cuboid(10.0, 0.1);
             this.mWorld.createCollider(groundColliderDesc);
 
             // Create a dynamic rigid-body.
-            let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+            let rigidBodyDesc = Physics.RigidBodyDesc.dynamic()
                     .setTranslation(0.0,20.0); 
             let rigidBody = this.mWorld.createRigidBody(rigidBodyDesc);
  
             // Create a cuboid collider attached to the dynamic rigidBody.
-            let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
+            let colliderDesc = Physics.ColliderDesc.cuboid(0.5, 0.5);
             let collider = this.mWorld.createCollider(colliderDesc, rigidBody);
 
         });  
@@ -75,8 +75,8 @@ export class MainLayer extends BaseLayer {
         
         let data = this.mWorld.debugRender();
 
-        this.mWorld.forEachRigidBody((rigidBody:RAPIER.RigidBody)=>{
-            let vector:RAPIER.Vector = rigidBody.translation();
+        this.mWorld.forEachRigidBody((rigidBody:Physics.RigidBody)=>{
+            let vector:Physics.Vector = rigidBody.translation();
             console.log(`${rigidBody.userData}刚体的坐标:${vector.x}  ${vector.y}`);
             find("Box",this.node).setPosition(vector.x,vector.y * 10 );
         });      
@@ -109,9 +109,9 @@ export class MainLayer extends BaseLayer {
         }
         for(let cell of refreshIndexArray){
             let node:Node = this.mNodeRelevanceAttr.get(cell);
-            let name:string = AttrCalcRelevanceConfig.GetData(cell)!.name;//获取到当前的名称
+            let name:string = Cfg_AttrCalcRelevance.GetData(cell)!.name;//获取到当前的名称
             let value:number = _Facade.FindProxy(PlayerAttrProxy).GetAttrSumValue(cell);
-            let isPercent:boolean = AttrCalcRelevanceConfig.GetData(cell)!.isPercent;
+            let isPercent:boolean = Cfg_AttrCalcRelevance.GetData(cell)!.isPercent;
             GetTextMeshComp(find("Name",node)).string = name;
             GetTextMeshComp(find("Value",node)).string = `${isPercent?value/10000:value}${isPercent?"%":""}`;
         }
@@ -133,7 +133,7 @@ export class MainLayer extends BaseLayer {
         this.mNodeRelevanceAttr.set(eAttrBaseType.STUN,find(`${extreAttrPath}7/LayoutNode`,this.node));
         this.mNodeRelevanceAttr.set(eAttrBaseType.FINAL_ATT,find(`${extreAttrPath}8/LayoutNode`,this.node));
         this.mNodeRelevanceAttr.set(eAttrBaseType.RESIST_SUCK,find(`${extreAttrPath}9/LayoutNode`,this.node));
-        this.mNodeRelevanceAttr.set(eAttrBaseType.RESIST_BACK_ATT,find(`${extreAttrPath}10/LayoutNode`,this.node));
+        this.mNodeRelevanceAttr.set(eAttrBaseType.RESIST_BACK_ATT,find(`${extreAttrPath}10/LayoutNode`,this.node)); 
         this.mNodeRelevanceAttr.set(eAttrBaseType.RESIST_CONTI_ATT,find(`${extreAttrPath}11/LayoutNode`,this.node));
         this.mNodeRelevanceAttr.set(eAttrBaseType.RESIST_DEADLY,find(`${extreAttrPath}12/LayoutNode`,this.node));
         this.mNodeRelevanceAttr.set(eAttrBaseType.RESIST_MISS,find(`${extreAttrPath}13/LayoutNode`,this.node));

@@ -1,10 +1,8 @@
-//import { AttrCalcRelevanceConfig, IAttrCalcRelevanceStruct } from "../../../Config/Cfg_AttrCalcRelevance";
 import { Cfg_AttrCalcRelevance, IAttrCalcRelevanceStruct } from "../../../Config/Cfg_AttrCalcRelevance";
 import { BaseProxy } from "../../../Frame/BaseProxy/BaseProxy";
 import { _Facade } from "../../../Global"; 
 import { eNetProtocol } from "../../../NetNotification"; 
-import { eNotice } from "../../../NotificationTable";
-import { ItemBaseType, ItemCell } from "../BagProxy/ItemDefine/ItemDefine";
+import { eNotice } from "../../../NotificationTable"; 
 import { NetWorkProxy } from "../NetWorkProxy/NetWorkProxy";
 import { AttrBase, PlayerAttrNetType } from "./AttrDefine/AttrDefine";
 //import { AttrBase, PlayerAttrNetType } from "./AttrDefine/AttrDefine";

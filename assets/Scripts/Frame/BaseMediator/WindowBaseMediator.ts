@@ -88,13 +88,13 @@ export  abstract class WindowBaseMediator extends BaseMediator {
     
     
     //打开一个界面
-    protected OpenMultLayer(windowID:number){
+    protected OpenMultLayer(windowInfo:{windowID:number,windowInfo:any}){
         if(!!this.mView)//已经打开了本窗口的话，立即返回
             return; 
         let view:Node = _Facade.FindProxy(PoolProxy).Get(ePoolDefine.WindowInterface);//从对象池中取一个可用的窗口
         this.mView = view.getComponent(WindowInterface);//取到组件的Interface
         this.mView.SetWindowBaseData(this.GetWindowParam()); 
-        let canOpen:boolean = _Facade.FindProxy(WindowProxy).OpenMultWindow(this.getMediatorName(),this.mView,windowID);//判断组件是否被正常的添加
+        let canOpen:boolean = _Facade.FindProxy(WindowProxy).OpenMultWindow(this.getMediatorName(),this.mView,windowInfo.windowID);//判断组件是否被正常的添加
         if(!canOpen){//没有被正常打开的话 
             _Facade.FindProxy(PoolProxy).Put(ePoolDefine.WindowInterface,view);//对视图节点进行回收 
             return;
@@ -102,11 +102,11 @@ export  abstract class WindowBaseMediator extends BaseMediator {
         if(this.mLoadResourceID == -1){//立即尝试加载所有的游戏资源
             this.mView.EnterLoadModel();//准备进行资源加载
             this.mLoadResourceID = _Facade.FindProxy(BundleProxy).LoadDirs(this.GetResourceArray());//加载到资源组下的所有资源信息
-            _Facade.FindProxy(BundleProxy).RegisterListen(new ListenObj(this.mLoadResourceID,(loadInfo:LoadStruct)=>this.ResourceLoadComplete(loadInfo,windowID),this.ResourceLoadProgress.bind(this)));//注册监听
+            _Facade.FindProxy(BundleProxy).RegisterListen(new ListenObj(this.mLoadResourceID,(loadInfo:LoadStruct)=>this.ResourceLoadComplete(loadInfo,windowInfo),this.ResourceLoadProgress.bind(this)));//注册监听
         }else{//资源加载成功了
-            this.mView.CreateWindow(this.GenWindowNode(),windowID);//创建游戏窗口
+            this.mView.CreateWindow(this.GenWindowNode(),windowInfo);//创建游戏窗口
             _Facade.Send(eNotice.OpenLayer,this.getMediatorName()); 
-        }
+        } 
     } 
 
     //关闭本界面

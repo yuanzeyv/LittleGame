@@ -20,108 +20,99 @@ interface IScrollHandle {
 }
 enum Event {
     /** 滚动中 */
-    ON_SCROLL, 
+    ON_SCROLL,
+
     /** 更新滚动百分比 */
-    ON_UPDATE_PERCENTAGE, 
+    ON_UPDATE_PERCENTAGE,
+
     /** 当View 尺寸变化时 */
-    ON_VIEW_SIZE_CHANGED, 
+    ON_VIEW_SIZE_CHANGED,
+
     /** 当自动滚动即将停止时 */
-    ON_ABOUT_TO_STOP, 
+    ON_ABOUT_TO_STOP,
+
     /** 当滚动开始时 */
-    ON_SCROLL_START,  
+    ON_SCROLL_START,
+
     /** 当滚动抬起时 */
-    ON_SCROLL_END, 
+    ON_SCROLL_END,
+
     /** 当滚动取消时 */
-    ON_SCROLL_CANCEL, 
+    ON_SCROLL_CANCEL,
+
     /** 当主轴方向改变时 */
-    ON_CHANGED_ORIENTATION, 
+    ON_CHANGED_ORIENTATION,
+
     /** 当滚动到指定单行索引之前 */
-    ON_SCROLL_TO_GROUPINDEX_BEFOR, 
+    ON_SCROLL_TO_GROUPINDEX_BEFOR,
+
     /** 当滚动到指定单行索引之后 */
-    ON_SCROLL_TO_GROUPINDEX_AFTER, 
+    ON_SCROLL_TO_GROUPINDEX_AFTER,
+
     /** 当滚动到指定数据索引之后 */
-    ON_SCROLL_TO_MODELINDEX_BEFOR, 
+    ON_SCROLL_TO_MODELINDEX_BEFOR,
+
     /** 当滚动到指定数据索引之后 */
     ON_SCROLL_TO_MODELINDEX_AFTER,
 }
 @ccclass('ScrollManager')
 export class ScrollManager extends Manager {
     public static Event = Event
-    @property(UITransform) 
-    private _view: UITransform = null;//自己对应的可视区域
-    //获取与设置可视区域内容
-    @property(UITransform) 
-    get view() { return this._view }
-    private set view(value: UITransform){ this._view = value; }
-
-    @property(UITransform) //内容展示
-    private _content: UITransform = null;
-    @property(UITransform) //获取与设置内容暂时
-    get content() { return this._content }
+    @property(UITransform) private _view: UITransform = null
+    @property(UITransform) get view() { return this._view }
+    private set view(value: UITransform) {
+        this._view = value
+    }
+    @property(UITransform) private _content: UITransform = null
+    @property(UITransform) get content() { return this._content }
     private set content(value: UITransform) {
         this._content = value
     }
-    //当前的方向信息
-    @property({ type: Orientation }) 
-    private _orientation: Orientation = Orientation.Vertical;
-    @property({ type: Orientation }) 
-    get orientation() { return this._orientation }
+    @property({ type: Orientation }) private _orientation: Orientation = Orientation.Vertical
+    @property({ type: Orientation }) get orientation() { return this._orientation }
     set orientation(value: Orientation) {
-        if (value == this._orientation) 
-            return;
+        if (value == this._orientation) return
         this._orientation = value
-        this.emit(Event.ON_CHANGED_ORIENTATION);//改变了方向的话
+        this.emit(Event.ON_CHANGED_ORIENTATION)
     }
-
     @property({
         type: TouchMode,
-        tooltip:  `Auto: 当内容撑满可视区域或开启ReleaseManager时允许拖动
-                   AlwaysAllow: 任何情况下都可以拖动，即使没有任何元素
-                   Disabled: 任何情况下都禁用拖动
-                 `
-    }) 
-    touchMode: TouchMode = TouchMode.Auto;
-    
-    @property({ type: MovementType }) 
-    movementType: MovementType = MovementType.Elastic;
+        tooltip: `Auto: 当内容撑满可视区域或开启ReleaseManager时允许拖动
+        AlwaysAllow: 任何情况下都可以拖动，即使没有任何元素
+        Disabled: 任何情况下都禁用拖动
+        `
+    }) touchMode: TouchMode = TouchMode.Auto
+    @property({ type: MovementType }) movementType: MovementType = MovementType.Elastic
     @property({
         range: [0, 1], slide: true, step: 0.001,
         visible: function () { return this.movementType == MovementType.Elastic }
-    }) 
-    elasticity: number = 0.1;//弹力值
-    
-    @property inertia: boolean = true;
+    }) elasticity: number = 0.1
+    @property inertia: boolean = true
     @property({
         range: [0, 1], slide: true, step: 0.001,
         visible: function () { return this.inertia }
-    }) 
-    decelerationRate: number = 0.135;
-
+    }) decelerationRate: number = 0.135
     // TODO 鼠标滚轮暂时不做，感觉不是必要功能
     // @property scrollSensitivity: number = 0.01 
     @property({
         tooltip: "当滚动速度小于这个值时，会发送ON_ABOUT_TO_STOP广播"
-    }) 
-    aboutToStopVelocity: number = 100;
+    }) aboutToStopVelocity: number = 100
     @property({
         tooltip: "取消子节点的Button点击事件"
-    }) 
-    cancelInnerEvents: boolean = true;
+    }) cancelInnerEvents: boolean = true
     @property({
         range: [0, 0.5], slide: true, step: 0.001,
         visible: function () { return this.inertia },
         tooltip: `嵌套时，当子元素的ScrollView拖动方向和当前拖动方向相同时，使用当前阈值进行计算由谁来处理拖动
         无特殊需求时，默认值即可`
-    }) 
-    nestedMinThreshold: number = 0.001;
+    }) nestedMinThreshold: number = 0.001
     @property({
         range: [0.5, 1], slide: true, step: 0.001,
         visible: function () { return this.inertia },
         tooltip: `嵌套时，当子元素的ScrollView拖动方向和当前拖动方向相同时，使用当前阈值进行计算由谁来处理拖动
         无特殊需求时，默认值即可`
-    }) 
-    nestedMaxThreshold: number = 0.999;
-    private __debug_graphics: Graphics;//debug绘制参数
+    }) nestedMaxThreshold: number = 0.999
+    private __debug_graphics: Graphics
     private _boundaryOffset: number = 0
     private _viewWidget: Widget = null
     private _parentAdapter: ScrollAdapter

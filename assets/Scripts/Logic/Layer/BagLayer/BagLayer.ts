@@ -19,4 +19,4 @@ export class BagLayer extends BaseLayer {
     
     onClose():void{      
     } 
-}          
+}

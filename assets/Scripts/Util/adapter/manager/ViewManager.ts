@@ -12,8 +12,8 @@ import { ModelManager } from './ModelManager';
 import { ScrollManager } from './ScrollManager';
 const { ccclass, property } = _decorator;
 enum Event {
-    ON_SCROLL,
-    ON_LATEUPDATE,
+    ON_SCROLL,//正在移动过程中
+    ON_LATEUPDATE,//
     ON_CLEARVIEWS,
     ON_UPDATE_VIEWS,
     ON_CHANGED_VIRTUALSIZE,
@@ -97,20 +97,20 @@ export class ViewManager<T = any> extends Manager {
     @property({
         tooltip: "尾部循环"
     }) loopFooter: boolean = false
-    private _groupLength: number = 0
-    private _cacheGroups: Group<T>[] = []
-    private _groups: Group<T>[] = []
-    private _disableViews: View<T>[] = []
-    private _visibleViews: View<T>[] = []
-    private _fixedViews: View<T>[] = []
-    private _disableHolders: Holder<T>[] = []
-    private _isFill: boolean = false
-    private _headerIndex: number = -1
-    private _footerIndex: number = -1
-    private _virtualSize: number = 0
-    private _overflowHeader: number = 0
-    private _cacheHeadeDatas: T[] = []
-    private _cacheHeadePosition: ILike
+    private _groupLength: number = 0;
+    private _cacheGroups: Group<T>[] = [];
+    private _groups: Group<T>[] = [];
+    private _disableViews: View<T>[] = [];
+    private _visibleViews: View<T>[] = [];
+    private _fixedViews: View<T>[] = [];
+    private _disableHolders: Holder<T>[] = [];
+    private _isFill: boolean = false;
+    private _headerIndex: number = -1;
+    private _footerIndex: number = -1;
+    private _virtualSize: number = 0;
+    private _overflowHeader: number = 0;
+    private _cacheHeadeDatas: T[] = [];
+    private _cacheHeadePosition: ILike;
     public get header() { return this._visibleViews[0] }
     public get footer() { return this._visibleViews[this._visibleViews.length - 1] }
 
@@ -157,19 +157,35 @@ export class ViewManager<T = any> extends Manager {
         this.adapter.scrollManager.on(ScrollManager.Event.ON_CHANGED_ORIENTATION, this._resetAllState, this)
     }
     private _clearAll() {
-        for (let i = 0, len = this._visibleViews.length; i < len; i++) {
-            this._recycleViewToDisableViews(this._visibleViews[i])
-        }
+        for (let i = 0, len = this._visibleViews.length; i < len; i++)
+            this._recycleViewToDisableViews(this._visibleViews[i]);
         this._cacheGroups.push(...this._groups)
-        this._clearFixedViews()
         this._visibleViews.length = 0
+        this._clearFixedViews()
         this._groups.length = 0
         this.virtualSize = 0
         this.overflowHeader = 0
     }
-    private _onClearModel() {
-        this._clearAll()
-        this.emit(Event.ON_CLEARVIEWS)
+     
+    private _destoryAll() { 
+        for (let i = 0, len = this._visibleViews.length; i < len; i++)//首先确保所有的可视对象被执行正确的生命周期
+            this._recycleViewToDisableViews(this._visibleViews[i]);
+        this._clearFixedViews();
+        this._cacheGroups.length = 0;
+        this._visibleViews.length = 0;
+        this._groups.length = 0;
+        this.virtualSize = 0;
+        this.overflowHeader = 0; 
+        for(let i = 0;i <this._disableHolders.length;i++)
+            this._disableHolders[i].internal_destory();
+        this._disableHolders.length = 0;
+    }
+    private _onClearModel(isDestory:boolean = false) {
+        if(isDestory)
+            this._destoryAll();//尝试销毁试图内的所有可见的节点元素
+        else    
+            this._clearAll();//尝试清理所有的元素
+        this.emit(Event.ON_CLEARVIEWS);
     }
     private _resetAllState() {
         if (EDITOR) return
@@ -202,7 +218,7 @@ export class ViewManager<T = any> extends Manager {
      * 更新所有Group
      */
     private _updateGroups(insertIndex: number) {
-        var view = this._getViewFromDisibleViews(null)
+        var view = this._getViewFromDisibleViews(null);//获取到可是范围内的视图信息
         var gindex = this.getGroupIndexByModelIndex(insertIndex)
         if (-1 == gindex) {
             gindex = this._groupLength - 1
@@ -409,7 +425,7 @@ export class ViewManager<T = any> extends Manager {
         return view
     }
     private _getHolderFromDisableHolders(model: IModel<T>) {
-        var index = this._disableHolders.findIndex(holder => holder.code == model.code)
+        var index = this._disableHolders.findIndex(holder => holder.code == model.code);//寻找一个Holders
         if (-1 != index) {
             return this._disableHolders.splice(index, 1)[0]
         }
@@ -430,7 +446,7 @@ export class ViewManager<T = any> extends Manager {
     }
     private _recycleViewToDisableViews(view: View) {
         if (!view) return
-        view.internal_recycleHolders(holder => this._disableHolders.push(holder))
+        view.internal_recycleHolders(holder =>this._disableHolders.push(holder));
         view.internal_disable()
         this._disableViews.push(view)
     }
@@ -828,8 +844,8 @@ export class ViewManager<T = any> extends Manager {
     }
     /** @deprecated 内部方法，调用会爆炸💥 */
     public internal_getHolder(model: IModel<T>): Holder<T, ScrollAdapter> {
-        var holder = this._getHolderFromDisableHolders(model)
-        if (!holder) {
+        var holder = this._getHolderFromDisableHolders(model);//获取到当前的Holder
+        if (!holder) {//如果没有Hodel的话，需要常见一个
             var prefab = this.adapter.getPrefab(model.data)
             var node = instantiate(prefab) as Node
             holder = this.adapter.getHolder(node, model.code)

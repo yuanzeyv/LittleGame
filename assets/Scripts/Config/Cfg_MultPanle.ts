@@ -45,6 +45,9 @@ class MultPanle{
        this.mConfigObject[5] = {"key":5,"desc":"游戏协议面板","title":"游玩协议","btnName":"游玩协议","type":2,"childWindow":[]};
        this.mConfigObject[6] = {"key":6,"desc":"游戏公告","title":"游戏时报","btnName":"游戏时报","type":3,"childWindow":[]};
        this.mConfigObject[7] = {"key":7,"desc":"防沉迷公告","title":"防沉迷公告","btnName":"防沉迷公告","type":3,"childWindow":[]};
+       this.mConfigObject[8] = {"key":8,"desc":"建筑商店通用多面板界面","title":"建筑商店通用多面板界面","btnName":"建筑商店","type":1,"childWindow":[9,12]};
+       this.mConfigObject[9] = {"key":9,"desc":"建筑商店","title":"建筑商店","btnName":"建筑商店","type":2,"childWindow":[]};
+       this.mConfigObject[12] = {"key":12,"desc":"建筑信息","title":"建筑信息","btnName":"建筑信息","type":2,"childWindow":[]};
    }
    private InitArray(){
        for(let key in this.mConfigObject)

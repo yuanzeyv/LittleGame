@@ -7,4 +7,4 @@ export const DEBUG_DRAW_LIND_WIDTH = 3
 /** 开启View边框 */
 export const ADAPTER_DEBUG_VIEW = false
 /** 开启虚拟Content遮罩 */
-export const ADAPTER_DEBUG_CONTENT = false 
+export const ADAPTER_DEBUG_CONTENT = false

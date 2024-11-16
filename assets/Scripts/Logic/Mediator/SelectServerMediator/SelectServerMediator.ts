@@ -12,7 +12,7 @@ import { PoolProxy } from "../../Proxy/PoolProxy/PoolProxy";
 import { WindowProxy } from "../../Proxy/WindowProxy/WindowProxy"; 
 import { SelectServerLayer } from "../../Layer/SelectServerLayer/SelectServerLayer";
 
-export class SelectServerMediator extends WindowBaseMediator{  
+export class SelectServerMediator extends WindowBaseMediator{   
     RegisterNotification(notificationMap:Map<string,NotificationHandle>):void{
         notificationMap
         .set(eNotice.OpenChooseServerLayer,this.OpenLayer.bind(this))

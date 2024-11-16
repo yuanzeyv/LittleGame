@@ -22,18 +22,18 @@ export class ButtonEvent{
         button.clickEvents.push(clickEventHandler);
     }
 
-    //反注册一个按钮事件
+    //反注册一个按钮事件 
     public UnregisterButtonClick(node:Node,func:(event:EventTouch,...args)=>void):void{
         let funcMap:Map<(event:EventTouch,...args)=>void,Array<any>>|undefined = this.mButtonEventMap.get(node);//通过节点获取到当前节点监听的函数信息
         if( undefined == funcMap || !funcMap.has(func))
-            return;
+            return; 
         funcMap.delete(func);
         if(funcMap.size == 0) this.mButtonEventMap.delete(node);
         let events:EventHandler[] = node.getComponent(Button).clickEvents;//获取到所有的事件数组
         for(let i = 0 ; i < events.length;i++){
             let cell:EventHandler = events[i];
-            if(cell == undefined || cell.component != "BaseLayer" ||  cell.target.uuid != this.mLayerNode.uuid || cell.customEventData == undefined)
-                continue;
+            if(cell == undefined  ||  cell.target.uuid != this.mLayerNode.uuid || cell.customEventData == undefined)
+                continue; 
             let data:{func:(event:EventTouch,...args)=>void,args:Array<any>} = cell.customEventData as any;
             if(data.func != func)
                 continue;

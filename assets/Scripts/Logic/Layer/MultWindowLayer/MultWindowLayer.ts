@@ -13,6 +13,7 @@ const {ccclass, property, type} = _decorator;
 export class MultWindowLayer extends BaseLayer {   
     private mMainID:number = 0;//当前界面的主ID
     private mSelectWindowID:number = 0;//当前打开的界面ID 
+    private mWindowInfo:any;//当前打开的界面ID 
     private mContent:Node//获取到当前窗口的承载节点
 
     private mTwoWindowIDArray:Array<number> = new Array<number>();//当前打开的界面ID 
@@ -25,16 +26,18 @@ export class MultWindowLayer extends BaseLayer {
         this.mContent = find("Content",this.node);
         this.mTwoTableView = find("ScrollView",this.node).getComponent(MultWindowPanel);
     } 
-    InitData(windowInfo:{mainID:number,selectID:number}) {
+     
+    InitData(windowInfo:{mainID:number,selectID:number,ViewData:any}) {
         this.mMainID = windowInfo.mainID;
         this.mSelectWindowID = windowInfo.selectID;
+        this.mWindowInfo = windowInfo.ViewData;
         this.mTwoWindowIDArray = _Facade.FindProxy(MultWindowProxy).GetWindowArrayByParentWindow(this.mMainID);//设置当前窗口的子窗口列表
         this.RegisterButtonEvent(find("BackGround/Close",this.node),this.CloseButtonHandle,this);
     }   
 
     InitLayer() {
         this.mTwoTableView.SetWindowLayer(this);
-        this.mTwoTableView.SetTableViewData(this.mTwoWindowIDArray,this.mSelectWindowID);
+        this.mTwoTableView.SetTableViewData(this.mTwoWindowIDArray,this.mSelectWindowID,this.mWindowInfo);
     }   
   
     //设置多面板的窗口标题

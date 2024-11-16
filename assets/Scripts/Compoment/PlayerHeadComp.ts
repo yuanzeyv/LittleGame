@@ -1,4 +1,4 @@
-import { _decorator, Component, find, Node, Sprite, SpriteFrame } from 'cc';
+import { _decorator, Component, find, Sprite, SpriteFrame } from 'cc';
 import { _Facade } from '../Global';
 import { ResouceProxy } from '../Logic/Proxy/ResourceProxy/ResouceProxy';
 const { ccclass, property } = _decorator;

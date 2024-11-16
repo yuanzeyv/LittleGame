@@ -8,4 +8,8 @@ export let MultWindowParamMap:{[id:number]:MultWindowParam} ={
 
     10        :{id:10,openNotice:eNotice.OpenMultChooseServerLayer,closeNotice:eNotice.ClosMultChooseServerLayer,addNotice:eNotice.AddMultMultChooseServerLayer,MainMediator:"SelectServerMultMediator"},//隐私协议面板
     11        :{id:11,openNotice:eNotice.OpenChooseServerLayer,closeNotice:eNotice.ClosChooseServerLayer,Size:{Width:360,Height:800}},//隐私协议面板
-};      
+
+    8         :{id:8,openNotice:eNotice.OpenMultBuildingChooseLayer,closeNotice:eNotice.CloseMultBuildingChooseLayer,addNotice:eNotice.AddMultBuildingChooseLayer,MainMediator:"BuildingChooseMultMediator"},//建筑商店多面板
+    9         :{id:9,openNotice:eNotice.OpenBuildingChooseLayer,closeNotice:eNotice.CloseBuildingChooseLayer,Size:{Width:600,Height:800}},//隐私协议面板
+    12        :{id:12,openNotice:eNotice.OpenBuildingInfoLayer,closeNotice:eNotice.CloseBuildingInfoLayer,Size:{Width:600,Height:800}},//隐私协议面板
+};         
